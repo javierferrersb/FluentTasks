@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FluentTasks (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FluentTasks (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
