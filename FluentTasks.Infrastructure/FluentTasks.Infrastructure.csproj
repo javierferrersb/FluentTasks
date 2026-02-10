@@ -13,7 +13,10 @@
 
   <ItemGroup>
     <Folder Include="Google\" />
-    <Folder Include="Storage\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
   </ItemGroup>
 
 </Project>

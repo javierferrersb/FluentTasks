@@ -45,8 +45,13 @@
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Converters\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
+    <ProjectReference Include="..\FluentTasks.Infrastructure\FluentTasks.Infrastructure.csproj" />
   </ItemGroup>
 
   <!--
