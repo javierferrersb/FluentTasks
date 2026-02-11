@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Google\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
   </ItemGroup>
 
