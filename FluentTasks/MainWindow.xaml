@@ -22,7 +22,6 @@
 
         <!-- Title Bar Area -->
         <Grid Grid.Row="0"
-              Background="{ThemeResource LayerFillColorDefaultBrush}"
               Padding="16,12"
               CornerRadius="0">
 
@@ -31,18 +30,9 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0"
-                        Orientation="Horizontal"
-                        Spacing="16"
-                        VerticalAlignment="Center">
-                <TextBlock Text="✓"
-                           FontSize="24"
-                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                           VerticalAlignment="Center" />
-                <TextBlock Text="FluentTasks"
-                           Style="{StaticResource TitleTextBlockStyle}"
-                           VerticalAlignment="Center" />
-            </StackPanel>
+            <TextBlock Text="FluentTasks"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       VerticalAlignment="Center" />
 
             <Button Grid.Column="1"
                     Content="Sync Lists"
@@ -135,9 +125,36 @@
                         BorderThickness="1"
                         CornerRadius="8,8,0,0"
                         Padding="16,12">
-                    <TextBlock x:Name="TaskListTitle"
-                               Text="Select a list to view tasks"
-                               Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <StackPanel Spacing="16">
+                        <TextBlock x:Name="TaskListTitle"
+                                   Text="Select a list to view tasks"
+                                   Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        
+                        <!-- Add Task Input -->
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="NewTaskInput"
+                                     Grid.Column="0"
+                                     PlaceholderText="Add a new task..."
+                                     Margin="0,0,8,0"
+                                     VerticalAlignment="Center">
+                                <TextBox.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="Enter"
+                                                         Invoked="AddTask_Enter" />
+                                </TextBox.KeyboardAccelerators>
+                            </TextBox>
+
+                            <Button Grid.Column="1"
+                                    Content="Add Task"
+                                    Click="AddTask_Click"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
                 </Border>
 
                 <!-- Tasks Content -->
@@ -167,10 +184,9 @@
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <CheckBox Grid.Column="0"
-                                                          IsChecked="{Binding IsCompleted}"
-                                                          IsEnabled="False"
-                                                          VerticalAlignment="Center" />
+                                                <CheckBox IsChecked="{Binding IsCompleted, Mode=OneWay}"
+                                                          Click="TaskCheckbox_Click"
+                                                          Tag="{Binding}" />
 
                                                 <TextBlock Grid.Column="1"
                                                            Text="{Binding Title}"

@@ -2,8 +2,11 @@ using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FluentTasks.UI;
 
@@ -55,6 +58,105 @@ public sealed partial class MainWindow : Window
         catch (Exception ex)
         {
             StatusText.Text = $"Error loading tasks: {ex.Message}";
+        }
+    }
+
+    private async void AddTask_Click(object sender, RoutedEventArgs e)
+    {
+        await CreateNewTaskAsync();
+    }
+
+    private async void AddTask_Enter(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+    {
+        await CreateNewTaskAsync();
+        args.Handled = true;
+    }
+
+    private async Task CreateNewTaskAsync()
+    {
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        {
+            StatusText.Text = "Please select a list first";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(NewTaskInput.Text))
+        {
+            StatusText.Text = "Please enter a task title";
+            return;
+        }
+
+        try
+        {
+            var title = NewTaskInput.Text.Trim();
+            StatusText.Text = "Creating task...";
+
+            // Create the task in Google
+            var newTask = await _taskService.CreateTaskAsync(selectedList.Id, title);
+
+            // Get current tasks and create a NEW list with the new task
+            var currentTasks = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList()
+                ?? new List<TaskItem>();
+
+            var updatedTasks = new List<TaskItem> { newTask }; // New task first
+            updatedTasks.AddRange(currentTasks); // Then existing tasks
+
+            // Set the new list
+            TasksView.ItemsSource = updatedTasks;
+
+            // Clear input and update status
+            NewTaskInput.Text = string.Empty;
+            EmptyState.Visibility = Visibility.Collapsed;
+            StatusText.Text = $"Task created • {updatedTasks.Count} tasks";
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error creating task: {ex.Message}";
+        }
+    }
+
+    private async void TaskCheckbox_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not CheckBox checkbox || checkbox.Tag is not TaskItem task)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        try
+        {
+            var newCompletedState = checkbox.IsChecked == true;
+
+            StatusText.Text = newCompletedState ? "Completing task..." : "Reopening task...";
+
+            // Update in Google Tasks
+            var success = await _taskService.CompleteTaskAsync(
+                selectedList.Id,
+                task.Id,
+                newCompletedState);
+
+            if (success)
+            {
+                // Refresh the entire task list from the backend to ensure consistency
+                var updatedTasks = await _taskService.GetTasksAsync(selectedList.Id);
+                TasksView.ItemsSource = updatedTasks;
+
+                StatusText.Text = newCompletedState
+                    ? "Task completed ✓"
+                    : "Task reopened";
+            }
+            else
+            {
+                // Revert checkbox if update failed
+                checkbox.IsChecked = !newCompletedState;
+                StatusText.Text = "Failed to update task";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+            // Revert checkbox on error
+            checkbox.IsChecked = !checkbox.IsChecked;
         }
     }
 }

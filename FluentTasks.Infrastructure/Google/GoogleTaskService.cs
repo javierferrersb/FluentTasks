@@ -82,5 +82,61 @@ namespace FluentTasks.Infrastructure.Google
                 IsCompleted = created.Status == "completed"
             };
         }
+
+        public async Task<bool> UpdateTaskAsync(string taskListId, TaskItem task)
+        {
+            try
+            {
+                var services = await GetServiceAsync();
+
+                var googleTask = new GoogleTask
+                {
+                    Id = task.Id,
+                    Title = task.Title,
+                    Status = task.IsCompleted ? "completed" : "needsAction"
+                };
+
+                var request = services.Tasks.Update(googleTask, taskListId, task.Id);
+                await request.ExecuteAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CompleteTaskAsync(string taskListId, string taskId, bool isCompleted)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+
+                // Get the task first
+                var getRequest = service.Tasks.Get(taskListId, taskId);
+                var task = await getRequest.ExecuteAsync();
+
+                // Update status
+                task.Status = isCompleted ? "completed" : "needsAction";
+
+                if (isCompleted)
+                {
+                    task.Completed = DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                }
+                else
+                {
+                    task.Completed = null;
+                }
+
+                var updateRequest = service.Tasks.Update(task, taskListId, taskId);
+                await updateRequest.ExecuteAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -12,5 +12,11 @@ namespace FluentTasks.Core.Services
 
         // Create a new task
         Task<TaskItem> CreateTaskAsync(string taskListId, string title);
+
+        // Update an existing task (e.g., title, notes)
+        Task<bool> UpdateTaskAsync(string taskListId, TaskItem task);
+
+        // Mark a task as completed or not completed
+        Task<bool> CompleteTaskAsync(string taskListId, string taskId, bool isCompleted);
     }
 }
