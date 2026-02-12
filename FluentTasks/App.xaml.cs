@@ -1,4 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+﻿using FluentTasks.Core.Services;
+using FluentTasks.Infrastructure.Google;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -11,6 +15,7 @@ namespace FluentTasks.UI
     public partial class App : Application
     {
         private Window? _window;
+        private readonly IHost _host;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -19,6 +24,16 @@ namespace FluentTasks.UI
         public App()
         {
             InitializeComponent();
+
+            // Create the host for dependency injection and other services.
+            _host = new HostBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    // Register services and
+                    services.AddSingleton<IGoogleAuthService, GoogleAuthService>();
+                    services.AddSingleton<ITaskService, GoogleTaskService>();
+                })
+                .Build();
         }
 
         /// <summary>
@@ -29,6 +44,13 @@ namespace FluentTasks.UI
         {
             _window = new MainWindow();
             _window.Activate();
+        }
+
+        // Helper to get services
+        public static T GetService<T>() where T : class
+        {
+            var app = Current as App;
+            return app!._host.Services.GetService<T>()!;
         }
     }
 }

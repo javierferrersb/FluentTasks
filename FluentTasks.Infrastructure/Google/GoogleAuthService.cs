@@ -18,12 +18,16 @@ namespace FluentTasks.Infrastructure.Google
             if (_credential != null)
                 return _credential;
 
+            var appDataPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "FluentTasks");
+
             _credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
                 _clientSecrets,
                 ["https://www.googleapis.com/auth/tasks"],
                 "user",
                 CancellationToken.None,
-                new FileDataStore("FluentTasks", true)
+                new FileDataStore(appDataPath, true)
             );
 
             return _credential;

@@ -13,7 +13,33 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid>
+    <Grid Padding="24">
+        <StackPanel Spacing="16"
+                    VerticalAlignment="Center">
+            <TextBlock Text="FluentTasks - OAuth test"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       HorizontalAlignment="Center" />
 
+            <Button x:Name="LoadTaskListsButton"
+                    Content="Load Tasks List"
+                    Click="LoadTaskListsButton_Click"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource AccentButtonStyle}" />
+
+            <TextBlock x:Name="StatusText"
+                       Text="Click button to test"
+                       HorizontalAlignment="Center" />
+
+            <ListView x:Name="TaskListsView"
+                      Height="300"
+                      BorderBrush="Gray"
+                      BorderThickness="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>
