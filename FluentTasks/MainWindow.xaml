@@ -13,33 +13,211 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid Padding="24">
-        <StackPanel Spacing="16"
-                    VerticalAlignment="Center">
-            <TextBlock Text="FluentTasks - OAuth test"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       HorizontalAlignment="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <Button x:Name="LoadTaskListsButton"
-                    Content="Load Tasks List"
-                    Click="LoadTaskListsButton_Click"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource AccentButtonStyle}" />
+        <!-- Title Bar Area -->
+        <Grid Grid.Row="0"
+              Background="{ThemeResource LayerFillColorDefaultBrush}"
+              Padding="16,12"
+              CornerRadius="0">
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        Spacing="16"
+                        VerticalAlignment="Center">
+                <TextBlock Text="✓"
+                           FontSize="24"
+                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                           VerticalAlignment="Center" />
+                <TextBlock Text="FluentTasks"
+                           Style="{StaticResource TitleTextBlockStyle}"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                    Content="Sync Lists"
+                    Click="LoadTaskLists_Click"
+                    Style="{StaticResource AccentButtonStyle}">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="R"
+                                         Modifiers="Control" />
+                </Button.KeyboardAccelerators>
+            </Button>
+        </Grid>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1"
+              Padding="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Task Lists -->
+            <Grid Grid.Column="0"
+                  Margin="0,0,8,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Lists Header -->
+                <Border Grid.Row="0"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8,8,0,0"
+                        Padding="16,12">
+                    <TextBlock Text="My Lists"
+                               Style="{StaticResource BodyStrongTextBlockStyle}" />
+                </Border>
+
+                <!-- Lists Content -->
+                <Border Grid.Row="1"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1,0,1,1"
+                        CornerRadius="0,0,8,8">
+
+                    <ListView x:Name="TaskListsView"
+                              SelectionChanged="TaskListsView_SelectionChanged"
+                              SelectionMode="Single"
+                              Background="Transparent"
+                              Padding="4">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="12,10"
+                                      Background="Transparent"
+                                      CornerRadius="4">
+                                    <TextBlock Text="{Binding Title}"
+                                               Style="{StaticResource BodyTextBlockStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="Padding"
+                                        Value="0" />
+                                <Setter Property="Margin"
+                                        Value="4,2" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Border>
+            </Grid>
+
+            <!-- Right Panel: Tasks -->
+            <Grid Grid.Column="1"
+                  Margin="8,0,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Tasks Header -->
+                <Border Grid.Row="0"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8,8,0,0"
+                        Padding="16,12">
+                    <TextBlock x:Name="TaskListTitle"
+                               Text="Select a list to view tasks"
+                               Style="{StaticResource BodyStrongTextBlockStyle}" />
+                </Border>
+
+                <!-- Tasks Content -->
+                <Border Grid.Row="1"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1,0,1,1"
+                        CornerRadius="0,0,8,8">
+
+                    <Grid>
+                        <!-- Tasks List -->
+                        <ScrollViewer>
+                            <ItemsRepeater x:Name="TasksView"
+                                           Margin="8">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="6"
+                                                Padding="16,12"
+                                                Margin="0,0,0,8">
+
+                                            <Grid ColumnSpacing="12">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <CheckBox Grid.Column="0"
+                                                          IsChecked="{Binding IsCompleted}"
+                                                          IsEnabled="False"
+                                                          VerticalAlignment="Center" />
+
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{Binding Title}"
+                                                           Style="{StaticResource BodyTextBlockStyle}"
+                                                           TextWrapping="Wrap"
+                                                           VerticalAlignment="Center" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </ScrollViewer>
+
+                        <!-- Empty State -->
+                        <StackPanel x:Name="EmptyState"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Spacing="12"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="📋"
+                                       FontSize="48"
+                                       HorizontalAlignment="Center"
+                                       Opacity="0.5" />
+                            <TextBlock Text="No tasks yet"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Text="Tasks will appear here when you select a list"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                       HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="16,8">
             <TextBlock x:Name="StatusText"
-                       Text="Click button to test"
-                       HorizontalAlignment="Center" />
-
-            <ListView x:Name="TaskListsView"
-                      Height="300"
-                      BorderBrush="Gray"
-                      BorderThickness="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+                       Text="Ready - Press Ctrl+R to sync"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Border>
     </Grid>
 </Window>

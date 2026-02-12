@@ -1,44 +1,60 @@
+using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Linq;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace FluentTasks.UI;
 
-namespace FluentTasks.UI
+public sealed partial class MainWindow : Window
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainWindow : Window
+    private readonly ITaskService _taskService;
+
+    public MainWindow()
     {
-        private readonly ITaskService _taskService;
+        this.InitializeComponent();
+        _taskService = App.GetService<ITaskService>();
+    }
 
-        public MainWindow()
+    private async void LoadTaskLists_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
+            StatusText.Text = "Loading task lists...";
+            TaskListsView.ItemsSource = null;
+            TasksView.ItemsSource = null;
 
-            _taskService = App.GetService<ITaskService>();
+            var taskLists = await _taskService.GetTaskListsAsync();
+
+            TaskListsView.ItemsSource = taskLists;
+            StatusText.Text = $"Loaded {taskLists.Count()} task lists. Click one to see tasks.";
         }
-
-        private async void LoadTaskListsButton_Click(object sender, RoutedEventArgs e)
+        catch (Exception ex)
         {
-            try
-            {
-                StatusText.Text = "Loading... (browser may open for login)";
-                TaskListsView.ItemsSource = null;
+            StatusText.Text = $"Error: {ex.Message}";
+        }
+    }
 
-                // This will trigger OAuth if not authenticated
-                var taskLists = await _taskService.GetTaskListsAsync();
+    private async void TaskListsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
 
-                TaskListsView.ItemsSource = taskLists;
-                StatusText.Text = $"Loaded {taskLists.Count()} task lists!";
-            }
-            catch (Exception ex)
-            {
-                StatusText.Text = $"Error: {ex.Message}";
-            }
+        try
+        {
+            TaskListTitle.Text = $"Tasks in: {selectedList.Title}";
+            StatusText.Text = "Loading tasks...";
+            TasksView.ItemsSource = null;
+
+            var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+
+            TasksView.ItemsSource = tasks;
+            StatusText.Text = $"Loaded {tasks.Count()} tasks";
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error loading tasks: {ex.Message}";
         }
     }
 }
