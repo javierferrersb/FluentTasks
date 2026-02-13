@@ -6,6 +6,10 @@ using GoogleTask = Google.Apis.Tasks.v1.Data.Task;
 
 namespace FluentTasks.Infrastructure.Google
 {
+    /// <summary>
+    /// Implementation of ITaskService that communicates with Google Tasks API.
+    /// Handles all CRUD operations for task lists and tasks.
+    /// </summary>
     public class GoogleTaskService : ITaskService
     {
         private readonly IGoogleAuthService _authService;
@@ -17,6 +21,12 @@ namespace FluentTasks.Infrastructure.Google
             _authService = authService;
         }
 
+        /// <summary>
+        /// Gets or initializes the Google Tasks API service.
+        /// Lazy initialization pattern - only creates service once and reuses it.
+        /// Requires valid OAuth credentials from the auth service.
+        /// </summary>
+        /// <returns>Configured TasksService instance</returns>
         private async Task<TasksService> GetServiceAsync()
         {
             if (_tasksService != null)
@@ -35,6 +45,11 @@ namespace FluentTasks.Infrastructure.Google
             return _tasksService;
         }
 
+        /// <summary>
+        /// Retrieves all task lists for the authenticated user from Google Tasks.
+        /// Returns an empty collection if no lists exist or if the request fails.
+        /// </summary>
+        /// <returns>Collection of task lists with ID and Title</returns>
         public async Task<IEnumerable<TaskList>> GetTaskListsAsync()
         {
             var service = await GetServiceAsync();
@@ -48,21 +63,38 @@ namespace FluentTasks.Infrastructure.Google
             }) ?? [];
         }
 
+        /// <summary>
+        /// Retrieves all tasks from a specific task list.
+        /// Includes completed tasks and maps Google's task structure to our domain model.
+        /// Parses due dates from RFC 3339 format.
+        /// </summary>
+        /// <param name="taskListId">The ID of the task list to retrieve tasks from</param>
+        /// <returns>Collection of tasks with ID, Title, Completion status, and Due date</returns>
         public async Task<IEnumerable<TaskItem>> GetTasksAsync(string taskListId)
         {
             var service = await GetServiceAsync();
             var request = service.Tasks.List(taskListId);
             var response = await request.ExecuteAsync();
 
-            // Map Google's Task to our TaskItem
             return response.Items?.Select(googleTask => new TaskItem
             {
                 Id = googleTask.Id,
                 Title = googleTask.Title ?? "",
-                IsCompleted = googleTask.Status == "completed"
+                IsCompleted = googleTask.Status == "completed",
+                DueDate = string.IsNullOrEmpty(googleTask.Due)
+        ? null
+        : DateTimeOffset.Parse(googleTask.Due)
             }) ?? [];
         }
 
+        /// <summary>
+        /// Creates a new task in the specified task list.
+        /// Initially creates task with only a title - other properties can be set via UpdateTaskAsync.
+        /// The task is added to Google Tasks and immediately returned with its generated ID.
+        /// </summary>
+        /// <param name="taskListId">The task list to add the task to</param>
+        /// <param name="title">The task title</param>
+        /// <returns>Newly created task with Google-generated ID</returns>
         public async Task<TaskItem> CreateTaskAsync(string taskListId, string title)
         {
             var service = await GetServiceAsync();
@@ -79,25 +111,56 @@ namespace FluentTasks.Infrastructure.Google
             {
                 Id = created.Id,
                 Title = created.Title ?? "",
-                IsCompleted = created.Status == "completed"
+                IsCompleted = created.Status == "completed",
+                DueDate = string.IsNullOrEmpty(created.Due)
+                ? null
+                : DateTimeOffset.Parse(created.Due)
             };
         }
 
+        /// <summary>
+        /// Updates an existing task in Google Tasks.
+        /// 
+        /// IMPORTANT: Uses fetch-modify-update pattern to preserve all fields.
+        /// Google Tasks API replaces the entire task on update, so we must:
+        /// 1. GET the current task (preserves Notes, Parent, Links, etc.)
+        /// 2. Modify only the fields we want to change
+        /// 3. Send the complete task back
+        /// 
+        /// This prevents accidental deletion of fields like Notes (description).
+        /// </summary>
+        /// <param name="taskListId">The task list containing the task</param>
+        /// <param name="task">The task with updated values</param>
+        /// <returns>True if update succeeded, false otherwise</returns>
         public async Task<bool> UpdateTaskAsync(string taskListId, TaskItem task)
         {
             try
             {
-                var services = await GetServiceAsync();
+                var service = await GetServiceAsync();
 
-                var googleTask = new GoogleTask
+                // STEP 1: Get the current task from Google (preserves all fields)
+                var getRequest = service.Tasks.Get(taskListId, task.Id);
+                var googleTask = await getRequest.ExecuteAsync();
+
+                // STEP 2: Update only the fields we care about
+                googleTask.Title = task.Title;
+                googleTask.Status = task.IsCompleted ? "completed" : "needsAction";
+
+                // Update due date if we have it
+                if (task.DueDate.HasValue)
                 {
-                    Id = task.Id,
-                    Title = task.Title,
-                    Status = task.IsCompleted ? "completed" : "needsAction"
-                };
+                    googleTask.Due = task.DueDate.Value.UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+                }
+                else
+                {
+                    googleTask.Due = null;
+                }
 
-                var request = services.Tasks.Update(googleTask, taskListId, task.Id);
-                await request.ExecuteAsync();
+                // Notes, Parent, Position, etc. are preserved from the GET
+
+                // STEP 3: Send the complete task back
+                var updateRequest = service.Tasks.Update(googleTask, taskListId, task.Id);
+                await updateRequest.ExecuteAsync();
                 return true;
             }
             catch
@@ -106,6 +169,15 @@ namespace FluentTasks.Infrastructure.Google
             }
         }
 
+        /// <summary>
+        /// Marks a task as completed or reopens it.
+        /// Sets the completion timestamp when completing a task.
+        /// Also uses fetch-modify-update pattern to preserve other fields.
+        /// </summary>
+        /// <param name="taskListId">The task list containing the task</param>
+        /// <param name="taskId">The ID of the task to update</param>
+        /// <param name="isCompleted">True to mark as completed, false to reopen</param>
+        /// <returns>True if update succeeded, false otherwise</returns>
         public async Task<bool> CompleteTaskAsync(string taskListId, string taskId, bool isCompleted)
         {
             try
@@ -139,6 +211,13 @@ namespace FluentTasks.Infrastructure.Google
             }
         }
 
+        /// <summary>
+        /// Permanently deletes a task from Google Tasks.
+        /// This action cannot be undone - the task is completely removed.
+        /// </summary>
+        /// <param name="taskListId">The task list containing the task</param>
+        /// <param name="taskId">The ID of the task to delete</param>
+        /// <returns>True if deletion succeeded, false otherwise</returns>
         public async Task<bool> DeleteTaskAsync(string taskListId, string taskId)
         {
             try

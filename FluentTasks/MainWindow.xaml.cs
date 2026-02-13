@@ -200,4 +200,140 @@ public sealed partial class MainWindow : Window
             StatusText.Text = $"Error: {ex.Message}";
         }
     }
+
+    private void TaskTitle_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
+    {
+        if (sender is not TextBlock textBlock || textBlock.Tag is not TaskItem task)
+            return;
+
+        // Enter edit mode
+        task.EditTitle = task.Title;
+        task.IsEditing = true;
+    }
+
+    private async void SaveEdit_Click(object sender, RoutedEventArgs e)
+    {
+        await SaveTaskEditAsync(sender);
+    }
+
+    private async void SaveEdit_Enter(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+    {
+        await SaveTaskEditAsync(args.Element);
+        args.Handled = true;
+    }
+
+    private void CancelEdit_Click(object sender, RoutedEventArgs e)
+    {
+        CancelTaskEdit(sender);
+    }
+
+    private void CancelEdit_Escape(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+    {
+        CancelTaskEdit(args.Element);
+        args.Handled = true;
+    }
+
+    private async Task SaveTaskEditAsync(object sender)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not TaskItem task)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        if (string.IsNullOrWhiteSpace(task.EditTitle))
+        {
+            StatusText.Text = "Task title cannot be empty";
+            return;
+        }
+
+        try
+        {
+            StatusText.Text = "Updating task...";
+
+            // Update the title
+            task.Title = task.EditTitle.Trim();
+
+            // Update in Google
+            var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
+
+            if (success)
+            {
+                task.IsEditing = false;
+                StatusText.Text = "Task updated ✓";
+            }
+            else
+            {
+                StatusText.Text = "Failed to update task";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private void CancelTaskEdit(object sender)
+    {
+        if (sender is not FrameworkElement element || element.Tag is not TaskItem task)
+            return;
+
+        // Exit edit mode without saving
+        task.IsEditing = false;
+        task.EditTitle = string.Empty;
+    }
+
+    private async void TaskDetails_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not TaskItem task)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        try
+        {
+            // Create and show the dialog
+            var dialog = new Dialogs.TaskDetailsDialog(task);
+            dialog.XamlRoot = this.Content.XamlRoot;
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                // User clicked Save
+                StatusText.Text = "Updating task...";
+
+                var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
+
+                if (success)
+                {
+                    // Reload tasks from Google to get fresh state
+                    var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                    var tasksList = tasks.ToList();
+
+                    TasksView.ItemsSource = tasksList;
+
+                    if (!tasksList.Any())
+                    {
+                        EmptyState.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        EmptyState.Visibility = Visibility.Collapsed;
+                    }
+
+                    StatusText.Text = "Task updated ✓";
+                }
+                else
+                {
+                    StatusText.Text = "Failed to update task";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+        }
+    }
 }
