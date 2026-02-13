@@ -184,7 +184,7 @@
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <CheckBox IsChecked="{Binding IsCompleted, Mode=OneWay}"
+                                                <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}"
                                                           Click="TaskCheckbox_Click"
                                                           Tag="{Binding}" />
 

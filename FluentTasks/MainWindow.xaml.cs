@@ -125,7 +125,7 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            var newCompletedState = checkbox.IsChecked == true;
+            var newCompletedState = task.IsCompleted; // Already updated by binding
 
             StatusText.Text = newCompletedState ? "Completing task..." : "Reopening task...";
 
@@ -137,26 +137,22 @@ public sealed partial class MainWindow : Window
 
             if (success)
             {
-                // Refresh the entire task list from the backend to ensure consistency
-                var updatedTasks = await _taskService.GetTasksAsync(selectedList.Id);
-                TasksView.ItemsSource = updatedTasks;
-
                 StatusText.Text = newCompletedState
                     ? "Task completed ✓"
                     : "Task reopened";
             }
             else
             {
-                // Revert checkbox if update failed
-                checkbox.IsChecked = !newCompletedState;
+                // Revert if failed
+                task.IsCompleted = !newCompletedState;
                 StatusText.Text = "Failed to update task";
             }
         }
         catch (Exception ex)
         {
             StatusText.Text = $"Error: {ex.Message}";
-            // Revert checkbox on error
-            checkbox.IsChecked = !checkbox.IsChecked;
+            // Revert on error
+            task.IsCompleted = !task.IsCompleted;
         }
     }
 }

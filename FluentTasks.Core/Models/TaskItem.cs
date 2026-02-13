@@ -1,9 +1,16 @@
-﻿namespace FluentTasks.Core.Models
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace FluentTasks.Core.Models
 {
-    public class TaskItem
+    public partial class TaskItem : ObservableObject
     {
-        public string Id { get; set; } = string.Empty;
-        public string Title { get; set; } = string.Empty;
-        public bool IsCompleted { get; set; }
+        [ObservableProperty]
+        private string _id = string.Empty;
+
+        [ObservableProperty]
+        private string _title = string.Empty;
+
+        [ObservableProperty]
+        private bool _isCompleted;
     }
 }
