@@ -46,18 +46,39 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            TaskListTitle.Text = $"Tasks in: {selectedList.Title}";
+            TaskListTitle.Text = selectedList.Title;
             StatusText.Text = "Loading tasks...";
             TasksView.ItemsSource = null;
+            EmptyState.Visibility = Visibility.Collapsed;
 
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+            var tasksList = tasks.ToList();
 
-            TasksView.ItemsSource = tasks;
-            StatusText.Text = $"Loaded {tasks.Count()} tasks";
+            // Populate ParentTitle for subtasks
+            foreach (var task in tasksList.Where(t => t.IsSubtask))
+            {
+                var parent = tasksList.FirstOrDefault(t => t.Id == task.ParentId);
+                if (parent != null)
+                {
+                    task.ParentTitle = parent.Title;
+                }
+            }
+
+            if (tasksList.Any())
+            {
+                TasksView.ItemsSource = tasksList;
+                EmptyState.Visibility = Visibility.Collapsed;
+                StatusText.Text = $"{tasksList.Count} tasks";
+            }
+            else
+            {
+                EmptyState.Visibility = Visibility.Visible;
+                StatusText.Text = "This list is empty";
+            }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error loading tasks: {ex.Message}";
+            StatusText.Text = $"Error: {ex.Message}";
         }
     }
 
@@ -293,7 +314,6 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            // Create and show the dialog
             var dialog = new Dialogs.TaskDetailsDialog(task);
             dialog.XamlRoot = this.Content.XamlRoot;
 
@@ -301,16 +321,24 @@ public sealed partial class MainWindow : Window
 
             if (result == ContentDialogResult.Primary)
             {
-                // User clicked Save
                 StatusText.Text = "Updating task...";
 
                 var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
 
                 if (success)
                 {
-                    // Reload tasks from Google to get fresh state
                     var tasks = await _taskService.GetTasksAsync(selectedList.Id);
                     var tasksList = tasks.ToList();
+
+                    // Populate ParentTitle for subtasks
+                    foreach (var t in tasksList.Where(t => t.IsSubtask))
+                    {
+                        var parent = tasksList.FirstOrDefault(p => p.Id == t.ParentId);
+                        if (parent != null)
+                        {
+                            t.ParentTitle = parent.Title;
+                        }
+                    }
 
                     TasksView.ItemsSource = tasksList;
 
@@ -334,6 +362,62 @@ public sealed partial class MainWindow : Window
         catch (Exception ex)
         {
             StatusText.Text = $"Error: {ex.Message}";
+        }
+    }
+
+    private async void AddSubtask_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not TaskItem parentTask)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        // Simple prompt for subtask title
+        var dialog = new ContentDialog
+        {
+            Title = $"Add subtask to: {parentTask.Title}",
+            PrimaryButtonText = "Add",
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = this.Content.XamlRoot
+        };
+
+        var textBox = new TextBox
+        {
+            PlaceholderText = "Subtask title..."
+        };
+
+        dialog.Content = textBox;
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
+        {
+            try
+            {
+                StatusText.Text = "Creating subtask...";
+
+                // Create subtask with parent ID and inherit parent's due date
+                var newSubtask = await _taskService.CreateTaskAsync(
+                    selectedList.Id,
+                    textBox.Text.Trim(),
+                    parentTask.Id,
+                    parentTask.DueDate);  // inherit parent's due date
+
+                // Reload to show in correct position
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                var tasksList = tasks.ToList();
+
+                TasksView.ItemsSource = tasksList;
+                EmptyState.Visibility = tasksList.Any() ? Visibility.Collapsed : Visibility.Visible;
+
+                StatusText.Text = $"Subtask created • {tasksList.Count} tasks";
+            }
+            catch (Exception ex)
+            {
+                StatusText.Text = $"Error: {ex.Message}";
+            }
         }
     }
 }

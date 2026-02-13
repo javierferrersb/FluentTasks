@@ -84,7 +84,8 @@ namespace FluentTasks.Infrastructure.Google
                 DueDate = string.IsNullOrEmpty(googleTask.Due)
                 ? null
                 : DateTimeOffset.Parse(googleTask.Due),
-                Notes = googleTask.Notes
+                Notes = googleTask.Notes,
+                ParentId = googleTask.Parent
             }) ?? [];
         }
 
@@ -95,17 +96,33 @@ namespace FluentTasks.Infrastructure.Google
         /// </summary>
         /// <param name="taskListId">The task list to add the task to</param>
         /// <param name="title">The task title</param>
+        /// <param name="dueDate">Optional due date for the task</param>
+        /// <param name="parentId">Optional parent task ID for creating a subtask</param>
         /// <returns>Newly created task with Google-generated ID</returns>
-        public async Task<TaskItem> CreateTaskAsync(string taskListId, string title)
+        public async Task<TaskItem> CreateTaskAsync(string taskListId, string title, string? parentId = null, DateTimeOffset? dueDate = null)
         {
             var service = await GetServiceAsync();
 
             var googleTask = new GoogleTask
             {
-                Title = title
+                Title = title,
+                Parent = parentId
             };
 
+            // Set due date if provided
+            if (dueDate.HasValue)
+            {
+                googleTask.Due = dueDate.Value.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
+            }
+
             var request = service.Tasks.Insert(googleTask, taskListId);
+
+            // If it's a subtask, specify the parent
+            if (!string.IsNullOrEmpty(parentId))
+            {
+                request.Parent = parentId;
+            }
+
             var created = await request.ExecuteAsync();
 
             return new TaskItem
@@ -114,9 +131,10 @@ namespace FluentTasks.Infrastructure.Google
                 Title = created.Title ?? "",
                 IsCompleted = created.Status == "completed",
                 DueDate = string.IsNullOrEmpty(created.Due)
-                ? null
-                : DateTimeOffset.Parse(created.Due),
-                Notes = created.Notes
+                    ? null
+                    : DateTimeOffset.Parse(created.Due),
+                Notes = created.Notes,
+                ParentId = created.Parent
             };
         }
 

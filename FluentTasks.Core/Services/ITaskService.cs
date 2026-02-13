@@ -11,7 +11,7 @@ namespace FluentTasks.Core.Services
         Task<IEnumerable<TaskItem>> GetTasksAsync(string taskListId);
 
         // Create a new task
-        Task<TaskItem> CreateTaskAsync(string taskListId, string title);
+        Task<TaskItem> CreateTaskAsync(string taskListId, string title, string? parentId = null, DateTimeOffset? dueDate = null);
 
         // Update an existing task (e.g., title, notes)
         Task<bool> UpdateTaskAsync(string taskListId, TaskItem task);

@@ -20,6 +20,8 @@
             <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
             <converters:DateToStringConverter x:Key="DateToStringConverter" />
             <converters:OverdueToColorConverter x:Key="OverdueToColorConverter" />
+            <converters:OverdueToBackgroundConverter x:Key="OverdueToBackgroundConverter" />
+            <converters:OverdueToBorderConverter x:Key="OverdueToBorderConverter" />
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -175,35 +177,34 @@
                     <Grid>
                         <!-- Tasks List -->
                         <ScrollViewer>
-                            <ItemsRepeater x:Name="TasksView"
-                                           Margin="8">
+                            <ItemsRepeater x:Name="TasksView">
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate>
                                         <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                BorderThickness="1"
-                                                CornerRadius="6"
-                                                Padding="16,12"
-                                                Margin="0,0,0,8">
+                                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="6"
+                                                    Padding="16,12"
+                                                    Margin="0,0,0,8">
 
-                                            <Grid ColumnSpacing="12">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
+                                                <Grid ColumnSpacing="12">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
 
-                                                <CheckBox Grid.Column="0"
-                                                          IsChecked="{Binding IsCompleted, Mode=TwoWay}"
-                                                          Click="TaskCheckbox_Click"
-                                                          Tag="{Binding}"
-                                                          VerticalAlignment="Center" />
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                                                              Click="TaskCheckbox_Click"
+                                                              Tag="{Binding}"
+                                                              VerticalAlignment="Center" />
 
-                                                <!-- Display Mode -->
                                                 <StackPanel Grid.Column="1"
                                                             Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                            Spacing="4"
+                                                            Spacing="6"
                                                             VerticalAlignment="Center">
 
                                                     <!-- Title -->
@@ -212,6 +213,44 @@
                                                                TextWrapping="Wrap"
                                                                Tapped="TaskTitle_Tapped"
                                                                Tag="{Binding}" />
+
+                                                    <!-- Chips Row -->
+                                                    <StackPanel Orientation="Horizontal"
+                                                                Spacing="6">
+
+                                                        <!-- Due Date Chip -->
+                                                        <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
+                                                                BorderBrush="{Binding IsOverdue, Converter={StaticResource OverdueToBorderConverter}}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="4"
+                                                                Padding="6,2"
+                                                                Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                            <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
+                                                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                                                       Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
+                                                                       FontWeight="SemiBold" />
+                                                        </Border>
+
+                                                        <!-- Subtask Chip -->
+                                                        <Border Background="{ThemeResource SubtleFillColorSecondaryBrush}"
+                                                                BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="4"
+                                                                Padding="6,2"
+                                                                Visibility="{Binding IsSubtask, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        Spacing="4">
+                                                                <TextBlock Text="↳"
+                                                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                                                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                                <TextBlock Text="{Binding ParentTitle}"
+                                                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                                                           Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                                           FontWeight="SemiBold" />
+                                                            </StackPanel>
+                                                        </Border>
+
+                                                    </StackPanel>
 
                                                     <!-- Notes Preview -->
                                                     <TextBlock Text="{Binding Notes}"
@@ -222,85 +261,94 @@
                                                                TextTrimming="CharacterEllipsis"
                                                                Visibility="{Binding HasNotes, Converter={StaticResource BoolToVisibilityConverter}}"
                                                                Opacity="0.8" />
-
-                                                    <!-- Due Date Display -->
-                                                    <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
-                                                               Style="{StaticResource CaptionTextBlockStyle}"
-                                                               Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
-                                                               Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}" />
                                                 </StackPanel>
 
                                                 <!-- Edit Mode (unchanged) -->
-                                                <Grid Grid.Column="1"
-                                                      Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
-                                                      ColumnSpacing="8">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="1"
+                                                          Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                          ColumnSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <TextBox Grid.Column="0"
-                                                             Text="{Binding EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                             VerticalAlignment="Center"
-                                                             Tag="{Binding}">
-                                                        <TextBox.KeyboardAccelerators>
-                                                            <KeyboardAccelerator Key="Enter"
-                                                                                 Invoked="SaveEdit_Enter" />
-                                                            <KeyboardAccelerator Key="Escape"
-                                                                                 Invoked="CancelEdit_Escape" />
+                                                        <TextBox Grid.Column="0"
+                                                                 Text="{Binding EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                 VerticalAlignment="Center"
+                                                                 Tag="{Binding}">
+                                                            <TextBox.KeyboardAccelerators>
+                                                                <KeyboardAccelerator Key="Enter"
+                                                                                     Invoked="SaveEdit_Enter" />
+                                                                <KeyboardAccelerator Key="Escape"
+                                                                                     Invoked="CancelEdit_Escape" />
                                                             </TextBox.KeyboardAccelerators>
-                                                    </TextBox>
+                                                        </TextBox>
 
-                                                    <Button Grid.Column="1"
-                                                            Content="&#xE8FB;"
-                                                            FontFamily="Segoe MDL2 Assets"
-                                                            Click="SaveEdit_Click"
-                                                            Tag="{Binding}"
-                                                            Style="{StaticResource AccentButtonStyle}"
-                                                            Padding="8,4"
-                                                            ToolTipService.ToolTip="Save (Enter)" />
+                                                        <Button Grid.Column="1"
+                                                                Content="&#xE8FB;"
+                                                                FontFamily="Segoe MDL2 Assets"
+                                                                Click="SaveEdit_Click"
+                                                                Tag="{Binding}"
+                                                                Style="{StaticResource AccentButtonStyle}"
+                                                                Padding="8,4"
+                                                                ToolTipService.ToolTip="Save (Enter)" />
 
+                                                        <Button Grid.Column="2"
+                                                                Content="&#xE711;"
+                                                                FontFamily="Segoe MDL2 Assets"
+                                                                Click="CancelEdit_Click"
+                                                                Tag="{Binding}"
+                                                                Padding="8,4"
+                                                                ToolTipService.ToolTip="Cancel (Esc)" />
+                                                    </Grid>
+
+                                                    <!-- Add Subtask Button -->
                                                     <Button Grid.Column="2"
-                                                            Content="&#xE711;"
-                                                            FontFamily="Segoe MDL2 Assets"
-                                                            Click="CancelEdit_Click"
+                                                            Click="AddSubtask_Click"
                                                             Tag="{Binding}"
-                                                            Padding="8,4"
-                                                            ToolTipService.ToolTip="Cancel (Esc)" />
+                                                            Background="Transparent"
+                                                            BorderThickness="0"
+                                                            VerticalAlignment="Center"
+                                                            Padding="8"
+                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Add subtask">
+                                                        <FontIcon Glyph="&#xE710;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
+
+                                                    <!-- Details Button -->
+                                                    <Button Grid.Column="3"
+                                                            Click="TaskDetails_Click"
+                                                            Tag="{Binding}"
+                                                            Background="Transparent"
+                                                            BorderThickness="0"
+                                                            VerticalAlignment="Center"
+                                                            Padding="8"
+                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Task details">
+                                                        <FontIcon Glyph="&#xE70F;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
+
+                                                    <!-- Delete Button -->
+                                                    <Button Grid.Column="4"
+                                                            Click="DeleteTask_Click"
+                                                            Tag="{Binding}"
+                                                            Background="Transparent"
+                                                            BorderThickness="0"
+                                                            VerticalAlignment="Center"
+                                                            Padding="8"
+                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Delete task">
+                                                        <FontIcon Glyph="&#xE74D;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
                                                 </Grid>
-
-                                                <!-- Details Button -->
-                                                <Button Grid.Column="2"
-                                                        Click="TaskDetails_Click"
-                                                        Tag="{Binding}"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"
-                                                        VerticalAlignment="Center"
-                                                        Padding="8"
-                                                        Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                        ToolTipService.ToolTip="Task details">
-                                                    <FontIcon Glyph="&#xE70F;"
-                                                              FontSize="16"
-                                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-
-                                                <!-- Delete Button -->
-                                                <Button Grid.Column="3"
-                                                        Click="DeleteTask_Click"
-                                                        Tag="{Binding}"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"
-                                                        VerticalAlignment="Center"
-                                                        Padding="8"
-                                                        Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                        ToolTipService.ToolTip="Delete task">
-                                                    <FontIcon Glyph="&#xE74D;"
-                                                              FontSize="16"
-                                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Button>
-                                            </Grid>
-                                        </Border>
+                                            </Border>
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
                             </ItemsRepeater>
