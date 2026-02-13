@@ -182,17 +182,33 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                                                <CheckBox Grid.Column="0"
+                                                          IsChecked="{Binding IsCompleted, Mode=TwoWay}"
                                                           Click="TaskCheckbox_Click"
-                                                          Tag="{Binding}" />
+                                                          Tag="{Binding}"
+                                                          VerticalAlignment="Center" />
 
                                                 <TextBlock Grid.Column="1"
                                                            Text="{Binding Title}"
                                                            Style="{StaticResource BodyTextBlockStyle}"
                                                            TextWrapping="Wrap"
                                                            VerticalAlignment="Center" />
+
+                                                <Button Grid.Column="2"
+                                                        Click="DeleteTask_Click"
+                                                        Tag="{Binding}"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        VerticalAlignment="Center"
+                                                        Padding="8"
+                                                        ToolTipService.ToolTip="Delete task">
+                                                    <FontIcon Glyph="&#xE74D;"
+                                                              FontSize="16"
+                                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                </Button>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>

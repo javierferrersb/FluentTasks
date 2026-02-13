@@ -18,5 +18,8 @@ namespace FluentTasks.Core.Services
 
         // Mark a task as completed or not completed
         Task<bool> CompleteTaskAsync(string taskListId, string taskId, bool isCompleted);
+
+        // Delete a task
+        Task<bool> DeleteTaskAsync(string taskListId, string taskId);
     }
 }

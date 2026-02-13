@@ -138,5 +138,20 @@ namespace FluentTasks.Infrastructure.Google
                 return false;
             }
         }
+
+        public async Task<bool> DeleteTaskAsync(string taskListId, string taskId)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+                var request = service.Tasks.Delete(taskListId, taskId);
+                await request.ExecuteAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

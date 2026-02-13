@@ -155,4 +155,49 @@ public sealed partial class MainWindow : Window
             task.IsCompleted = !task.IsCompleted;
         }
     }
+
+    private async void DeleteTask_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not TaskItem task)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        try
+        {
+            StatusText.Text = "Deleting task...";
+
+            // Delete from Google
+            var success = await _taskService.DeleteTaskAsync(selectedList.Id, task.Id);
+
+            if (success)
+            {
+                // Remove from UI
+                var currentTasks = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList();
+                if (currentTasks != null)
+                {
+                    currentTasks.Remove(task);
+                    TasksView.ItemsSource = null;
+                    TasksView.ItemsSource = currentTasks;
+
+                    // Show empty state if no tasks left
+                    if (!currentTasks.Any())
+                    {
+                        EmptyState.Visibility = Visibility.Visible;
+                    }
+
+                    StatusText.Text = $"Task deleted • {currentTasks.Count} tasks remaining";
+                }
+            }
+            else
+            {
+                StatusText.Text = "Failed to delete task";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+        }
+    }
 }
