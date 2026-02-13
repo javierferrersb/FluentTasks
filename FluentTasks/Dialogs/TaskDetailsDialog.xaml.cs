@@ -27,6 +27,7 @@ public sealed partial class TaskDetailsDialog : ContentDialog
         // Set initial values
         TitleTextBox.Text = task.Title;
         DueDatePicker.Date = task.DueDate;
+        NotesTextBox.Text = task.Notes ?? "";
 
         UpdateStatusInfo();
 
@@ -52,6 +53,9 @@ public sealed partial class TaskDetailsDialog : ContentDialog
         // Apply changes to the actual task
         Task.Title = TitleTextBox.Text.Trim();
         Task.DueDate = _tempDueDate;
+        Task.Notes = string.IsNullOrWhiteSpace(NotesTextBox.Text)
+        ? null
+        : NotesTextBox.Text.Trim();
     }
 
     private void ClearDueDate_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

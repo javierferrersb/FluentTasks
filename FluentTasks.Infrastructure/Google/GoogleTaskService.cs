@@ -82,8 +82,9 @@ namespace FluentTasks.Infrastructure.Google
                 Title = googleTask.Title ?? "",
                 IsCompleted = googleTask.Status == "completed",
                 DueDate = string.IsNullOrEmpty(googleTask.Due)
-        ? null
-        : DateTimeOffset.Parse(googleTask.Due)
+                ? null
+                : DateTimeOffset.Parse(googleTask.Due),
+                Notes = googleTask.Notes
             }) ?? [];
         }
 
@@ -114,7 +115,8 @@ namespace FluentTasks.Infrastructure.Google
                 IsCompleted = created.Status == "completed",
                 DueDate = string.IsNullOrEmpty(created.Due)
                 ? null
-                : DateTimeOffset.Parse(created.Due)
+                : DateTimeOffset.Parse(created.Due),
+                Notes = created.Notes
             };
         }
 
@@ -145,6 +147,7 @@ namespace FluentTasks.Infrastructure.Google
                 // STEP 2: Update only the fields we care about
                 googleTask.Title = task.Title;
                 googleTask.Status = task.IsCompleted ? "completed" : "needsAction";
+                googleTask.Notes = task.Notes;
 
                 // Update due date if we have it
                 if (task.DueDate.HasValue)

@@ -23,8 +23,12 @@ namespace FluentTasks.Core.Models
         [ObservableProperty]
         private DateTimeOffset? _dueDate;
 
-        // Helper property for display
+        [ObservableProperty]
+        private string? _notes;
+
+        // Helper properties for display
         public bool HasDueDate => DueDate.HasValue;
         public bool IsOverdue => DueDate.HasValue && DueDate.Value.Date < DateTime.Today && !IsCompleted;
+        public bool HasNotes => !string.IsNullOrWhiteSpace(Notes);
     }
 }

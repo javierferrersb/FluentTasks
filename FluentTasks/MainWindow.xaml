@@ -205,11 +205,23 @@
                                                             Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
                                                             Spacing="4"
                                                             VerticalAlignment="Center">
+
+                                                    <!-- Title -->
                                                     <TextBlock Text="{Binding Title}"
                                                                Style="{StaticResource BodyTextBlockStyle}"
                                                                TextWrapping="Wrap"
                                                                Tapped="TaskTitle_Tapped"
                                                                Tag="{Binding}" />
+
+                                                    <!-- Notes Preview -->
+                                                    <TextBlock Text="{Binding Notes}"
+                                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                               TextWrapping="Wrap"
+                                                               MaxLines="2"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               Visibility="{Binding HasNotes, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                               Opacity="0.8" />
 
                                                     <!-- Due Date Display -->
                                                     <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"

@@ -36,6 +36,15 @@
             </Grid>
         </StackPanel>
 
+        <!-- Notes/Description -->
+        <TextBox x:Name="NotesTextBox"
+                 Header="Notes"
+                 PlaceholderText="Add details about this task..."
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 Height="120"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" />
+
         <!-- Status Info -->
         <StackPanel Spacing="4">
             <TextBlock Text="Status"
