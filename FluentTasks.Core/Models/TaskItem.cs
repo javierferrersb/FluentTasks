@@ -34,6 +34,9 @@ namespace FluentTasks.Core.Models
         [ObservableProperty]
         private string? _parentTitle;
 
+        [ObservableProperty]
+        private int _position;
+
         // Helper properties for display
         public bool HasDueDate => DueDate.HasValue;
         public bool IsOverdue => DueDate.HasValue && DueDate.Value.Date < DateTime.Today && !IsCompleted;

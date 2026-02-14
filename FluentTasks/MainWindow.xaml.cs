@@ -14,6 +14,10 @@ public sealed partial class MainWindow : Window
 {
     private readonly ITaskService _taskService;
 
+    private List<TaskItem> _allTasks = new();
+    private SortOption _currentSort = SortOption.None;
+    private FilterOption _currentFilter = FilterOption.All;
+
     public MainWindow()
     {
         this.InitializeComponent();
@@ -52,29 +56,22 @@ public sealed partial class MainWindow : Window
             EmptyState.Visibility = Visibility.Collapsed;
 
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-            var tasksList = tasks.ToList();
+            _allTasks = tasks.ToList();
 
             // Populate ParentTitle for subtasks
-            foreach (var task in tasksList.Where(t => t.IsSubtask))
+            foreach (var task in _allTasks.Where(t => t.IsSubtask))
             {
-                var parent = tasksList.FirstOrDefault(t => t.Id == task.ParentId);
+                var parent = _allTasks.FirstOrDefault(t => t.Id == task.ParentId);
                 if (parent != null)
                 {
                     task.ParentTitle = parent.Title;
                 }
             }
 
-            if (tasksList.Any())
-            {
-                TasksView.ItemsSource = tasksList;
-                EmptyState.Visibility = Visibility.Collapsed;
-                StatusText.Text = $"{tasksList.Count} tasks";
-            }
-            else
-            {
-                EmptyState.Visibility = Visibility.Visible;
-                StatusText.Text = "This list is empty";
-            }
+            // Apply current sort and filter
+            ApplySortAndFilter();
+
+            StatusText.Text = $"{_allTasks.Count} tasks loaded";
         }
         catch (Exception ex)
         {
@@ -112,23 +109,16 @@ public sealed partial class MainWindow : Window
             var title = NewTaskInput.Text.Trim();
             StatusText.Text = "Creating task...";
 
-            // Create the task in Google
             var newTask = await _taskService.CreateTaskAsync(selectedList.Id, title);
 
-            // Get current tasks and create a NEW list with the new task
-            var currentTasks = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList()
-                ?? new List<TaskItem>();
+            // Add to all tasks
+            _allTasks.Insert(0, newTask);
 
-            var updatedTasks = new List<TaskItem> { newTask }; // New task first
-            updatedTasks.AddRange(currentTasks); // Then existing tasks
+            // Reapply sort/filter
+            ApplySortAndFilter();
 
-            // Set the new list
-            TasksView.ItemsSource = updatedTasks;
-
-            // Clear input and update status
             NewTaskInput.Text = string.Empty;
-            EmptyState.Visibility = Visibility.Collapsed;
-            StatusText.Text = $"Task created • {updatedTasks.Count} tasks";
+            StatusText.Text = $"Task created • {_allTasks.Count} tasks";
         }
         catch (Exception ex)
         {
@@ -189,27 +179,17 @@ public sealed partial class MainWindow : Window
         {
             StatusText.Text = "Deleting task...";
 
-            // Delete from Google
             var success = await _taskService.DeleteTaskAsync(selectedList.Id, task.Id);
 
             if (success)
             {
-                // Remove from UI
-                var currentTasks = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList();
-                if (currentTasks != null)
-                {
-                    currentTasks.Remove(task);
-                    TasksView.ItemsSource = null;
-                    TasksView.ItemsSource = currentTasks;
+                // Remove from all tasks
+                _allTasks.Remove(task);
 
-                    // Show empty state if no tasks left
-                    if (!currentTasks.Any())
-                    {
-                        EmptyState.Visibility = Visibility.Visible;
-                    }
+                // Reapply sort/filter
+                ApplySortAndFilter();
 
-                    StatusText.Text = $"Task deleted • {currentTasks.Count} tasks remaining";
-                }
+                StatusText.Text = $"Task deleted • {_allTasks.Count} tasks remaining";
             }
             else
             {
@@ -328,28 +308,20 @@ public sealed partial class MainWindow : Window
                 if (success)
                 {
                     var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                    var tasksList = tasks.ToList();
+                    _allTasks = tasks.ToList();
 
                     // Populate ParentTitle for subtasks
-                    foreach (var t in tasksList.Where(t => t.IsSubtask))
+                    foreach (var t in _allTasks.Where(t => t.IsSubtask))
                     {
-                        var parent = tasksList.FirstOrDefault(p => p.Id == t.ParentId);
+                        var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
                         if (parent != null)
                         {
                             t.ParentTitle = parent.Title;
                         }
                     }
 
-                    TasksView.ItemsSource = tasksList;
-
-                    if (!tasksList.Any())
-                    {
-                        EmptyState.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        EmptyState.Visibility = Visibility.Collapsed;
-                    }
+                    // Apply current sort/filter
+                    ApplySortAndFilter();
 
                     StatusText.Text = "Task updated ✓";
                 }
@@ -373,7 +345,6 @@ public sealed partial class MainWindow : Window
         if (TaskListsView.SelectedItem is not TaskList selectedList)
             return;
 
-        // Simple prompt for subtask title
         var dialog = new ContentDialog
         {
             Title = $"Add subtask to: {parentTask.Title}",
@@ -398,26 +369,137 @@ public sealed partial class MainWindow : Window
             {
                 StatusText.Text = "Creating subtask...";
 
-                // Create subtask with parent ID and inherit parent's due date
                 var newSubtask = await _taskService.CreateTaskAsync(
                     selectedList.Id,
                     textBox.Text.Trim(),
                     parentTask.Id,
-                    parentTask.DueDate);  // inherit parent's due date
+                    parentTask.DueDate);
 
-                // Reload to show in correct position
-                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                var tasksList = tasks.ToList();
+                IEnumerable<TaskItem>? tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                _allTasks = tasks.ToList();
 
-                TasksView.ItemsSource = tasksList;
-                EmptyState.Visibility = tasksList.Any() ? Visibility.Collapsed : Visibility.Visible;
+                // Populate ParentTitle for subtasks
+                foreach (var t in _allTasks.Where(t => t.IsSubtask))
+                {
+                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
+                    if (parent != null)
+                    {
+                        t.ParentTitle = parent.Title;
+                    }
+                }
 
-                StatusText.Text = $"Subtask created • {tasksList.Count} tasks";
+                // Apply current sort/filter
+                ApplySortAndFilter();
+
+                StatusText.Text = $"Subtask created • {_allTasks.Count} tasks";
             }
             catch (Exception ex)
             {
                 StatusText.Text = $"Error: {ex.Message}";
             }
         }
+    }
+
+    private void Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (SortComboBox.SelectedItem is ComboBoxItem item &&
+            Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
+        {
+            _currentSort = sortOption;
+            ApplySortAndFilter();
+        }
+    }
+
+    private void Filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (FilterComboBox.SelectedItem is ComboBoxItem item &&
+            Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
+        {
+            _currentFilter = filterOption;
+            ApplySortAndFilter();
+        }
+    }
+
+    private void ApplySortAndFilter()
+    {
+        // Guard: Don't run if UI isn't loaded yet
+        if (TasksView == null || TaskCountText == null)
+            return;
+
+        if (!_allTasks.Any())
+        {
+            TasksView.ItemsSource = null;
+            TaskCountText.Text = "";
+            return;
+        }
+
+        var tasks = _allTasks.AsEnumerable();
+
+        // Apply filter
+        tasks = _currentFilter switch
+        {
+            FilterOption.Incomplete => tasks.Where(t => !t.IsCompleted),
+            FilterOption.Completed => tasks.Where(t => t.IsCompleted),
+            FilterOption.Overdue => tasks.Where(t => t.IsOverdue),
+            FilterOption.Today => tasks.Where(t => t.DueDate.HasValue &&
+                t.DueDate.Value.Date == DateTimeOffset.Now.Date),
+            FilterOption.ThisWeek => tasks.Where(t => t.DueDate.HasValue &&
+                t.DueDate.Value.Date >= DateTimeOffset.Now.Date &&
+                t.DueDate.Value.Date <= DateTimeOffset.Now.Date.AddDays(7)),
+            _ => tasks
+        };
+
+        // Apply sort
+        tasks = _currentSort switch
+        {
+            SortOption.DueDateAscending => tasks.OrderBy(t => t.DueDate ?? DateTimeOffset.MaxValue),
+            SortOption.DueDateDescending => tasks.OrderByDescending(t => t.DueDate ?? DateTimeOffset.MinValue),
+            SortOption.Alphabetical => tasks.OrderBy(t => t.Title),
+            SortOption.AlphabeticalReverse => tasks.OrderByDescending(t => t.Title),
+            SortOption.CompletedLast => tasks.OrderBy(t => t.IsCompleted).ThenBy(t => t.Title),
+            _ => tasks
+        };
+
+        var filteredList = tasks.ToList();
+        TasksView.ItemsSource = filteredList;
+
+        // Update count
+        var totalCount = _allTasks.Count;
+        var displayCount = filteredList.Count;
+
+        if (displayCount == totalCount)
+        {
+            TaskCountText.Text = $"{totalCount} tasks";
+        }
+        else
+        {
+            TaskCountText.Text = $"Showing {displayCount} of {totalCount} tasks";
+        }
+
+        // Show/hide empty state
+        if (EmptyState != null)
+        {
+            EmptyState.Visibility = filteredList.Any() ? Visibility.Collapsed : Visibility.Visible;
+        }
+    }
+
+    public enum SortOption
+    {
+        None,
+        DueDateAscending,
+        DueDateDescending,
+        Alphabetical,
+        AlphabeticalReverse,
+        CompletedLast
+    }
+
+    public enum FilterOption
+    {
+        All,
+        Incomplete,
+        Completed,
+        Overdue,
+        Today,
+        ThisWeek
     }
 }

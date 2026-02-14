@@ -136,10 +136,74 @@
                         CornerRadius="8,8,0,0"
                         Padding="16,12">
                     <StackPanel Spacing="16">
-                        <TextBlock x:Name="TaskListTitle"
-                                   Text="Select a list to view tasks"
-                                   Style="{StaticResource BodyStrongTextBlockStyle}" />
-                        
+                        <!-- Page Header -->
+                        <StackPanel Grid.Row="0"
+                                    Spacing="16"
+                                    Margin="0,0,0,24">
+                            <TextBlock x:Name="TaskListTitle"
+                                       Text="Select a list"
+                                       Style="{StaticResource TitleLargeTextBlockStyle}" />
+
+                            <!-- Sort & Filter Toolbar -->
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Sort Dropdown -->
+                                <ComboBox Grid.Column="0"
+                                          x:Name="SortComboBox"
+                                          Header="Sort by"
+                                          MinWidth="180"
+                                          SelectionChanged="Sort_SelectionChanged">
+                                    <ComboBoxItem Content="Default"
+                                                  Tag="None"
+                                                  IsSelected="True" />
+                                    <ComboBoxItem Content="Due date (earliest)"
+                                                  Tag="DueDateAscending" />
+                                    <ComboBoxItem Content="Due date (latest)"
+                                                  Tag="DueDateDescending" />
+                                    <ComboBoxItem Content="A to Z"
+                                                  Tag="Alphabetical" />
+                                    <ComboBoxItem Content="Z to A"
+                                                  Tag="AlphabeticalReverse" />
+                                    <ComboBoxItem Content="Completed last"
+                                                  Tag="CompletedLast" />
+                                </ComboBox>
+
+                                <!-- Filter Dropdown -->
+                                <ComboBox Grid.Column="1"
+                                          x:Name="FilterComboBox"
+                                          Header="Filter"
+                                          MinWidth="150"
+                                          SelectionChanged="Filter_SelectionChanged">
+                                    <ComboBoxItem Content="All tasks"
+                                                  Tag="All"
+                                                  IsSelected="True" />
+                                    <ComboBoxItem Content="Incomplete"
+                                                  Tag="Incomplete" />
+                                    <ComboBoxItem Content="Completed"
+                                                  Tag="Completed" />
+                                    <ComboBoxItem Content="Overdue"
+                                                  Tag="Overdue" />
+                                    <ComboBoxItem Content="Due today"
+                                                  Tag="Today" />
+                                    <ComboBoxItem Content="Due this week"
+                                                  Tag="ThisWeek" />
+                                </ComboBox>
+
+                                <!-- Task Count -->
+                                <TextBlock Grid.Column="2"
+                                           x:Name="TaskCountText"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,0,4"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </Grid>
+                        </StackPanel>
+
                         <!-- Add Task Input -->
                         <Grid Margin="0,16,0,0">
                             <Grid.ColumnDefinitions>

@@ -82,10 +82,11 @@ namespace FluentTasks.Infrastructure.Google
                 Title = googleTask.Title ?? "",
                 IsCompleted = googleTask.Status == "completed",
                 DueDate = string.IsNullOrEmpty(googleTask.Due)
-                ? null
-                : DateTimeOffset.Parse(googleTask.Due),
+                    ? null
+                    : DateTimeOffset.Parse(googleTask.Due),
                 Notes = googleTask.Notes,
-                ParentId = googleTask.Parent
+                ParentId = googleTask.Parent,
+                Position = int.TryParse(googleTask.Position, out var pos) ? pos : 0
             }) ?? [];
         }
 
