@@ -4,42 +4,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-
-    <Grid Width="12"
-          Height="12">
+    <Grid Width="10"
+          Height="10"
+          UseLayoutRounding="False">
         <!-- Ripple Effect (behind main orb) -->
         <Ellipse x:Name="RippleEllipse"
-                 Width="12"
-                 Height="12"
+                 Width="10"
+                 Height="10"
                  StrokeThickness="2"
                  Stroke="Transparent"
                  Fill="Transparent"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Center"
-                 Opacity="0">
+                 Opacity="0"
+                 UseLayoutRounding="False">
             <Ellipse.RenderTransform>
                 <ScaleTransform x:Name="RippleScale"
                                 ScaleX="1"
                                 ScaleY="1"
-                                CenterX="6"
-                                CenterY="6" />
+                                CenterX="5"
+                                CenterY="5" />
             </Ellipse.RenderTransform>
         </Ellipse>
-
         <!-- Main Orb -->
         <Ellipse x:Name="OrbEllipse"
-                 Width="12"
-                 Height="12"
+                 Width="10"
+                 Height="10"
                  StrokeThickness="2"
                  Fill="Transparent"
                  VerticalAlignment="Center"
-                 HorizontalAlignment="Center">
+                 HorizontalAlignment="Center"
+                 UseLayoutRounding="False">
             <Ellipse.RenderTransform>
                 <ScaleTransform x:Name="OrbScale"
                                 ScaleX="1"
                                 ScaleY="1"
-                                CenterX="6"
-                                CenterY="6" />
+                                CenterX="5"
+                                CenterY="5" />
             </Ellipse.RenderTransform>
         </Ellipse>
     </Grid>

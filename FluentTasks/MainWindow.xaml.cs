@@ -60,7 +60,6 @@ public sealed partial class MainWindow : Window
             TaskListsView.ItemsSource = TaskLists;
 
             StatusText.Text = "Ready";
-            ShowSuccess($"Synced {TaskLists.Count} lists");
 
             if (TaskLists.Any())
             {
@@ -114,7 +113,6 @@ public sealed partial class MainWindow : Window
             // Set initial checkmark on filter (Incomplete is default)
             FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
 
-            ShowSuccess($"Loaded {_allTasks.Count} tasks");
         }
         catch (Exception ex)
         {

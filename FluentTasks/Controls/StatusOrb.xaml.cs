@@ -153,7 +153,7 @@ public sealed partial class StatusOrb : UserControl
         var scaleXAnimation = new DoubleAnimation
         {
             From = 0.0,  // Start from center
-            To = 1.4,    // End at orb size
+            To = 1.6,    // End at orb size
             Duration = new Duration(TimeSpan.FromMilliseconds(600)),
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         };
@@ -161,7 +161,7 @@ public sealed partial class StatusOrb : UserControl
         var scaleYAnimation = new DoubleAnimation
         {
             From = 0.0,  // Start from center
-            To = 1.4,    // End at orb size
+            To = 1.6,    // End at orb size
             Duration = new Duration(TimeSpan.FromMilliseconds(600)),
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         };
