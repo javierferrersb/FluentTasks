@@ -1,5 +1,7 @@
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
+using FluentTasks.UI.Services;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -21,11 +23,17 @@ public sealed partial class MainWindow : Window
     private SortOption _currentSort = SortOption.None;
     private FilterOption _currentFilter = FilterOption.Incomplete;
     private TaskItem? _draggedTask;
+    private string _searchQuery = string.Empty;
 
     public MainWindow()
     {
         this.InitializeComponent();
         _taskService = App.GetService<ITaskService>();
+
+        // Set up custom title bar
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(AppTitleBar);
+        this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
     }
 
     private async void LoadTaskLists_Click(object sender, RoutedEventArgs e)
@@ -480,7 +488,6 @@ public sealed partial class MainWindow : Window
 
     private void ApplySortAndFilter()
     {
-        // Guard: Don't run if UI isn't loaded yet
         if (TasksView == null || TaskCountText == null)
             return;
 
@@ -492,6 +499,12 @@ public sealed partial class MainWindow : Window
         }
 
         var tasks = _allTasks.AsEnumerable();
+
+        // Apply search first
+        if (!string.IsNullOrWhiteSpace(_searchQuery))
+        {
+            tasks = SearchService.FilterTasks(tasks, _searchQuery);
+        }
 
         // Apply filter
         tasks = _currentFilter switch
@@ -515,7 +528,7 @@ public sealed partial class MainWindow : Window
             SortOption.Alphabetical => tasks.OrderBy(t => t.Title),
             SortOption.AlphabeticalReverse => tasks.OrderByDescending(t => t.Title),
             SortOption.CompletedLast => tasks.OrderBy(t => t.IsCompleted).ThenBy(t => t.Title),
-            _ => OrganizeTasksHierarchically(tasks)  // Default: group subtasks under parents
+            _ => OrganizeTasksHierarchically(tasks)
         };
 
         var filteredList = tasks.ToList();
@@ -535,9 +548,8 @@ public sealed partial class MainWindow : Window
                 task.UseSubtaskMargin = false;
             }
 
-            // Enable drag/drop only in default sort
-            task.CanDrag = isDefaultSort;
-            task.CanDrop = isDefaultSort;
+            task.CanDrag = isDefaultSort && string.IsNullOrWhiteSpace(_searchQuery);  // Can't drag when searching
+            task.CanDrop = isDefaultSort && string.IsNullOrWhiteSpace(_searchQuery);
         }
 
         TasksView.ItemsSource = filteredList;
@@ -546,7 +558,11 @@ public sealed partial class MainWindow : Window
         var totalCount = _allTasks.Count;
         var displayCount = filteredList.Count;
 
-        if (displayCount == totalCount)
+        bool hasActiveFilters = !string.IsNullOrWhiteSpace(_searchQuery) ||
+                               _currentFilter != FilterOption.Incomplete ||
+                               _currentSort != SortOption.None;
+
+        if (displayCount == totalCount && !hasActiveFilters)
         {
             TaskCountText.Text = $"{totalCount} tasks";
         }
@@ -555,10 +571,18 @@ public sealed partial class MainWindow : Window
             TaskCountText.Text = $"Showing {displayCount} of {totalCount} tasks";
         }
 
-        // Show/hide empty state
         if (EmptyState != null)
         {
             EmptyState.Visibility = filteredList.Any() ? Visibility.Collapsed : Visibility.Visible;
+        }
+    }
+
+    private void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            _searchQuery = sender.Text;
+            ApplySortAndFilter();
         }
     }
 
