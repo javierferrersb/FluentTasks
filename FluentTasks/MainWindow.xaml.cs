@@ -6,6 +6,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -271,9 +272,62 @@ public sealed partial class MainWindow : Window
         if (sender is not TextBlock textBlock || textBlock.Tag is not TaskItem task)
             return;
 
-        // Enter edit mode
+        // Exit edit mode for all other tasks
+        foreach (var t in _allTasks.Where(t => t.IsEditing && t.Id != task.Id))
+        {
+            t.IsEditing = false;
+            t.EditTitle = string.Empty;
+        }
+
+        // Enter edit mode for this task
         task.EditTitle = task.Title;
         task.IsEditing = true;
+
+        // Focus the textbox after a short delay to let UI update
+        DispatcherQueue.TryEnqueue(async () =>
+        {
+            await Task.Delay(50); // Small delay for UI to render
+            FocusEditTextBox(task);
+        });
+    }
+
+    private void FocusEditTextBox(TaskItem task)
+    {
+        // Find the TextBox in the visual tree for this task
+        if (TasksView.ItemsSource is IEnumerable<TaskItem> items)
+        {
+            var index = items.ToList().IndexOf(task);
+            if (index >= 0)
+            {
+                var container = TasksView.TryGetElement(index);
+                if (container != null)
+                {
+                    var textBox = FindTextBoxInVisualTree(container);
+                    if (textBox != null)
+                    {
+                        textBox.Focus(FocusState.Programmatic);
+                        textBox.SelectAll();  // Select all text
+                    }
+                }
+            }
+        }
+    }
+
+    private TextBox? FindTextBoxInVisualTree(DependencyObject parent)
+    {
+        var count = VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+
+            if (child is TextBox textBox && textBox.Tag is TaskItem)
+                return textBox;
+
+            var result = FindTextBoxInVisualTree(child);
+            if (result != null)
+                return result;
+        }
+        return null;
     }
 
     private async void SaveEdit_Click(object sender, RoutedEventArgs e)
@@ -452,13 +506,12 @@ public sealed partial class MainWindow : Window
 
     private void ApplySortAndFilter()
     {
-        if (TasksView == null || TaskCountText == null)
+        if (TasksView == null)
             return;
 
         if (!_allTasks.Any())
         {
             TasksView.ItemsSource = null;
-            TaskCountText.Text = "";
             return;
         }
 
@@ -526,14 +579,6 @@ public sealed partial class MainWindow : Window
                                _currentFilter != FilterOption.Incomplete ||
                                _currentSort != SortOption.None;
 
-        if (displayCount == totalCount && !hasActiveFilters)
-        {
-            TaskCountText.Text = $"{totalCount} tasks";
-        }
-        else
-        {
-            TaskCountText.Text = $"Showing {displayCount} of {totalCount} tasks";
-        }
 
         if (EmptyState != null)
         {
@@ -674,7 +719,6 @@ public sealed partial class MainWindow : Window
                     _allTasks.Clear();
                     TasksView.ItemsSource = null;
                     TaskListTitle.Text = "Select a list";
-                    TaskCountText.Text = "";
 
                     ShowSuccess("List deleted");
                 }
@@ -1060,6 +1104,70 @@ public sealed partial class MainWindow : Window
         {
             FilterButtonText.Text = "Filter";
             FilterButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+        }
+    }
+
+    private void TaskTitle_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Underline;
+        }
+    }
+
+    private void TaskTitle_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+        }
+    }
+
+    private async void DateChip_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
+    {
+        if (sender is not Border border || border.Tag is not TaskItem task)
+            return;
+
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        try
+        {
+            var dialog = new Dialogs.TaskDetailsDialog(task);
+            dialog.XamlRoot = this.Content.XamlRoot;
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
+
+                if (success)
+                {
+                    var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                    _allTasks = tasks.ToList();
+
+                    foreach (var t in _allTasks.Where(t => t.IsSubtask))
+                    {
+                        var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
+                        if (parent != null)
+                        {
+                            t.ParentTitle = parent.Title;
+                        }
+                    }
+
+                    ApplySortAndFilter();
+                    ShowSuccess("Task updated");
+                }
+                else
+                {
+                    ShowWarning("Failed to update task");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
         }
     }
 

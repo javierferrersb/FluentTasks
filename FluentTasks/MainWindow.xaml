@@ -58,46 +58,17 @@
             <TitleBar.Content>
                 <Grid HorizontalAlignment="Stretch"
                       Margin="40,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Left spacer -->
-                    <Grid Grid.Column="0" />
-
-                    <!-- Search (centered) -->
-                    <AutoSuggestBox Grid.Column="1"
-                                    x:Name="SearchBox"
-                                    PlaceholderText="Search tasks..."
-                                    QueryIcon="Find"
-                                    TextChanged="Search_TextChanged"
-                                    Width="280"
-                                    VerticalAlignment="Center">
-                        <AutoSuggestBox.KeyboardAccelerators>
-                            <KeyboardAccelerator Key="F"
-                                                 Modifiers="Control" />
-                        </AutoSuggestBox.KeyboardAccelerators>
-                    </AutoSuggestBox>
-
-                    <!-- Sync Button -->
-                    <Button Grid.Column="2"
-                            Content="Sync Lists"
+                    <Button Content="Sync Lists"
                             Click="LoadTaskLists_Click"
                             Style="{StaticResource AccentButtonStyle}"
                             Height="32"
-                            VerticalAlignment="Center"
-                            Margin="12,0,0,0">
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                         <Button.KeyboardAccelerators>
                             <KeyboardAccelerator Key="R"
                                                  Modifiers="Control" />
                         </Button.KeyboardAccelerators>
                     </Button>
-
-                    <!-- Right spacer -->
-                    <Grid Grid.Column="3" />
                 </Grid>
             </TitleBar.Content>
         </TitleBar>
@@ -358,13 +329,22 @@
                                     </StackPanel>
                                 </Button>
 
-                                <!-- Task Count -->
-                                <TextBlock Grid.Column="2"
-                                           x:Name="TaskCountText"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <!-- Search Box -->
+                                <AutoSuggestBox Grid.Column="2"
+                                                x:Name="SearchBox"
+                                                PlaceholderText="Search tasks..."
+                                                QueryIcon="Find"
+                                                TextChanged="Search_TextChanged"
+                                                HorizontalAlignment="Right"
+                                                MaxWidth="400"
+                                                MinWidth="200"
+                                                VerticalAlignment="Center"
+                                                Margin="12,0,0,0">
+                                    <AutoSuggestBox.KeyboardAccelerators>
+                                        <KeyboardAccelerator Key="F"
+                                                             Modifiers="Control" />
+                                    </AutoSuggestBox.KeyboardAccelerators>
+                                </AutoSuggestBox>
                             </Grid>
 
                             <!-- Add Task Input -->
@@ -440,6 +420,8 @@
                                                                            Style="{StaticResource BodyTextBlockStyle}"
                                                                            TextWrapping="Wrap"
                                                                            Tapped="TaskTitle_Tapped"
+                                                                           PointerEntered="TaskTitle_PointerEntered"
+                                                                           PointerExited="TaskTitle_PointerExited"
                                                                            Tag="{Binding}" />
 
                                                                 <!-- Chips Row -->
@@ -452,7 +434,9 @@
                                                                             BorderThickness="1"
                                                                             CornerRadius="4"
                                                                             Padding="6,2"
-                                                                            Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                            Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                            Tapped="DateChip_Tapped"
+                                                                            Tag="{Binding}">
                                                                         <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
                                                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                                                    Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
