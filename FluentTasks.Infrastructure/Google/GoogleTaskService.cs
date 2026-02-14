@@ -3,6 +3,7 @@ using FluentTasks.Core.Services;
 using Google.Apis.Services;
 using Google.Apis.Tasks.v1;
 using GoogleTask = Google.Apis.Tasks.v1.Data.Task;
+using GoogleTaskList = Google.Apis.Tasks.v1.Data.TaskList;
 
 namespace FluentTasks.Infrastructure.Google
 {
@@ -246,6 +247,90 @@ namespace FluentTasks.Infrastructure.Google
             {
                 var service = await GetServiceAsync();
                 var request = service.Tasks.Delete(taskListId, taskId);
+                await request.ExecuteAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new task list.
+        /// </summary>
+        /// <param name="title">The name of the new task list</param>
+        /// <returns>The created task list with Google-generated ID</returns>
+        public async Task<TaskList> CreateTaskListAsync(string title)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+
+                var googleTaskList = new GoogleTaskList
+                {
+                    Title = title
+                };
+
+                var request = service.Tasklists.Insert(googleTaskList);
+                var created = await request.ExecuteAsync();
+
+                return new TaskList
+                {
+                    Id = created.Id,
+                    Title = created.Title
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Failed to create task list", ex);
+            }
+        }
+
+        /// <summary>
+        /// Updates the title of a task list.
+        /// Uses fetch-modify-update pattern to preserve other properties.
+        /// </summary>
+        /// <param name="taskListId">ID of the task list to update</param>
+        /// <param name="newTitle">New title for the task list</param>
+        /// <returns>True if update succeeded, false otherwise</returns>
+        public async Task<bool> UpdateTaskListAsync(string taskListId, string newTitle)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+
+                // Get current task list
+                var getRequest = service.Tasklists.Get(taskListId);
+                var taskList = await getRequest.ExecuteAsync();
+
+                // Update title
+                taskList.Title = newTitle;
+
+                // Send back
+                var updateRequest = service.Tasklists.Update(taskList, taskListId);
+                await updateRequest.ExecuteAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Deletes a task list and all its tasks.
+        /// WARNING: This permanently deletes all tasks in the list.
+        /// </summary>
+        /// <param name="taskListId">ID of the task list to delete</param>
+        /// <returns>True if deletion succeeded, false otherwise</returns>
+        public async Task<bool> DeleteTaskListAsync(string taskListId)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+                var request = service.Tasklists.Delete(taskListId);
                 await request.ExecuteAsync();
                 return true;
             }

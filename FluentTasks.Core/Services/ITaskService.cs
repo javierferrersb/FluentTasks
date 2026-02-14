@@ -7,6 +7,17 @@ namespace FluentTasks.Core.Services
         // Get all task lists for the user
         Task<IEnumerable<TaskList>> GetTaskListsAsync();
 
+        // Create a new task list
+        Task<TaskList> CreateTaskListAsync(string title);
+
+        // Update the title of an existing task list
+        Task<bool> UpdateTaskListAsync(string taskListId, string newTitle);
+
+        // Delete a task list and all its tasks
+        Task<bool> DeleteTaskListAsync(string taskListId);
+
+
+
         // Get all tasks in a specific task list
         Task<IEnumerable<TaskItem>> GetTasksAsync(string taskListId);
 

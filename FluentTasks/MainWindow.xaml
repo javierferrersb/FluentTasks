@@ -22,6 +22,7 @@
             <converters:OverdueToColorConverter x:Key="OverdueToColorConverter" />
             <converters:OverdueToBackgroundConverter x:Key="OverdueToBackgroundConverter" />
             <converters:OverdueToBorderConverter x:Key="OverdueToBorderConverter" />
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -78,9 +79,49 @@
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         CornerRadius="8,8,0,0"
-                        Padding="16,12">
-                    <TextBlock Text="My Lists"
-                               Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        Padding="12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="My Lists"
+                                   Style="{StaticResource BodyStrongTextBlockStyle}"
+                                   VerticalAlignment="Center" />
+
+                        <Button Grid.Column="1"
+                                Content="&#xE710;"
+                                FontFamily="Segoe MDL2 Assets"
+                                Click="CreateList_Click"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4"
+                                ToolTipService.ToolTip="New list" />
+
+                        <Button Grid.Column="2"
+                                Content="&#xE70F;"
+                                FontFamily="Segoe MDL2 Assets"
+                                Click="RenameList_Click"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4"
+                                IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                                ToolTipService.ToolTip="Rename list" />
+
+                        <Button Grid.Column="3"
+                                Content="&#xE74D;"
+                                FontFamily="Segoe MDL2 Assets"
+                                Click="DeleteList_Click"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4"
+                                IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                                ToolTipService.ToolTip="Delete list" />
+                    </Grid>
                 </Border>
 
                 <!-- Lists Content -->
