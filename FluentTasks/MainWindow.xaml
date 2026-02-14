@@ -115,7 +115,8 @@
             <Grid Grid.Column="0"
                   Background="{ThemeResource LayerFillColorDefaultBrush}"
                   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                  BorderThickness="0,0,1,0">
+                  BorderThickness="0,0,1,0"
+                  Padding="16">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -123,92 +124,74 @@
                 </Grid.RowDefinitions>
 
                 <!-- Lists Header -->
-                <Border Grid.Row="0"
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="8,8,0,0"
-                        Padding="12"
-                        Margin="16,16,16,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0"
+                      Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0"
-                                   Text="My Lists"
-                                   Style="{StaticResource BodyStrongTextBlockStyle}"
-                                   VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="0"
+                               Text="My Lists"
+                               Style="{StaticResource BodyStrongTextBlockStyle}"
+                               VerticalAlignment="Center" />
 
-                        <Button Grid.Column="1"
-                                Content="&#xE710;"
-                                FontFamily="Segoe MDL2 Assets"
-                                Click="CreateList_Click"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Padding="8,4"
-                                ToolTipService.ToolTip="New list" />
+                    <Button Grid.Column="1"
+                            Content="&#xE710;"
+                            FontFamily="Segoe MDL2 Assets"
+                            Click="CreateList_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="8,4"
+                            ToolTipService.ToolTip="New list" />
 
-                        <Button Grid.Column="2"
-                                Content="&#xE70F;"
-                                FontFamily="Segoe MDL2 Assets"
-                                Click="RenameList_Click"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Padding="8,4"
-                                IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
-                                ToolTipService.ToolTip="Rename list" />
+                    <Button Grid.Column="2"
+                            Content="&#xE70F;"
+                            FontFamily="Segoe MDL2 Assets"
+                            Click="RenameList_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="8,4"
+                            IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                            ToolTipService.ToolTip="Rename list" />
 
-                        <Button Grid.Column="3"
-                                Content="&#xE74D;"
-                                FontFamily="Segoe MDL2 Assets"
-                                Click="DeleteList_Click"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Padding="8,4"
-                                IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
-                                ToolTipService.ToolTip="Delete list" />
-                    </Grid>
-                </Border>
+                    <Button Grid.Column="3"
+                            Content="&#xE74D;"
+                            FontFamily="Segoe MDL2 Assets"
+                            Click="DeleteList_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="8,4"
+                            IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
+                            ToolTipService.ToolTip="Delete list" />
+                </Grid>
 
-                <!-- Lists Content -->
-                <Border Grid.Row="1"
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1,0,1,1"
-                        CornerRadius="0,0,8,8"
-                        Margin="16,0,16,16">
-
-                    <ListView x:Name="TaskListsView"
-                              SelectionChanged="TaskListsView_SelectionChanged"
-                              SelectionMode="Single"
-                              Background="Transparent"
-                              Padding="4">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="12,10"
-                                      Background="Transparent"
-                                      CornerRadius="4">
-                                    <TextBlock Text="{Binding Title}"
-                                               Style="{StaticResource BodyTextBlockStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Padding"
-                                        Value="0" />
-                                <Setter Property="Margin"
-                                        Value="4,2" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </Border>
+                <!-- Lists - No border, just items -->
+                <ListView x:Name="TaskListsView"
+                          Grid.Row="1"
+                          SelectionChanged="TaskListsView_SelectionChanged"
+                          SelectionMode="Single"
+                          Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Padding="12,10" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                            <Setter Property="Padding"
+                                    Value="0" />
+                            <Setter Property="Margin"
+                                    Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
             </Grid>
 
             <!-- Right Content Area -->
@@ -219,79 +202,177 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Page Header with Filters -->
-                <StackPanel Grid.Row="0"
+                <!-- Empty State - Show when no list selected -->
+                <StackPanel x:Name="NoListSelectedState"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
                             Spacing="16"
-                            Margin="0,0,0,16">
-                    <TextBlock x:Name="TaskListTitle"
-                               Text="Select a list"
-                               Style="{StaticResource TitleLargeTextBlockStyle}" />
-
-                    <!-- Sort & Filter Toolbar -->
-                    <Grid ColumnSpacing="12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Sort Dropdown -->
-                        <ComboBox Grid.Column="0"
-                                  x:Name="SortComboBox"
-                                  Header="Sort by"
-                                  MinWidth="180"
-                                  SelectionChanged="Sort_SelectionChanged">
-                            <ComboBoxItem Content="Default"
-                                          Tag="None"
-                                          IsSelected="True" />
-                            <ComboBoxItem Content="Due date (earliest)"
-                                          Tag="DueDateAscending" />
-                            <ComboBoxItem Content="Due date (latest)"
-                                          Tag="DueDateDescending" />
-                            <ComboBoxItem Content="A to Z"
-                                          Tag="Alphabetical" />
-                            <ComboBoxItem Content="Z to A"
-                                          Tag="AlphabeticalReverse" />
-                            <ComboBoxItem Content="Completed last"
-                                          Tag="CompletedLast" />
-                        </ComboBox>
-
-                        <!-- Filter Dropdown -->
-                        <ComboBox Grid.Column="1"
-                                  x:Name="FilterComboBox"
-                                  Header="Filter"
-                                  MinWidth="150"
-                                  SelectionChanged="Filter_SelectionChanged">
-                            <ComboBoxItem Content="All tasks"
-                                          Tag="All" />
-                            <ComboBoxItem Content="Incomplete"
-                                          Tag="Incomplete"
-                                          IsSelected="True" />
-                            <ComboBoxItem Content="Completed"
-                                          Tag="Completed" />
-                            <ComboBoxItem Content="Overdue"
-                                          Tag="Overdue" />
-                            <ComboBoxItem Content="Due today"
-                                          Tag="Today" />
-                            <ComboBoxItem Content="Due this week"
-                                          Tag="ThisWeek" />
-                        </ComboBox>
-
-                        <!-- Task Count -->
-                        <TextBlock Grid.Column="2"
-                                   x:Name="TaskCountText"
-                                   VerticalAlignment="Bottom"
-                                   Margin="0,0,0,4"
-                                   Style="{StaticResource CaptionTextBlockStyle}"
-                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                    </Grid>
+                            Visibility="Visible">
+                    <TextBlock Text="📋"
+                               FontSize="64"
+                               HorizontalAlignment="Center"
+                               Opacity="0.3" />
+                    <TextBlock Text="Select a list to get started"
+                               Style="{StaticResource TitleTextBlockStyle}"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="Choose a task list from the sidebar or create a new one"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                               HorizontalAlignment="Center" />
                 </StackPanel>
-                <!-- Tasks Content Area -->
-                <ScrollViewer Grid.Row="1">
-                    <Grid>
-                        <!-- Add Task Input -->
-                        <StackPanel Spacing="16">
-                            <Grid ColumnSpacing="8">
+
+                <!-- Task Content - Show when list selected -->
+                <Grid x:Name="TaskContentArea"
+                      Grid.RowSpan="2"
+                      Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Page Header -->
+                    <TextBlock Grid.Row="0"
+                               x:Name="TaskListTitle"
+                               Text="My Tasks"
+                               Style="{StaticResource TitleLargeTextBlockStyle}"
+                               Margin="8,0,0,16" />
+
+                    <!-- Tasks Container with Header -->
+                    <Border Grid.Row="1"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Margin="0,0,0,8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <!-- Header with sort/filter -->
+                                <RowDefinition Height="Auto" />
+                                <!-- Add task input -->
+                                <RowDefinition Height="*" />
+                                <!-- Tasks list -->
+                            </Grid.RowDefinitions>
+
+                            <!-- Header: Sort, Filter, Count -->
+                            <Grid Grid.Row="0"
+                                  Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                  BorderThickness="0,0,0,1"
+                                  Padding="16,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Sort Button -->
+                                <Button x:Name="SortButton"
+                                        Grid.Column="0"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="8,4"
+                                        Margin="0,0,8,0">
+                                    <Button.Flyout>
+                                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                            <MenuFlyoutItem x:Name="SortDefault"
+                                                            Text="Default"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="None" />
+                                            <MenuFlyoutItem x:Name="SortDueDateAsc"
+                                                            Text="Due date (earliest)"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="DueDateAscending" />
+                                            <MenuFlyoutItem x:Name="SortDueDateDesc"
+                                                            Text="Due date (latest)"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="DueDateDescending" />
+                                            <MenuFlyoutItem x:Name="SortAlpha"
+                                                            Text="A to Z"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="Alphabetical" />
+                                            <MenuFlyoutItem x:Name="SortAlphaRev"
+                                                            Text="Z to A"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="AlphabeticalReverse" />
+                                            <MenuFlyoutItem x:Name="SortCompleted"
+                                                            Text="Completed last"
+                                                            Click="SortMenuItem_Click"
+                                                            Tag="CompletedLast" />
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="6">
+                                        <FontIcon Glyph="&#xE8CB;"
+                                                  FontSize="14" />
+                                        <TextBlock x:Name="SortButtonText"
+                                                   Text="Sort"
+                                                   Style="{StaticResource CaptionTextBlockStyle}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Filter Button -->
+                                <Button x:Name="FilterButton"
+                                        Grid.Column="1"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="8,4">
+                                    <Button.Flyout>
+                                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                            <MenuFlyoutItem x:Name="FilterAll"
+                                                            Text="All tasks"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="All" />
+                                            <MenuFlyoutItem x:Name="FilterIncomplete"
+                                                            Text="Incomplete"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="Incomplete" />
+                                            <MenuFlyoutItem x:Name="FilterCompleted"
+                                                            Text="Completed"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="Completed" />
+                                            <MenuFlyoutItem x:Name="FilterOverdue"
+                                                            Text="Overdue"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="Overdue" />
+                                            <MenuFlyoutItem x:Name="FilterToday"
+                                                            Text="Due today"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="Today" />
+                                            <MenuFlyoutItem x:Name="FilterWeek"
+                                                            Text="Due this week"
+                                                            Click="FilterMenuItem_Click"
+                                                            Tag="ThisWeek" />
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="6">
+                                        <FontIcon Glyph="&#xE71C;"
+                                                  FontSize="14" />
+                                        <TextBlock x:Name="FilterButtonText"
+                                                   Text="Filter"
+                                                   Style="{StaticResource CaptionTextBlockStyle}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Task Count -->
+                                <TextBlock Grid.Column="2"
+                                           x:Name="TaskCountText"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </Grid>
+
+                            <!-- Add Task Input -->
+                            <Grid Grid.Row="1"
+                                  Padding="16,12"
+                                  ColumnSpacing="8"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                  BorderThickness="0,0,0,1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -315,214 +396,219 @@
                             </Grid>
 
                             <!-- Tasks List -->
-                            <ItemsRepeater x:Name="TasksView">
-                                <ItemsRepeater.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Margin="{Binding UseSubtaskMargin, Converter={StaticResource SubtaskMarginConverter}}">
-                                            <Border Style="{StaticResource TaskCardStyle}"
-                                                    CanDrag="{Binding CanDrag}"
-                                                    AllowDrop="{Binding CanDrop}"
-                                                    DragStarting="Task_DragStarting"
-                                                    DragOver="Task_DragOver"
-                                                    Drop="Task_Drop"
-                                                    PointerEntered="TaskCard_PointerEntered"
-                                                    PointerExited="TaskCard_PointerExited"
-                                                    Tag="{Binding}">
+                            <ScrollViewer Grid.Row="2"
+                                          Padding="16">
+                                <StackPanel Spacing="0">
+                                    <ItemsRepeater x:Name="TasksView">
+                                        <ItemsRepeater.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="{Binding UseSubtaskMargin, Converter={StaticResource SubtaskMarginConverter}}">
+                                                    <Border Style="{StaticResource TaskCardStyle}"
+                                                            CanDrag="{Binding CanDrag}"
+                                                            AllowDrop="{Binding CanDrop}"
+                                                            DragStarting="Task_DragStarting"
+                                                            DragOver="Task_DragOver"
+                                                            Drop="Task_Drop"
+                                                            PointerEntered="TaskCard_PointerEntered"
+                                                            PointerExited="TaskCard_PointerExited"
+                                                            Tag="{Binding}">
 
 
-                                                <Grid ColumnSpacing="0">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="50" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
+                                                        <Grid ColumnSpacing="0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50" />
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
 
-                                                    <CheckBox Grid.Column="0"
-                                                              IsChecked="{Binding IsCompleted, Mode=TwoWay}"
-                                                              Click="TaskCheckbox_Click"
-                                                              Tag="{Binding}"
-                                                              VerticalAlignment="Center" />
+                                                            <CheckBox Grid.Column="0"
+                                                                      IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                                                                      Click="TaskCheckbox_Click"
+                                                                      Tag="{Binding}"
+                                                                      VerticalAlignment="Center" />
 
-                                                    <!-- Display Mode -->
-                                                    <StackPanel Grid.Column="1"
-                                                                Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                                Spacing="6"
-                                                                VerticalAlignment="Center">
+                                                            <!-- Display Mode -->
+                                                            <StackPanel Grid.Column="1"
+                                                                        Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                                        Spacing="6"
+                                                                        VerticalAlignment="Center">
 
-                                                        <!-- Title -->
-                                                        <TextBlock Text="{Binding Title}"
-                                                                   Style="{StaticResource BodyTextBlockStyle}"
-                                                                   TextWrapping="Wrap"
-                                                                   Tapped="TaskTitle_Tapped"
-                                                                   Tag="{Binding}" />
+                                                                <!-- Title -->
+                                                                <TextBlock Text="{Binding Title}"
+                                                                           Style="{StaticResource BodyTextBlockStyle}"
+                                                                           TextWrapping="Wrap"
+                                                                           Tapped="TaskTitle_Tapped"
+                                                                           Tag="{Binding}" />
 
-                                                        <!-- Chips Row -->
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    Spacing="6">
-
-                                                            <!-- Due Date Chip -->
-                                                            <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
-                                                                    BorderBrush="{Binding IsOverdue, Converter={StaticResource OverdueToBorderConverter}}"
-                                                                    BorderThickness="1"
-                                                                    CornerRadius="4"
-                                                                    Padding="6,2"
-                                                                    Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}">
-                                                                <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
-                                                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                                                           Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
-                                                                           FontWeight="SemiBold" />
-                                                            </Border>
-
-                                                            <!-- Subtask Chip -->
-                                                            <Border Background="{ThemeResource SubtleFillColorSecondaryBrush}"
-                                                                    BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
-                                                                    BorderThickness="1"
-                                                                    CornerRadius="4"
-                                                                    Padding="6,2"
-                                                                    Visibility="{Binding ShowParentChip, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                <!-- Chips Row -->
                                                                 <StackPanel Orientation="Horizontal"
-                                                                            Spacing="4">
-                                                                    <TextBlock Text="↳"
-                                                                               Style="{StaticResource CaptionTextBlockStyle}"
-                                                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
-                                                                    <TextBlock Text="{Binding ParentTitle}"
-                                                                               Style="{StaticResource CaptionTextBlockStyle}"
-                                                                               Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                                                               FontWeight="SemiBold" />
+                                                                            Spacing="6">
+
+                                                                    <!-- Due Date Chip -->
+                                                                    <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
+                                                                            BorderBrush="{Binding IsOverdue, Converter={StaticResource OverdueToBorderConverter}}"
+                                                                            BorderThickness="1"
+                                                                            CornerRadius="4"
+                                                                            Padding="6,2"
+                                                                            Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                        <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
+                                                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                                                   Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
+                                                                                   FontWeight="SemiBold" />
+                                                                    </Border>
+
+                                                                    <!-- Subtask Chip -->
+                                                                    <Border Background="{ThemeResource SubtleFillColorSecondaryBrush}"
+                                                                            BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
+                                                                            BorderThickness="1"
+                                                                            CornerRadius="4"
+                                                                            Padding="6,2"
+                                                                            Visibility="{Binding ShowParentChip, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                        <StackPanel Orientation="Horizontal"
+                                                                                    Spacing="4">
+                                                                            <TextBlock Text="↳"
+                                                                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                                                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                                            <TextBlock Text="{Binding ParentTitle}"
+                                                                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                                                                       Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                                                       FontWeight="SemiBold" />
+                                                                        </StackPanel>
+                                                                    </Border>
+
                                                                 </StackPanel>
-                                                            </Border>
 
-                                                        </StackPanel>
+                                                                <!-- Notes Preview -->
+                                                                <TextBlock Text="{Binding Notes}"
+                                                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                                           TextWrapping="Wrap"
+                                                                           MaxLines="2"
+                                                                           TextTrimming="CharacterEllipsis"
+                                                                           Visibility="{Binding HasNotes, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                           Opacity="0.8" />
+                                                            </StackPanel>
 
-                                                        <!-- Notes Preview -->
-                                                        <TextBlock Text="{Binding Notes}"
-                                                                   Style="{StaticResource CaptionTextBlockStyle}"
-                                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                                   TextWrapping="Wrap"
-                                                                   MaxLines="2"
-                                                                   TextTrimming="CharacterEllipsis"
-                                                                   Visibility="{Binding HasNotes, Converter={StaticResource BoolToVisibilityConverter}}"
-                                                                   Opacity="0.8" />
-                                                    </StackPanel>
+                                                            <!-- Edit Mode -->
+                                                            <Grid Grid.Column="1"
+                                                                  Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                  ColumnSpacing="8">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
 
-                                                    <!-- Edit Mode -->
-                                                    <Grid Grid.Column="1"
-                                                          Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
-                                                          ColumnSpacing="8">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="Auto" />
-                                                        </Grid.ColumnDefinitions>
+                                                                <TextBox Grid.Column="0"
+                                                                         Text="{Binding EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                         VerticalAlignment="Center"
+                                                                         MinWidth="200"
+                                                                         MaxWidth="400"
+                                                                         Tag="{Binding}">
+                                                                    <TextBox.KeyboardAccelerators>
+                                                                        <KeyboardAccelerator Key="Enter"
+                                                                                             Invoked="SaveEdit_Enter" />
+                                                                        <KeyboardAccelerator Key="Escape"
+                                                                                             Invoked="CancelEdit_Escape" />
+                                                                    </TextBox.KeyboardAccelerators>
+                                                                </TextBox>
 
-                                                        <TextBox Grid.Column="0"
-                                                                 Text="{Binding EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                                 VerticalAlignment="Center"
-                                                                 MinWidth="200"
-                                                                 MaxWidth="400"
-                                                                 Tag="{Binding}">
-                                                            <TextBox.KeyboardAccelerators>
-                                                                <KeyboardAccelerator Key="Enter"
-                                                                                     Invoked="SaveEdit_Enter" />
-                                                                <KeyboardAccelerator Key="Escape"
-                                                                                     Invoked="CancelEdit_Escape" />
-                                                            </TextBox.KeyboardAccelerators>
-                                                        </TextBox>
+                                                                <Button Grid.Column="1"
+                                                                        Content="&#xE8FB;"
+                                                                        FontFamily="Segoe MDL2 Assets"
+                                                                        Click="SaveEdit_Click"
+                                                                        Tag="{Binding}"
+                                                                        Style="{StaticResource AccentButtonStyle}"
+                                                                        Padding="8,4"
+                                                                        ToolTipService.ToolTip="Save (Enter)" />
 
-                                                        <Button Grid.Column="1"
-                                                                Content="&#xE8FB;"
-                                                                FontFamily="Segoe MDL2 Assets"
-                                                                Click="SaveEdit_Click"
-                                                                Tag="{Binding}"
-                                                                Style="{StaticResource AccentButtonStyle}"
-                                                                Padding="8,4"
-                                                                ToolTipService.ToolTip="Save (Enter)" />
+                                                                <Button Grid.Column="2"
+                                                                        Content="&#xE711;"
+                                                                        FontFamily="Segoe MDL2 Assets"
+                                                                        Click="CancelEdit_Click"
+                                                                        Tag="{Binding}"
+                                                                        Padding="8,4"
+                                                                        ToolTipService.ToolTip="Cancel (Esc)" />
+                                                            </Grid>
 
-                                                        <Button Grid.Column="2"
-                                                                Content="&#xE711;"
-                                                                FontFamily="Segoe MDL2 Assets"
-                                                                Click="CancelEdit_Click"
-                                                                Tag="{Binding}"
-                                                                Padding="8,4"
-                                                                ToolTipService.ToolTip="Cancel (Esc)" />
-                                                    </Grid>
+                                                            <!-- Add Subtask Button -->
+                                                            <Button Grid.Column="2"
+                                                                    Click="AddSubtask_Click"
+                                                                    Tag="{Binding}"
+                                                                    Background="Transparent"
+                                                                    BorderThickness="0"
+                                                                    VerticalAlignment="Center"
+                                                                    Padding="8"
+                                                                    Visibility="{Binding ShowAddSubtaskButton, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                    ToolTipService.ToolTip="Add subtask">
+                                                                <FontIcon Glyph="&#xE710;"
+                                                                          FontSize="16"
+                                                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                            </Button>
 
-                                                    <!-- Add Subtask Button -->
-                                                    <Button Grid.Column="2"
-                                                            Click="AddSubtask_Click"
-                                                            Tag="{Binding}"
-                                                            Background="Transparent"
-                                                            BorderThickness="0"
-                                                            VerticalAlignment="Center"
-                                                            Padding="8"
-                                                            Visibility="{Binding ShowAddSubtaskButton, Converter={StaticResource BoolToVisibilityConverter}}"
-                                                            ToolTipService.ToolTip="Add subtask">
-                                                        <FontIcon Glyph="&#xE710;"
-                                                                  FontSize="16"
-                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    </Button>
+                                                            <!-- Details Button -->
+                                                            <Button Grid.Column="3"
+                                                                    Click="TaskDetails_Click"
+                                                                    Tag="{Binding}"
+                                                                    Background="Transparent"
+                                                                    BorderThickness="0"
+                                                                    VerticalAlignment="Center"
+                                                                    Padding="8"
+                                                                    Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                                    ToolTipService.ToolTip="Task details">
+                                                                <FontIcon Glyph="&#xE70F;"
+                                                                          FontSize="16"
+                                                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                            </Button>
 
-                                                    <!-- Details Button -->
-                                                    <Button Grid.Column="3"
-                                                            Click="TaskDetails_Click"
-                                                            Tag="{Binding}"
-                                                            Background="Transparent"
-                                                            BorderThickness="0"
-                                                            VerticalAlignment="Center"
-                                                            Padding="8"
-                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                            ToolTipService.ToolTip="Task details">
-                                                        <FontIcon Glyph="&#xE70F;"
-                                                                  FontSize="16"
-                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    </Button>
-
-                                                    <!-- Delete Button -->
-                                                    <Button Grid.Column="4"
-                                                            Click="DeleteTask_Click"
-                                                            Tag="{Binding}"
-                                                            Background="Transparent"
-                                                            BorderThickness="0"
-                                                            VerticalAlignment="Center"
-                                                            Padding="8"
-                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                                                            ToolTipService.ToolTip="Delete task">
-                                                        <FontIcon Glyph="&#xE74D;"
-                                                                  FontSize="16"
-                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    </Button>
+                                                            <!-- Delete Button -->
+                                                            <Button Grid.Column="4"
+                                                                    Click="DeleteTask_Click"
+                                                                    Tag="{Binding}"
+                                                                    Background="Transparent"
+                                                                    BorderThickness="0"
+                                                                    VerticalAlignment="Center"
+                                                                    Padding="8"
+                                                                    Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                                    ToolTipService.ToolTip="Delete task">
+                                                                <FontIcon Glyph="&#xE74D;"
+                                                                          FontSize="16"
+                                                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                            </Button>
+                                                        </Grid>
+                                                    </Border>
                                                 </Grid>
-                                            </Border>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsRepeater.ItemTemplate>
-                            </ItemsRepeater>
+                                            </DataTemplate>
+                                        </ItemsRepeater.ItemTemplate>
+                                    </ItemsRepeater>
 
-                            <!-- Empty State -->
-                            <StackPanel x:Name="EmptyState"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        Spacing="12"
-                                        Margin="0,80,0,0"
-                                        Visibility="Collapsed">
-                                <TextBlock Text="📋"
-                                           FontSize="48"
-                                           HorizontalAlignment="Center"
-                                           Opacity="0.3" />
-                                <TextBlock Text="No tasks"
-                                           Style="{StaticResource SubtitleTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                           HorizontalAlignment="Center" />
-                                <TextBlock Text="Tasks will appear here when you select a list"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                           HorizontalAlignment="Center" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </ScrollViewer>
+                                    <!-- Empty State -->
+                                    <StackPanel x:Name="EmptyState"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Spacing="12"
+                                                Margin="0,60,0,0"
+                                                Visibility="Collapsed">
+                                        <TextBlock Text="✓"
+                                                   FontSize="48"
+                                                   HorizontalAlignment="Center"
+                                                   Opacity="0.3" />
+                                        <TextBlock Text="No tasks"
+                                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   HorizontalAlignment="Center" />
+                                        <TextBlock Text="Add a task to get started"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                                   HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+                </Grid>
             </Grid>
         </Grid>
 

@@ -43,8 +43,10 @@ public sealed partial class MainWindow : Window
         {
             StatusText.Text = "Syncing...";
             TaskListsView.ItemsSource = null;
-            TasksView.ItemsSource = null;
-            EmptyState.Visibility = Visibility.Collapsed;
+
+            // Show empty state while loading
+            NoListSelectedState.Visibility = Visibility.Visible;
+            TaskContentArea.Visibility = Visibility.Collapsed;
 
             var taskLists = await _taskService.GetTaskListsAsync();
 
@@ -73,7 +75,16 @@ public sealed partial class MainWindow : Window
     private async void TaskListsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (TaskListsView.SelectedItem is not TaskList selectedList)
+        {
+            // No list selected - show empty state
+            NoListSelectedState.Visibility = Visibility.Visible;
+            TaskContentArea.Visibility = Visibility.Collapsed;
             return;
+        }
+
+        // List selected - show content
+        NoListSelectedState.Visibility = Visibility.Collapsed;
+        TaskContentArea.Visibility = Visibility.Visible;
 
         try
         {
@@ -94,6 +105,14 @@ public sealed partial class MainWindow : Window
             }
 
             ApplySortAndFilter();
+
+            // Initialize button states
+            UpdateSortButtonAppearance();
+            UpdateFilterButtonAppearance();
+
+            // Set initial checkmark on filter (Incomplete is default)
+            FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
+
             ShowSuccess($"Loaded {_allTasks.Count} tasks");
         }
         catch (Exception ex)
@@ -428,26 +447,6 @@ public sealed partial class MainWindow : Window
             {
                 ShowError($"Error: {ex.Message}");
             }
-        }
-    }
-
-    private void Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (SortComboBox.SelectedItem is ComboBoxItem item &&
-            Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
-        {
-            _currentSort = sortOption;
-            ApplySortAndFilter();
-        }
-    }
-
-    private void Filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (FilterComboBox.SelectedItem is ComboBoxItem item &&
-            Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
-        {
-            _currentFilter = filterOption;
-            ApplySortAndFilter();
         }
     }
 
@@ -952,6 +951,116 @@ public sealed partial class MainWindow : Window
         Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(fadeOut, "Opacity");
         fadeOutStoryboard.Children.Add(fadeOut);
         fadeOutStoryboard.Begin();
+    }
+
+    private void SortMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem item &&
+            Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
+        {
+            _currentSort = sortOption;
+
+            // Update all menu items - remove checkmarks
+            SortDefault.Icon = null;
+            SortDueDateAsc.Icon = null;
+            SortDueDateDesc.Icon = null;
+            SortAlpha.Icon = null;
+            SortAlphaRev.Icon = null;
+            SortCompleted.Icon = null;
+
+            // Add checkmark to selected item
+            item.Icon = new FontIcon { Glyph = "\uE73E" };
+
+            // Update button appearance
+            UpdateSortButtonAppearance();
+
+            ApplySortAndFilter();
+        }
+    }
+
+    private void FilterMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem item &&
+            Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
+        {
+            _currentFilter = filterOption;
+
+            // Update all menu items - remove checkmarks
+            FilterAll.Icon = null;
+            FilterIncomplete.Icon = null;
+            FilterCompleted.Icon = null;
+            FilterOverdue.Icon = null;
+            FilterToday.Icon = null;
+            FilterWeek.Icon = null;
+
+            // Add checkmark to selected item
+            item.Icon = new FontIcon { Glyph = "\uE73E" };
+
+            // Update button appearance
+            UpdateFilterButtonAppearance();
+
+            ApplySortAndFilter();
+        }
+    }
+
+    private string GetSortDisplayText(SortOption sort)
+    {
+        return sort switch
+        {
+            SortOption.None => "Default",
+            SortOption.DueDateAscending => "Due date (earliest)",
+            SortOption.DueDateDescending => "Due date (latest)",
+            SortOption.Alphabetical => "A to Z",
+            SortOption.AlphabeticalReverse => "Z to A",
+            SortOption.CompletedLast => "Completed last",
+            _ => "Sort"
+        };
+    }
+
+    private string GetFilterDisplayText(FilterOption filter)
+    {
+        return filter switch
+        {
+            FilterOption.All => "All tasks",
+            FilterOption.Incomplete => "Incomplete",
+            FilterOption.Completed => "Completed",
+            FilterOption.Overdue => "Overdue",
+            FilterOption.Today => "Due today",
+            FilterOption.ThisWeek => "Due this week",
+            _ => "Filter"
+        };
+    }
+
+    private void UpdateSortButtonAppearance()
+    {
+        bool isActive = _currentSort != SortOption.None;
+
+        if (isActive)
+        {
+            SortButtonText.Text = $"Sort: {GetSortDisplayText(_currentSort)}";
+            SortButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+        }
+        else
+        {
+            SortButtonText.Text = "Sort";
+            SortButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+        }
+    }
+
+    private void UpdateFilterButtonAppearance()
+    {
+        bool isActive = _currentFilter != FilterOption.Incomplete;
+
+        if (isActive)
+        {
+            FilterButtonText.Text = $"Filter: {GetFilterDisplayText(_currentFilter)}";
+            FilterButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+        }
+        else
+        {
+            FilterButtonText.Text = "Filter";
+            FilterButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+        }
     }
 
     /// <summary>
