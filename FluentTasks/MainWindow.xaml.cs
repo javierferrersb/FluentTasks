@@ -1,5 +1,6 @@
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
+using FluentTasks.UI.Controls;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -54,9 +55,10 @@ public sealed partial class MainWindow : Window
             }
 
             TaskListsView.ItemsSource = TaskLists;
-            StatusText.Text = $"Synced • {TaskLists.Count} lists";
 
-            // Auto-select first list
+            StatusText.Text = "Ready";
+            ShowSuccess($"Synced {TaskLists.Count} lists");
+
             if (TaskLists.Any())
             {
                 TaskListsView.SelectedIndex = 0;
@@ -64,7 +66,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -76,14 +78,12 @@ public sealed partial class MainWindow : Window
         try
         {
             TaskListTitle.Text = selectedList.Title;
-            StatusText.Text = "Loading tasks...";
             TasksView.ItemsSource = null;
             EmptyState.Visibility = Visibility.Collapsed;
 
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
             _allTasks = tasks.ToList();
 
-            // Populate ParentTitle for subtasks
             foreach (var task in _allTasks.Where(t => t.IsSubtask))
             {
                 var parent = _allTasks.FirstOrDefault(t => t.Id == task.ParentId);
@@ -93,14 +93,12 @@ public sealed partial class MainWindow : Window
                 }
             }
 
-            // Apply current sort and filter
             ApplySortAndFilter();
-
-            StatusText.Text = $"{_allTasks.Count} tasks loaded";
+            ShowSuccess($"Loaded {_allTasks.Count} tasks");
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -119,35 +117,31 @@ public sealed partial class MainWindow : Window
     {
         if (TaskListsView.SelectedItem is not TaskList selectedList)
         {
-            StatusText.Text = "Please select a list first";
+            ShowInfo("Please select a list first");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(NewTaskInput.Text))
         {
-            StatusText.Text = "Please enter a task title";
+            ShowInfo("Please enter a task title");
             return;
         }
 
         try
         {
             var title = NewTaskInput.Text.Trim();
-            StatusText.Text = "Creating task...";
 
             var newTask = await _taskService.CreateTaskAsync(selectedList.Id, title);
 
-            // Add to all tasks
             _allTasks.Insert(0, newTask);
-
-            // Reapply sort/filter
             ApplySortAndFilter();
 
             NewTaskInput.Text = string.Empty;
-            StatusText.Text = $"Task created • {_allTasks.Count} tasks";
+            ShowSuccess("Task created");
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error creating task: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -163,7 +157,6 @@ public sealed partial class MainWindow : Window
         {
             var newCompletedState = checkbox.IsChecked == true;
 
-            // If completing a parent task with incomplete subtasks, show warning
             if (newCompletedState && !task.IsSubtask)
             {
                 var subtasks = _allTasks.Where(t => t.ParentId == task.Id && !t.IsCompleted).ToList();
@@ -184,14 +177,11 @@ public sealed partial class MainWindow : Window
 
                     if (result != ContentDialogResult.Primary)
                     {
-                        // User cancelled, revert checkbox
                         checkbox.IsChecked = false;
                         return;
                     }
                 }
             }
-
-            StatusText.Text = newCompletedState ? "Completing task..." : "Reopening task...";
 
             var success = await _taskService.CompleteTaskAsync(
                 selectedList.Id,
@@ -200,11 +190,9 @@ public sealed partial class MainWindow : Window
 
             if (success)
             {
-                // Reload all tasks to reflect API changes (subtasks auto-completed)
                 var tasks = await _taskService.GetTasksAsync(selectedList.Id);
                 _allTasks = tasks.ToList();
 
-                // Populate ParentTitle
                 foreach (var t in _allTasks.Where(t => t.IsSubtask))
                 {
                     var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
@@ -215,20 +203,17 @@ public sealed partial class MainWindow : Window
                 }
 
                 ApplySortAndFilter();
-
-                StatusText.Text = newCompletedState
-                    ? "Task completed ✓"
-                    : "Task reopened";
+                ShowSuccess(newCompletedState ? "Task completed" : "Task reopened");
             }
             else
             {
                 checkbox.IsChecked = !newCompletedState;
-                StatusText.Text = "Failed to update task";
+                ShowWarning("Failed to update task");
             }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
             checkbox.IsChecked = task.IsCompleted;
         }
     }
@@ -243,28 +228,22 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            StatusText.Text = "Deleting task...";
-
             var success = await _taskService.DeleteTaskAsync(selectedList.Id, task.Id);
 
             if (success)
             {
-                // Remove from all tasks
                 _allTasks.Remove(task);
-
-                // Reapply sort/filter
                 ApplySortAndFilter();
-
-                StatusText.Text = $"Task deleted • {_allTasks.Count} tasks remaining";
+                ShowSuccess("Task deleted");
             }
             else
             {
-                StatusText.Text = "Failed to delete task";
+                ShowWarning("Failed to delete task");
             }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -310,33 +289,29 @@ public sealed partial class MainWindow : Window
 
         if (string.IsNullOrWhiteSpace(task.EditTitle))
         {
-            StatusText.Text = "Task title cannot be empty";
+            ShowInfo("Task title cannot be empty");
             return;
         }
 
         try
         {
-            StatusText.Text = "Updating task...";
-
-            // Update the title
             task.Title = task.EditTitle.Trim();
 
-            // Update in Google
             var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
 
             if (success)
             {
                 task.IsEditing = false;
-                StatusText.Text = "Task updated ✓";
+                ShowSuccess("Task updated");
             }
             else
             {
-                StatusText.Text = "Failed to update task";
+                ShowWarning("Failed to update task");
             }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -367,8 +342,6 @@ public sealed partial class MainWindow : Window
 
             if (result == ContentDialogResult.Primary)
             {
-                StatusText.Text = "Updating task...";
-
                 var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
 
                 if (success)
@@ -376,7 +349,6 @@ public sealed partial class MainWindow : Window
                     var tasks = await _taskService.GetTasksAsync(selectedList.Id);
                     _allTasks = tasks.ToList();
 
-                    // Populate ParentTitle for subtasks
                     foreach (var t in _allTasks.Where(t => t.IsSubtask))
                     {
                         var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
@@ -386,20 +358,18 @@ public sealed partial class MainWindow : Window
                         }
                     }
 
-                    // Apply current sort/filter
                     ApplySortAndFilter();
-
-                    StatusText.Text = "Task updated ✓";
+                    ShowSuccess("Task updated");
                 }
                 else
                 {
-                    StatusText.Text = "Failed to update task";
+                    ShowWarning("Failed to update task");
                 }
             }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -433,18 +403,15 @@ public sealed partial class MainWindow : Window
         {
             try
             {
-                StatusText.Text = "Creating subtask...";
-
-                var newSubtask = await _taskService.CreateTaskAsync(
+                await _taskService.CreateTaskAsync(
                     selectedList.Id,
                     textBox.Text.Trim(),
                     parentTask.Id,
                     parentTask.DueDate);
 
-                IEnumerable<TaskItem>? tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
                 _allTasks = tasks.ToList();
 
-                // Populate ParentTitle for subtasks
                 foreach (var t in _allTasks.Where(t => t.IsSubtask))
                 {
                     var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
@@ -454,14 +421,12 @@ public sealed partial class MainWindow : Window
                     }
                 }
 
-                // Apply current sort/filter
                 ApplySortAndFilter();
-
-                StatusText.Text = $"Subtask created • {_allTasks.Count} tasks";
+                ShowSuccess("Subtask created");
             }
             catch (Exception ex)
             {
-                StatusText.Text = $"Error: {ex.Message}";
+                ShowError($"Error: {ex.Message}");
             }
         }
     }
@@ -612,19 +577,16 @@ public sealed partial class MainWindow : Window
         {
             try
             {
-                StatusText.Text = "Creating list...";
-
                 var newList = await _taskService.CreateTaskListAsync(textBox.Text.Trim());
 
-                // Add to UI
                 TaskLists.Add(newList);
                 TaskListsView.SelectedItem = newList;
 
-                StatusText.Text = "List created ✓";
+                ShowSuccess("List created");
             }
             catch (Exception ex)
             {
-                StatusText.Text = $"Error: {ex.Message}";
+                ShowError($"Error: {ex.Message}");
             }
         }
     }
@@ -657,8 +619,6 @@ public sealed partial class MainWindow : Window
         {
             try
             {
-                StatusText.Text = "Renaming list...";
-
                 var success = await _taskService.UpdateTaskListAsync(selectedList.Id, textBox.Text.Trim());
 
                 if (success)
@@ -666,32 +626,30 @@ public sealed partial class MainWindow : Window
                     selectedList.Title = textBox.Text.Trim();
                     TaskListTitle.Text = selectedList.Title;
 
-                    // Refresh the list view
                     var currentSelection = TaskListsView.SelectedItem;
                     TaskListsView.ItemsSource = null;
                     TaskListsView.ItemsSource = TaskLists;
                     TaskListsView.SelectedItem = currentSelection;
 
-                    StatusText.Text = "List renamed ✓";
+                    ShowSuccess("List renamed");
                 }
                 else
                 {
-                    StatusText.Text = "Failed to rename list";
+                    ShowWarning("Failed to rename list");
                 }
             }
             catch (Exception ex)
             {
-                StatusText.Text = $"Error: {ex.Message}";
+                ShowError($"Error: {ex.Message}");
             }
         }
     }
 
     private async void DeleteList_Click(object sender, RoutedEventArgs e)
     {
-        if (TaskListsView.SelectedItem is not Core.Models.TaskList selectedList)
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
             return;
 
-        // Confirmation dialog
         var confirmDialog = new ContentDialog
         {
             Title = "Delete List?",
@@ -708,30 +666,27 @@ public sealed partial class MainWindow : Window
         {
             try
             {
-                StatusText.Text = "Deleting list...";
-
                 var success = await _taskService.DeleteTaskListAsync(selectedList.Id);
 
                 if (success)
                 {
                     TaskLists.Remove(selectedList);
 
-                    // Clear tasks view
                     _allTasks.Clear();
                     TasksView.ItemsSource = null;
                     TaskListTitle.Text = "Select a list";
                     TaskCountText.Text = "";
 
-                    StatusText.Text = "List deleted ✓";
+                    ShowSuccess("List deleted");
                 }
                 else
                 {
-                    StatusText.Text = "Failed to delete list";
+                    ShowWarning("Failed to delete list");
                 }
             }
             catch (Exception ex)
             {
-                StatusText.Text = $"Error: {ex.Message}";
+                ShowError($"Error: {ex.Message}");
             }
         }
     }
@@ -862,40 +817,30 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            StatusText.Text = "Reordering...";
-
-            // Get current ordered list
             var currentList = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList();
             if (currentList == null)
                 return;
 
-            // Find indices
             var draggedIndex = currentList.IndexOf(draggedTask);
             var targetIndex = currentList.IndexOf(targetTask);
 
             if (draggedIndex == -1 || targetIndex == -1)
                 return;
 
-            // Determine which task should come BEFORE the dragged task in new position
             string? previousTaskId = null;
 
             if (draggedIndex < targetIndex)
             {
-                // Moving down: dragged task should come AFTER target
                 previousTaskId = targetTask.Id;
             }
             else
             {
-                // Moving up: dragged task should come BEFORE target
-                // So find the task that comes before target
                 var previousIndex = targetIndex - 1;
 
-                // Make sure we stay within the same parent boundary
                 while (previousIndex >= 0)
                 {
                     var candidate = currentList[previousIndex];
 
-                    // If dragged is a subtask, previous must be a sibling
                     if (draggedTask.IsSubtask)
                     {
                         if (candidate.ParentId == draggedTask.ParentId)
@@ -904,7 +849,7 @@ public sealed partial class MainWindow : Window
                             break;
                         }
                     }
-                    else // Dragged is a parent task
+                    else
                     {
                         if (!candidate.IsSubtask)
                         {
@@ -915,8 +860,6 @@ public sealed partial class MainWindow : Window
 
                     previousIndex--;
                 }
-
-                // If no valid previous task found, move to top (previousTaskId stays null)
             }
 
             var success = await _taskService.MoveTaskAsync(
@@ -926,11 +869,9 @@ public sealed partial class MainWindow : Window
 
             if (success)
             {
-                // Reload to get new order from Google
                 var tasks = await _taskService.GetTasksAsync(selectedList.Id);
                 _allTasks = tasks.ToList();
 
-                // Populate ParentTitle
                 foreach (var t in _allTasks.Where(t => t.IsSubtask))
                 {
                     var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
@@ -941,17 +882,16 @@ public sealed partial class MainWindow : Window
                 }
 
                 ApplySortAndFilter();
-
-                StatusText.Text = "Reordered ✓";
+                ShowSuccess("Task reordered");
             }
             else
             {
-                StatusText.Text = "Failed to reorder";
+                ShowWarning("Failed to reorder");
             }
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Error: {ex.Message}";
+            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -969,6 +909,85 @@ public sealed partial class MainWindow : Window
         {
             border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["LayerFillColorDefaultBrush"];
         }
+    }
+
+    private async void ShowTemporaryStatus(string message)
+    {
+        ActionText.Text = $"• {message}";
+
+        // Fade in animation
+        var fadeInStoryboard = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
+        var fadeIn = new Microsoft.UI.Xaml.Media.Animation.DoubleAnimation
+        {
+            From = 0,
+            To = 1,
+            Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            EasingFunction = new Microsoft.UI.Xaml.Media.Animation.CubicEase
+            {
+                EasingMode = Microsoft.UI.Xaml.Media.Animation.EasingMode.EaseOut
+            }
+        };
+
+        Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTarget(fadeIn, ActionText);
+        Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(fadeIn, "Opacity");
+        fadeInStoryboard.Children.Add(fadeIn);
+        fadeInStoryboard.Begin();
+
+        // Wait 3 seconds, then fade out
+        await System.Threading.Tasks.Task.Delay(3000);
+
+        var fadeOutStoryboard = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
+        var fadeOut = new Microsoft.UI.Xaml.Media.Animation.DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+            EasingFunction = new Microsoft.UI.Xaml.Media.Animation.CubicEase
+            {
+                EasingMode = Microsoft.UI.Xaml.Media.Animation.EasingMode.EaseIn
+            }
+        };
+
+        Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTarget(fadeOut, ActionText);
+        Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(fadeOut, "Opacity");
+        fadeOutStoryboard.Children.Add(fadeOut);
+        fadeOutStoryboard.Begin();
+    }
+
+    /// <summary>
+    /// Shows a success state with ripple effect and temporary message
+    /// </summary>
+    private void ShowSuccess(string message)
+    {
+        StatusOrb.TriggerRipple();
+        ShowTemporaryStatus(message);
+    }
+
+    /// <summary>
+    /// Shows an error state with offline orb and message
+    /// </summary>
+    private void ShowError(string message)
+    {
+        StatusOrb.SetStatus(OrbStatus.Offline);
+        StatusText.Text = "Offline";
+        ShowTemporaryStatus(message);
+    }
+
+    /// <summary>
+    /// Shows a warning state with yellow orb and message
+    /// </summary>
+    private void ShowWarning(string message)
+    {
+        StatusOrb.SetStatus(OrbStatus.Warning);
+        ShowTemporaryStatus(message);
+    }
+
+    /// <summary>
+    /// Shows an info message without changing orb state
+    /// </summary>
+    private void ShowInfo(string message)
+    {
+        ShowTemporaryStatus(message);
     }
 
     public enum SortOption
