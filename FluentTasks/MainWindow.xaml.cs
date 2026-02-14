@@ -955,6 +955,22 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    private void TaskCard_PointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Border border)
+        {
+            border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+        }
+    }
+
+    private void TaskCard_PointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Border border)
+        {
+            border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["LayerFillColorDefaultBrush"];
+        }
+    }
+
     public enum SortOption
     {
         None,

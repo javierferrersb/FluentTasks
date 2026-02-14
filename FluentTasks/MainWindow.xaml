@@ -17,6 +17,22 @@
             <converters:OverdueToBorderConverter x:Key="OverdueToBorderConverter" />
             <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
             <converters:SubtaskMarginConverter x:Key="SubtaskMarginConverter" />
+
+            <Style x:Key="TaskCardStyle"
+                   TargetType="Border">
+                <Setter Property="Background"
+                        Value="{ThemeResource LayerFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush"
+                        Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="CornerRadius"
+                        Value="6" />
+                <Setter Property="Padding"
+                        Value="14,10" />
+                <Setter Property="Margin"
+                        Value="0,0,0,6" />
+            </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -302,22 +318,20 @@
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="{Binding UseSubtaskMargin, Converter={StaticResource SubtaskMarginConverter}}">
-                                            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                                    BorderThickness="1"
-                                                    CornerRadius="6"
-                                                    Padding="16,12"
-                                                    Margin="0,0,0,8"
+                                            <Border Style="{StaticResource TaskCardStyle}"
                                                     CanDrag="{Binding CanDrag}"
                                                     AllowDrop="{Binding CanDrop}"
                                                     DragStarting="Task_DragStarting"
                                                     DragOver="Task_DragOver"
                                                     Drop="Task_Drop"
+                                                    PointerEntered="TaskCard_PointerEntered"
+                                                    PointerExited="TaskCard_PointerExited"
                                                     Tag="{Binding}">
 
-                                                <Grid ColumnSpacing="12">
+
+                                                <Grid ColumnSpacing="0">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="50" />
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="Auto" />
