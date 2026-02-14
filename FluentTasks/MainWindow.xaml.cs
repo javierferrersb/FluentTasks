@@ -19,7 +19,7 @@ public sealed partial class MainWindow : Window
     private ObservableCollection<TaskList> TaskLists = new();
 
     private SortOption _currentSort = SortOption.None;
-    private FilterOption _currentFilter = FilterOption.All;
+    private FilterOption _currentFilter = FilterOption.Incomplete;
 
     public MainWindow()
     {
@@ -152,11 +152,38 @@ public sealed partial class MainWindow : Window
 
         try
         {
-            var newCompletedState = task.IsCompleted; // Already updated by binding
+            var newCompletedState = checkbox.IsChecked == true;
+
+            // If completing a parent task with incomplete subtasks, show warning
+            if (newCompletedState && !task.IsSubtask)
+            {
+                var subtasks = _allTasks.Where(t => t.ParentId == task.Id && !t.IsCompleted).ToList();
+
+                if (subtasks.Any())
+                {
+                    var dialog = new ContentDialog
+                    {
+                        Title = "Complete subtasks?",
+                        Content = $"This task has {subtasks.Count} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks.",
+                        PrimaryButtonText = "Complete All",
+                        CloseButtonText = "Cancel",
+                        DefaultButton = ContentDialogButton.Close,
+                        XamlRoot = this.Content.XamlRoot
+                    };
+
+                    var result = await dialog.ShowAsync();
+
+                    if (result != ContentDialogResult.Primary)
+                    {
+                        // User cancelled, revert checkbox
+                        checkbox.IsChecked = false;
+                        return;
+                    }
+                }
+            }
 
             StatusText.Text = newCompletedState ? "Completing task..." : "Reopening task...";
 
-            // Update in Google Tasks
             var success = await _taskService.CompleteTaskAsync(
                 selectedList.Id,
                 task.Id,
@@ -164,22 +191,36 @@ public sealed partial class MainWindow : Window
 
             if (success)
             {
+                // Reload all tasks to reflect API changes (subtasks auto-completed)
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                _allTasks = tasks.ToList();
+
+                // Populate ParentTitle
+                foreach (var t in _allTasks.Where(t => t.IsSubtask))
+                {
+                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
+                    if (parent != null)
+                    {
+                        t.ParentTitle = parent.Title;
+                    }
+                }
+
+                ApplySortAndFilter();
+
                 StatusText.Text = newCompletedState
                     ? "Task completed ✓"
                     : "Task reopened";
             }
             else
             {
-                // Revert if failed
-                task.IsCompleted = !newCompletedState;
+                checkbox.IsChecked = !newCompletedState;
                 StatusText.Text = "Failed to update task";
             }
         }
         catch (Exception ex)
         {
             StatusText.Text = $"Error: {ex.Message}";
-            // Revert on error
-            task.IsCompleted = !task.IsCompleted;
+            checkbox.IsChecked = task.IsCompleted;
         }
     }
 
@@ -473,10 +514,27 @@ public sealed partial class MainWindow : Window
             SortOption.Alphabetical => tasks.OrderBy(t => t.Title),
             SortOption.AlphabeticalReverse => tasks.OrderByDescending(t => t.Title),
             SortOption.CompletedLast => tasks.OrderBy(t => t.IsCompleted).ThenBy(t => t.Title),
-            _ => tasks
+            _ => OrganizeTasksHierarchically(tasks)  // Default: group subtasks under parents
         };
 
         var filteredList = tasks.ToList();
+
+        // Set display properties based on sort mode
+        bool isDefaultSort = _currentSort == SortOption.None;
+        foreach (var task in filteredList)
+        {
+            if (task.IsSubtask)
+            {
+                task.ShowParentChip = !isDefaultSort;  // Show chip when NOT in default sort
+                task.UseSubtaskMargin = isDefaultSort;  // Show margin when IN default sort
+            }
+            else
+            {
+                task.ShowParentChip = false;
+                task.UseSubtaskMargin = false;
+            }
+        }
+
         TasksView.ItemsSource = filteredList;
 
         // Update count
@@ -647,6 +705,43 @@ public sealed partial class MainWindow : Window
                 StatusText.Text = $"Error: {ex.Message}";
             }
         }
+    }
+
+    private IEnumerable<TaskItem> OrganizeTasksHierarchically(IEnumerable<TaskItem> tasks)
+    {
+        var tasksList = tasks.ToList();
+        var result = new List<TaskItem>();
+        var processed = new HashSet<string>();
+
+        // First pass: add all parent tasks (non-subtasks) and their children
+        foreach (var task in tasksList.Where(t => !t.IsSubtask))
+        {
+            if (!processed.Contains(task.Id))
+            {
+                result.Add(task);
+                processed.Add(task.Id);
+
+                // Add all subtasks of this parent immediately after
+                var subtasks = tasksList.Where(t => t.ParentId == task.Id).ToList();
+                foreach (var subtask in subtasks)
+                {
+                    if (!processed.Contains(subtask.Id))
+                    {
+                        result.Add(subtask);
+                        processed.Add(subtask.Id);
+                    }
+                }
+            }
+        }
+
+        // Second pass: add any orphaned subtasks (parent might be in different list or deleted)
+        foreach (var task in tasksList.Where(t => t.IsSubtask && !processed.Contains(t.Id)))
+        {
+            result.Add(task);
+            processed.Add(task.Id);
+        }
+
+        return result;
     }
 
     public enum SortOption

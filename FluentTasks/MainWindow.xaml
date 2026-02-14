@@ -23,6 +23,8 @@
             <converters:OverdueToBackgroundConverter x:Key="OverdueToBackgroundConverter" />
             <converters:OverdueToBorderConverter x:Key="OverdueToBorderConverter" />
             <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+            <converters:SubtaskMarginConverter x:Key="SubtaskMarginConverter" />
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -221,10 +223,10 @@
                                           MinWidth="150"
                                           SelectionChanged="Filter_SelectionChanged">
                                     <ComboBoxItem Content="All tasks"
-                                                  Tag="All"
-                                                  IsSelected="True" />
+                                                  Tag="All"/>
                                     <ComboBoxItem Content="Incomplete"
-                                                  Tag="Incomplete" />
+                                                  Tag="Incomplete"
+                                                  IsSelected="True" />
                                     <ComboBoxItem Content="Completed"
                                                   Tag="Completed" />
                                     <ComboBoxItem Content="Overdue"
@@ -285,7 +287,8 @@
                             <ItemsRepeater x:Name="TasksView">
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                        <Grid Margin="{Binding UseSubtaskMargin, Converter={StaticResource SubtaskMarginConverter}}">
+                                            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                                     BorderThickness="1"
                                                     CornerRadius="6"
@@ -342,7 +345,7 @@
                                                                 BorderThickness="1"
                                                                 CornerRadius="4"
                                                                 Padding="6,2"
-                                                                Visibility="{Binding IsSubtask, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                Visibility="{Binding ShowParentChip, Converter={StaticResource BoolToVisibilityConverter}}">
                                                             <StackPanel Orientation="Horizontal"
                                                                         Spacing="4">
                                                                 <TextBlock Text="↳"
@@ -368,12 +371,12 @@
                                                                Opacity="0.8" />
                                                 </StackPanel>
 
-                                                <!-- Edit Mode (unchanged) -->
+                                                    <!-- Edit Mode -->
                                                     <Grid Grid.Column="1"
                                                           Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
                                                           ColumnSpacing="8">
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
@@ -381,6 +384,8 @@
                                                         <TextBox Grid.Column="0"
                                                                  Text="{Binding EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                  VerticalAlignment="Center"
+                                                                 MinWidth="200"
+                                                                 MaxWidth="400"
                                                                  Tag="{Binding}">
                                                             <TextBox.KeyboardAccelerators>
                                                                 <KeyboardAccelerator Key="Enter"
@@ -416,7 +421,8 @@
                                                             BorderThickness="0"
                                                             VerticalAlignment="Center"
                                                             Padding="8"
-                                                            Visibility="{Binding IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            Visibility="{Binding CanShowAddSubtaskButton, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                            IsEnabled="{Binding IsSubtask, Converter={StaticResource InvertedBoolConverter}}"
                                                             ToolTipService.ToolTip="Add subtask">
                                                         <FontIcon Glyph="&#xE710;"
                                                                   FontSize="16"
@@ -454,6 +460,7 @@
                                                     </Button>
                                                 </Grid>
                                             </Border>
+                                        </Grid>
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
                             </ItemsRepeater>

@@ -14,8 +14,8 @@ namespace FluentTasks.Core.Models
         [NotifyPropertyChangedFor(nameof(IsOverdue))]
         private bool _isCompleted;
 
-        // Used for editing
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CanShowAddSubtaskButton))]
         private bool _isEditing;
 
         [ObservableProperty]
@@ -37,10 +37,17 @@ namespace FluentTasks.Core.Models
         [ObservableProperty]
         private int _position;
 
+        [ObservableProperty]
+        private bool _showParentChip;
+
+        [ObservableProperty]
+        private bool _useSubtaskMargin;
+
         // Helper properties for display
         public bool HasDueDate => DueDate.HasValue;
         public bool IsOverdue => DueDate.HasValue && DueDate.Value.Date < DateTime.Today && !IsCompleted;
         public bool HasNotes => !string.IsNullOrWhiteSpace(Notes);
         public bool IsSubtask => !string.IsNullOrWhiteSpace(ParentId);
+        public bool CanShowAddSubtaskButton => !IsEditing && !IsSubtask;
     }
 }

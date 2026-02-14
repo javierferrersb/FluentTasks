@@ -9,18 +9,24 @@ public class DateToStringConverter : IValueConverter
     {
         if (value is DateTimeOffset date)
         {
-            var daysUntil = (date.Date - DateTimeOffset.Now.Date).Days;
+            var now = DateTimeOffset.Now;
+            var daysUntil = (date.Date - now.Date).Days;
 
             if (daysUntil < 0)
-                return $"📅 Overdue";
+            {
+                var daysOverdue = Math.Abs(daysUntil);
+                return daysOverdue == 1
+                    ? "📅 Overdue by 1 day"
+                    : $"📅 Overdue by {daysOverdue} days";
+            }
             else if (daysUntil == 0)
-                return $"📅 Today";
+                return "📅 Today";
             else if (daysUntil == 1)
-                return $"📅 Tomorrow";
+                return "📅 Tomorrow";
             else if (daysUntil <= 7)
-                return $"📅 {date.ToString("dddd")}"; // Day name
+                return $"📅 {date.ToString("dddd")}";
             else
-                return $"📅 {date.ToString("MMM d")}"; // e.g., "Jan 15"
+                return $"📅 {date.ToString("MMM d")}";
         }
 
         return string.Empty;
