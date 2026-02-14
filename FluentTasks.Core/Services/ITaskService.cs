@@ -32,5 +32,8 @@ namespace FluentTasks.Core.Services
 
         // Delete a task
         Task<bool> DeleteTaskAsync(string taskListId, string taskId);
+
+        // Move a task to a different position within the same list
+        Task<bool> MoveTaskAsync(string taskListId, string taskId, string? previousTaskId);
     }
 }

@@ -20,6 +20,7 @@ public sealed partial class MainWindow : Window
 
     private SortOption _currentSort = SortOption.None;
     private FilterOption _currentFilter = FilterOption.Incomplete;
+    private TaskItem? _draggedTask;
 
     public MainWindow()
     {
@@ -525,14 +526,18 @@ public sealed partial class MainWindow : Window
         {
             if (task.IsSubtask)
             {
-                task.ShowParentChip = !isDefaultSort;  // Show chip when NOT in default sort
-                task.UseSubtaskMargin = isDefaultSort;  // Show margin when IN default sort
+                task.ShowParentChip = !isDefaultSort;
+                task.UseSubtaskMargin = isDefaultSort;
             }
             else
             {
                 task.ShowParentChip = false;
                 task.UseSubtaskMargin = false;
             }
+
+            // Enable drag/drop only in default sort
+            task.CanDrag = isDefaultSort;
+            task.CanDrop = isDefaultSort;
         }
 
         TasksView.ItemsSource = filteredList;
@@ -709,7 +714,7 @@ public sealed partial class MainWindow : Window
 
     private IEnumerable<TaskItem> OrganizeTasksHierarchically(IEnumerable<TaskItem> tasks)
     {
-        var tasksList = tasks.ToList();
+        var tasksList = tasks.OrderBy(t => t.Position).ToList();  // Sort by position first!
         var result = new List<TaskItem>();
         var processed = new HashSet<string>();
 
@@ -721,8 +726,12 @@ public sealed partial class MainWindow : Window
                 result.Add(task);
                 processed.Add(task.Id);
 
-                // Add all subtasks of this parent immediately after
-                var subtasks = tasksList.Where(t => t.ParentId == task.Id).ToList();
+                // Add all subtasks of this parent immediately after, sorted by position
+                var subtasks = tasksList
+                    .Where(t => t.ParentId == task.Id)
+                    .OrderBy(t => t.Position)  // Sort subtasks by position
+                    .ToList();
+
                 foreach (var subtask in subtasks)
                 {
                     if (!processed.Contains(subtask.Id))
@@ -734,7 +743,7 @@ public sealed partial class MainWindow : Window
             }
         }
 
-        // Second pass: add any orphaned subtasks (parent might be in different list or deleted)
+        // Second pass: add any orphaned subtasks
         foreach (var task in tasksList.Where(t => t.IsSubtask && !processed.Contains(t.Id)))
         {
             result.Add(task);
@@ -742,6 +751,184 @@ public sealed partial class MainWindow : Window
         }
 
         return result;
+    }
+
+    private void Task_DragStarting(UIElement sender, DragStartingEventArgs args)
+    {
+        if (sender is Border border && border.Tag is TaskItem task)
+        {
+            _draggedTask = task;
+            args.Data.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move;
+
+            // Set text for data package (fixes empty icon issue)
+            args.Data.SetText(task.Title);
+        }
+    }
+
+    private void Task_DragOver(object sender, DragEventArgs e)
+    {
+        if (_draggedTask == null)
+        {
+            e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.None;
+            return;
+        }
+
+        if (sender is Border border && border.Tag is TaskItem targetTask)
+        {
+            // Validate drop target
+            if (!IsValidDropTarget(_draggedTask, targetTask))
+            {
+                e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.None;
+                return;
+            }
+
+            e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move;
+            e.DragUIOverride.IsCaptionVisible = false;
+            e.DragUIOverride.IsGlyphVisible = false;
+        }
+    }
+
+    private async void Task_Drop(object sender, DragEventArgs e)
+    {
+        if (_draggedTask == null)
+            return;
+
+        if (sender is Border border && border.Tag is TaskItem targetTask)
+        {
+            if (!IsValidDropTarget(_draggedTask, targetTask))
+                return;
+
+            await MoveTaskToPosition(_draggedTask, targetTask);
+        }
+
+        _draggedTask = null;
+    }
+
+    private bool IsValidDropTarget(TaskItem draggedTask, TaskItem targetTask)
+    {
+        // Can't drop on itself
+        if (draggedTask.Id == targetTask.Id)
+            return false;
+
+        // If dragging a parent task
+        if (!draggedTask.IsSubtask)
+        {
+            // Can only drop on other parent tasks (not subtasks)
+            if (targetTask.IsSubtask)
+                return false;
+
+            // Can't drop on own subtasks
+            if (targetTask.ParentId == draggedTask.Id)
+                return false;
+        }
+        else // Dragging a subtask
+        {
+            // Can only drop on siblings (same parent)
+            if (draggedTask.ParentId != targetTask.ParentId)
+                return false;
+        }
+
+        return true;
+    }
+
+    private async Task MoveTaskToPosition(TaskItem draggedTask, TaskItem targetTask)
+    {
+        if (TaskListsView.SelectedItem is not TaskList selectedList)
+            return;
+
+        try
+        {
+            StatusText.Text = "Reordering...";
+
+            // Get current ordered list
+            var currentList = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList();
+            if (currentList == null)
+                return;
+
+            // Find indices
+            var draggedIndex = currentList.IndexOf(draggedTask);
+            var targetIndex = currentList.IndexOf(targetTask);
+
+            if (draggedIndex == -1 || targetIndex == -1)
+                return;
+
+            // Determine which task should come BEFORE the dragged task in new position
+            string? previousTaskId = null;
+
+            if (draggedIndex < targetIndex)
+            {
+                // Moving down: dragged task should come AFTER target
+                previousTaskId = targetTask.Id;
+            }
+            else
+            {
+                // Moving up: dragged task should come BEFORE target
+                // So find the task that comes before target
+                var previousIndex = targetIndex - 1;
+
+                // Make sure we stay within the same parent boundary
+                while (previousIndex >= 0)
+                {
+                    var candidate = currentList[previousIndex];
+
+                    // If dragged is a subtask, previous must be a sibling
+                    if (draggedTask.IsSubtask)
+                    {
+                        if (candidate.ParentId == draggedTask.ParentId)
+                        {
+                            previousTaskId = candidate.Id;
+                            break;
+                        }
+                    }
+                    else // Dragged is a parent task
+                    {
+                        if (!candidate.IsSubtask)
+                        {
+                            previousTaskId = candidate.Id;
+                            break;
+                        }
+                    }
+
+                    previousIndex--;
+                }
+
+                // If no valid previous task found, move to top (previousTaskId stays null)
+            }
+
+            var success = await _taskService.MoveTaskAsync(
+                selectedList.Id,
+                draggedTask.Id,
+                previousTaskId);
+
+            if (success)
+            {
+                // Reload to get new order from Google
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                _allTasks = tasks.ToList();
+
+                // Populate ParentTitle
+                foreach (var t in _allTasks.Where(t => t.IsSubtask))
+                {
+                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
+                    if (parent != null)
+                    {
+                        t.ParentTitle = parent.Title;
+                    }
+                }
+
+                ApplySortAndFilter();
+
+                StatusText.Text = "Reordered ✓";
+            }
+            else
+            {
+                StatusText.Text = "Failed to reorder";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+        }
     }
 
     public enum SortOption

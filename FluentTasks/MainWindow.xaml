@@ -25,6 +25,17 @@
             <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
             <converters:SubtaskMarginConverter x:Key="SubtaskMarginConverter" />
             <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <Style x:Key="DraggableCardStyle"
+                   TargetType="Border">
+                <Setter Property="Background"
+                        Value="{ThemeResource LayerFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush"
+                        Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="CornerRadius"
+                        Value="6" />
+            </Style>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -293,7 +304,13 @@
                                                     BorderThickness="1"
                                                     CornerRadius="6"
                                                     Padding="16,12"
-                                                    Margin="0,0,0,8">
+                                                    Margin="0,0,0,8"
+                                                    CanDrag="{Binding CanDrag}"
+                                                    AllowDrop="{Binding CanDrop}"
+                                                    DragStarting="Task_DragStarting"
+                                                    DragOver="Task_DragOver"
+                                                    Drop="Task_Drop"
+                                                    Tag="{Binding}">
 
                                                 <Grid ColumnSpacing="12">
                                                     <Grid.ColumnDefinitions>

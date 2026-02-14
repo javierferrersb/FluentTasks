@@ -87,7 +87,7 @@ namespace FluentTasks.Infrastructure.Google
                     : DateTimeOffset.Parse(googleTask.Due),
                 Notes = googleTask.Notes,
                 ParentId = googleTask.Parent,
-                Position = int.TryParse(googleTask.Position, out var pos) ? pos : 0
+                Position = googleTask.Position ?? "0"
             }) ?? [];
         }
 
@@ -136,7 +136,8 @@ namespace FluentTasks.Infrastructure.Google
                     ? null
                     : DateTimeOffset.Parse(created.Due),
                 Notes = created.Notes,
-                ParentId = created.Parent
+                ParentId = created.Parent,
+                Position = created.Position ?? "0"
             };
         }
 
@@ -331,6 +332,37 @@ namespace FluentTasks.Infrastructure.Google
             {
                 var service = await GetServiceAsync();
                 var request = service.Tasklists.Delete(taskListId);
+                await request.ExecuteAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Moves a task to a new position in the list.
+        /// Used for drag-and-drop reordering.
+        /// </summary>
+        /// <param name="taskListId">The task list containing the task</param>
+        /// <param name="taskId">The task to move</param>
+        /// <param name="previousTaskId">The task that should come before this one (null = move to top)</param>
+        /// <returns>True if move succeeded, false otherwise</returns>
+        public async Task<bool> MoveTaskAsync(string taskListId, string taskId, string? previousTaskId)
+        {
+            try
+            {
+                var service = await GetServiceAsync();
+
+                var request = service.Tasks.Move(taskListId, taskId);
+
+                // Set the task that should come before this one
+                if (!string.IsNullOrEmpty(previousTaskId))
+                {
+                    request.Previous = previousTaskId;
+                }
+
                 await request.ExecuteAsync();
                 return true;
             }

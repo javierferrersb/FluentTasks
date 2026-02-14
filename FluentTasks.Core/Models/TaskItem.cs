@@ -35,13 +35,19 @@ namespace FluentTasks.Core.Models
         private string? _parentTitle;
 
         [ObservableProperty]
-        private int _position;
+        private string _position = string.Empty;
 
         [ObservableProperty]
         private bool _showParentChip;
 
         [ObservableProperty]
         private bool _useSubtaskMargin;
+
+        [ObservableProperty]
+        private bool _canDrag;
+
+        [ObservableProperty]
+        private bool _canDrop;
 
         // Helper properties for display
         public bool HasDueDate => DueDate.HasValue;
