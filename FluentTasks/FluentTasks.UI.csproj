@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
@@ -15,7 +15,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Controls\MenuControlItem.xaml" />
+    <None Remove="Controls\NavigationPanelControl.xaml" />
     <None Remove="Controls\StatusOrb.xaml" />
+    <None Remove="Controls\TaskListControl.xaml" />
     <None Remove="Dialogs\IconPickerDialog.xaml" />
     <None Remove="Dialogs\ListEditorDialog.xaml" />
     <None Remove="Dialogs\TaskDetailsDialog.xaml" />
@@ -74,7 +76,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Controls\NavigationPanelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Controls\StatusOrb.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\TaskListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
