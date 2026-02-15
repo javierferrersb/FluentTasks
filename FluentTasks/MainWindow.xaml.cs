@@ -1,6 +1,7 @@
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using FluentTasks.UI.Controls;
+using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -27,15 +28,23 @@ public sealed partial class MainWindow : Window
     private TaskItem? _draggedTask;
     private string _searchQuery = string.Empty;
 
+    private readonly IconStorageService _iconStorageService;
+    private List<NavItem> _smartListItems = new();
+    private List<NavItem> _userListItems = new();
+    private NavItem? _selectedNavItem;
+
     public MainWindow()
     {
         this.InitializeComponent();
         _taskService = App.GetService<ITaskService>();
+        _iconStorageService = App.GetService<IconStorageService>();
 
         // Set up custom title bar
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+
+        InitializeSmartLists();
     }
 
     private async void LoadTaskLists_Click(object sender, RoutedEventArgs e)
@@ -43,28 +52,31 @@ public sealed partial class MainWindow : Window
         try
         {
             StatusText.Text = "Syncing...";
-            TaskListsView.ItemsSource = null;
-
-            // Show empty state while loading
-            NoListSelectedState.Visibility = Visibility.Visible;
-            TaskContentArea.Visibility = Visibility.Collapsed;
 
             var taskLists = await _taskService.GetTaskListsAsync();
 
             TaskLists.Clear();
+            _userListItems.Clear();
+
             foreach (var list in taskLists)
             {
                 TaskLists.Add(list);
+
+                // Create nav item for each list
+                var icon = _iconStorageService.GetIcon(list.Id);
+                _userListItems.Add(new NavItem
+                {
+                    Id = list.Id,
+                    Title = list.Title,
+                    Icon = icon,
+                    Type = NavItemType.UserList,
+                    Data = list
+                });
             }
 
-            TaskListsView.ItemsSource = TaskLists;
+            UserListsView.ItemsSource = _userListItems;
 
             StatusText.Text = "Ready";
-
-            if (TaskLists.Any())
-            {
-                TaskListsView.SelectedIndex = 0;
-            }
         }
         catch (Exception ex)
         {
@@ -72,17 +84,123 @@ public sealed partial class MainWindow : Window
         }
     }
 
-    private async void TaskListsView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void InitializeSmartLists()
     {
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        _smartListItems = new List<NavItem>
+    {
+        new NavItem
         {
-            // No list selected - show empty state
-            NoListSelectedState.Visibility = Visibility.Visible;
-            TaskContentArea.Visibility = Visibility.Collapsed;
-            return;
+            Id = "inbox",
+            Title = "Inbox",
+            Icon = "\uE8F4", // List icon
+            Type = NavItemType.SmartList,
+            Data = FilterOption.Incomplete
+        },
+        new NavItem
+        {
+            Id = "today",
+            Title = "Today",
+            Icon = "\uE8BF", // Calendar icon
+            Type = NavItemType.SmartList,
+            Data = FilterOption.Today
+        },
+        new NavItem
+        {
+            Id = "week",
+            Title = "This Week",
+            Icon = "\uE787", // Calendar week icon
+            Type = NavItemType.SmartList,
+            Data = FilterOption.ThisWeek
+        },
+        new NavItem
+        {
+            Id = "overdue",
+            Title = "Overdue",
+            Icon = "\uE7BA", // Warning icon
+            Type = NavItemType.SmartList,
+            Data = FilterOption.Overdue
         }
+    };
 
-        // List selected - show content
+        SmartListsView.ItemsSource = _smartListItems;
+    }
+
+    private async void Navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ListView listView || listView.SelectedItem is not NavItem navItem)
+            return;
+
+        // Deselect other ListView
+        if (listView == SmartListsView)
+            UserListsView.SelectedItem = null;
+        else
+            SmartListsView.SelectedItem = null;
+
+        _selectedNavItem = navItem;
+
+        // Handle based on type
+        if (navItem.Type == NavItemType.SmartList)
+        {
+            await HandleSmartListSelection(navItem);
+        }
+        else if (navItem.Type == NavItemType.UserList)
+        {
+            await HandleUserListSelection(navItem);
+        }
+    }
+
+    private async Task HandleSmartListSelection(NavItem navItem)
+    {
+        NoListSelectedState.Visibility = Visibility.Collapsed;
+        TaskContentArea.Visibility = Visibility.Visible;
+
+        TaskListTitle.Text = navItem.Title;
+
+        // Load ALL tasks from ALL lists
+        try
+        {
+            _allTasks.Clear();
+
+            foreach (var list in TaskLists)
+            {
+                var tasks = await _taskService.GetTasksAsync(list.Id);
+                _allTasks.AddRange(tasks);
+            }
+
+            // Populate parent titles
+            foreach (var task in _allTasks.Where(t => t.IsSubtask))
+            {
+                var parent = _allTasks.FirstOrDefault(t => t.Id == task.ParentId);
+                if (parent != null)
+                {
+                    task.ParentTitle = parent.Title;
+                }
+            }
+
+            // Apply the smart list filter
+            if (navItem.Data is FilterOption filter)
+            {
+                _currentFilter = filter;
+            }
+
+            if (AddTaskInputGrid != null)
+                AddTaskInputGrid.Visibility = Visibility.Collapsed;
+
+            ApplySortAndFilter();
+            UpdateSortButtonAppearance();
+            UpdateFilterButtonAppearance();
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    private async Task HandleUserListSelection(NavItem navItem)
+    {
+        if (navItem.Data is not TaskList selectedList)
+            return;
+
         NoListSelectedState.Visibility = Visibility.Collapsed;
         TaskContentArea.Visibility = Visibility.Visible;
 
@@ -104,13 +222,15 @@ public sealed partial class MainWindow : Window
                 }
             }
 
-            ApplySortAndFilter();
+            // Reset to default filter for user lists
+            _currentFilter = FilterOption.Incomplete;
 
-            // Initialize button states
+            if (AddTaskInputGrid != null)
+                AddTaskInputGrid.Visibility = Visibility.Visible;
+
+            ApplySortAndFilter();
             UpdateSortButtonAppearance();
             UpdateFilterButtonAppearance();
-
-            // Set initial checkmark on filter (Incomplete is default)
             FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
 
         }
@@ -133,7 +253,7 @@ public sealed partial class MainWindow : Window
 
     private async Task CreateNewTaskAsync()
     {
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
         {
             ShowInfo("Please select a list first");
             return;
@@ -168,7 +288,7 @@ public sealed partial class MainWindow : Window
         if (sender is not CheckBox checkbox || checkbox.Tag is not TaskItem task)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         try
@@ -241,7 +361,7 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem task)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         try
@@ -355,7 +475,7 @@ public sealed partial class MainWindow : Window
         if (sender is not FrameworkElement element || element.Tag is not TaskItem task)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         if (string.IsNullOrWhiteSpace(task.EditTitle))
@@ -401,7 +521,7 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem task)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         try
@@ -449,7 +569,7 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem parentTask)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         var dialog = new ContentDialog
@@ -595,10 +715,10 @@ public sealed partial class MainWindow : Window
 
     private async void CreateList_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new ContentDialog
+        var nameDialog = new ContentDialog
         {
             Title = "Create New List",
-            PrimaryButtonText = "Create",
+            PrimaryButtonText = "Next",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.Content.XamlRoot
@@ -611,37 +731,73 @@ public sealed partial class MainWindow : Window
         };
         textBox.SelectAll();
 
-        dialog.Content = textBox;
+        nameDialog.Content = textBox;
 
-        var result = await dialog.ShowAsync();
+        var result = await nameDialog.ShowAsync();
 
         if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
         {
-            try
+            // Show icon picker
+            var iconDialog = new Dialogs.IconPickerDialog("\uE8F4");
+            iconDialog.XamlRoot = this.Content.XamlRoot;
+            iconDialog.PrimaryButtonClick += (s, args) =>
             {
-                var newList = await _taskService.CreateTaskListAsync(textBox.Text.Trim());
+                if (iconDialog.SelectedIcon != null)
+                {
+                    CreateListWithIcon(textBox.Text.Trim(), iconDialog.SelectedIcon);
+                }
+            };
 
-                TaskLists.Add(newList);
-                TaskListsView.SelectedItem = newList;
+            await iconDialog.ShowAsync();
+        }
+    }
 
-                ShowSuccess("List created");
-            }
-            catch (Exception ex)
+    private async void CreateListWithIcon(string title, string icon)
+    {
+        try
+        {
+            var newList = await _taskService.CreateTaskListAsync(title);
+
+            // Save icon
+            _iconStorageService.SetIcon(newList.Id, icon);
+
+            // Add to collections
+            TaskLists.Add(newList);
+            _userListItems.Add(new NavItem
             {
-                ShowError($"Error: {ex.Message}");
-            }
+                Id = newList.Id,
+                Title = newList.Title,
+                Icon = icon,
+                Type = NavItemType.UserList,
+                Data = newList
+            });
+
+            // Refresh view
+            UserListsView.ItemsSource = null;
+            UserListsView.ItemsSource = _userListItems;
+            UserListsView.SelectedItem = _userListItems[^1];
+
+            ShowSuccess("List created");
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
         }
     }
 
     private async void RenameList_Click(object sender, RoutedEventArgs e)
     {
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (sender is not Button button || button.Tag is not NavItem navItem)
             return;
 
-        var dialog = new ContentDialog
+        if (navItem.Data is not TaskList selectedList)
+            return;
+
+        // Name dialog
+        var nameDialog = new ContentDialog
         {
             Title = "Rename List",
-            PrimaryButtonText = "Rename",
+            PrimaryButtonText = "Next",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.Content.XamlRoot
@@ -653,43 +809,64 @@ public sealed partial class MainWindow : Window
         };
         textBox.SelectAll();
 
-        dialog.Content = textBox;
+        nameDialog.Content = textBox;
 
-        var result = await dialog.ShowAsync();
+        var result = await nameDialog.ShowAsync();
 
         if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
         {
-            try
+            // Icon picker
+            var iconDialog = new Dialogs.IconPickerDialog(navItem.Icon);
+            iconDialog.XamlRoot = this.Content.XamlRoot;
+            iconDialog.PrimaryButtonClick += (s, args) =>
             {
-                var success = await _taskService.UpdateTaskListAsync(selectedList.Id, textBox.Text.Trim());
-
-                if (success)
+                if (iconDialog.SelectedIcon != null)
                 {
-                    selectedList.Title = textBox.Text.Trim();
-                    TaskListTitle.Text = selectedList.Title;
-
-                    var currentSelection = TaskListsView.SelectedItem;
-                    TaskListsView.ItemsSource = null;
-                    TaskListsView.ItemsSource = TaskLists;
-                    TaskListsView.SelectedItem = currentSelection;
-
-                    ShowSuccess("List renamed");
+                    UpdateListWithIcon(selectedList, navItem, textBox.Text.Trim(), iconDialog.SelectedIcon);
                 }
-                else
-                {
-                    ShowWarning("Failed to rename list");
-                }
-            }
-            catch (Exception ex)
+            };
+
+            await iconDialog.ShowAsync();
+        }
+    }
+
+    private async void UpdateListWithIcon(TaskList list, NavItem navItem, string newTitle, string newIcon)
+    {
+        try
+        {
+            var success = await _taskService.UpdateTaskListAsync(list.Id, newTitle);
+
+            if (success)
             {
-                ShowError($"Error: {ex.Message}");
+                list.Title = newTitle;
+                navItem.Title = newTitle;
+                navItem.Icon = newIcon;
+
+                // Save icon
+                _iconStorageService.SetIcon(list.Id, newIcon);
+
+                // Refresh
+                TaskListTitle.Text = newTitle;
+                UserListsView.ItemsSource = null;
+                UserListsView.ItemsSource = _userListItems;
+                UserListsView.SelectedItem = navItem;
+
+                ShowSuccess("List updated");
             }
+            else
+            {
+                ShowWarning("Failed to update list");
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
         }
     }
 
     private async void DeleteList_Click(object sender, RoutedEventArgs e)
     {
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         var confirmDialog = new ContentDialog
@@ -853,7 +1030,7 @@ public sealed partial class MainWindow : Window
 
     private async Task MoveTaskToPosition(TaskItem draggedTask, TaskItem targetTask)
     {
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         try
@@ -1126,7 +1303,7 @@ public sealed partial class MainWindow : Window
         if (sender is not Border border || border.Tag is not TaskItem task)
             return;
 
-        if (TaskListsView.SelectedItem is not TaskList selectedList)
+        if (_selectedNavItem?.Data is not TaskList selectedList)
             return;
 
         try
@@ -1167,6 +1344,12 @@ public sealed partial class MainWindow : Window
         {
             ShowError($"Error: {ex.Message}");
         }
+    }
+
+    private void Settings_Click(object sender, RoutedEventArgs e)
+    {
+        // TODO: Implement settings page later
+        ShowInfo("Settings coming soon!");
     }
 
     /// <summary>

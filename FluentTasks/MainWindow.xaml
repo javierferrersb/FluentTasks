@@ -34,6 +34,68 @@
                 <Setter Property="Margin"
                         Value="0,0,0,6" />
             </Style>
+
+            <!-- Navigation Item Selection Style -->
+            <Style x:Key="NavListViewItemStyle"
+                   TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Stretch" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="4,2" />
+                <Setter Property="CornerRadius"
+                        Value="4" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <Grid x:Name="RootGrid"
+                                  Background="{TemplateBinding Background}"
+                                  CornerRadius="{TemplateBinding CornerRadius}"
+                                  Padding="{TemplateBinding Padding}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="RootGrid.Background"
+                                                        Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="RootGrid.Background"
+                                                        Value="{ThemeResource SubtleFillColorTertiaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Target="RootGrid.Background"
+                                                        Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedPointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="RootGrid.Background"
+                                                        Value="{ThemeResource AccentFillColorSecondaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="SelectedPressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="RootGrid.Background"
+                                                        Value="{ThemeResource AccentFillColorTertiaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -41,36 +103,18 @@
             <!-- TitleBar -->
             <RowDefinition Height="*" />
             <!-- Main Content -->
-            <RowDefinition Height="Auto" />
-            <!-- Status Bar -->
         </Grid.RowDefinitions>
 
         <!-- Custom Title Bar -->
         <TitleBar x:Name="AppTitleBar"
                   Grid.Row="0"
+                  Height="48"
                   Title="FluentTasks">
             <TitleBar.IconSource>
                 <FontIconSource Glyph="&#xE73A;"
                                 FontFamily="Segoe MDL2 Assets"
                                 Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
             </TitleBar.IconSource>
-
-            <TitleBar.Content>
-                <Grid HorizontalAlignment="Stretch"
-                      Margin="40,0">
-                    <Button Content="Sync Lists"
-                            Click="LoadTaskLists_Click"
-                            Style="{StaticResource AccentButtonStyle}"
-                            Height="32"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                        <Button.KeyboardAccelerators>
-                            <KeyboardAccelerator Key="R"
-                                                 Modifiers="Control" />
-                        </Button.KeyboardAccelerators>
-                    </Button>
-                </Grid>
-            </TitleBar.Content>
         </TitleBar>
 
         <!-- Main Content -->
@@ -84,85 +128,176 @@
 
             <!-- Left Navigation Panel -->
             <Grid Grid.Column="0"
-                  Background="{ThemeResource LayerFillColorDefaultBrush}"
-                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                  BorderThickness="0,0,1,0"
-                  Padding="16">
+                  BorderThickness="0,0,1,0">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <!-- Smart Lists -->
+                    <RowDefinition Height="Auto" />
+                    <!-- My Lists Header -->
                     <RowDefinition Height="*" />
+                    <!-- User Lists -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Settings -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Sync -->
                 </Grid.RowDefinitions>
 
-                <!-- Lists Header -->
-                <Grid Grid.Row="0"
-                      Margin="0,0,0,12">
+                <!-- Smart Lists -->
+                <ListView Grid.Row="0"
+                          x:Name="SmartListsView"
+                          SelectionMode="Single"
+                          SelectionChanged="Navigation_SelectionChanged"
+                          Padding="8,0"
+                          Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="12,8"
+                                  Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Grid.Column="0"
+                                          Glyph="{Binding Icon}"
+                                          FontSize="16"
+                                          Margin="0,0,12,0" />
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Title}"
+                                           Style="{StaticResource BodyTextBlockStyle}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem"
+                               BasedOn="{StaticResource NavListViewItemStyle}" />
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <!-- My Lists Header -->
+                <Grid Grid.Row="1"
+                      Padding="16,12,16,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
                     <TextBlock Grid.Column="0"
                                Text="My Lists"
-                               Style="{StaticResource BodyStrongTextBlockStyle}"
-                               VerticalAlignment="Center" />
-
+                               Style="{StaticResource CaptionTextBlockStyle}"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               FontWeight="SemiBold" />
                     <Button Grid.Column="1"
                             Content="&#xE710;"
                             FontFamily="Segoe MDL2 Assets"
                             Click="CreateList_Click"
                             Background="Transparent"
                             BorderThickness="0"
-                            Padding="8,4"
+                            Padding="4"
+                            FontSize="12"
                             ToolTipService.ToolTip="New list" />
-
-                    <Button Grid.Column="2"
-                            Content="&#xE70F;"
-                            FontFamily="Segoe MDL2 Assets"
-                            Click="RenameList_Click"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="8,4"
-                            IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
-                            ToolTipService.ToolTip="Rename list" />
-
-                    <Button Grid.Column="3"
-                            Content="&#xE74D;"
-                            FontFamily="Segoe MDL2 Assets"
-                            Click="DeleteList_Click"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="8,4"
-                            IsEnabled="{Binding SelectedItem, ElementName=TaskListsView, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}"
-                            ToolTipService.ToolTip="Delete list" />
                 </Grid>
 
-                <!-- Lists - No border, just items -->
-                <ListView x:Name="TaskListsView"
-                          Grid.Row="1"
-                          SelectionChanged="TaskListsView_SelectionChanged"
+                <!-- User Lists -->
+                <ListView Grid.Row="2"
+                          x:Name="UserListsView"
                           SelectionMode="Single"
+                          SelectionChanged="Navigation_SelectionChanged"
+                          Padding="8,0"
                           Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                       Padding="12,10" />
+                            <Grid Padding="12,8"
+                                  Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <FontIcon Grid.Column="0"
+                                          Glyph="{Binding Icon}"
+                                          FontSize="16"
+                                          Margin="0,0,12,0" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Title}"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           VerticalAlignment="Center" />
+
+                                <Button Grid.Column="2"
+                                        Content="&#xE70F;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Click="RenameList_Click"
+                                        Tag="{Binding}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="4"
+                                        FontSize="12"
+                                        Opacity="0"
+                                        x:Name="RenameButton"
+                                        ToolTipService.ToolTip="Rename" />
+
+                                <Button Grid.Column="3"
+                                        Content="&#xE74D;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Click="DeleteList_Click"
+                                        Tag="{Binding}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="4"
+                                        FontSize="12"
+                                        Opacity="0"
+                                        x:Name="DeleteButton"
+                                        ToolTipService.ToolTip="Delete" />
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Stretch" />
-                            <Setter Property="Padding"
-                                    Value="0" />
-                            <Setter Property="Margin"
-                                    Value="0" />
-                        </Style>
+                        <Style TargetType="ListViewItem"
+                               BasedOn="{StaticResource NavListViewItemStyle}" />
                     </ListView.ItemContainerStyle>
                 </ListView>
+
+                <!-- Settings Button -->
+                <Button Grid.Row="3"
+                        Click="Settings_Click"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Padding="20,12"
+                        Margin="8,8,8,4">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <FontIcon Glyph="&#xE713;"
+                                  FontSize="16" />
+                        <TextBlock Text="Settings"
+                                   Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
+
+                <!-- Sync Button -->
+                <Button Grid.Row="5"
+                        Click="LoadTaskLists_Click"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Padding="20,12"
+                        Margin="8,4,8,8">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="R"
+                                             Modifiers="Control" />
+                    </Button.KeyboardAccelerators>
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <FontIcon Glyph="&#xE72C;"
+                                  FontSize="16" />
+                        <TextBlock Text="Sync Lists"
+                                   Style="{StaticResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
             </Grid>
 
             <!-- Right Content Area -->
@@ -226,6 +361,8 @@
                                 <!-- Add task input -->
                                 <RowDefinition Height="*" />
                                 <!-- Tasks list -->
+                                <RowDefinition Height="Auto" />
+                                <!-- Status -->
                             </Grid.RowDefinitions>
 
                             <!-- Header: Sort, Filter, Count -->
@@ -348,8 +485,9 @@
                             </Grid>
 
                             <!-- Add Task Input -->
-                            <Grid Grid.Row="1"
-                                  Padding="16,12"
+                            <Grid x:Name="AddTaskInputGrid"
+                                  Grid.Row="1"
+                                  Padding="16,12, 16, 0"
                                   ColumnSpacing="8"
                                   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                   BorderThickness="0,0,0,1">
@@ -590,33 +728,33 @@
                                     </StackPanel>
                                 </StackPanel>
                             </ScrollViewer>
+                            
+                            <!-- Status Bar -->
+                            <Border Grid.Row="3"
+                                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="0,1,0,0"
+                                    Padding="16,8">
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8">
+                                    <controls:StatusOrb x:Name="StatusOrb"
+                                                        VerticalAlignment="Center" />
+                                    <TextBlock x:Name="StatusText"
+                                               Text="Ready"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock x:Name="ActionText"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                               VerticalAlignment="Center"
+                                               Opacity="0" />
+                                </StackPanel>
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>
             </Grid>
         </Grid>
-
-        <!-- Status Bar -->
-        <Border Grid.Row="2"
-                Background="{ThemeResource LayerFillColorDefaultBrush}"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="0,1,0,0"
-                Padding="16,8">
-            <StackPanel Orientation="Horizontal"
-                        Spacing="8">
-                <controls:StatusOrb x:Name="StatusOrb"
-                                    VerticalAlignment="Center" />
-                <TextBlock x:Name="StatusText"
-                           Text="Ready"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           VerticalAlignment="Center" />
-                <TextBlock x:Name="ActionText"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           VerticalAlignment="Center"
-                           Opacity="0" />
-            </StackPanel>
-        </Border>
     </Grid>
 </Window>

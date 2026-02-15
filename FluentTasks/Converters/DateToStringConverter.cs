@@ -16,17 +16,17 @@ public class DateToStringConverter : IValueConverter
             {
                 var daysOverdue = Math.Abs(daysUntil);
                 return daysOverdue == 1
-                    ? "📅 Overdue by 1 day"
-                    : $"📅 Overdue by {daysOverdue} days";
+                    ? "Overdue by 1 day"
+                    : $"Overdue by {daysOverdue} days";
             }
             else if (daysUntil == 0)
-                return "📅 Today";
+                return "Due Today";
             else if (daysUntil == 1)
-                return "📅 Tomorrow";
+                return "Due Tomorrow";
             else if (daysUntil <= 7)
-                return $"📅 {date.ToString("dddd")}";
+                return $"Due {date.ToString("dddd")}";
             else
-                return $"📅 {date.ToString("MMM d")}";
+                return $"Due {date.ToString("MMM d")}";
         }
 
         return string.Empty;

@@ -1,5 +1,6 @@
 ﻿using FluentTasks.Core.Services;
 using FluentTasks.Infrastructure.Google;
+using FluentTasks.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -32,6 +33,7 @@ namespace FluentTasks.UI
                     // Register services and
                     services.AddSingleton<IGoogleAuthService, GoogleAuthService>();
                     services.AddSingleton<ITaskService, GoogleTaskService>();
+                    services.AddSingleton<IconStorageService>();
                 })
                 .Build();
         }
