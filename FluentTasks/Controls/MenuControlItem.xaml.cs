@@ -78,8 +78,9 @@ public sealed partial class MenuItemControl : UserControl
 
     private void UpdateButtonStyle()
     {
-        var styleName = IsSelected ? "SelectedStyle" : "UnselectedStyle";
-        RootButton.Style = (Style)Resources[styleName];
+        RootButton.Style = IsSelected 
+            ? (Style)Application.Current.Resources["AccentButtonStyle"]
+            : (Style)Application.Current.Resources["SubtleButtonStyle"];
     }
 
     private void RootButton_Click(object sender, RoutedEventArgs e)
