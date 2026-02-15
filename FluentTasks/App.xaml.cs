@@ -1,6 +1,7 @@
 ﻿using FluentTasks.Core.Services;
 using FluentTasks.Infrastructure.Google;
 using FluentTasks.UI.Services;
+using FluentTasks.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -30,10 +31,18 @@ namespace FluentTasks.UI
             _host = new HostBuilder()
                 .ConfigureServices((context, services) =>
                 {
-                    // Register services and
+                    // Infrastructure services
                     services.AddSingleton<IGoogleAuthService, GoogleAuthService>();
                     services.AddSingleton<ITaskService, GoogleTaskService>();
                     services.AddSingleton<IconStorageService>();
+
+                    // UI services
+                    services.AddSingleton<DialogService>();
+                    services.AddSingleton<IDialogService>(sp => sp.GetRequiredService<DialogService>());
+
+                    // ViewModels
+                    services.AddTransient<ShellViewModel>();
+                    services.AddTransient<TaskListViewModel>();
                 })
                 .Build();
         }
@@ -48,7 +57,9 @@ namespace FluentTasks.UI
             _window.Activate();
         }
 
-        // Helper to get services
+        /// <summary>
+        /// Gets a registered service from the DI container.
+        /// </summary>
         public static T GetService<T>() where T : class
         {
             var app = Current as App;

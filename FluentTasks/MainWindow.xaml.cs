@@ -1,8 +1,9 @@
+using System.ComponentModel;
 using FluentTasks.Core.Models;
-using FluentTasks.Core.Services;
 using FluentTasks.UI.Controls;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
+using FluentTasks.UI.ViewModels;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -10,7 +11,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,299 +18,191 @@ namespace FluentTasks.UI;
 
 public sealed partial class MainWindow : Window
 {
-    private readonly ITaskService _taskService;
+    public ShellViewModel ViewModel { get; }
 
-    private List<TaskItem> _allTasks = new();
-    private ObservableCollection<TaskList> TaskLists = new();
-
-    private SortOption _currentSort = SortOption.None;
-    private FilterOption _currentFilter = FilterOption.Incomplete;
     private TaskItem? _draggedTask;
-    private string _searchQuery = string.Empty;
-
-    private readonly IconStorageService _iconStorageService;
-    private List<NavItem> _smartListItems = new();
-    private List<NavItem> _userListItems = new();
-    private NavItem? _selectedNavItem;
 
     public MainWindow()
     {
         this.InitializeComponent();
-        _taskService = App.GetService<ITaskService>();
-        _iconStorageService = App.GetService<IconStorageService>();
+
+        ViewModel = App.GetService<ShellViewModel>();
+
+        // Wire up ViewModel events for view-specific effects
+        ViewModel.RippleRequested += () => StatusOrb.TriggerRipple();
+        ViewModel.OrbStatusChanged += kind => StatusOrb.SetStatus(kind switch
+        {
+            OrbStatusKind.Connected => OrbStatus.Connected,
+            OrbStatusKind.Syncing => OrbStatus.Syncing,
+            OrbStatusKind.Warning => OrbStatus.Warning,
+            OrbStatusKind.Offline => OrbStatus.Offline,
+            _ => OrbStatus.Connected
+        });
+        ViewModel.TemporaryStatusRequested += ShowTemporaryStatus;
+
+        // Sync VM property changes to UI elements
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
 
         // Set up custom title bar
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
-        InitializeSmartLists();
+        // Initialize the dialog service with the XamlRoot once content is loaded
+        if (this.Content is FrameworkElement root)
+        {
+            root.Loaded += (_, _) =>
+            {
+                var dialogService = App.GetService<DialogService>();
+                dialogService.SetXamlRoot(root.XamlRoot);
+            };
+        }
     }
+
+    private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(ShellViewModel.IsNoListSelected):
+                NoListSelectedState.Visibility = ViewModel.IsNoListSelected ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            case nameof(ShellViewModel.IsTaskContentVisible):
+                TaskContentArea.Visibility = ViewModel.IsTaskContentVisible ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            case nameof(ShellViewModel.StatusText):
+                StatusText.Text = ViewModel.StatusText;
+                break;
+            case nameof(ShellViewModel.TaskListVM):
+                WireTaskListVM();
+                break;
+        }
+    }
+
+    private void WireTaskListVM()
+    {
+        if (ViewModel.TaskListVM is null) return;
+
+        ViewModel.TaskListVM.PropertyChanged += TaskListVM_PropertyChanged;
+        SyncTaskListVMState();
+    }
+
+    private void TaskListVM_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(TaskListViewModel.Title):
+                TaskListTitle.Text = ViewModel.TaskListVM!.Title;
+                break;
+            case nameof(TaskListViewModel.Tasks):
+                TasksView.ItemsSource = ViewModel.TaskListVM!.Tasks;
+                break;
+            case nameof(TaskListViewModel.IsEmpty):
+                EmptyState.Visibility = ViewModel.TaskListVM!.IsEmpty ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            case nameof(TaskListViewModel.IsLoading):
+                SkeletonLoadingState.Visibility = ViewModel.TaskListVM!.IsLoading ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            case nameof(TaskListViewModel.ShowAddTaskInput):
+                AddTaskInputGrid.Visibility = ViewModel.TaskListVM!.ShowAddTaskInput ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            case nameof(TaskListViewModel.SortButtonText):
+                SortButtonText.Text = ViewModel.TaskListVM!.SortButtonText;
+                SortButtonText.Foreground = ViewModel.TaskListVM.IsSortActive
+                    ? (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"]
+                    : (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+                break;
+            case nameof(TaskListViewModel.FilterButtonText):
+                FilterButtonText.Text = ViewModel.TaskListVM!.FilterButtonText;
+                FilterButtonText.Foreground = ViewModel.TaskListVM.IsFilterActive
+                    ? (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"]
+                    : (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+                break;
+            case nameof(TaskListViewModel.NewTaskTitle):
+                if (NewTaskInput.Text != ViewModel.TaskListVM!.NewTaskTitle)
+                    NewTaskInput.Text = ViewModel.TaskListVM.NewTaskTitle;
+                break;
+        }
+    }
+
+    private void SyncTaskListVMState()
+    {
+        if (ViewModel.TaskListVM is null) return;
+
+        TaskListTitle.Text = ViewModel.TaskListVM.Title;
+        TasksView.ItemsSource = ViewModel.TaskListVM.Tasks;
+        EmptyState.Visibility = ViewModel.TaskListVM.IsEmpty ? Visibility.Visible : Visibility.Collapsed;
+        SkeletonLoadingState.Visibility = ViewModel.TaskListVM.IsLoading ? Visibility.Visible : Visibility.Collapsed;
+        AddTaskInputGrid.Visibility = ViewModel.TaskListVM.ShowAddTaskInput ? Visibility.Visible : Visibility.Collapsed;
+        SortButtonText.Text = ViewModel.TaskListVM.SortButtonText;
+        FilterButtonText.Text = ViewModel.TaskListVM.FilterButtonText;
+    }
+
+    // --- Navigation ---
+
+    private void MenuItem_Clicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            _ = ViewModel.SelectNavItemAsync(navItem);
+        }
+    }
+
+    private void MenuItem_EditClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            _ = ViewModel.RenameListAsync(navItem);
+        }
+    }
+
+    private void MenuItem_DeleteClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            _ = ViewModel.DeleteListAsync(navItem);
+        }
+    }
+
+    private void Settings_Click(object sender, RoutedEventArgs e)
+    {
+        // TODO: Implement settings page later
+    }
+
+    // --- Sync ---
 
     private async void LoadTaskLists_Click(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            StatusText.Text = "Syncing...";
-
-            var taskLists = await _taskService.GetTaskListsAsync();
-
-            TaskLists.Clear();
-            _userListItems.Clear();
-
-            foreach (var list in taskLists)
-            {
-                TaskLists.Add(list);
-
-                // Create nav item for each list
-                var icon = _iconStorageService.GetIcon(list.Id);
-                _userListItems.Add(new NavItem
-                {
-                    Id = list.Id,
-                    Title = list.Title,
-                    Icon = icon,
-                    Type = NavItemType.UserList,
-                    Data = list
-                });
-            }
-
-            UserListsView.ItemsSource = _userListItems;
-
-            StatusText.Text = "Ready";
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
+        await ViewModel.SyncCommand.ExecuteAsync(null);
     }
 
-    private void InitializeSmartLists()
-    {
-        _smartListItems = new List<NavItem>
-    {
-        new NavItem
-        {
-            Id = "inbox",
-            Title = "Inbox",
-            Icon = "\uE8F4", // List icon
-            Type = NavItemType.SmartList,
-            Data = FilterOption.Incomplete
-        },
-        new NavItem
-        {
-            Id = "today",
-            Title = "Today",
-            Icon = "\uE8BF", // Calendar icon
-            Type = NavItemType.SmartList,
-            Data = FilterOption.Today
-        },
-        new NavItem
-        {
-            Id = "week",
-            Title = "This Week",
-            Icon = "\uE787", // Calendar week icon
-            Type = NavItemType.SmartList,
-            Data = FilterOption.ThisWeek
-        },
-        new NavItem
-        {
-            Id = "overdue",
-            Title = "Overdue",
-            Icon = "\uE7BA", // Warning icon
-            Type = NavItemType.SmartList,
-            Data = FilterOption.Overdue
-        }
-    };
+    // --- Create List ---
 
-        SmartListsView.ItemsSource = _smartListItems;
+    private async void CreateList_Click(object sender, RoutedEventArgs e)
+    {
+        await ViewModel.CreateListCommand.ExecuteAsync(null);
     }
 
-
-    private async Task HandleSmartListSelection(NavItem navItem)
-    {
-        NoListSelectedState.Visibility = Visibility.Collapsed;
-        TaskContentArea.Visibility = Visibility.Visible;
-
-        TaskListTitle.Text = navItem.Title;
-
-        // Hide add task input for smart lists
-        if (AddTaskInputGrid != null)
-            AddTaskInputGrid.Visibility = Visibility.Collapsed;
-
-        try
-        {
-            // Show skeleton loading
-            StatusText.Text = "Loading...";
-            TasksView.ItemsSource = null;
-            EmptyState.Visibility = Visibility.Collapsed;
-            SkeletonLoadingState.Visibility = Visibility.Visible;
-
-            _allTasks.Clear();
-
-            // Load ALL tasks from ALL lists
-            foreach (var list in TaskLists)
-            {
-                var tasks = await _taskService.GetTasksAsync(list.Id);
-                _allTasks.AddRange(tasks);
-            }
-
-            // Populate parent titles
-            foreach (var task in _allTasks.Where(t => t.IsSubtask))
-            {
-                var parent = _allTasks.FirstOrDefault(t => t.Id == task.ParentId);
-                if (parent != null)
-                {
-                    task.ParentTitle = parent.Title;
-                }
-            }
-
-            // Apply the smart list filter
-            if (navItem.Data is FilterOption filter)
-            {
-                _currentFilter = filter;
-            }
-
-            _currentSort = SortOption.None;
-
-            // Hide skeleton, show tasks
-            SkeletonLoadingState.Visibility = Visibility.Collapsed;
-
-            ApplySortAndFilter();
-
-            // Update button appearance
-            UpdateSortButtonAppearance();
-            UpdateFilterButtonAppearance();
-
-            // Set sort checkmarks (always default for smart lists)
-            SortDefault.Icon = new FontIcon { Glyph = "\uE73E" };
-            SortDueDateAsc.Icon = null;
-            SortDueDateDesc.Icon = null;
-            SortAlpha.Icon = null;
-            SortAlphaRev.Icon = null;
-            SortCompleted.Icon = null;
-
-            // Set filter checkmark based on smart list type
-            FilterAll.Icon = _currentFilter == FilterOption.All ? new FontIcon { Glyph = "\uE73E" } : null;
-            FilterIncomplete.Icon = _currentFilter == FilterOption.Incomplete ? new FontIcon { Glyph = "\uE73E" } : null;
-            FilterCompleted.Icon = _currentFilter == FilterOption.Completed ? new FontIcon { Glyph = "\uE73E" } : null;
-            FilterOverdue.Icon = _currentFilter == FilterOption.Overdue ? new FontIcon { Glyph = "\uE73E" } : null;
-            FilterToday.Icon = _currentFilter == FilterOption.Today ? new FontIcon { Glyph = "\uE73E" } : null;
-            FilterWeek.Icon = _currentFilter == FilterOption.ThisWeek ? new FontIcon { Glyph = "\uE73E" } : null;
-
-            StatusText.Text = "Ready";
-            ShowSuccess($"Loaded {_allTasks.Count} tasks");
-        }
-        catch (Exception ex)
-        {
-            SkeletonLoadingState.Visibility = Visibility.Collapsed;
-            ShowError($"Error: {ex.Message}");
-        }
-    }
-
-    private async Task HandleUserListSelection(NavItem navItem)
-    {
-        if (navItem.Data is not TaskList selectedList)
-            return;
-
-        NoListSelectedState.Visibility = Visibility.Collapsed;
-        TaskContentArea.Visibility = Visibility.Visible;
-
-        // Show add task input for user lists
-        if (AddTaskInputGrid != null)
-            AddTaskInputGrid.Visibility = Visibility.Visible;
-
-        try
-        {
-            TaskListTitle.Text = selectedList.Title;
-            TasksView.ItemsSource = null;
-            EmptyState.Visibility = Visibility.Collapsed;
-
-            var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-            _allTasks = tasks.ToList();
-
-            foreach (var task in _allTasks.Where(t => t.IsSubtask))
-            {
-                var parent = _allTasks.FirstOrDefault(t => t.Id == task.ParentId);
-                if (parent != null)
-                {
-                    task.ParentTitle = parent.Title;
-                }
-            }
-
-            // Reset to default filter for user lists
-            _currentFilter = FilterOption.Incomplete;
-            _currentSort = SortOption.None;
-
-            ApplySortAndFilter();
-
-            // Initialize button states and checkmarks
-            UpdateSortButtonAppearance();
-            UpdateFilterButtonAppearance();
-
-            // Set checkmarks
-            SortDefault.Icon = new FontIcon { Glyph = "\uE73E" };
-            SortDueDateAsc.Icon = null;
-            SortDueDateDesc.Icon = null;
-            SortAlpha.Icon = null;
-            SortAlphaRev.Icon = null;
-            SortCompleted.Icon = null;
-
-            FilterAll.Icon = null;
-            FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
-            FilterCompleted.Icon = null;
-            FilterOverdue.Icon = null;
-            FilterToday.Icon = null;
-            FilterWeek.Icon = null;
-
-            ShowSuccess($"Loaded {_allTasks.Count} tasks");
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
+    // --- Task actions (delegate to TaskListVM) ---
 
     private async void AddTask_Click(object sender, RoutedEventArgs e)
     {
-        await CreateNewTaskAsync();
+        if (ViewModel.TaskListVM is not null)
+        {
+            ViewModel.TaskListVM.NewTaskTitle = NewTaskInput.Text;
+            await ViewModel.TaskListVM.AddTaskCommand.ExecuteAsync(null);
+            NewTaskInput.Text = ViewModel.TaskListVM.NewTaskTitle;
+        }
     }
 
     private async void AddTask_Enter(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        await CreateNewTaskAsync();
+        if (ViewModel.TaskListVM is not null)
+        {
+            ViewModel.TaskListVM.NewTaskTitle = NewTaskInput.Text;
+            await ViewModel.TaskListVM.AddTaskCommand.ExecuteAsync(null);
+            NewTaskInput.Text = ViewModel.TaskListVM.NewTaskTitle;
+        }
         args.Handled = true;
-    }
-
-    private async Task CreateNewTaskAsync()
-    {
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-        {
-            ShowInfo("Please select a list first");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(NewTaskInput.Text))
-        {
-            ShowInfo("Please enter a task title");
-            return;
-        }
-
-        try
-        {
-            var title = NewTaskInput.Text.Trim();
-
-            var newTask = await _taskService.CreateTaskAsync(selectedList.Id, title);
-
-            _allTasks.Insert(0, newTask);
-            ApplySortAndFilter();
-
-            NewTaskInput.Text = string.Empty;
-            ShowSuccess("Task created");
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
     }
 
     private async void TaskCheckbox_Click(object sender, RoutedEventArgs e)
@@ -318,71 +210,15 @@ public sealed partial class MainWindow : Window
         if (sender is not CheckBox checkbox || checkbox.Tag is not TaskItem task)
             return;
 
-        if (_selectedNavItem?.Data is not TaskList selectedList)
+        if (ViewModel.TaskListVM is null)
             return;
 
-        try
+        var newCompletedState = checkbox.IsChecked == true;
+        var success = await ViewModel.TaskListVM.CompleteTaskAsync(task, newCompletedState);
+
+        if (!success)
         {
-            var newCompletedState = checkbox.IsChecked == true;
-
-            if (newCompletedState && !task.IsSubtask)
-            {
-                var subtasks = _allTasks.Where(t => t.ParentId == task.Id && !t.IsCompleted).ToList();
-
-                if (subtasks.Any())
-                {
-                    var dialog = new ContentDialog
-                    {
-                        Title = "Complete subtasks?",
-                        Content = $"This task has {subtasks.Count} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks.",
-                        PrimaryButtonText = "Complete All",
-                        CloseButtonText = "Cancel",
-                        DefaultButton = ContentDialogButton.Close,
-                        XamlRoot = this.Content.XamlRoot
-                    };
-
-                    var result = await dialog.ShowAsync();
-
-                    if (result != ContentDialogResult.Primary)
-                    {
-                        checkbox.IsChecked = false;
-                        return;
-                    }
-                }
-            }
-
-            var success = await _taskService.CompleteTaskAsync(
-                selectedList.Id,
-                task.Id,
-                newCompletedState);
-
-            if (success)
-            {
-                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                _allTasks = tasks.ToList();
-
-                foreach (var t in _allTasks.Where(t => t.IsSubtask))
-                {
-                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
-                    if (parent != null)
-                    {
-                        t.ParentTitle = parent.Title;
-                    }
-                }
-
-                ApplySortAndFilter();
-                ShowSuccess(newCompletedState ? "Task completed" : "Task reopened");
-            }
-            else
-            {
-                checkbox.IsChecked = !newCompletedState;
-                ShowWarning("Failed to update task");
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-            checkbox.IsChecked = task.IsCompleted;
+            checkbox.IsChecked = !newCompletedState;
         }
     }
 
@@ -391,159 +227,49 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem task)
             return;
 
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-            return;
-
-        try
-        {
-            var success = await _taskService.DeleteTaskAsync(selectedList.Id, task.Id);
-
-            if (success)
-            {
-                _allTasks.Remove(task);
-                ApplySortAndFilter();
-                ShowSuccess("Task deleted");
-            }
-            else
-            {
-                ShowWarning("Failed to delete task");
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
+        if (ViewModel.TaskListVM is not null)
+            await ViewModel.TaskListVM.DeleteTaskAsync(task);
     }
 
-    private void TaskTitle_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
+    private void TaskTitle_Tapped(object sender, TappedRoutedEventArgs e)
     {
         if (sender is not TextBlock textBlock || textBlock.Tag is not TaskItem task)
             return;
 
-        // Exit edit mode for all other tasks
-        foreach (var t in _allTasks.Where(t => t.IsEditing && t.Id != task.Id))
-        {
-            t.IsEditing = false;
-            t.EditTitle = string.Empty;
-        }
-
-        // Enter edit mode for this task
-        task.EditTitle = task.Title;
-        task.IsEditing = true;
+        ViewModel.TaskListVM?.BeginEditTask(task);
 
         // Focus the textbox after a short delay to let UI update
         DispatcherQueue.TryEnqueue(async () =>
         {
-            await Task.Delay(50); // Small delay for UI to render
+            await Task.Delay(50);
             FocusEditTextBox(task);
         });
     }
 
-    private void FocusEditTextBox(TaskItem task)
-    {
-        // Find the TextBox in the visual tree for this task
-        if (TasksView.ItemsSource is IEnumerable<TaskItem> items)
-        {
-            var index = items.ToList().IndexOf(task);
-            if (index >= 0)
-            {
-                var container = TasksView.TryGetElement(index);
-                if (container != null)
-                {
-                    var textBox = FindTextBoxInVisualTree(container);
-                    if (textBox != null)
-                    {
-                        textBox.Focus(FocusState.Programmatic);
-                        textBox.SelectAll();  // Select all text
-                    }
-                }
-            }
-        }
-    }
-
-    private TextBox? FindTextBoxInVisualTree(DependencyObject parent)
-    {
-        var count = VisualTreeHelper.GetChildrenCount(parent);
-        for (int i = 0; i < count; i++)
-        {
-            var child = VisualTreeHelper.GetChild(parent, i);
-
-            if (child is TextBox textBox && textBox.Tag is TaskItem)
-                return textBox;
-
-            var result = FindTextBoxInVisualTree(child);
-            if (result != null)
-                return result;
-        }
-        return null;
-    }
-
     private async void SaveEdit_Click(object sender, RoutedEventArgs e)
     {
-        await SaveTaskEditAsync(sender);
+        if (sender is FrameworkElement { Tag: TaskItem task })
+            await (ViewModel.TaskListVM?.SaveEditAsync(task) ?? Task.CompletedTask);
     }
 
     private async void SaveEdit_Enter(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        await SaveTaskEditAsync(args.Element);
+        if (args.Element is FrameworkElement { Tag: TaskItem task })
+            await (ViewModel.TaskListVM?.SaveEditAsync(task) ?? Task.CompletedTask);
         args.Handled = true;
     }
 
     private void CancelEdit_Click(object sender, RoutedEventArgs e)
     {
-        CancelTaskEdit(sender);
+        if (sender is FrameworkElement { Tag: TaskItem task })
+            ViewModel.TaskListVM?.CancelEdit(task);
     }
 
     private void CancelEdit_Escape(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        CancelTaskEdit(args.Element);
+        if (args.Element is FrameworkElement { Tag: TaskItem task })
+            ViewModel.TaskListVM?.CancelEdit(task);
         args.Handled = true;
-    }
-
-    private async Task SaveTaskEditAsync(object sender)
-    {
-        if (sender is not FrameworkElement element || element.Tag is not TaskItem task)
-            return;
-
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-            return;
-
-        if (string.IsNullOrWhiteSpace(task.EditTitle))
-        {
-            ShowInfo("Task title cannot be empty");
-            return;
-        }
-
-        try
-        {
-            task.Title = task.EditTitle.Trim();
-
-            var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
-
-            if (success)
-            {
-                task.IsEditing = false;
-                ShowSuccess("Task updated");
-            }
-            else
-            {
-                ShowWarning("Failed to update task");
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
-
-    private void CancelTaskEdit(object sender)
-    {
-        if (sender is not FrameworkElement element || element.Tag is not TaskItem task)
-            return;
-
-        // Exit edit mode without saving
-        task.IsEditing = false;
-        task.EditTitle = string.Empty;
     }
 
     private async void TaskDetails_Click(object sender, RoutedEventArgs e)
@@ -551,47 +277,8 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem task)
             return;
 
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-            return;
-
-        try
-        {
-            var dialog = new Dialogs.TaskDetailsDialog(task);
-            dialog.XamlRoot = this.Content.XamlRoot;
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
-
-                if (success)
-                {
-                    var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                    _allTasks = tasks.ToList();
-
-                    foreach (var t in _allTasks.Where(t => t.IsSubtask))
-                    {
-                        var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
-                        if (parent != null)
-                        {
-                            t.ParentTitle = parent.Title;
-                        }
-                    }
-
-                    ApplySortAndFilter();
-                    ShowSuccess("Task updated");
-                }
-                else
-                {
-                    ShowWarning("Failed to update task");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
+        if (ViewModel.TaskListVM is not null)
+            await ViewModel.TaskListVM.ShowDetailsAsync(task);
     }
 
     private async void AddSubtask_Click(object sender, RoutedEventArgs e)
@@ -599,138 +286,54 @@ public sealed partial class MainWindow : Window
         if (sender is not Button button || button.Tag is not TaskItem parentTask)
             return;
 
-        if (_selectedNavItem?.Data is not TaskList selectedList)
+        if (ViewModel.TaskListVM is not null)
+            await ViewModel.TaskListVM.AddSubtaskAsync(parentTask);
+    }
+
+    private async void DateChip_Tapped(object sender, TappedRoutedEventArgs e)
+    {
+        if (sender is not Border border || border.Tag is not TaskItem task)
             return;
 
-        var dialog = new ContentDialog
+        if (ViewModel.TaskListVM is not null)
+            await ViewModel.TaskListVM.ShowDetailsAsync(task);
+    }
+
+    // --- Sort / Filter ---
+
+    private void SortMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuFlyoutItem item &&
+            Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
         {
-            Title = $"Add subtask to: {parentTask.Title}",
-            PrimaryButtonText = "Add",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
-            XamlRoot = this.Content.XamlRoot
-        };
+            ViewModel.TaskListVM?.SetSort(sortOption);
 
-        var textBox = new TextBox
-        {
-            PlaceholderText = "Subtask title..."
-        };
-
-        dialog.Content = textBox;
-
-        var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
-        {
-            try
-            {
-                await _taskService.CreateTaskAsync(
-                    selectedList.Id,
-                    textBox.Text.Trim(),
-                    parentTask.Id,
-                    parentTask.DueDate);
-
-                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                _allTasks = tasks.ToList();
-
-                foreach (var t in _allTasks.Where(t => t.IsSubtask))
-                {
-                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
-                    if (parent != null)
-                    {
-                        t.ParentTitle = parent.Title;
-                    }
-                }
-
-                ApplySortAndFilter();
-                ShowSuccess("Subtask created");
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error: {ex.Message}");
-            }
+            // Update checkmarks in the menu
+            SortDefault.Icon = null;
+            SortDueDateAsc.Icon = null;
+            SortDueDateDesc.Icon = null;
+            SortAlpha.Icon = null;
+            SortAlphaRev.Icon = null;
+            SortCompleted.Icon = null;
+            item.Icon = new FontIcon { Glyph = "\uE73E" };
         }
     }
 
-    private void ApplySortAndFilter()
+    private void FilterMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        if (TasksView == null)
-            return;
-
-        if (!_allTasks.Any())
+        if (sender is MenuFlyoutItem item &&
+            Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
         {
-            TasksView.ItemsSource = null;
-            return;
-        }
+            ViewModel.TaskListVM?.SetFilter(filterOption);
 
-        var tasks = _allTasks.AsEnumerable();
-
-        // Apply search first
-        if (!string.IsNullOrWhiteSpace(_searchQuery))
-        {
-            tasks = SearchService.FilterTasks(tasks, _searchQuery);
-        }
-
-        // Apply filter
-        tasks = _currentFilter switch
-        {
-            FilterOption.Incomplete => tasks.Where(t => !t.IsCompleted),
-            FilterOption.Completed => tasks.Where(t => t.IsCompleted),
-            FilterOption.Overdue => tasks.Where(t => t.IsOverdue),
-            FilterOption.Today => tasks.Where(t => t.DueDate.HasValue &&
-                t.DueDate.Value.Date == DateTimeOffset.Now.Date),
-            FilterOption.ThisWeek => tasks.Where(t => t.DueDate.HasValue &&
-                t.DueDate.Value.Date >= DateTimeOffset.Now.Date &&
-                t.DueDate.Value.Date <= DateTimeOffset.Now.Date.AddDays(7)),
-            _ => tasks
-        };
-
-        // Apply sort
-        tasks = _currentSort switch
-        {
-            SortOption.DueDateAscending => tasks.OrderBy(t => t.DueDate ?? DateTimeOffset.MaxValue),
-            SortOption.DueDateDescending => tasks.OrderByDescending(t => t.DueDate ?? DateTimeOffset.MinValue),
-            SortOption.Alphabetical => tasks.OrderBy(t => t.Title),
-            SortOption.AlphabeticalReverse => tasks.OrderByDescending(t => t.Title),
-            SortOption.CompletedLast => tasks.OrderBy(t => t.IsCompleted).ThenBy(t => t.Title),
-            _ => OrganizeTasksHierarchically(tasks)
-        };
-
-        var filteredList = tasks.ToList();
-
-        // Set display properties based on sort mode
-        bool isDefaultSort = _currentSort == SortOption.None;
-        foreach (var task in filteredList)
-        {
-            if (task.IsSubtask)
-            {
-                task.ShowParentChip = !isDefaultSort;
-                task.UseSubtaskMargin = isDefaultSort;
-            }
-            else
-            {
-                task.ShowParentChip = false;
-                task.UseSubtaskMargin = false;
-            }
-
-            task.CanDrag = isDefaultSort && string.IsNullOrWhiteSpace(_searchQuery);  // Can't drag when searching
-            task.CanDrop = isDefaultSort && string.IsNullOrWhiteSpace(_searchQuery);
-        }
-
-        TasksView.ItemsSource = filteredList;
-
-        // Update count
-        var totalCount = _allTasks.Count;
-        var displayCount = filteredList.Count;
-
-        bool hasActiveFilters = !string.IsNullOrWhiteSpace(_searchQuery) ||
-                               _currentFilter != FilterOption.Incomplete ||
-                               _currentSort != SortOption.None;
-
-
-        if (EmptyState != null)
-        {
-            EmptyState.Visibility = filteredList.Any() ? Visibility.Collapsed : Visibility.Visible;
+            // Update checkmarks in the menu
+            FilterAll.Icon = null;
+            FilterIncomplete.Icon = null;
+            FilterCompleted.Icon = null;
+            FilterOverdue.Icon = null;
+            FilterToday.Icon = null;
+            FilterWeek.Icon = null;
+            item.Icon = new FontIcon { Glyph = "\uE73E" };
         }
     }
 
@@ -738,255 +341,11 @@ public sealed partial class MainWindow : Window
     {
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
         {
-            _searchQuery = sender.Text;
-            ApplySortAndFilter();
+            ViewModel.TaskListVM?.UpdateSearch(sender.Text);
         }
     }
 
-    private async void CreateList_Click(object sender, RoutedEventArgs e)
-    {
-        var dialog = new Dialogs.ListEditorDialog("\uE8F4", "New List");
-        dialog.XamlRoot = this.Content.XamlRoot;
-
-        var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary && dialog.ListName != null && dialog.SelectedIcon != null)
-        {
-            try
-            {
-                var newList = await _taskService.CreateTaskListAsync(dialog.ListName);
-
-                _iconStorageService.SetIcon(newList.Id, dialog.SelectedIcon);
-
-                TaskLists.Add(newList);
-                _userListItems.Add(new NavItem
-                {
-                    Id = newList.Id,
-                    Title = newList.Title,
-                    Icon = dialog.SelectedIcon,
-                    Type = NavItemType.UserList,
-                    Data = newList
-                });
-
-                UserListsView.ItemsSource = null;
-                UserListsView.ItemsSource = _userListItems;
-
-                ShowSuccess("List created");
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error: {ex.Message}");
-            }
-        }
-    }
-
-    private async void CreateListWithIcon(string title, string icon)
-    {
-        try
-        {
-            var newList = await _taskService.CreateTaskListAsync(title);
-
-            // Save icon
-            _iconStorageService.SetIcon(newList.Id, icon);
-
-            // Add to collections
-            TaskLists.Add(newList);
-            _userListItems.Add(new NavItem
-            {
-                Id = newList.Id,
-                Title = newList.Title,
-                Icon = icon,
-                Type = NavItemType.UserList,
-                Data = newList
-            });
-
-            // Refresh view
-            UserListsView.ItemsSource = null;
-            UserListsView.ItemsSource = _userListItems;
-
-            ShowSuccess("List created");
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
-
-    private async void RenameList_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is not Button button || button.Tag is not NavItem navItem)
-            return;
-
-        if (navItem.Data is not TaskList selectedList)
-            return;
-
-        var dialog = new Dialogs.ListEditorDialog(navItem.Icon, selectedList.Title);
-        dialog.XamlRoot = this.Content.XamlRoot;
-
-        var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary && dialog.ListName != null && dialog.SelectedIcon != null)
-        {
-            try
-            {
-                var success = await _taskService.UpdateTaskListAsync(selectedList.Id, dialog.ListName);
-
-                if (success)
-                {
-                    selectedList.Title = dialog.ListName;
-                    navItem.Title = dialog.ListName;
-                    navItem.Icon = dialog.SelectedIcon;
-
-                    _iconStorageService.SetIcon(selectedList.Id, dialog.SelectedIcon);
-
-                    TaskListTitle.Text = dialog.ListName;
-                    UserListsView.ItemsSource = null;
-                    UserListsView.ItemsSource = _userListItems;
-
-                    ShowSuccess("List updated");
-                }
-                else
-                {
-                    ShowWarning("Failed to update list");
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error: {ex.Message}");
-            }
-        }
-    }
-
-    private async void UpdateListWithIcon(TaskList list, NavItem navItem, string newTitle, string newIcon)
-    {
-        try
-        {
-            var success = await _taskService.UpdateTaskListAsync(list.Id, newTitle);
-
-            if (success)
-            {
-                list.Title = newTitle;
-                navItem.Title = newTitle;
-                navItem.Icon = newIcon;
-
-                // Save icon
-                _iconStorageService.SetIcon(list.Id, newIcon);
-
-                // Refresh
-                TaskListTitle.Text = newTitle;
-                UserListsView.ItemsSource = null;
-                UserListsView.ItemsSource = _userListItems;
-
-                ShowSuccess("List updated");
-            }
-            else
-            {
-                ShowWarning("Failed to update list");
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
-
-    private async void DeleteList_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is not Button button || button.Tag is not NavItem navItem)
-            return;
-
-        if (navItem.Data is not TaskList selectedList)
-            return;
-
-        var confirmDialog = new ContentDialog
-        {
-            Title = "Delete List?",
-            Content = $"Are you sure you want to delete \"{selectedList.Title}\"?\n\nAll tasks in this list will be permanently deleted.",
-            PrimaryButtonText = "Delete",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Close,
-            XamlRoot = this.Content.XamlRoot
-        };
-
-        var result = await confirmDialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary)
-        {
-            try
-            {
-                var success = await _taskService.DeleteTaskListAsync(selectedList.Id);
-
-                if (success)
-                {
-                    // Remove from both collections
-                    TaskLists.Remove(selectedList);
-                    _userListItems.Remove(navItem);
-
-                    // Refresh view
-                    UserListsView.ItemsSource = null;
-                    UserListsView.ItemsSource = _userListItems;
-
-                    // Clear selection
-                    _selectedNavItem = null;
-                    _allTasks.Clear();
-                    TasksView.ItemsSource = null;
-                    NoListSelectedState.Visibility = Visibility.Visible;
-                    TaskContentArea.Visibility = Visibility.Collapsed;
-
-                    ShowSuccess("List deleted");
-                }
-                else
-                {
-                    ShowWarning("Failed to delete list");
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error: {ex.Message}");
-            }
-        }
-    }
-
-    private IEnumerable<TaskItem> OrganizeTasksHierarchically(IEnumerable<TaskItem> tasks)
-    {
-        var tasksList = tasks.OrderBy(t => t.Position).ToList();  // Sort by position first!
-        var result = new List<TaskItem>();
-        var processed = new HashSet<string>();
-
-        // First pass: add all parent tasks (non-subtasks) and their children
-        foreach (var task in tasksList.Where(t => !t.IsSubtask))
-        {
-            if (!processed.Contains(task.Id))
-            {
-                result.Add(task);
-                processed.Add(task.Id);
-
-                // Add all subtasks of this parent immediately after, sorted by position
-                var subtasks = tasksList
-                    .Where(t => t.ParentId == task.Id)
-                    .OrderBy(t => t.Position)  // Sort subtasks by position
-                    .ToList();
-
-                foreach (var subtask in subtasks)
-                {
-                    if (!processed.Contains(subtask.Id))
-                    {
-                        result.Add(subtask);
-                        processed.Add(subtask.Id);
-                    }
-                }
-            }
-        }
-
-        // Second pass: add any orphaned subtasks
-        foreach (var task in tasksList.Where(t => t.IsSubtask && !processed.Contains(t.Id)))
-        {
-            result.Add(task);
-            processed.Add(task.Id);
-        }
-
-        return result;
-    }
+    // --- Drag and drop (view-specific UI wiring) ---
 
     private void Task_DragStarting(UIElement sender, DragStartingEventArgs args)
     {
@@ -994,8 +353,6 @@ public sealed partial class MainWindow : Window
         {
             _draggedTask = task;
             args.Data.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Move;
-
-            // Set text for data package (fixes empty icon issue)
             args.Data.SetText(task.Title);
         }
     }
@@ -1010,8 +367,7 @@ public sealed partial class MainWindow : Window
 
         if (sender is Border border && border.Tag is TaskItem targetTask)
         {
-            // Validate drop target
-            if (!IsValidDropTarget(_draggedTask, targetTask))
+            if (!TaskListViewModel.IsValidDropTarget(_draggedTask, targetTask))
             {
                 e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.None;
                 return;
@@ -1030,132 +386,20 @@ public sealed partial class MainWindow : Window
 
         if (sender is Border border && border.Tag is TaskItem targetTask)
         {
-            if (!IsValidDropTarget(_draggedTask, targetTask))
-                return;
-
-            await MoveTaskToPosition(_draggedTask, targetTask);
+            if (ViewModel.TaskListVM is not null)
+                await ViewModel.TaskListVM.MoveTaskAsync(_draggedTask, targetTask);
         }
 
         _draggedTask = null;
     }
 
-    private bool IsValidDropTarget(TaskItem draggedTask, TaskItem targetTask)
-    {
-        // Can't drop on itself
-        if (draggedTask.Id == targetTask.Id)
-            return false;
-
-        // If dragging a parent task
-        if (!draggedTask.IsSubtask)
-        {
-            // Can only drop on other parent tasks (not subtasks)
-            if (targetTask.IsSubtask)
-                return false;
-
-            // Can't drop on own subtasks
-            if (targetTask.ParentId == draggedTask.Id)
-                return false;
-        }
-        else // Dragging a subtask
-        {
-            // Can only drop on siblings (same parent)
-            if (draggedTask.ParentId != targetTask.ParentId)
-                return false;
-        }
-
-        return true;
-    }
-
-    private async Task MoveTaskToPosition(TaskItem draggedTask, TaskItem targetTask)
-    {
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-            return;
-
-        try
-        {
-            var currentList = (TasksView.ItemsSource as IEnumerable<TaskItem>)?.ToList();
-            if (currentList == null)
-                return;
-
-            var draggedIndex = currentList.IndexOf(draggedTask);
-            var targetIndex = currentList.IndexOf(targetTask);
-
-            if (draggedIndex == -1 || targetIndex == -1)
-                return;
-
-            string? previousTaskId = null;
-
-            if (draggedIndex < targetIndex)
-            {
-                previousTaskId = targetTask.Id;
-            }
-            else
-            {
-                var previousIndex = targetIndex - 1;
-
-                while (previousIndex >= 0)
-                {
-                    var candidate = currentList[previousIndex];
-
-                    if (draggedTask.IsSubtask)
-                    {
-                        if (candidate.ParentId == draggedTask.ParentId)
-                        {
-                            previousTaskId = candidate.Id;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (!candidate.IsSubtask)
-                        {
-                            previousTaskId = candidate.Id;
-                            break;
-                        }
-                    }
-
-                    previousIndex--;
-                }
-            }
-
-            var success = await _taskService.MoveTaskAsync(
-                selectedList.Id,
-                draggedTask.Id,
-                previousTaskId);
-
-            if (success)
-            {
-                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                _allTasks = tasks.ToList();
-
-                foreach (var t in _allTasks.Where(t => t.IsSubtask))
-                {
-                    var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
-                    if (parent != null)
-                    {
-                        t.ParentTitle = parent.Title;
-                    }
-                }
-
-                ApplySortAndFilter();
-                ShowSuccess("Task reordered");
-            }
-            else
-            {
-                ShowWarning("Failed to reorder");
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
+    // --- View-specific UI helpers ---
 
     private void TaskCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {
         if (sender is Border border)
         {
-            border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+            border.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
         }
     }
 
@@ -1163,15 +407,68 @@ public sealed partial class MainWindow : Window
     {
         if (sender is Border border)
         {
-            border.Background = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["LayerFillColorDefaultBrush"];
+            border.Background = (Brush)Application.Current.Resources["LayerFillColorDefaultBrush"];
         }
+    }
+
+    private void TaskTitle_PointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Underline;
+        }
+    }
+
+    private void TaskTitle_PointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+        }
+    }
+
+    private void FocusEditTextBox(TaskItem task)
+    {
+        if (TasksView.ItemsSource is IEnumerable<TaskItem> items)
+        {
+            var index = items.ToList().IndexOf(task);
+            if (index >= 0)
+            {
+                var container = TasksView.TryGetElement(index);
+                if (container != null)
+                {
+                    var textBox = FindTextBoxInVisualTree(container);
+                    if (textBox != null)
+                    {
+                        textBox.Focus(FocusState.Programmatic);
+                        textBox.SelectAll();
+                    }
+                }
+            }
+        }
+    }
+
+    private static TextBox? FindTextBoxInVisualTree(DependencyObject parent)
+    {
+        var count = VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+
+            if (child is TextBox textBox && textBox.Tag is TaskItem)
+                return textBox;
+
+            var result = FindTextBoxInVisualTree(child);
+            if (result != null)
+                return result;
+        }
+        return null;
     }
 
     private async void ShowTemporaryStatus(string message)
     {
         ActionText.Text = $"• {message}";
 
-        // Fade in animation
         var fadeInStoryboard = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
         var fadeIn = new Microsoft.UI.Xaml.Media.Animation.DoubleAnimation
         {
@@ -1189,7 +486,6 @@ public sealed partial class MainWindow : Window
         fadeInStoryboard.Children.Add(fadeIn);
         fadeInStoryboard.Begin();
 
-        // Wait 3 seconds, then fade out
         await System.Threading.Tasks.Task.Delay(3000);
 
         var fadeOutStoryboard = new Microsoft.UI.Xaml.Media.Animation.Storyboard();
@@ -1208,279 +504,5 @@ public sealed partial class MainWindow : Window
         Microsoft.UI.Xaml.Media.Animation.Storyboard.SetTargetProperty(fadeOut, "Opacity");
         fadeOutStoryboard.Children.Add(fadeOut);
         fadeOutStoryboard.Begin();
-    }
-
-    private void SortMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuFlyoutItem item &&
-            Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
-        {
-            _currentSort = sortOption;
-
-            // Update all menu items - remove checkmarks
-            SortDefault.Icon = null;
-            SortDueDateAsc.Icon = null;
-            SortDueDateDesc.Icon = null;
-            SortAlpha.Icon = null;
-            SortAlphaRev.Icon = null;
-            SortCompleted.Icon = null;
-
-            // Add checkmark to selected item
-            item.Icon = new FontIcon { Glyph = "\uE73E" };
-
-            // Update button appearance
-            UpdateSortButtonAppearance();
-
-            ApplySortAndFilter();
-        }
-    }
-
-    private void FilterMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuFlyoutItem item &&
-            Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
-        {
-            _currentFilter = filterOption;
-
-            // Update all menu items - remove checkmarks
-            FilterAll.Icon = null;
-            FilterIncomplete.Icon = null;
-            FilterCompleted.Icon = null;
-            FilterOverdue.Icon = null;
-            FilterToday.Icon = null;
-            FilterWeek.Icon = null;
-
-            // Add checkmark to selected item
-            item.Icon = new FontIcon { Glyph = "\uE73E" };
-
-            // Update button appearance
-            UpdateFilterButtonAppearance();
-
-            ApplySortAndFilter();
-        }
-    }
-
-    private string GetSortDisplayText(SortOption sort)
-    {
-        return sort switch
-        {
-            SortOption.None => "Default",
-            SortOption.DueDateAscending => "Due date (earliest)",
-            SortOption.DueDateDescending => "Due date (latest)",
-            SortOption.Alphabetical => "A to Z",
-            SortOption.AlphabeticalReverse => "Z to A",
-            SortOption.CompletedLast => "Completed last",
-            _ => "Sort"
-        };
-    }
-
-    private string GetFilterDisplayText(FilterOption filter)
-    {
-        return filter switch
-        {
-            FilterOption.All => "All tasks",
-            FilterOption.Incomplete => "Incomplete",
-            FilterOption.Completed => "Completed",
-            FilterOption.Overdue => "Overdue",
-            FilterOption.Today => "Due today",
-            FilterOption.ThisWeek => "Due this week",
-            _ => "Filter"
-        };
-    }
-
-    private void UpdateSortButtonAppearance()
-    {
-        bool isActive = _currentSort != SortOption.None;
-
-        if (isActive)
-        {
-            SortButtonText.Text = $"Sort: {GetSortDisplayText(_currentSort)}";
-            SortButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
-        }
-        else
-        {
-            SortButtonText.Text = "Sort";
-            SortButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
-        }
-    }
-
-    private void UpdateFilterButtonAppearance()
-    {
-        bool isActive = _currentFilter != FilterOption.Incomplete;
-
-        if (isActive)
-        {
-            FilterButtonText.Text = $"Filter: {GetFilterDisplayText(_currentFilter)}";
-            FilterButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
-        }
-        else
-        {
-            FilterButtonText.Text = "Filter";
-            FilterButtonText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
-        }
-    }
-
-    private void TaskTitle_PointerEntered(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        if (sender is TextBlock textBlock)
-        {
-            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Underline;
-        }
-    }
-
-    private void TaskTitle_PointerExited(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-    {
-        if (sender is TextBlock textBlock)
-        {
-            textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
-        }
-    }
-
-    private async void DateChip_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
-    {
-        if (sender is not Border border || border.Tag is not TaskItem task)
-            return;
-
-        if (_selectedNavItem?.Data is not TaskList selectedList)
-            return;
-
-        try
-        {
-            var dialog = new Dialogs.TaskDetailsDialog(task);
-            dialog.XamlRoot = this.Content.XamlRoot;
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                var success = await _taskService.UpdateTaskAsync(selectedList.Id, task);
-
-                if (success)
-                {
-                    var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-                    _allTasks = tasks.ToList();
-
-                    foreach (var t in _allTasks.Where(t => t.IsSubtask))
-                    {
-                        var parent = _allTasks.FirstOrDefault(p => p.Id == t.ParentId);
-                        if (parent != null)
-                        {
-                            t.ParentTitle = parent.Title;
-                        }
-                    }
-
-                    ApplySortAndFilter();
-                    ShowSuccess("Task updated");
-                }
-                else
-                {
-                    ShowWarning("Failed to update task");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            ShowError($"Error: {ex.Message}");
-        }
-    }
-
-    private void MenuItem_Clicked(object sender, EventArgs e)
-    {
-        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
-        {
-            // Deselect all
-            foreach (var item in _smartListItems)
-                item.IsSelected = false;
-            foreach (var item in _userListItems)
-                item.IsSelected = false;
-
-            // Select clicked
-            navItem.IsSelected = true;
-            _selectedNavItem = navItem;
-
-            // Handle navigation
-            if (navItem.Type == NavItemType.SmartList)
-                _ = HandleSmartListSelection(navItem);
-            else if (navItem.Type == NavItemType.UserList)
-                _ = HandleUserListSelection(navItem);
-        }
-    }
-
-    private void MenuItem_EditClicked(object sender, EventArgs e)
-    {
-        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
-        {
-            RenameList_Click(navItem, null);
-        }
-    }
-
-    private void MenuItem_DeleteClicked(object sender, EventArgs e)
-    {
-        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
-        {
-            DeleteList_Click(navItem, null);
-        }
-    }
-
-    private void Settings_Click(object sender, RoutedEventArgs e)
-    {
-        // TODO: Implement settings page later
-        ShowInfo("Settings coming soon!");
-    }
-
-    /// <summary>
-    /// Shows a success state with ripple effect and temporary message
-    /// </summary>
-    private void ShowSuccess(string message)
-    {
-        StatusOrb.TriggerRipple();
-        ShowTemporaryStatus(message);
-    }
-
-    /// <summary>
-    /// Shows an error state with offline orb and message
-    /// </summary>
-    private void ShowError(string message)
-    {
-        StatusOrb.SetStatus(OrbStatus.Offline);
-        StatusText.Text = "Offline";
-        ShowTemporaryStatus(message);
-    }
-
-    /// <summary>
-    /// Shows a warning state with yellow orb and message
-    /// </summary>
-    private void ShowWarning(string message)
-    {
-        StatusOrb.SetStatus(OrbStatus.Warning);
-        ShowTemporaryStatus(message);
-    }
-
-    /// <summary>
-    /// Shows an info message without changing orb state
-    /// </summary>
-    private void ShowInfo(string message)
-    {
-        ShowTemporaryStatus(message);
-    }
-
-    public enum SortOption
-    {
-        None,
-        DueDateAscending,
-        DueDateDescending,
-        Alphabetical,
-        AlphabeticalReverse,
-        CompletedLast
-    }
-
-    public enum FilterOption
-    {
-        All,
-        Incomplete,
-        Completed,
-        Overdue,
-        Today,
-        ThisWeek
     }
 }

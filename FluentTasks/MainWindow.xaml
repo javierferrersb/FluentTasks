@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="using:FluentTasks.UI.Converters"
         xmlns:controls="using:FluentTasks.UI.Controls"
-        xmlns:models="using:FluentTasks.UI.Models">
+        xmlns:models="using:FluentTasks.UI.Models"
+        xmlns:vm="using:FluentTasks.UI.ViewModels">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -253,7 +254,7 @@
                 <!-- Smart Lists -->
                 <ItemsControl Grid.Row="0"
                               x:Name="SmartListsView"
-                              ItemsSource="{x:Bind _smartListItems}"
+                              ItemsSource="{x:Bind ViewModel.SmartLists, Mode=OneWay}"
                               Margin="0,8,0,0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:NavItem">
@@ -288,7 +289,8 @@
 
                 <!-- User Lists -->
                 <ScrollViewer Grid.Row="2">
-                    <ItemsControl x:Name="UserListsView">
+                    <ItemsControl x:Name="UserListsView"
+                                  ItemsSource="{x:Bind ViewModel.UserLists, Mode=OneWay}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:NavItem">
                                 <controls:MenuItemControl Icon="{x:Bind Icon}"

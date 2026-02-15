@@ -1,0 +1,455 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using FluentTasks.Core.Models;
+using FluentTasks.Core.Services;
+using FluentTasks.UI.Models;
+using FluentTasks.UI.Services;
+
+namespace FluentTasks.UI.ViewModels;
+
+/// <summary>
+/// ViewModel for the main shell window.
+/// Manages navigation, task lists, and sync operations.
+/// </summary>
+public sealed partial class ShellViewModel : ObservableObject
+{
+    private readonly ITaskService _taskService;
+    private readonly IDialogService _dialogService;
+    private readonly IconStorageService _iconStorageService;
+
+    private readonly ObservableCollection<TaskList> _taskListsBackingStore = [];
+
+    [ObservableProperty]
+    private ObservableCollection<NavItem> _smartLists = [];
+
+    [ObservableProperty]
+    private ObservableCollection<NavItem> _userLists = [];
+
+    [ObservableProperty]
+    private NavItem? _selectedNavItem;
+
+    [ObservableProperty]
+    private string _statusText = "Ready";
+
+    [ObservableProperty]
+    private string _actionText = string.Empty;
+
+    [ObservableProperty]
+    private bool _isNoListSelected = true;
+
+    [ObservableProperty]
+    private bool _isTaskContentVisible;
+
+    /// <summary>
+    /// Raised when a status ripple animation should play.
+    /// </summary>
+    public event Action? RippleRequested;
+
+    /// <summary>
+    /// Raised when the status orb state should change.
+    /// </summary>
+    public event Action<OrbStatusKind>? OrbStatusChanged;
+
+    /// <summary>
+    /// Raised when a temporary action message should animate in and out.
+    /// </summary>
+    public event Action<string>? TemporaryStatusRequested;
+
+    /// <summary>
+    /// The child view model for the active task list.
+    /// </summary>
+    [ObservableProperty]
+    private TaskListViewModel? _taskListVM;
+
+    public ShellViewModel(
+        ITaskService taskService,
+        IDialogService dialogService,
+        IconStorageService iconStorageService)
+    {
+        _taskService = taskService;
+        _dialogService = dialogService;
+        _iconStorageService = iconStorageService;
+
+        InitializeSmartLists();
+    }
+
+    private void InitializeSmartLists()
+    {
+        SmartLists =
+        [
+            new NavItem
+            {
+                Id = "inbox",
+                Title = "Inbox",
+                Icon = "\uE8F4",
+                Type = NavItemType.SmartList,
+                Data = FilterOption.Incomplete
+            },
+            new NavItem
+            {
+                Id = "today",
+                Title = "Today",
+                Icon = "\uE8BF",
+                Type = NavItemType.SmartList,
+                Data = FilterOption.Today
+            },
+            new NavItem
+            {
+                Id = "week",
+                Title = "This Week",
+                Icon = "\uE787",
+                Type = NavItemType.SmartList,
+                Data = FilterOption.ThisWeek
+            },
+            new NavItem
+            {
+                Id = "overdue",
+                Title = "Overdue",
+                Icon = "\uE7BA",
+                Type = NavItemType.SmartList,
+                Data = FilterOption.Overdue
+            }
+        ];
+    }
+
+    /// <summary>
+    /// Selects a navigation item and triggers the appropriate content load.
+    /// </summary>
+    public async Task SelectNavItemAsync(NavItem navItem)
+    {
+        // Deselect all
+        foreach (var item in SmartLists) item.IsSelected = false;
+        foreach (var item in UserLists) item.IsSelected = false;
+
+        navItem.IsSelected = true;
+        SelectedNavItem = navItem;
+
+        IsNoListSelected = false;
+        IsTaskContentVisible = true;
+
+        if (navItem.Type == NavItemType.SmartList)
+        {
+            await HandleSmartListSelectionAsync(navItem);
+        }
+        else if (navItem.Type == NavItemType.UserList)
+        {
+            await HandleUserListSelectionAsync(navItem);
+        }
+    }
+
+    private async Task HandleSmartListSelectionAsync(NavItem navItem)
+    {
+        EnsureTaskListVM(isSmartList: true);
+        TaskListVM!.SetTitle(navItem.Title);
+        TaskListVM.SetSelectedList(null); // smart lists don't have a single backing list
+
+        try
+        {
+            StatusText = "Loading...";
+            TaskListVM.BeginLoading();
+
+            var allTasks = new List<TaskItem>();
+            foreach (var list in _taskListsBackingStore)
+            {
+                var tasks = await _taskService.GetTasksAsync(list.Id);
+                allTasks.AddRange(tasks);
+            }
+
+            var filter = navItem.Data is FilterOption f ? f : FilterOption.Incomplete;
+            TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
+
+            StatusText = "Ready";
+            ShowSuccess($"Loaded {allTasks.Count} tasks");
+        }
+        catch (Exception ex)
+        {
+            TaskListVM.EndLoading();
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    private async Task HandleUserListSelectionAsync(NavItem navItem)
+    {
+        if (navItem.Data is not TaskList selectedList)
+            return;
+
+        EnsureTaskListVM(isSmartList: false);
+        TaskListVM!.SetTitle(selectedList.Title);
+        TaskListVM.SetSelectedList(selectedList);
+
+        try
+        {
+            var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+            TaskListVM.LoadTasks(tasks.ToList(), SortOption.None, FilterOption.Incomplete);
+
+            ShowSuccess($"Loaded {tasks.Count()} tasks");
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    private void EnsureTaskListVM(bool isSmartList)
+    {
+        if (TaskListVM is null)
+        {
+            TaskListVM = new TaskListViewModel(_taskService, _dialogService);
+            TaskListVM.StatusMessage += OnChildStatus;
+        }
+
+        TaskListVM.IsSmartList = isSmartList;
+    }
+
+    private void OnChildStatus(object? sender, StatusMessageEventArgs e)
+    {
+        switch (e.Kind)
+        {
+            case StatusKind.Success:
+                ShowSuccess(e.Message);
+                break;
+            case StatusKind.Warning:
+                ShowWarning(e.Message);
+                break;
+            case StatusKind.Error:
+                ShowError(e.Message);
+                break;
+            case StatusKind.Info:
+                ShowInfo(e.Message);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Syncs task lists from the remote service.
+    /// </summary>
+    [RelayCommand]
+    private async Task SyncAsync()
+    {
+        try
+        {
+            StatusText = "Syncing...";
+
+            var taskLists = await _taskService.GetTaskListsAsync();
+
+            _taskListsBackingStore.Clear();
+            UserLists.Clear();
+
+            foreach (var list in taskLists)
+            {
+                _taskListsBackingStore.Add(list);
+
+                var icon = _iconStorageService.GetIcon(list.Id);
+                UserLists.Add(new NavItem
+                {
+                    Id = list.Id,
+                    Title = list.Title,
+                    Icon = icon,
+                    Type = NavItemType.UserList,
+                    Data = list
+                });
+            }
+
+            StatusText = "Ready";
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Creates a new task list via dialog.
+    /// </summary>
+    [RelayCommand]
+    private async Task CreateListAsync()
+    {
+        var result = await _dialogService.ShowListEditorAsync("\uE8F4", "New List");
+        if (result.Name is null)
+            return;
+
+        try
+        {
+            var newList = await _taskService.CreateTaskListAsync(result.Name);
+            _iconStorageService.SetIcon(newList.Id, result.Icon ?? "\uE8F4");
+
+            _taskListsBackingStore.Add(newList);
+            UserLists.Add(new NavItem
+            {
+                Id = newList.Id,
+                Title = newList.Title,
+                Icon = result.Icon ?? "\uE8F4",
+                Type = NavItemType.UserList,
+                Data = newList
+            });
+
+            ShowSuccess("List created");
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Renames an existing task list via dialog.
+    /// </summary>
+    public async Task RenameListAsync(NavItem navItem)
+    {
+        if (navItem.Data is not TaskList selectedList)
+            return;
+
+        var result = await _dialogService.ShowListEditorAsync(navItem.Icon, selectedList.Title);
+        if (result.Name is null)
+            return;
+
+        try
+        {
+            var success = await _taskService.UpdateTaskListAsync(selectedList.Id, result.Name);
+
+            if (success)
+            {
+                selectedList.Title = result.Name;
+                navItem.Title = result.Name;
+                navItem.Icon = result.Icon ?? navItem.Icon;
+
+                _iconStorageService.SetIcon(selectedList.Id, result.Icon ?? navItem.Icon);
+
+                if (TaskListVM is not null && SelectedNavItem == navItem)
+                {
+                    TaskListVM.SetTitle(result.Name);
+                }
+
+                // Force collection refresh
+                RefreshUserLists();
+                ShowSuccess("List updated");
+            }
+            else
+            {
+                ShowWarning("Failed to update list");
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Deletes a task list after confirmation.
+    /// </summary>
+    public async Task DeleteListAsync(NavItem navItem)
+    {
+        if (navItem.Data is not TaskList selectedList)
+            return;
+
+        var confirmed = await _dialogService.ShowConfirmationAsync(
+            "Delete List?",
+            $"Are you sure you want to delete \"{selectedList.Title}\"?\n\nAll tasks in this list will be permanently deleted.",
+            "Delete",
+            "Cancel");
+
+        if (!confirmed)
+            return;
+
+        try
+        {
+            var success = await _taskService.DeleteTaskListAsync(selectedList.Id);
+
+            if (success)
+            {
+                _taskListsBackingStore.Remove(selectedList);
+                UserLists.Remove(navItem);
+
+                if (SelectedNavItem == navItem)
+                {
+                    SelectedNavItem = null;
+                    TaskListVM = null;
+                    IsNoListSelected = true;
+                    IsTaskContentVisible = false;
+                }
+
+                ShowSuccess("List deleted");
+            }
+            else
+            {
+                ShowWarning("Failed to delete list");
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    private void RefreshUserLists()
+    {
+        // Trigger change notification by swapping the collection
+        var items = UserLists.ToList();
+        UserLists.Clear();
+        foreach (var item in items) UserLists.Add(item);
+    }
+
+    // --- Status helpers ---
+
+    private void ShowSuccess(string message)
+    {
+        RippleRequested?.Invoke();
+        TemporaryStatusRequested?.Invoke(message);
+    }
+
+    private void ShowError(string message)
+    {
+        OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+        StatusText = "Offline";
+        TemporaryStatusRequested?.Invoke(message);
+    }
+
+    private void ShowWarning(string message)
+    {
+        OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+        TemporaryStatusRequested?.Invoke(message);
+    }
+
+    private void ShowInfo(string message)
+    {
+        TemporaryStatusRequested?.Invoke(message);
+    }
+}
+
+/// <summary>
+/// Orb status values communicated from ViewModel to View.
+/// Mirrors the control enum to avoid ViewModel depending on UI controls.
+/// </summary>
+public enum OrbStatusKind
+{
+    Connected,
+    Syncing,
+    Warning,
+    Offline
+}
+
+/// <summary>
+/// Describes a status message raised by a child ViewModel.
+/// </summary>
+public sealed class StatusMessageEventArgs(StatusKind kind, string message) : EventArgs
+{
+    public StatusKind Kind { get; } = kind;
+    public string Message { get; } = message;
+}
+
+/// <summary>
+/// Kind of status message.
+/// </summary>
+public enum StatusKind
+{
+    Success,
+    Warning,
+    Error,
+    Info
+}
