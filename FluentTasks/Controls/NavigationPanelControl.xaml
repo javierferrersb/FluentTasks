@@ -7,6 +7,7 @@
     <Grid Background="{ThemeResource LayerFillColorDefaultBrush}"
           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
           BorderThickness="0,0,1,0"
+		  CornerRadius="0,8,0,0" 
           Padding="8">
 
         <Grid.RowDefinitions>
@@ -34,24 +35,26 @@
         </ItemsControl>
 
         <!-- My Lists Header -->
-        <Grid Grid.Row="1"
-              Padding="16,16,16,8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="My Lists"
-                       Style="{StaticResource CaptionTextBlockStyle}"
-                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                       FontWeight="SemiBold" />
-            <Button Content="&#xE710;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Click="CreateList_Click"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Padding="4"
-                    FontSize="12" />
-        </Grid>
+		<Grid Grid.Row="1"
+			  Padding="16,16,16,8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="My Lists"
+					   Grid.Column="0"
+					   Style="{StaticResource CaptionTextBlockStyle}"
+					   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+					   FontWeight="SemiBold" />
+			<Button Content="&#xE710;"
+					Grid.Column="1"
+					FontFamily="Segoe MDL2 Assets"
+					Click="CreateList_Click"
+					Background="Transparent"
+					BorderThickness="0"
+					Padding="4"
+					FontSize="12" />
+		</Grid>
 
         <!-- User Lists -->
         <ScrollViewer Grid.Row="2">
