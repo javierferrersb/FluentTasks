@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FluentTasks.UI.ViewModels;
 
@@ -86,7 +86,7 @@ public sealed partial class ShellViewModel : ObservableObject
             {
                 Id = "inbox",
                 Title = "Inbox",
-                Icon = "\uE8F4",
+                Icon = "\uE80F",
                 Type = NavItemType.SmartList,
                 Data = FilterOption.Incomplete
             },

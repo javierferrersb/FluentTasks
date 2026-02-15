@@ -8,7 +8,7 @@
           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
           BorderThickness="0,0,1,0"
 		  CornerRadius="0,8,0,0" 
-          Padding="8">
+          Padding="8,2,8,8">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -80,8 +80,7 @@
                 Click="Settings_Click"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0"
+                Style="{StaticResource SubtleButtonStyle}"
                 Padding="20,12"
                 Margin="0,8,0,4">
             <StackPanel Orientation="Horizontal"
@@ -97,8 +96,7 @@
                 Click="Sync_Click"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0"
+                Style="{StaticResource SubtleButtonStyle}"
                 Padding="20,12"
                 Margin="0,4,0,8">
             <StackPanel Orientation="Horizontal"

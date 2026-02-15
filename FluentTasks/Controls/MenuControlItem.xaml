@@ -7,7 +7,9 @@
 
     <Button x:Name="RootButton"
             HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Left"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            MinHeight="40"
             Margin="4,2"
             Padding="12,8"
             Style="{StaticResource SubtleButtonStyle}"
@@ -24,6 +26,7 @@
                       Grid.Column="0"
                       Glyph="{x:Bind Icon}"
                       FontSize="16"
+                      VerticalAlignment="Center"
                       Margin="0,0,12,0" />
 
             <TextBlock x:Name="ItemText"
@@ -40,7 +43,10 @@
                     BorderThickness="0"
                     Padding="4"
                     FontSize="12"
-                    Visibility="Collapsed"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource SubtleButtonStyle}"
+                    Opacity="0"
+                    IsHitTestVisible="False"
                     Click="EditButton_Click" />
 
             <Button x:Name="DeleteButton"
@@ -51,7 +57,10 @@
                     BorderThickness="0"
                     Padding="4"
                     FontSize="12"
-                    Visibility="Collapsed"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource SubtleButtonStyle}"
+                    Opacity="0"
+                    IsHitTestVisible="False"
                     Click="DeleteButton_Click" />
         </Grid>
     </Button>

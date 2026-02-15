@@ -1,6 +1,5 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System;
 
@@ -57,14 +56,18 @@ public sealed partial class MenuItemControl : UserControl
         {
             if (ShowActions)
             {
-                EditButton.Visibility = Visibility.Visible;
-                DeleteButton.Visibility = Visibility.Visible;
+                EditButton.Opacity = 1;
+                EditButton.IsHitTestVisible = true;
+                DeleteButton.Opacity = 1;
+                DeleteButton.IsHitTestVisible = true;
             }
         };
         RootButton.PointerExited += (_, _) =>
         {
-            EditButton.Visibility = Visibility.Collapsed;
-            DeleteButton.Visibility = Visibility.Collapsed;
+            EditButton.Opacity = 0;
+            EditButton.IsHitTestVisible = false;
+            DeleteButton.Opacity = 0;
+            DeleteButton.IsHitTestVisible = false;
         };
     }
 
@@ -78,9 +81,16 @@ public sealed partial class MenuItemControl : UserControl
 
     private void UpdateButtonStyle()
     {
-        RootButton.Style = IsSelected 
+        RootButton.Style = IsSelected
             ? (Style)Application.Current.Resources["AccentButtonStyle"]
             : (Style)Application.Current.Resources["SubtleButtonStyle"];
+
+        var foregroundBrush = IsSelected
+            ? (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"]
+            : (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"];
+
+        EditButton.Foreground = foregroundBrush;
+        DeleteButton.Foreground = foregroundBrush;
     }
 
     private void RootButton_Click(object sender, RoutedEventArgs e)
