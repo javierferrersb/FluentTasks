@@ -51,54 +51,35 @@ public sealed partial class MenuItemControl : UserControl
     public MenuItemControl()
     {
         this.InitializeComponent();
-        UpdateVisualState();
+        UpdateButtonStyle();
 
-        RootButton.PointerEntered += OnPointerEntered;
-        RootButton.PointerExited += OnPointerExited;
+        RootButton.PointerEntered += (_, _) =>
+        {
+            if (ShowActions)
+            {
+                EditButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
+            }
+        };
+        RootButton.PointerExited += (_, _) =>
+        {
+            EditButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+        };
     }
 
     private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is MenuItemControl control)
         {
-            control.UpdateVisualState();
+            control.UpdateButtonStyle();
         }
     }
 
-    private void UpdateVisualState()
+    private void UpdateButtonStyle()
     {
-        if (IsSelected)
-        {
-            RootButton.Background = (Brush)Application.Current.Resources["AccentFillColorDefaultBrush"];
-            ItemIcon.Foreground = (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"];
-            ItemText.Foreground = (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"];
-            EditButton.Foreground = (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"];
-            DeleteButton.Foreground = (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"];
-        }
-        else
-        {
-            RootButton.Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
-            RootButton.ClearValue(ForegroundProperty);
-            ItemIcon.ClearValue(ForegroundProperty);
-            ItemText.ClearValue(ForegroundProperty);
-            EditButton.ClearValue(ForegroundProperty);
-            DeleteButton.ClearValue(ForegroundProperty);
-        }
-    }
-
-    private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
-    {
-        if (ShowActions)
-        {
-            EditButton.Visibility = Visibility.Visible;
-            DeleteButton.Visibility = Visibility.Visible;
-        }
-    }
-
-    private void OnPointerExited(object sender, PointerRoutedEventArgs e)
-    {
-        EditButton.Visibility = Visibility.Collapsed;
-        DeleteButton.Visibility = Visibility.Collapsed;
+        var styleName = IsSelected ? "SelectedStyle" : "UnselectedStyle";
+        RootButton.Style = (Style)Resources[styleName];
     }
 
     private void RootButton_Click(object sender, RoutedEventArgs e)
