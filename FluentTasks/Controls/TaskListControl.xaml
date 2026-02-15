@@ -186,9 +186,7 @@
                     <Grid x:Name="AddTaskInputGrid"
                           Grid.Row="1"
                           Padding="16,12,16,0"
-                          ColumnSpacing="8"
-                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                          BorderThickness="0,0,0,1">
+                          ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
