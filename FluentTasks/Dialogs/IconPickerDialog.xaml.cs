@@ -53,6 +53,9 @@ public sealed partial class IconPickerDialog : ContentDialog
         {
             IconGrid.SelectedIndex = index;
         }
+
+        // Hook up the event
+        this.PrimaryButtonClick += ContentDialog_PrimaryButtonClick;
     }
 
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

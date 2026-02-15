@@ -1,0 +1,53 @@
+<ContentDialog x:Class="FluentTasks.UI.Dialogs.ListEditorDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               Title="List Details"
+               PrimaryButtonText="Save"
+               CloseButtonText="Cancel"
+               DefaultButton="Primary">
+
+    <Grid Width="400"
+          RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Name Input -->
+        <TextBox x:Name="NameTextBox"
+                 Grid.Row="0"
+                 Header="List name"
+                 PlaceholderText="Enter list name..."
+                 MaxLength="100" />
+
+        <!-- Icon Picker -->
+        <StackPanel Grid.Row="1"
+                    Spacing="8">
+            <TextBlock Text="Icon"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
+            <GridView x:Name="IconGrid"
+                      SelectionMode="Single"
+                      MaxHeight="200">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="40"
+                                Height="40"
+                                Background="Transparent"
+                                CornerRadius="4">
+                            <FontIcon Glyph="{Binding}"
+                                      FontSize="20"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Margin"
+                                Value="2" />
+                    </Style>
+                </GridView.ItemContainerStyle>
+            </GridView>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

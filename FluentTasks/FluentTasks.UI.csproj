@@ -14,8 +14,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Controls\MenuControlItem.xaml" />
     <None Remove="Controls\StatusOrb.xaml" />
     <None Remove="Dialogs\IconPickerDialog.xaml" />
+    <None Remove="Dialogs\ListEditorDialog.xaml" />
     <None Remove="Dialogs\TaskDetailsDialog.xaml" />
   </ItemGroup>
 
@@ -55,6 +57,16 @@
   <ItemGroup>
     <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
     <ProjectReference Include="..\FluentTasks.Infrastructure\FluentTasks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\MenuControlItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\ListEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Dialogs\IconPickerDialog.xaml">

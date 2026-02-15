@@ -125,29 +125,6 @@ public sealed partial class MainWindow : Window
         SmartListsView.ItemsSource = _smartListItems;
     }
 
-    private async void Navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is not ListView listView || listView.SelectedItem is not NavItem navItem)
-            return;
-
-        // Deselect other ListView
-        if (listView == SmartListsView)
-            UserListsView.SelectedItem = null;
-        else
-            SmartListsView.SelectedItem = null;
-
-        _selectedNavItem = navItem;
-
-        // Handle based on type
-        if (navItem.Type == NavItemType.SmartList)
-        {
-            await HandleSmartListSelection(navItem);
-        }
-        else if (navItem.Type == NavItemType.UserList)
-        {
-            await HandleUserListSelection(navItem);
-        }
-    }
 
     private async Task HandleSmartListSelection(NavItem navItem)
     {
@@ -156,11 +133,21 @@ public sealed partial class MainWindow : Window
 
         TaskListTitle.Text = navItem.Title;
 
-        // Load ALL tasks from ALL lists
+        // Hide add task input for smart lists
+        if (AddTaskInputGrid != null)
+            AddTaskInputGrid.Visibility = Visibility.Collapsed;
+
         try
         {
+            // Show skeleton loading
+            StatusText.Text = "Loading...";
+            TasksView.ItemsSource = null;
+            EmptyState.Visibility = Visibility.Collapsed;
+            SkeletonLoadingState.Visibility = Visibility.Visible;
+
             _allTasks.Clear();
 
+            // Load ALL tasks from ALL lists
             foreach (var list in TaskLists)
             {
                 var tasks = await _taskService.GetTasksAsync(list.Id);
@@ -183,15 +170,39 @@ public sealed partial class MainWindow : Window
                 _currentFilter = filter;
             }
 
-            if (AddTaskInputGrid != null)
-                AddTaskInputGrid.Visibility = Visibility.Collapsed;
+            _currentSort = SortOption.None;
+
+            // Hide skeleton, show tasks
+            SkeletonLoadingState.Visibility = Visibility.Collapsed;
 
             ApplySortAndFilter();
+
+            // Update button appearance
             UpdateSortButtonAppearance();
             UpdateFilterButtonAppearance();
+
+            // Set sort checkmarks (always default for smart lists)
+            SortDefault.Icon = new FontIcon { Glyph = "\uE73E" };
+            SortDueDateAsc.Icon = null;
+            SortDueDateDesc.Icon = null;
+            SortAlpha.Icon = null;
+            SortAlphaRev.Icon = null;
+            SortCompleted.Icon = null;
+
+            // Set filter checkmark based on smart list type
+            FilterAll.Icon = _currentFilter == FilterOption.All ? new FontIcon { Glyph = "\uE73E" } : null;
+            FilterIncomplete.Icon = _currentFilter == FilterOption.Incomplete ? new FontIcon { Glyph = "\uE73E" } : null;
+            FilterCompleted.Icon = _currentFilter == FilterOption.Completed ? new FontIcon { Glyph = "\uE73E" } : null;
+            FilterOverdue.Icon = _currentFilter == FilterOption.Overdue ? new FontIcon { Glyph = "\uE73E" } : null;
+            FilterToday.Icon = _currentFilter == FilterOption.Today ? new FontIcon { Glyph = "\uE73E" } : null;
+            FilterWeek.Icon = _currentFilter == FilterOption.ThisWeek ? new FontIcon { Glyph = "\uE73E" } : null;
+
+            StatusText.Text = "Ready";
+            ShowSuccess($"Loaded {_allTasks.Count} tasks");
         }
         catch (Exception ex)
         {
+            SkeletonLoadingState.Visibility = Visibility.Collapsed;
             ShowError($"Error: {ex.Message}");
         }
     }
@@ -203,6 +214,10 @@ public sealed partial class MainWindow : Window
 
         NoListSelectedState.Visibility = Visibility.Collapsed;
         TaskContentArea.Visibility = Visibility.Visible;
+
+        // Show add task input for user lists
+        if (AddTaskInputGrid != null)
+            AddTaskInputGrid.Visibility = Visibility.Visible;
 
         try
         {
@@ -224,15 +239,30 @@ public sealed partial class MainWindow : Window
 
             // Reset to default filter for user lists
             _currentFilter = FilterOption.Incomplete;
-
-            if (AddTaskInputGrid != null)
-                AddTaskInputGrid.Visibility = Visibility.Visible;
+            _currentSort = SortOption.None;
 
             ApplySortAndFilter();
+
+            // Initialize button states and checkmarks
             UpdateSortButtonAppearance();
             UpdateFilterButtonAppearance();
-            FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
 
+            // Set checkmarks
+            SortDefault.Icon = new FontIcon { Glyph = "\uE73E" };
+            SortDueDateAsc.Icon = null;
+            SortDueDateDesc.Icon = null;
+            SortAlpha.Icon = null;
+            SortAlphaRev.Icon = null;
+            SortCompleted.Icon = null;
+
+            FilterAll.Icon = null;
+            FilterIncomplete.Icon = new FontIcon { Glyph = "\uE73E" };
+            FilterCompleted.Icon = null;
+            FilterOverdue.Icon = null;
+            FilterToday.Icon = null;
+            FilterWeek.Icon = null;
+
+            ShowSuccess($"Loaded {_allTasks.Count} tasks");
         }
         catch (Exception ex)
         {
@@ -715,40 +745,38 @@ public sealed partial class MainWindow : Window
 
     private async void CreateList_Click(object sender, RoutedEventArgs e)
     {
-        var nameDialog = new ContentDialog
+        var dialog = new Dialogs.ListEditorDialog("\uE8F4", "New List");
+        dialog.XamlRoot = this.Content.XamlRoot;
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary && dialog.ListName != null && dialog.SelectedIcon != null)
         {
-            Title = "Create New List",
-            PrimaryButtonText = "Next",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
-            XamlRoot = this.Content.XamlRoot
-        };
-
-        var textBox = new TextBox
-        {
-            PlaceholderText = "List name...",
-            Text = "New List"
-        };
-        textBox.SelectAll();
-
-        nameDialog.Content = textBox;
-
-        var result = await nameDialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
-        {
-            // Show icon picker
-            var iconDialog = new Dialogs.IconPickerDialog("\uE8F4");
-            iconDialog.XamlRoot = this.Content.XamlRoot;
-            iconDialog.PrimaryButtonClick += (s, args) =>
+            try
             {
-                if (iconDialog.SelectedIcon != null)
-                {
-                    CreateListWithIcon(textBox.Text.Trim(), iconDialog.SelectedIcon);
-                }
-            };
+                var newList = await _taskService.CreateTaskListAsync(dialog.ListName);
 
-            await iconDialog.ShowAsync();
+                _iconStorageService.SetIcon(newList.Id, dialog.SelectedIcon);
+
+                TaskLists.Add(newList);
+                _userListItems.Add(new NavItem
+                {
+                    Id = newList.Id,
+                    Title = newList.Title,
+                    Icon = dialog.SelectedIcon,
+                    Type = NavItemType.UserList,
+                    Data = newList
+                });
+
+                UserListsView.ItemsSource = null;
+                UserListsView.ItemsSource = _userListItems;
+
+                ShowSuccess("List created");
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Error: {ex.Message}");
+            }
         }
     }
 
@@ -775,7 +803,6 @@ public sealed partial class MainWindow : Window
             // Refresh view
             UserListsView.ItemsSource = null;
             UserListsView.ItemsSource = _userListItems;
-            UserListsView.SelectedItem = _userListItems[^1];
 
             ShowSuccess("List created");
         }
@@ -793,40 +820,40 @@ public sealed partial class MainWindow : Window
         if (navItem.Data is not TaskList selectedList)
             return;
 
-        // Name dialog
-        var nameDialog = new ContentDialog
+        var dialog = new Dialogs.ListEditorDialog(navItem.Icon, selectedList.Title);
+        dialog.XamlRoot = this.Content.XamlRoot;
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary && dialog.ListName != null && dialog.SelectedIcon != null)
         {
-            Title = "Rename List",
-            PrimaryButtonText = "Next",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
-            XamlRoot = this.Content.XamlRoot
-        };
-
-        var textBox = new TextBox
-        {
-            Text = selectedList.Title
-        };
-        textBox.SelectAll();
-
-        nameDialog.Content = textBox;
-
-        var result = await nameDialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
-        {
-            // Icon picker
-            var iconDialog = new Dialogs.IconPickerDialog(navItem.Icon);
-            iconDialog.XamlRoot = this.Content.XamlRoot;
-            iconDialog.PrimaryButtonClick += (s, args) =>
+            try
             {
-                if (iconDialog.SelectedIcon != null)
-                {
-                    UpdateListWithIcon(selectedList, navItem, textBox.Text.Trim(), iconDialog.SelectedIcon);
-                }
-            };
+                var success = await _taskService.UpdateTaskListAsync(selectedList.Id, dialog.ListName);
 
-            await iconDialog.ShowAsync();
+                if (success)
+                {
+                    selectedList.Title = dialog.ListName;
+                    navItem.Title = dialog.ListName;
+                    navItem.Icon = dialog.SelectedIcon;
+
+                    _iconStorageService.SetIcon(selectedList.Id, dialog.SelectedIcon);
+
+                    TaskListTitle.Text = dialog.ListName;
+                    UserListsView.ItemsSource = null;
+                    UserListsView.ItemsSource = _userListItems;
+
+                    ShowSuccess("List updated");
+                }
+                else
+                {
+                    ShowWarning("Failed to update list");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Error: {ex.Message}");
+            }
         }
     }
 
@@ -849,7 +876,6 @@ public sealed partial class MainWindow : Window
                 TaskListTitle.Text = newTitle;
                 UserListsView.ItemsSource = null;
                 UserListsView.ItemsSource = _userListItems;
-                UserListsView.SelectedItem = navItem;
 
                 ShowSuccess("List updated");
             }
@@ -866,7 +892,10 @@ public sealed partial class MainWindow : Window
 
     private async void DeleteList_Click(object sender, RoutedEventArgs e)
     {
-        if (_selectedNavItem?.Data is not TaskList selectedList)
+        if (sender is not Button button || button.Tag is not NavItem navItem)
+            return;
+
+        if (navItem.Data is not TaskList selectedList)
             return;
 
         var confirmDialog = new ContentDialog
@@ -889,11 +918,20 @@ public sealed partial class MainWindow : Window
 
                 if (success)
                 {
+                    // Remove from both collections
                     TaskLists.Remove(selectedList);
+                    _userListItems.Remove(navItem);
 
+                    // Refresh view
+                    UserListsView.ItemsSource = null;
+                    UserListsView.ItemsSource = _userListItems;
+
+                    // Clear selection
+                    _selectedNavItem = null;
                     _allTasks.Clear();
                     TasksView.ItemsSource = null;
-                    TaskListTitle.Text = "Select a list";
+                    NoListSelectedState.Visibility = Visibility.Visible;
+                    TaskContentArea.Visibility = Visibility.Collapsed;
 
                     ShowSuccess("List deleted");
                 }
@@ -1343,6 +1381,44 @@ public sealed partial class MainWindow : Window
         catch (Exception ex)
         {
             ShowError($"Error: {ex.Message}");
+        }
+    }
+
+    private void MenuItem_Clicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            // Deselect all
+            foreach (var item in _smartListItems)
+                item.IsSelected = false;
+            foreach (var item in _userListItems)
+                item.IsSelected = false;
+
+            // Select clicked
+            navItem.IsSelected = true;
+            _selectedNavItem = navItem;
+
+            // Handle navigation
+            if (navItem.Type == NavItemType.SmartList)
+                _ = HandleSmartListSelection(navItem);
+            else if (navItem.Type == NavItemType.UserList)
+                _ = HandleUserListSelection(navItem);
+        }
+    }
+
+    private void MenuItem_EditClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            RenameList_Click(navItem, null);
+        }
+    }
+
+    private void MenuItem_DeleteClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuItemControl control && control.Tag is NavItem navItem)
+        {
+            DeleteList_Click(navItem, null);
         }
     }
 
