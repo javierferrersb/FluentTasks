@@ -4,10 +4,12 @@ using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
+using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FluentTasks.UI.ViewModels;
@@ -23,6 +25,33 @@ public sealed partial class ShellViewModel : ObservableObject
     private readonly IconStorageService _iconStorageService;
 
     private readonly ObservableCollection<TaskList> _taskListsBackingStore = [];
+
+    // Auto-sync infrastructure
+    private DispatcherTimer? _autoSyncTimer;
+    private DispatcherTimer? _debounceTimer;
+    private EventHandler<object>? _autoSyncTickHandler;
+    private EventHandler<object>? _debounceTickHandler;
+    private bool _isSyncing;
+    private bool _isAutoSyncEnabled = true;
+    private int _autoSyncIntervalMinutes = 5;
+    private const int MIN_SYNC_INTERVAL_MINUTES = 2;
+    private const int MAX_SYNC_INTERVAL_MINUTES = 60;
+
+    [ObservableProperty]
+    private DateTimeOffset? _lastSyncTime;
+
+    /// <summary>
+    /// Gets or sets the auto-sync interval in minutes, clamped between MIN_SYNC_INTERVAL_MINUTES and MAX_SYNC_INTERVAL_MINUTES.
+    /// </summary>
+    public int AutoSyncIntervalMinutes
+    {
+        get => _autoSyncIntervalMinutes;
+        set
+        {
+            _autoSyncIntervalMinutes = Math.Clamp(value, MIN_SYNC_INTERVAL_MINUTES, MAX_SYNC_INTERVAL_MINUTES);
+            OnPropertyChanged();
+        }
+    }
 
     [ObservableProperty]
     private ObservableCollection<NavItem> _smartLists = [];
@@ -201,6 +230,7 @@ public sealed partial class ShellViewModel : ObservableObject
         {
             TaskListVM = new TaskListViewModel(_taskService, _dialogService);
             TaskListVM.StatusMessage += OnChildStatus;
+            TaskListVM.SyncRequested += (s, e) => ScheduleSyncAfterChange();
         }
 
         TaskListVM.IsSmartList = isSmartList;
@@ -227,12 +257,18 @@ public sealed partial class ShellViewModel : ObservableObject
 
     /// <summary>
     /// Syncs task lists from the remote service.
+    /// User-initiated sync (Ctrl+R) that provides full error feedback.
     /// </summary>
     [RelayCommand]
     private async Task SyncAsync()
     {
+        if (_isSyncing)
+            return;
+
         try
         {
+            _isSyncing = true;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
             StatusText = "Syncing...";
 
             var taskLists = await _taskService.GetTaskListsAsync();
@@ -255,11 +291,29 @@ public sealed partial class ShellViewModel : ObservableObject
                 });
             }
 
-            StatusText = "Ready";
+            // Refresh current view if a list is selected
+            await RefreshCurrentViewAsync();
+
+            LastSyncTime = DateTimeOffset.Now;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
+            StatusText = "Synced";
+            ShowSuccess($"Synced {taskLists.Count()} lists");
+        }
+        catch (HttpRequestException ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = "Offline";
+            ShowError($"Network error: {ex.Message}");
         }
         catch (Exception ex)
         {
-            ShowError($"Error: {ex.Message}");
+            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+            StatusText = "Sync failed";
+            ShowError($"Sync error: {ex.Message}");
+        }
+        finally
+        {
+            _isSyncing = false;
         }
     }
 
@@ -289,6 +343,7 @@ public sealed partial class ShellViewModel : ObservableObject
             });
 
             ShowSuccess("List created");
+            ScheduleSyncAfterChange();
         }
         catch (Exception ex)
         {
@@ -328,6 +383,7 @@ public sealed partial class ShellViewModel : ObservableObject
                 // Force collection refresh
                 RefreshUserLists();
                 ShowSuccess("List updated");
+                ScheduleSyncAfterChange();
             }
             else
             {
@@ -375,6 +431,7 @@ public sealed partial class ShellViewModel : ObservableObject
                 }
 
                 ShowSuccess("List deleted");
+                ScheduleSyncAfterChange();
             }
             else
             {
@@ -395,10 +452,206 @@ public sealed partial class ShellViewModel : ObservableObject
         foreach (var item in items) UserLists.Add(item);
     }
 
+    // --- Auto-Sync Infrastructure ---
+
+    /// <summary>
+    /// Initializes and starts the automatic background synchronization timer.
+    /// Should be called once during application startup.
+    /// </summary>
+    public void InitializeAutoSync()
+    {
+        if (!_isAutoSyncEnabled)
+            return;
+
+        _autoSyncTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMinutes(AutoSyncIntervalMinutes)
+        };
+        _autoSyncTickHandler = async (s, e) => await PerformAutoSyncAsync();
+        _autoSyncTimer.Tick += _autoSyncTickHandler;
+        _autoSyncTimer.Start();
+
+        // Perform initial sync on startup
+        _ = PerformAutoSyncAsync();
+    }
+
+    /// <summary>
+    /// Stops the auto-sync timer and performs cleanup.
+    /// Should be called when the application is closing.
+    /// </summary>
+    public void StopAutoSync()
+    {
+        if (_autoSyncTimer is not null)
+        {
+            _autoSyncTimer.Stop();
+            if (_autoSyncTickHandler is not null)
+            {
+                _autoSyncTimer.Tick -= _autoSyncTickHandler;
+                _autoSyncTickHandler = null;
+            }
+            _autoSyncTimer = null;
+        }
+
+        if (_debounceTimer is not null)
+        {
+            _debounceTimer.Stop();
+            if (_debounceTickHandler is not null)
+            {
+                _debounceTimer.Tick -= _debounceTickHandler;
+                _debounceTickHandler = null;
+            }
+            _debounceTimer = null;
+        }
+    }
+
+    /// <summary>
+    /// Performs automatic background synchronization of task lists and tasks.
+    /// Updates UI with sync status and handles errors gracefully.
+    /// </summary>
+    private async Task PerformAutoSyncAsync()
+    {
+        // Prevent overlapping sync operations
+        if (_isSyncing)
+            return;
+
+        try
+        {
+            _isSyncing = true;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
+            StatusText = "Syncing...";
+
+            // Sync task lists
+            var taskLists = await _taskService.GetTaskListsAsync();
+
+            _taskListsBackingStore.Clear();
+            UserLists.Clear();
+
+            foreach (var list in taskLists)
+            {
+                _taskListsBackingStore.Add(list);
+
+                var icon = _iconStorageService.GetIcon(list.Id);
+                UserLists.Add(new NavItem
+                {
+                    Id = list.Id,
+                    Title = list.Title,
+                    Icon = icon,
+                    Type = NavItemType.UserList,
+                    Data = list
+                });
+            }
+
+            // Refresh current view if a list is selected
+            await RefreshCurrentViewAsync();
+
+            LastSyncTime = DateTimeOffset.Now;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
+            StatusText = "Synced";
+            RippleRequested?.Invoke();
+        }
+        catch (HttpRequestException)
+        {
+            // Network error - silent failure for background sync
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = "Offline";
+        }
+        catch (Exception ex)
+        {
+            // Unexpected error - log but don't interrupt user
+            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+            StatusText = "Sync failed";
+            System.Diagnostics.Debug.WriteLine($"[AutoSync] Error: {ex}");
+        }
+        finally
+        {
+            _isSyncing = false;
+        }
+    }
+
+    /// <summary>
+    /// Refreshes the tasks for the currently selected view.
+    /// </summary>
+    private async Task RefreshCurrentViewAsync()
+    {
+        if (SelectedNavItem is null || TaskListVM is null)
+            return;
+
+        try
+        {
+            if (SelectedNavItem.Type == NavItemType.SmartList)
+            {
+                // Refresh smart list
+                var allTasks = new List<TaskItem>();
+                foreach (var list in _taskListsBackingStore)
+                {
+                    var tasks = await _taskService.GetTasksAsync(list.Id);
+                    allTasks.AddRange(tasks);
+                }
+
+                var filter = SelectedNavItem.Data is FilterOption f ? f : FilterOption.Incomplete;
+                TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
+            }
+            else if (SelectedNavItem.Type == NavItemType.UserList && SelectedNavItem.Data is TaskList selectedList)
+            {
+                // Refresh user list
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                TaskListVM.LoadTasks(tasks.ToList(), TaskListVM.CurrentSort, TaskListVM.CurrentFilter);
+            }
+        }
+        catch (HttpRequestException)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = "Offline";
+        }
+        catch (Exception ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+            System.Diagnostics.Debug.WriteLine($"[RefreshCurrentView] Error: {ex}");
+        }
+    }
+
+    /// <summary>
+    /// Schedules an automatic sync after a user-initiated data change.
+    /// Uses debouncing to prevent sync spam during rapid edits.
+    /// </summary>
+    private void ScheduleSyncAfterChange()
+    {
+        if (!_isAutoSyncEnabled)
+            return;
+
+        // Reset debounce timer (2 seconds after last change)
+        if (_debounceTimer is not null)
+        {
+            _debounceTimer.Stop();
+        }
+        else
+        {
+            _debounceTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(2)
+            };
+            _debounceTickHandler = async (s, e) =>
+            {
+                _debounceTimer?.Stop();
+                await PerformAutoSyncAsync();
+            };
+            _debounceTimer.Tick += _debounceTickHandler;
+        }
+
+        _debounceTimer.Start();
+    }
+
     // --- Status helpers ---
 
     private void ShowSuccess(string message)
     {
+        // If we're currently offline but an operation succeeds, we're back online
+        if (StatusText == "Offline" || StatusText == "Sync failed")
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
+            StatusText = "Connected";
+        }
+
         RippleRequested?.Invoke();
         TemporaryStatusRequested?.Invoke(message);
     }

@@ -13,15 +13,19 @@ public sealed partial class MainWindow : Window
 {
     public ShellViewModel ViewModel { get; }
 
+    private readonly Action _onRippleRequested;
+    private readonly Action<OrbStatusKind> _onOrbStatusChanged;
+    private readonly Action<string> _onTemporaryStatusRequested;
+
     public MainWindow()
     {
         this.InitializeComponent();
 
         ViewModel = App.GetService<ShellViewModel>();
 
-        // Wire ViewModel events to the TaskList control
-        ViewModel.RippleRequested += () => TaskList.Orb.TriggerRipple();
-        ViewModel.OrbStatusChanged += kind => TaskList.Orb.SetStatus(kind switch
+        // Store handlers so they can be unsubscribed on close
+        _onRippleRequested = () => TaskList.Orb.TriggerRipple();
+        _onOrbStatusChanged = kind => TaskList.Orb.SetStatus(kind switch
         {
             OrbStatusKind.Connected => OrbStatus.Connected,
             OrbStatusKind.Syncing => OrbStatus.Syncing,
@@ -29,7 +33,12 @@ public sealed partial class MainWindow : Window
             OrbStatusKind.Offline => OrbStatus.Offline,
             _ => OrbStatus.Connected
         });
-        ViewModel.TemporaryStatusRequested += TaskList.ShowTemporaryStatus;
+        _onTemporaryStatusRequested = TaskList.ShowTemporaryStatus;
+
+        // Wire ViewModel events to the TaskList control
+        ViewModel.RippleRequested += _onRippleRequested;
+        ViewModel.OrbStatusChanged += _onOrbStatusChanged;
+        ViewModel.TemporaryStatusRequested += _onTemporaryStatusRequested;
 
         // Sync shell-level property changes to child controls
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
@@ -40,6 +49,12 @@ public sealed partial class MainWindow : Window
         NavigationPanel.DeleteClicked += (_, navItem) => _ = ViewModel.DeleteListAsync(navItem);
         NavigationPanel.CreateListClicked += async (_, _) => await ViewModel.CreateListCommand.ExecuteAsync(null);
         NavigationPanel.SyncClicked += async (_, _) => await ViewModel.SyncCommand.ExecuteAsync(null);
+
+        // Initialize auto-sync
+        ViewModel.InitializeAutoSync();
+
+        // Clean up when window closes
+        this.Closed += MainWindow_Closed;
 
         // Set up custom title bar
         ExtendsContentIntoTitleBar = true;
@@ -73,5 +88,15 @@ public sealed partial class MainWindow : Window
                 TaskList.SetStatusText(ViewModel.StatusText);
                 break;
         }
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        ViewModel.StopAutoSync();
+
+        ViewModel.RippleRequested -= _onRippleRequested;
+        ViewModel.OrbStatusChanged -= _onOrbStatusChanged;
+        ViewModel.TemporaryStatusRequested -= _onTemporaryStatusRequested;
+        ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
     }
 }

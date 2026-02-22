@@ -71,6 +71,11 @@ public sealed partial class TaskListViewModel : ObservableObject
     /// </summary>
     public event EventHandler<StatusMessageEventArgs>? StatusMessage;
 
+    /// <summary>
+    /// Raised when a data-modifying operation completes successfully and sync is needed.
+    /// </summary>
+    public event EventHandler? SyncRequested;
+
     public TaskListViewModel(ITaskService taskService, IDialogService dialogService)
     {
         _taskService = taskService;
@@ -251,6 +256,7 @@ public sealed partial class TaskListViewModel : ObservableObject
 
             NewTaskTitle = string.Empty;
             RaiseStatus(StatusKind.Success, "Task created");
+            SyncRequested?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception ex)
         {
@@ -291,6 +297,7 @@ public sealed partial class TaskListViewModel : ObservableObject
             {
                 await ReloadTasksAsync();
                 RaiseStatus(StatusKind.Success, newCompletedState ? "Task completed" : "Task reopened");
+                SyncRequested?.Invoke(this, EventArgs.Empty);
                 return true;
             }
 
@@ -321,6 +328,7 @@ public sealed partial class TaskListViewModel : ObservableObject
                 _allTasks.Remove(task);
                 ApplySortAndFilter();
                 RaiseStatus(StatusKind.Success, "Task deleted");
+                SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -372,6 +380,7 @@ public sealed partial class TaskListViewModel : ObservableObject
             {
                 task.IsEditing = false;
                 RaiseStatus(StatusKind.Success, "Task updated");
+                SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -411,6 +420,7 @@ public sealed partial class TaskListViewModel : ObservableObject
                 {
                     await ReloadTasksAsync();
                     RaiseStatus(StatusKind.Success, "Task updated");
+                    SyncRequested?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -449,6 +459,7 @@ public sealed partial class TaskListViewModel : ObservableObject
 
             await ReloadTasksAsync();
             RaiseStatus(StatusKind.Success, "Subtask created");
+            SyncRequested?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception ex)
         {
@@ -516,6 +527,7 @@ public sealed partial class TaskListViewModel : ObservableObject
             {
                 await ReloadTasksAsync();
                 RaiseStatus(StatusKind.Success, "Task reordered");
+                SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
