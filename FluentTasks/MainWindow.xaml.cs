@@ -41,6 +41,12 @@ public sealed partial class MainWindow : Window
         NavigationPanel.CreateListClicked += async (_, _) => await ViewModel.CreateListCommand.ExecuteAsync(null);
         NavigationPanel.SyncClicked += async (_, _) => await ViewModel.SyncCommand.ExecuteAsync(null);
 
+        // Initialize auto-sync
+        ViewModel.InitializeAutoSync();
+
+        // Clean up when window closes
+        this.Closed += MainWindow_Closed;
+
         // Set up custom title bar
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
@@ -73,5 +79,10 @@ public sealed partial class MainWindow : Window
                 TaskList.SetStatusText(ViewModel.StatusText);
                 break;
         }
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        ViewModel.StopAutoSync();
     }
 }
