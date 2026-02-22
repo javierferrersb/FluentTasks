@@ -54,9 +54,6 @@ public sealed partial class ShellViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private ObservableCollection<NavItem> _smartLists = [];
-
-    [ObservableProperty]
     private ObservableCollection<NavItem> _userLists = [];
 
     [ObservableProperty]
@@ -103,47 +100,6 @@ public sealed partial class ShellViewModel : ObservableObject
         _taskService = taskService;
         _dialogService = dialogService;
         _iconStorageService = iconStorageService;
-
-        InitializeSmartLists();
-    }
-
-    private void InitializeSmartLists()
-    {
-        SmartLists =
-        [
-            new NavItem
-            {
-                Id = "inbox",
-                Title = "Inbox",
-                Icon = "\uE80F",
-                Type = NavItemType.SmartList,
-                Data = FilterOption.Incomplete
-            },
-            new NavItem
-            {
-                Id = "today",
-                Title = "Today",
-                Icon = "\uE8BF",
-                Type = NavItemType.SmartList,
-                Data = FilterOption.Today
-            },
-            new NavItem
-            {
-                Id = "week",
-                Title = "This Week",
-                Icon = "\uE787",
-                Type = NavItemType.SmartList,
-                Data = FilterOption.ThisWeek
-            },
-            new NavItem
-            {
-                Id = "overdue",
-                Title = "Overdue",
-                Icon = "\uE7BA",
-                Type = NavItemType.SmartList,
-                Data = FilterOption.Overdue
-            }
-        ];
     }
 
     /// <summary>
@@ -152,7 +108,6 @@ public sealed partial class ShellViewModel : ObservableObject
     public async Task SelectNavItemAsync(NavItem navItem)
     {
         // Deselect all
-        foreach (var item in SmartLists) item.IsSelected = false;
         foreach (var item in UserLists) item.IsSelected = false;
 
         navItem.IsSelected = true;
@@ -161,44 +116,9 @@ public sealed partial class ShellViewModel : ObservableObject
         IsNoListSelected = false;
         IsTaskContentVisible = true;
 
-        if (navItem.Type == NavItemType.SmartList)
-        {
-            await HandleSmartListSelectionAsync(navItem);
-        }
-        else if (navItem.Type == NavItemType.UserList)
+        if (navItem.Type == NavItemType.UserList)
         {
             await HandleUserListSelectionAsync(navItem);
-        }
-    }
-
-    private async Task HandleSmartListSelectionAsync(NavItem navItem)
-    {
-        EnsureTaskListVM(isSmartList: true);
-        TaskListVM!.SetTitle(navItem.Title);
-        TaskListVM.SetSelectedList(null); // smart lists don't have a single backing list
-
-        try
-        {
-            StatusText = "Loading...";
-            TaskListVM.BeginLoading();
-
-            var allTasks = new List<TaskItem>();
-            foreach (var list in _taskListsBackingStore)
-            {
-                var tasks = await _taskService.GetTasksAsync(list.Id);
-                allTasks.AddRange(tasks);
-            }
-
-            var filter = navItem.Data is FilterOption f ? f : FilterOption.Incomplete;
-            TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
-
-            StatusText = "Ready";
-            ShowSuccess($"Loaded {allTasks.Count} tasks");
-        }
-        catch (Exception ex)
-        {
-            TaskListVM.EndLoading();
-            ShowError($"Error: {ex.Message}");
         }
     }
 
@@ -213,13 +133,18 @@ public sealed partial class ShellViewModel : ObservableObject
 
         try
         {
+            StatusText = "Loading...";
+            TaskListVM.BeginLoading();
+
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
             TaskListVM.LoadTasks(tasks.ToList(), SortOption.None, FilterOption.Incomplete);
 
+            StatusText = "Ready";
             ShowSuccess($"Loaded {tasks.Count()} tasks");
         }
         catch (Exception ex)
         {
+            TaskListVM.EndLoading();
             ShowError($"Error: {ex.Message}");
         }
     }
@@ -578,20 +503,7 @@ public sealed partial class ShellViewModel : ObservableObject
 
         try
         {
-            if (SelectedNavItem.Type == NavItemType.SmartList)
-            {
-                // Refresh smart list
-                var allTasks = new List<TaskItem>();
-                foreach (var list in _taskListsBackingStore)
-                {
-                    var tasks = await _taskService.GetTasksAsync(list.Id);
-                    allTasks.AddRange(tasks);
-                }
-
-                var filter = SelectedNavItem.Data is FilterOption f ? f : FilterOption.Incomplete;
-                TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
-            }
-            else if (SelectedNavItem.Type == NavItemType.UserList && SelectedNavItem.Data is TaskList selectedList)
+            if (SelectedNavItem.Type == NavItemType.UserList && SelectedNavItem.Data is TaskList selectedList)
             {
                 // Refresh user list
                 var tasks = await _taskService.GetTasksAsync(selectedList.Id);

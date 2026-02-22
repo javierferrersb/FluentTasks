@@ -4,38 +4,21 @@
              xmlns:controls="using:FluentTasks.UI.Controls"
              xmlns:models="using:FluentTasks.UI.Models">
 
-    <Grid Background="{ThemeResource LayerFillColorDefaultBrush}"
-          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-          BorderThickness="0,0,1,0"
+	<Grid Background="{ThemeResource LayerFillColorDefaultBrush}"
+		  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+		  BorderThickness="0,0,1,0"
 		  CornerRadius="0,8,0,0" 
-          Padding="8,2,8,8">
+		  Padding="8,2,8,8">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
 
-        <!-- Smart Lists -->
-        <ItemsControl Grid.Row="0"
-                      x:Name="SmartListsView"
-                      ItemsSource="{x:Bind SmartLists, Mode=OneWay}"
-                      Margin="0,8,0,0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="models:NavItem">
-                    <controls:MenuItemControl Icon="{x:Bind Icon}"
-                                              Text="{x:Bind Title}"
-                                              IsSelected="{x:Bind IsSelected, Mode=OneWay}"
-                                              ItemClicked="MenuItem_Clicked"
-                                              Tag="{x:Bind}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <!-- My Lists Header -->
-		<Grid Grid.Row="1"
+		<!-- My Lists Header -->
+		<Grid Grid.Row="0"
 			  Padding="16,16,16,8">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
@@ -56,8 +39,8 @@
 					FontSize="12" />
 		</Grid>
 
-        <!-- User Lists -->
-        <ScrollViewer Grid.Row="2">
+		<!-- User Lists -->
+		<ScrollViewer Grid.Row="1">
             <ItemsControl x:Name="UserListsView"
                           ItemsSource="{x:Bind UserLists, Mode=OneWay}">
                 <ItemsControl.ItemTemplate>
@@ -76,7 +59,7 @@
         </ScrollViewer>
 
         <!-- Settings -->
-        <Button Grid.Row="3"
+        <Button Grid.Row="2"
                 Click="Settings_Click"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"
@@ -92,7 +75,7 @@
         </Button>
 
         <!-- Sync -->
-        <Button Grid.Row="4"
+        <Button Grid.Row="3"
                 Click="Sync_Click"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"

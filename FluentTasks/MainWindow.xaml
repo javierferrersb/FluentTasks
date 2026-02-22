@@ -35,7 +35,6 @@
             <!-- Left Sidebar -->
             <controls:NavigationPanelControl x:Name="NavigationPanel"
                                              Grid.Column="0"
-                                             SmartLists="{x:Bind ViewModel.SmartLists, Mode=OneWay}"
                                              UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}" />
 
             <!-- Right Content Area -->

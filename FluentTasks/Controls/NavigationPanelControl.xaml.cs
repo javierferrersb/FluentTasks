@@ -7,29 +7,16 @@ using Microsoft.UI.Xaml.Controls;
 namespace FluentTasks.UI.Controls;
 
 /// <summary>
-/// Left sidebar navigation panel displaying smart lists, user lists, and action buttons.
+/// Left sidebar navigation panel displaying user lists and action buttons.
 /// </summary>
 public sealed partial class NavigationPanelControl : UserControl
 {
-    /// <summary>
-    /// Smart (built-in) navigation items.
-    /// </summary>
-    public static readonly DependencyProperty SmartListsProperty =
-        DependencyProperty.Register(nameof(SmartLists), typeof(ObservableCollection<NavItem>),
-            typeof(NavigationPanelControl), new PropertyMetadata(null));
-
     /// <summary>
     /// User-created task list navigation items.
     /// </summary>
     public static readonly DependencyProperty UserListsProperty =
         DependencyProperty.Register(nameof(UserLists), typeof(ObservableCollection<NavItem>),
             typeof(NavigationPanelControl), new PropertyMetadata(null));
-
-    public ObservableCollection<NavItem> SmartLists
-    {
-        get => (ObservableCollection<NavItem>)GetValue(SmartListsProperty);
-        set => SetValue(SmartListsProperty, value);
-    }
 
     public ObservableCollection<NavItem> UserLists
     {

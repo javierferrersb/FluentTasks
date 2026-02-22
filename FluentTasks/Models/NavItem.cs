@@ -53,7 +53,6 @@ public class NavItem : ObservableObject
 
 public enum NavItemType
 {
-    SmartList,
     UserList,
     Settings,
     Sync
