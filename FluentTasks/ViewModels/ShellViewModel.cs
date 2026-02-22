@@ -29,12 +29,29 @@ public sealed partial class ShellViewModel : ObservableObject
     // Auto-sync infrastructure
     private DispatcherTimer? _autoSyncTimer;
     private DispatcherTimer? _debounceTimer;
+    private EventHandler? _autoSyncTickHandler;
+    private EventHandler? _debounceTickHandler;
     private bool _isSyncing;
-    private DateTimeOffset? _lastSyncTime;
     private bool _isAutoSyncEnabled = true;
     private int _autoSyncIntervalMinutes = 5;
     private const int MIN_SYNC_INTERVAL_MINUTES = 2;
-    private const int MAX_SYNC_INTERVAL_MINUTES = 5;
+    private const int MAX_SYNC_INTERVAL_MINUTES = 60;
+
+    [ObservableProperty]
+    private DateTimeOffset? _lastSyncTime;
+
+    /// <summary>
+    /// Gets or sets the auto-sync interval in minutes, clamped between MIN_SYNC_INTERVAL_MINUTES and MAX_SYNC_INTERVAL_MINUTES.
+    /// </summary>
+    public int AutoSyncIntervalMinutes
+    {
+        get => _autoSyncIntervalMinutes;
+        set
+        {
+            _autoSyncIntervalMinutes = Math.Clamp(value, MIN_SYNC_INTERVAL_MINUTES, MAX_SYNC_INTERVAL_MINUTES);
+            OnPropertyChanged();
+        }
+    }
 
     [ObservableProperty]
     private ObservableCollection<NavItem> _smartLists = [];
@@ -245,8 +262,12 @@ public sealed partial class ShellViewModel : ObservableObject
     [RelayCommand]
     private async Task SyncAsync()
     {
+        if (_isSyncing)
+            return;
+
         try
         {
+            _isSyncing = true;
             OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
             StatusText = "Syncing...";
 
@@ -273,7 +294,7 @@ public sealed partial class ShellViewModel : ObservableObject
             // Refresh current view if a list is selected
             await RefreshCurrentViewAsync();
 
-            _lastSyncTime = DateTimeOffset.Now;
+            LastSyncTime = DateTimeOffset.Now;
             OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
             StatusText = "Synced";
             ShowSuccess($"Synced {taskLists.Count()} lists");
@@ -289,6 +310,10 @@ public sealed partial class ShellViewModel : ObservableObject
             OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
             StatusText = "Sync failed";
             ShowError($"Sync error: {ex.Message}");
+        }
+        finally
+        {
+            _isSyncing = false;
         }
     }
 
@@ -440,9 +465,10 @@ public sealed partial class ShellViewModel : ObservableObject
 
         _autoSyncTimer = new DispatcherTimer
         {
-            Interval = TimeSpan.FromMinutes(_autoSyncIntervalMinutes)
+            Interval = TimeSpan.FromMinutes(AutoSyncIntervalMinutes)
         };
-        _autoSyncTimer.Tick += async (s, e) => await PerformAutoSyncAsync();
+        _autoSyncTickHandler = async (s, e) => await PerformAutoSyncAsync();
+        _autoSyncTimer.Tick += _autoSyncTickHandler;
         _autoSyncTimer.Start();
 
         // Perform initial sync on startup
@@ -458,13 +484,22 @@ public sealed partial class ShellViewModel : ObservableObject
         if (_autoSyncTimer is not null)
         {
             _autoSyncTimer.Stop();
-            _autoSyncTimer.Tick -= async (s, e) => await PerformAutoSyncAsync();
+            if (_autoSyncTickHandler is not null)
+            {
+                _autoSyncTimer.Tick -= _autoSyncTickHandler;
+                _autoSyncTickHandler = null;
+            }
             _autoSyncTimer = null;
         }
 
         if (_debounceTimer is not null)
         {
             _debounceTimer.Stop();
+            if (_debounceTickHandler is not null)
+            {
+                _debounceTimer.Tick -= _debounceTickHandler;
+                _debounceTickHandler = null;
+            }
             _debounceTimer = null;
         }
     }
@@ -509,7 +544,7 @@ public sealed partial class ShellViewModel : ObservableObject
             // Refresh current view if a list is selected
             await RefreshCurrentViewAsync();
 
-            _lastSyncTime = DateTimeOffset.Now;
+            LastSyncTime = DateTimeOffset.Now;
             OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
             StatusText = "Synced";
             RippleRequested?.Invoke();
@@ -541,24 +576,37 @@ public sealed partial class ShellViewModel : ObservableObject
         if (SelectedNavItem is null || TaskListVM is null)
             return;
 
-        if (SelectedNavItem.Type == NavItemType.SmartList)
+        try
         {
-            // Refresh smart list
-            var allTasks = new List<TaskItem>();
-            foreach (var list in _taskListsBackingStore)
+            if (SelectedNavItem.Type == NavItemType.SmartList)
             {
-                var tasks = await _taskService.GetTasksAsync(list.Id);
-                allTasks.AddRange(tasks);
-            }
+                // Refresh smart list
+                var allTasks = new List<TaskItem>();
+                foreach (var list in _taskListsBackingStore)
+                {
+                    var tasks = await _taskService.GetTasksAsync(list.Id);
+                    allTasks.AddRange(tasks);
+                }
 
-            var filter = SelectedNavItem.Data is FilterOption f ? f : FilterOption.Incomplete;
-            TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
+                var filter = SelectedNavItem.Data is FilterOption f ? f : FilterOption.Incomplete;
+                TaskListVM.LoadTasks(allTasks, SortOption.None, filter);
+            }
+            else if (SelectedNavItem.Type == NavItemType.UserList && SelectedNavItem.Data is TaskList selectedList)
+            {
+                // Refresh user list
+                var tasks = await _taskService.GetTasksAsync(selectedList.Id);
+                TaskListVM.LoadTasks(tasks.ToList(), TaskListVM.CurrentSort, TaskListVM.CurrentFilter);
+            }
         }
-        else if (SelectedNavItem.Type == NavItemType.UserList && SelectedNavItem.Data is TaskList selectedList)
+        catch (HttpRequestException)
         {
-            // Refresh user list
-            var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-            TaskListVM.LoadTasks(tasks.ToList(), TaskListVM.CurrentSort, TaskListVM.CurrentFilter);
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = "Offline";
+        }
+        catch (Exception ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+            System.Diagnostics.Debug.WriteLine($"[RefreshCurrentView] Error: {ex}");
         }
     }
 
@@ -582,11 +630,12 @@ public sealed partial class ShellViewModel : ObservableObject
             {
                 Interval = TimeSpan.FromSeconds(2)
             };
-            _debounceTimer.Tick += async (s, e) =>
+            _debounceTickHandler = async (s, e) =>
             {
                 _debounceTimer?.Stop();
                 await PerformAutoSyncAsync();
             };
+            _debounceTimer.Tick += _debounceTickHandler;
         }
 
         _debounceTimer.Start();
