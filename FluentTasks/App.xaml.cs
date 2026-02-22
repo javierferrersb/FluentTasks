@@ -39,6 +39,7 @@ namespace FluentTasks.UI
                     // UI services
                     services.AddSingleton<DialogService>();
                     services.AddSingleton<IDialogService>(sp => sp.GetRequiredService<DialogService>());
+                    services.AddSingleton<SettingsService>();
 
                     // ViewModels
                     services.AddTransient<ShellViewModel>();
@@ -54,6 +55,12 @@ namespace FluentTasks.UI
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             _window = new MainWindow();
+
+            // Initialize settings service and apply theme
+            var settingsService = GetService<SettingsService>();
+            settingsService.SetMainWindow(_window);
+            settingsService.InitializeTheme();
+
             _window.Activate();
         }
 

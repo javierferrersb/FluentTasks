@@ -21,6 +21,7 @@
     <None Remove="Dialogs\IconPickerDialog.xaml" />
     <None Remove="Dialogs\ListEditorDialog.xaml" />
     <None Remove="Dialogs\TaskDetailsDialog.xaml" />
+    <None Remove="Dialogs\SettingsDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,11 +55,25 @@
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
     <ProjectReference Include="..\FluentTasks.Infrastructure\FluentTasks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Dialogs\SettingsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\AppearanceSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\GeneralSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ListsSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\MenuControlItem.xaml">
@@ -94,6 +109,9 @@
     <Page Update="Dialogs\TaskDetailsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
 
   <!--

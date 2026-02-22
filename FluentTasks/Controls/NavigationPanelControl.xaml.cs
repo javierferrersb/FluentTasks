@@ -18,10 +18,20 @@ public sealed partial class NavigationPanelControl : UserControl
         DependencyProperty.Register(nameof(UserLists), typeof(ObservableCollection<NavItem>),
             typeof(NavigationPanelControl), new PropertyMetadata(null));
 
+    public static readonly DependencyProperty IsSettingsSelectedProperty =
+        DependencyProperty.Register(nameof(IsSettingsSelected), typeof(bool),
+            typeof(NavigationPanelControl), new PropertyMetadata(false, OnIsSettingsSelectedChanged));
+
     public ObservableCollection<NavItem> UserLists
     {
         get => (ObservableCollection<NavItem>)GetValue(UserListsProperty);
         set => SetValue(UserListsProperty, value);
+    }
+
+    public bool IsSettingsSelected
+    {
+        get => (bool)GetValue(IsSettingsSelectedProperty);
+        set => SetValue(IsSettingsSelectedProperty, value);
     }
 
     /// <summary>Raised when any navigation item is clicked.</summary>
@@ -45,6 +55,21 @@ public sealed partial class NavigationPanelControl : UserControl
     public NavigationPanelControl()
     {
         this.InitializeComponent();
+    }
+
+    private static void OnIsSettingsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NavigationPanelControl control)
+        {
+            control.UpdateSettingsButtonStyle();
+        }
+    }
+
+    private void UpdateSettingsButtonStyle()
+    {
+        SettingsButton.Style = IsSettingsSelected
+            ? (Style)Application.Current.Resources["AccentButtonStyle"]
+            : (Style)Application.Current.Resources["SubtleButtonStyle"];
     }
 
     private void MenuItem_Clicked(object sender, EventArgs e)

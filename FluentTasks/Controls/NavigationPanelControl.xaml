@@ -59,7 +59,8 @@
         </ScrollViewer>
 
         <!-- Settings -->
-        <Button Grid.Row="2"
+        <Button x:Name="SettingsButton"
+                Grid.Row="2"
                 Click="Settings_Click"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Left"

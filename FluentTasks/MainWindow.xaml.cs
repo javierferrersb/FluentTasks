@@ -44,11 +44,12 @@ public sealed partial class MainWindow : Window
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
 
         // Wire navigation panel events to the ViewModel
-        NavigationPanel.ItemClicked += (_, navItem) => _ = ViewModel.SelectNavItemAsync(navItem);
+        NavigationPanel.ItemClicked += OnItemClicked;
         NavigationPanel.EditClicked += (_, navItem) => _ = ViewModel.RenameListAsync(navItem);
         NavigationPanel.DeleteClicked += (_, navItem) => _ = ViewModel.DeleteListAsync(navItem);
         NavigationPanel.CreateListClicked += async (_, _) => await ViewModel.CreateListCommand.ExecuteAsync(null);
         NavigationPanel.SyncClicked += async (_, _) => await ViewModel.SyncCommand.ExecuteAsync(null);
+        NavigationPanel.SettingsClicked += OnSettingsClicked;
 
         // Initialize auto-sync
         ViewModel.InitializeAutoSync();
@@ -98,5 +99,37 @@ public sealed partial class MainWindow : Window
         ViewModel.OrbStatusChanged -= _onOrbStatusChanged;
         ViewModel.TemporaryStatusRequested -= _onTemporaryStatusRequested;
         ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+    }
+
+    private void OnItemClicked(object? sender, NavItem navItem)
+    {
+        // Hide settings and show task list
+        SettingsContainer.Content = null;
+        SettingsContainer.Visibility = Visibility.Collapsed;
+        TaskList.Visibility = Visibility.Visible;
+        NavigationPanel.IsSettingsSelected = false;
+
+        // Navigate to the selected list
+        _ = ViewModel.SelectNavItemAsync(navItem);
+    }
+
+    private void OnSettingsClicked(object? sender, EventArgs e)
+    {
+        var settingsService = App.GetService<SettingsService>();
+        var settingsControl = new Dialogs.SettingsDialog(settingsService);
+
+        SettingsContainer.Content = settingsControl;
+        SettingsContainer.Visibility = Visibility.Visible;
+        TaskList.Visibility = Visibility.Collapsed;
+        NavigationPanel.IsSettingsSelected = true;
+
+        // Deselect all task lists
+        if (ViewModel.UserLists != null)
+        {
+            foreach (var navItem in ViewModel.UserLists)
+            {
+                navItem.IsSelected = false;
+            }
+        }
     }
 }

@@ -42,6 +42,12 @@
                                       Grid.Column="1"
                                       Padding="24,16,24,16"
                                       ViewModel="{x:Bind ViewModel.TaskListVM, Mode=OneWay}" />
+
+            <!-- Settings Panel -->
+            <ContentControl x:Name="SettingsContainer"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch" />
         </Grid>
     </Grid>
 </Window>
