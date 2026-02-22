@@ -48,6 +48,7 @@ public sealed partial class StatusOrb : UserControl
 
             case OrbStatus.Offline:
                 OrbEllipse.Stroke = new SolidColorBrush(Color.FromArgb(255, 239, 68, 68)); // Red
+                StartClosingAnimation();
                 break;
         }
     }
@@ -137,6 +138,38 @@ public sealed partial class StatusOrb : UserControl
         OrbScale.ScaleX = 1.0;
         OrbScale.ScaleY = 1.0;
         OrbEllipse.Opacity = 1.0;
+    }
+
+    private void StartClosingAnimation()
+    {
+        var closingStoryboard = new Storyboard();
+
+        var scaleXAnimation = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.5,
+            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+
+        var scaleYAnimation = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.5,
+            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+        };
+
+        Storyboard.SetTarget(scaleXAnimation, OrbScale);
+        Storyboard.SetTargetProperty(scaleXAnimation, "ScaleX");
+
+        Storyboard.SetTarget(scaleYAnimation, OrbScale);
+        Storyboard.SetTargetProperty(scaleYAnimation, "ScaleY");
+
+        closingStoryboard.Children.Add(scaleXAnimation);
+        closingStoryboard.Children.Add(scaleYAnimation);
+
+        closingStoryboard.Begin();
     }
 
     /// <summary>
