@@ -29,8 +29,8 @@ public sealed partial class ShellViewModel : ObservableObject
     // Auto-sync infrastructure
     private DispatcherTimer? _autoSyncTimer;
     private DispatcherTimer? _debounceTimer;
-    private EventHandler? _autoSyncTickHandler;
-    private EventHandler? _debounceTickHandler;
+    private EventHandler<object>? _autoSyncTickHandler;
+    private EventHandler<object>? _debounceTickHandler;
     private bool _isSyncing;
     private bool _isAutoSyncEnabled = true;
     private int _autoSyncIntervalMinutes = 5;
