@@ -26,7 +26,6 @@
     <None Remove="Dialogs\TaskDetailsDialog.xaml" />
     <None Remove="Dialogs\SettingsDialog.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -62,9 +61,15 @@
     <ProjectReference Include="..\FluentTasks.Infrastructure\FluentTasks.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Dialogs\OnboardingDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <None Update="Dialogs\SettingsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <Page Update="OnboardingWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <None Update="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>

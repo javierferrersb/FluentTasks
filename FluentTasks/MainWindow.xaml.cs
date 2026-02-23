@@ -23,6 +23,7 @@ public sealed partial class MainWindow : Window
     private readonly Action<string> _onTemporaryStatusRequested;
     private readonly SettingsService _settingsService;
     private readonly DialogService _dialogService;
+    private bool _shouldShowTeachingTips;
 
     public MainWindow()
     {
@@ -108,6 +109,9 @@ public sealed partial class MainWindow : Window
 
         // Subscribe to logout event
         _settingsService.LoggedOut += OnLoggedOut;
+
+        // Check if we should show teaching tips (first launch after onboarding)
+        _shouldShowTeachingTips = !_settingsService.HasSeenTeachingTips;
     }
 
     private void UpdateResponsiveLayout()
@@ -323,4 +327,59 @@ public sealed partial class MainWindow : Window
     {
         NavPanelOverlay.Visibility = Visibility.Collapsed;
     }
+
+    #region Teaching Tips
+
+    /// <summary>
+    /// Starts the teaching tips tour if the user hasn't seen it yet.
+    /// </summary>
+    public void StartTeachingTipsTourIfNeeded()
+    {
+        if (_shouldShowTeachingTips)
+        {
+            WelcomeTip.IsOpen = true;
+        }
+    }
+
+    private void WelcomeTip_ActionButtonClick(TeachingTip sender, object args)
+    {
+        WelcomeTip.IsOpen = false;
+        NavigationTip.IsOpen = true;
+    }
+
+    private void NavigationTip_ActionButtonClick(TeachingTip sender, object args)
+    {
+        NavigationTip.IsOpen = false;
+        TaskListTip.IsOpen = true;
+    }
+
+    private void TaskListTip_ActionButtonClick(TeachingTip sender, object args)
+    {
+        TaskListTip.IsOpen = false;
+        SyncTip.IsOpen = true;
+    }
+
+    private void SyncTip_ActionButtonClick(TeachingTip sender, object args)
+    {
+        SyncTip.IsOpen = false;
+        FinishTeachingTipsTour();
+    }
+
+    private void TeachingTip_SkipTour(TeachingTip sender, object args)
+    {
+        // Close all tips
+        WelcomeTip.IsOpen = false;
+        NavigationTip.IsOpen = false;
+        TaskListTip.IsOpen = false;
+        SyncTip.IsOpen = false;
+        FinishTeachingTipsTour();
+    }
+
+    private void FinishTeachingTipsTour()
+    {
+        _settingsService.HasSeenTeachingTips = true;
+        _shouldShowTeachingTips = false;
+    }
+
+    #endregion
 }

@@ -64,5 +64,64 @@
                                                  UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}" />
             </Border>
         </Grid>
+
+        <!-- Teaching Tips for onboarding guidance -->
+        <TeachingTip x:Name="WelcomeTip"
+                     Title="Welcome to FluentTasks! 🎉"
+                     Subtitle="Let's take a quick tour to help you get started."
+                     PreferredPlacement="Center"
+                     IsLightDismissEnabled="False"
+                     ActionButtonContent="Let's go!"
+                     ActionButtonClick="WelcomeTip_ActionButtonClick"
+                     CloseButtonContent="Skip tour"
+                     CloseButtonClick="TeachingTip_SkipTour">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="Emoji" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
+
+        <TeachingTip x:Name="NavigationTip"
+                     Target="{x:Bind NavigationPanel}"
+                     Title="Your Task Lists"
+                     Subtitle="All your task lists appear here. Click any list to view its tasks, or click the + button to create a new list."
+                     PreferredPlacement="Right"
+                     IsLightDismissEnabled="False"
+                     ActionButtonContent="Next"
+                     ActionButtonClick="NavigationTip_ActionButtonClick"
+                     CloseButtonContent="Skip tour"
+                     CloseButtonClick="TeachingTip_SkipTour">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="List" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
+
+        <TeachingTip x:Name="TaskListTip"
+                     Target="{x:Bind TaskList}"
+                     Title="Your Tasks"
+                     Subtitle="Your tasks appear here. Use the search bar to find tasks, or filter and sort them using the buttons in the toolbar."
+                     PreferredPlacement="Left"
+                     IsLightDismissEnabled="False"
+                     ActionButtonContent="Next"
+                     ActionButtonClick="TaskListTip_ActionButtonClick"
+                     CloseButtonContent="Skip tour"
+                     CloseButtonClick="TeachingTip_SkipTour">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="AllApps" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
+
+        <TeachingTip x:Name="SyncTip"
+                     Title="Stay in Sync"
+                     Subtitle="Your tasks sync automatically with Google Tasks. Click the sync button anytime to manually refresh your data."
+                     PreferredPlacement="Center"
+                     IsLightDismissEnabled="False"
+                     ActionButtonContent="Got it!"
+                     ActionButtonClick="SyncTip_ActionButtonClick"
+                     CloseButtonContent="Skip tour"
+                     CloseButtonClick="TeachingTip_SkipTour">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="Sync" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
     </Grid>
 </Window>

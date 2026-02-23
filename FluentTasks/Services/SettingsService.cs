@@ -31,6 +31,8 @@ public sealed class SettingsService
     private const string ThemeKey = "AppTheme";
     private const string DefaultFilterKey = "DefaultFilter";
     private const string DefaultSortKey = "DefaultSort";
+    private const string HasCompletedOnboardingKey = "HasCompletedOnboarding";
+    private const string HasSeenTeachingTipsKey = "HasSeenTeachingTips";
 
     public SettingsService(IGoogleAuthService authService)
     {
@@ -96,6 +98,24 @@ public sealed class SettingsService
             return SortOption.None;
         }
         set => _localSettings.Values[DefaultSortKey] = (int)value;
+    }
+
+    /// <summary>
+    /// Gets or sets whether the user has completed the onboarding flow.
+    /// </summary>
+    public bool HasCompletedOnboarding
+    {
+        get => _localSettings.Values[HasCompletedOnboardingKey] is bool completed && completed;
+        set => _localSettings.Values[HasCompletedOnboardingKey] = value;
+    }
+
+    /// <summary>
+    /// Gets or sets whether the user has seen the teaching tips tour.
+    /// </summary>
+    public bool HasSeenTeachingTips
+    {
+        get => _localSettings.Values[HasSeenTeachingTipsKey] is bool seen && seen;
+        set => _localSettings.Values[HasSeenTeachingTipsKey] = value;
     }
 
     /// <summary>

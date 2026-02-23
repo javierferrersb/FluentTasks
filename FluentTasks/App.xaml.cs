@@ -17,6 +17,7 @@ namespace FluentTasks.UI
     public partial class App : Application
     {
         private Window? _window;
+        private OnboardingWindow? _onboardingWindow;
         private readonly IHost _host;
 
         /// <summary>
@@ -54,7 +55,35 @@ namespace FluentTasks.UI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
+            var settingsService = GetService<SettingsService>();
+
+            // Check if user has completed onboarding
+            if (!settingsService.HasCompletedOnboarding)
+            {
+                // Show onboarding window
+                _onboardingWindow = new OnboardingWindow();
+                _onboardingWindow.OnboardingCompleted += OnOnboardingCompleted;
+                _onboardingWindow.Activate();
+            }
+            else
+            {
+                // Show main window directly
+                ShowMainWindow();
+            }
+        }
+
+        private void OnOnboardingCompleted(object? sender, System.EventArgs e)
+        {
+            // Close onboarding window and show main window
+            ShowMainWindow(startTour: true);
+            _onboardingWindow?.Close();
+            _onboardingWindow = null;
+        }
+
+        private void ShowMainWindow(bool startTour = false)
+        {
+            var mainWindow = new MainWindow();
+            _window = mainWindow;
 
             // Initialize settings service and apply theme
             var settingsService = GetService<SettingsService>();
@@ -62,6 +91,16 @@ namespace FluentTasks.UI
             settingsService.InitializeTheme();
 
             _window.Activate();
+
+            // Start teaching tips tour if this is right after onboarding
+            if (startTour)
+            {
+                // Use DispatcherQueue to ensure the window is fully loaded
+                _window.DispatcherQueue.TryEnqueue(() =>
+                {
+                    mainWindow.StartTeachingTipsTourIfNeeded();
+                });
+            }
         }
 
         /// <summary>
