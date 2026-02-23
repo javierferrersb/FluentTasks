@@ -2,9 +2,60 @@
              x:Name="ThisControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="using:FluentTasks.UI.Controls">
+             xmlns:controls="using:FluentTasks.UI.Controls"
+             SizeChanged="ThisControl_SizeChanged">
 
     <Grid Padding="{Binding Padding, ElementName=ThisControl}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WidthStates">
+                <VisualState x:Name="WideContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="200" />
+                        <Setter Target="SearchBox.MaxWidth" Value="400" />
+                        <Setter Target="SortButtonText.Visibility" Value="Visible" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Visible" />
+                        <Setter Target="HeaderToolbar.Padding" Value="16,12" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="16,12,16,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="16" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MediumContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="120" />
+                        <Setter Target="SearchBox.MaxWidth" Value="250" />
+                        <Setter Target="SortButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="HeaderToolbar.Padding" Value="12,10" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="12,10,12,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="12" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="80" />
+                        <Setter Target="SearchBox.MaxWidth" Value="150" />
+                        <Setter Target="SortButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="HeaderToolbar.Padding" Value="8,8" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="8,8,8,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="8" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -41,12 +92,34 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Page Header -->
-            <TextBlock Grid.Row="0"
-                       x:Name="TaskListTitle"
-                       Text="My Tasks"
-                       Style="{StaticResource TitleLargeTextBlockStyle}"
-                       Margin="8,0,0,16" />
+            <!-- Page Header with optional hamburger button -->
+            <Grid Grid.Row="0"
+                  Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="HamburgerButton"
+                        Grid.Column="0"
+                        Click="HamburgerButton_Click"
+                        VerticalAlignment="Center"
+                        Padding="10"
+                        Margin="0,0,8,0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Visibility="Collapsed"
+                        ToolTipService.ToolTip="Toggle navigation">
+                    <FontIcon Glyph="&#xE700;"
+                              FontSize="18" />
+                </Button>
+
+                <TextBlock Grid.Column="1"
+                           x:Name="TaskListTitle"
+                           Text="My Tasks"
+                           Style="{StaticResource TitleLargeTextBlockStyle}"
+                           VerticalAlignment="Center" />
+            </Grid>
 
             <!-- Tasks Container -->
             <Border Grid.Row="1"
@@ -64,7 +137,8 @@
                     </Grid.RowDefinitions>
 
                     <!-- Header: Sort, Filter, Search -->
-                    <Grid Grid.Row="0"
+                    <Grid x:Name="HeaderToolbar"
+                          Grid.Row="0"
                           Background="{ThemeResource LayerFillColorDefaultBrush}"
                           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                           BorderThickness="0,0,0,1"
@@ -203,14 +277,22 @@
                         </TextBox>
 
                         <Button Grid.Column="1"
-                                Content="Add Task"
                                 Click="AddTask_Click"
                                 Style="{StaticResource AccentButtonStyle}"
-                                VerticalAlignment="Center" />
+                                VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6">
+                                <FontIcon Glyph="&#xE710;"
+                                          FontSize="14" />
+                                <TextBlock x:Name="AddTaskButtonText"
+                                           Text="Add Task" />
+                            </StackPanel>
+                        </Button>
                     </Grid>
 
                     <!-- Tasks List -->
-                    <ScrollViewer Grid.Row="2"
+                    <ScrollViewer x:Name="TasksScrollViewer"
+                                  Grid.Row="2"
                                   Padding="16">
                         <StackPanel Spacing="0">
                             <ItemsRepeater x:Name="TasksView">

@@ -6,7 +6,8 @@
                CloseButtonText="Cancel"
                DefaultButton="Primary">
 
-    <Grid Width="400"
+    <Grid MinWidth="280"
+          MaxWidth="500"
           RowSpacing="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

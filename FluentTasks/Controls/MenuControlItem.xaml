@@ -14,7 +14,7 @@
             Padding="12,8"
             Style="{StaticResource SubtleButtonStyle}"
             Click="RootButton_Click">
-        <Grid>
+        <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -27,6 +27,7 @@
                       Glyph="{x:Bind Icon}"
                       FontSize="16"
                       VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
                       Margin="0,0,12,0"
                       Foreground="{Binding Foreground, ElementName=RootButton}" />
 
@@ -35,6 +36,7 @@
                        Text="{x:Bind Text}"
                        Style="{StaticResource BodyTextBlockStyle}"
                        VerticalAlignment="Center"
+                       TextTrimming="CharacterEllipsis"
                        Foreground="{Binding Foreground, ElementName=RootButton}" />
 
             <Button x:Name="EditButton"

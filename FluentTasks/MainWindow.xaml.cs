@@ -9,6 +9,7 @@ using FluentTasks.UI.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace FluentTasks.UI;
 
@@ -58,6 +59,14 @@ public sealed partial class MainWindow : Window
         NavigationPanel.SyncClicked += async (_, _) => await ViewModel.SyncCommand.ExecuteAsync(null);
         NavigationPanel.SettingsClicked += OnSettingsClicked;
 
+        // Wire overlay navigation panel events (for narrow screens)
+        OverlayNavigationPanel.ItemClicked += OnItemClicked;
+        OverlayNavigationPanel.EditClicked += (_, navItem) => _ = ViewModel.RenameListAsync(navItem);
+        OverlayNavigationPanel.DeleteClicked += (_, navItem) => _ = ViewModel.DeleteListAsync(navItem);
+        OverlayNavigationPanel.CreateListClicked += async (_, _) => await ViewModel.CreateListCommand.ExecuteAsync(null);
+        OverlayNavigationPanel.SyncClicked += async (_, _) => await ViewModel.SyncCommand.ExecuteAsync(null);
+        OverlayNavigationPanel.SettingsClicked += OnSettingsClicked;
+
         // Initialize auto-sync
         ViewModel.InitializeAutoSync();
 
@@ -81,7 +90,12 @@ public sealed partial class MainWindow : Window
 
                 // Set initial theme for dialogs
                 _dialogService.SetTheme(_settingsService.AppTheme);
+
+                // Apply initial responsive state
+                UpdateResponsiveLayout();
             };
+
+            root.SizeChanged += (_, _) => UpdateResponsiveLayout();
         }
 
         // Subscribe to theme changes
@@ -89,6 +103,57 @@ public sealed partial class MainWindow : Window
 
         // Subscribe to logout event
         _settingsService.LoggedOut += OnLoggedOut;
+    }
+
+    private void UpdateResponsiveLayout()
+    {
+        if (this.Content is not FrameworkElement root)
+            return;
+
+        var width = root.ActualWidth;
+
+        // Wide: >= 900px - full sidebar (280px)
+        // Medium: >= 600px - compact icon-only sidebar (56px)
+        // Narrow: < 600px - hidden sidebar with hamburger (0px)
+        bool showHamburger;
+        if (width >= 900)
+        {
+            NavPanelColumn.Width = new GridLength(280);
+            NavigationPanel.IsCompact = false;
+            NavigationPanel.Visibility = Visibility.Visible;
+            showHamburger = false;
+            TaskList.Padding = new Thickness(24, 16, 24, 16);
+        }
+        else if (width >= 600)
+        {
+            NavPanelColumn.Width = new GridLength(56);
+            NavigationPanel.IsCompact = true;
+            NavigationPanel.Visibility = Visibility.Visible;
+            showHamburger = false;
+            TaskList.Padding = new Thickness(16, 12, 16, 12);
+        }
+        else
+        {
+            NavPanelColumn.Width = new GridLength(0);
+            NavigationPanel.Visibility = Visibility.Collapsed;
+            showHamburger = true;
+            TaskList.Padding = new Thickness(12, 8, 12, 8);
+        }
+
+        TaskList.ShowHamburgerButton = showHamburger;
+
+        // Also update SettingsDialog if it's showing
+        if (SettingsContainer.Content is Dialogs.SettingsDialog settingsDialog)
+        {
+            settingsDialog.ShowHamburgerButton = showHamburger;
+        }
+    }
+
+    private void TaskList_HamburgerButtonClicked(object? sender, EventArgs e)
+    {
+        NavPanelOverlay.Visibility = NavPanelOverlay.Visibility == Visibility.Visible
+            ? Visibility.Collapsed
+            : Visibility.Visible;
     }
 
     private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -206,6 +271,9 @@ public sealed partial class MainWindow : Window
         TaskList.Visibility = Visibility.Visible;
         NavigationPanel.IsSettingsSelected = false;
 
+        // Close overlay nav panel if open
+        HideNavOverlay();
+
         // Navigate to the selected list
         _ = ViewModel.SelectNavItemAsync(navItem);
     }
@@ -214,10 +282,22 @@ public sealed partial class MainWindow : Window
     {
         var settingsControl = new Dialogs.SettingsDialog(_settingsService);
 
+        // Show hamburger button in settings if we're in narrow mode
+        settingsControl.ShowHamburgerButton = TaskList.ShowHamburgerButton;
+        settingsControl.HamburgerButtonClicked += (_, _) =>
+        {
+            NavPanelOverlay.Visibility = NavPanelOverlay.Visibility == Visibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        };
+
         SettingsContainer.Content = settingsControl;
         SettingsContainer.Visibility = Visibility.Visible;
         TaskList.Visibility = Visibility.Collapsed;
         NavigationPanel.IsSettingsSelected = true;
+
+        // Close overlay nav panel if open
+        HideNavOverlay();
 
         // Deselect all task lists
         if (ViewModel.UserLists != null)
@@ -227,5 +307,15 @@ public sealed partial class MainWindow : Window
                 navItem.IsSelected = false;
             }
         }
+    }
+
+    private void NavOverlayDismiss_Tapped(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
+    {
+        HideNavOverlay();
+    }
+
+    private void HideNavOverlay()
+    {
+        NavPanelOverlay.Visibility = Visibility.Collapsed;
     }
 }

@@ -1,94 +1,106 @@
 <UserControl x:Class="FluentTasks.UI.Controls.NavigationPanelControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="using:FluentTasks.UI.Controls"
-             xmlns:models="using:FluentTasks.UI.Models">
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:controls="using:FluentTasks.UI.Controls"
+			 xmlns:models="using:FluentTasks.UI.Models">
 
 	<Grid Background="{ThemeResource LayerFillColorDefaultBrush}"
 		  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
 		  BorderThickness="0,0,1,0"
-		  CornerRadius="0,8,0,0" 
-		  Padding="8,2,8,8">
+		  CornerRadius="0,8,0,0">
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
+		<Grid x:Name="NavContentGrid"
+			  Padding="8,2,8,8">
 
-		<!-- My Lists Header -->
-		<Grid Grid.Row="0"
-			  Padding="16,16,16,8">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="My Lists"
-					   Grid.Column="0"
-					   Style="{StaticResource CaptionTextBlockStyle}"
-					   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-					   FontWeight="SemiBold" />
-			<Button Content="&#xE710;"
-					Grid.Column="1"
-					FontFamily="Segoe MDL2 Assets"
-					Click="CreateList_Click"
-					Background="Transparent"
-					BorderThickness="0"
-					Padding="4"
-					FontSize="12" />
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<!-- My Lists Header -->
+			<Grid x:Name="MyListsHeader"
+				  Grid.Row="0"
+				  Padding="16,16,16,8">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock x:Name="MyListsText"
+						   Text="My Lists"
+						   Grid.Column="0"
+						   Style="{StaticResource CaptionTextBlockStyle}"
+						   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+						   FontWeight="SemiBold" />
+				<Button x:Name="CreateListButton"
+						Content="&#xE710;"
+						Grid.Column="1"
+						FontFamily="Segoe MDL2 Assets"
+						Click="CreateList_Click"
+						Background="Transparent"
+						BorderThickness="0"
+						Padding="4"
+						FontSize="12" />
+			</Grid>
+
+			<!-- User Lists -->
+			<ScrollViewer Grid.Row="1">
+				<ItemsControl x:Name="UserListsView"
+							  ItemsSource="{x:Bind UserLists, Mode=OneWay}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate x:DataType="models:NavItem">
+							<controls:MenuItemControl Icon="{x:Bind Icon}"
+													  Text="{x:Bind Title}"
+													  IsSelected="{x:Bind IsSelected, Mode=OneWay}"
+													  ShowActions="True"
+													  ItemClicked="MenuItem_Clicked"
+													  EditClicked="MenuItem_EditClicked"
+													  DeleteClicked="MenuItem_DeleteClicked"
+													  Tag="{x:Bind}"
+													  Loaded="MenuItem_Loaded" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+
+			<!-- Settings -->
+			<Button x:Name="SettingsButton"
+					Grid.Row="2"
+					Click="Settings_Click"
+					HorizontalAlignment="Stretch"
+					HorizontalContentAlignment="Left"
+					Style="{StaticResource SubtleButtonStyle}"
+					Padding="20,12"
+					Margin="0,8,0,4">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<FontIcon x:Name="SettingsIcon"
+							  Glyph="&#xE713;"
+							  FontSize="16" />
+					<TextBlock x:Name="SettingsButtonText"
+							   Text="Settings" />
+				</StackPanel>
+			</Button>
+
+			<!-- Sync -->
+			<Button x:Name="SyncButton"
+					Grid.Row="3"
+					Click="Sync_Click"
+					HorizontalAlignment="Stretch"
+					HorizontalContentAlignment="Left"
+					Style="{StaticResource SubtleButtonStyle}"
+					Padding="20,12"
+					Margin="0,4,0,8">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<FontIcon x:Name="SyncIcon"
+							  Glyph="&#xE72C;"
+							  FontSize="16" />
+					<TextBlock x:Name="SyncButtonText"
+							   Text="Sync Lists" />
+				</StackPanel>
+			</Button>
 		</Grid>
-
-		<!-- User Lists -->
-		<ScrollViewer Grid.Row="1">
-            <ItemsControl x:Name="UserListsView"
-                          ItemsSource="{x:Bind UserLists, Mode=OneWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="models:NavItem">
-                        <controls:MenuItemControl Icon="{x:Bind Icon}"
-                                                  Text="{x:Bind Title}"
-                                                  IsSelected="{x:Bind IsSelected, Mode=OneWay}"
-                                                  ShowActions="True"
-                                                  ItemClicked="MenuItem_Clicked"
-                                                  EditClicked="MenuItem_EditClicked"
-                                                  DeleteClicked="MenuItem_DeleteClicked"
-                                                  Tag="{x:Bind}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-
-        <!-- Settings -->
-        <Button x:Name="SettingsButton"
-                Grid.Row="2"
-                Click="Settings_Click"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Left"
-                Style="{StaticResource SubtleButtonStyle}"
-                Padding="20,12"
-                Margin="0,8,0,4">
-            <StackPanel Orientation="Horizontal"
-                        Spacing="12">
-                <FontIcon Glyph="&#xE713;"
-                          FontSize="16" />
-                <TextBlock Text="Settings" />
-            </StackPanel>
-        </Button>
-
-        <!-- Sync -->
-        <Button Grid.Row="3"
-                Click="Sync_Click"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Left"
-                Style="{StaticResource SubtleButtonStyle}"
-                Padding="20,12"
-                Margin="0,4,0,8">
-            <StackPanel Orientation="Horizontal"
-                        Spacing="12">
-                <FontIcon Glyph="&#xE72C;"
-                          FontSize="16" />
-                <TextBlock Text="Sync Lists" />
-            </StackPanel>
-        </Button>
-    </Grid>
+	</Grid>
 </UserControl>

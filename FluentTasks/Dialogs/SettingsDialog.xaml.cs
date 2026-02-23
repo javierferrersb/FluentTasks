@@ -16,6 +16,20 @@ public sealed partial class SettingsDialog : UserControl
     private readonly SettingsService _settingsService;
     private bool _isLoading;
 
+    /// <summary>
+    /// Raised when the hamburger menu button is clicked.
+    /// </summary>
+    public event EventHandler? HamburgerButtonClicked;
+
+    /// <summary>
+    /// Whether to show the hamburger menu button in the header.
+    /// </summary>
+    public bool ShowHamburgerButton
+    {
+        get => HamburgerButton.Visibility == Visibility.Visible;
+        set => HamburgerButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+    }
+
     public SettingsDialog(SettingsService settingsService)
     {
         _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
@@ -162,5 +176,10 @@ public sealed partial class SettingsDialog : UserControl
         {
             await _settingsService.LogOutAsync();
         }
+    }
+
+    private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+    {
+        HamburgerButtonClicked?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using FluentTasks.UI.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 
 namespace FluentTasks.UI.Controls;
 
@@ -22,6 +23,10 @@ public sealed partial class NavigationPanelControl : UserControl
         DependencyProperty.Register(nameof(IsSettingsSelected), typeof(bool),
             typeof(NavigationPanelControl), new PropertyMetadata(false, OnIsSettingsSelectedChanged));
 
+    public static readonly DependencyProperty IsCompactProperty =
+        DependencyProperty.Register(nameof(IsCompact), typeof(bool),
+            typeof(NavigationPanelControl), new PropertyMetadata(false, OnIsCompactChanged));
+
     public ObservableCollection<NavItem> UserLists
     {
         get => (ObservableCollection<NavItem>)GetValue(UserListsProperty);
@@ -32,6 +37,12 @@ public sealed partial class NavigationPanelControl : UserControl
     {
         get => (bool)GetValue(IsSettingsSelectedProperty);
         set => SetValue(IsSettingsSelectedProperty, value);
+    }
+
+    public bool IsCompact
+    {
+        get => (bool)GetValue(IsCompactProperty);
+        set => SetValue(IsCompactProperty, value);
     }
 
     /// <summary>Raised when any navigation item is clicked.</summary>
@@ -62,6 +73,72 @@ public sealed partial class NavigationPanelControl : UserControl
         if (d is NavigationPanelControl control)
         {
             control.UpdateSettingsButtonStyle();
+        }
+    }
+
+    private static void OnIsCompactChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NavigationPanelControl control)
+        {
+            control.UpdateCompactMode();
+        }
+    }
+
+    private void UpdateCompactMode()
+    {
+        if (IsCompact)
+        {
+            MyListsHeader.Visibility = Visibility.Collapsed;
+            SettingsButtonText.Visibility = Visibility.Collapsed;
+            SyncButtonText.Visibility = Visibility.Collapsed;
+            SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Center;
+            SyncButton.HorizontalContentAlignment = HorizontalAlignment.Center;
+            SettingsButton.Padding = new Thickness(8, 12, 8, 12);
+            SyncButton.Padding = new Thickness(8, 12, 8, 12);
+            NavContentGrid.Padding = new Thickness(4, 8, 4, 8);
+            ToolTipService.SetToolTip(SettingsButton, "Settings");
+            ToolTipService.SetToolTip(SyncButton, "Sync Lists");
+            ToolTipService.SetToolTip(CreateListButton, "Create new list");
+        }
+        else
+        {
+            MyListsHeader.Visibility = Visibility.Visible;
+            SettingsButtonText.Visibility = Visibility.Visible;
+            SyncButtonText.Visibility = Visibility.Visible;
+            SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+            SyncButton.HorizontalContentAlignment = HorizontalAlignment.Left;
+            SettingsButton.Padding = new Thickness(20, 12, 20, 12);
+            SyncButton.Padding = new Thickness(20, 12, 20, 12);
+            NavContentGrid.Padding = new Thickness(8, 2, 8, 8);
+            ToolTipService.SetToolTip(SettingsButton, null);
+            ToolTipService.SetToolTip(SyncButton, null);
+            ToolTipService.SetToolTip(CreateListButton, null);
+        }
+
+        // Update all menu item controls
+        UpdateMenuItemsCompactMode();
+    }
+
+    private void UpdateMenuItemsCompactMode()
+    {
+        // Find all MenuItemControl instances in the visual tree and update them
+        UpdateMenuItemsInVisualTree(UserListsView);
+    }
+
+    private void UpdateMenuItemsInVisualTree(DependencyObject parent)
+    {
+        var count = VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+            if (child is MenuItemControl menuItem)
+            {
+                menuItem.IsCompact = IsCompact;
+            }
+            else
+            {
+                UpdateMenuItemsInVisualTree(child);
+            }
         }
     }
 
@@ -109,5 +186,13 @@ public sealed partial class NavigationPanelControl : UserControl
     private void Settings_Click(object sender, RoutedEventArgs e)
     {
         SettingsClicked?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void MenuItem_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is MenuItemControl menuItem)
+        {
+            menuItem.IsCompact = IsCompact;
+        }
     }
 }

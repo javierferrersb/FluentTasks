@@ -9,7 +9,8 @@
                PrimaryButtonClick="Save_Click">
 
     <StackPanel Spacing="16"
-                MinWidth="400">
+                MinWidth="280"
+                MaxWidth="500">
         <!-- Title -->
         <TextBox x:Name="TitleTextBox"
                  Header="Title"
@@ -28,6 +29,7 @@
 
                 <CalendarDatePicker x:Name="DueDatePicker"
                                     Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
                                     PlaceholderText="No due date" />
 
                 <Button Grid.Column="1"

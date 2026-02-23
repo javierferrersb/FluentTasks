@@ -19,6 +19,9 @@ public sealed partial class MenuItemControl : UserControl
     public static readonly DependencyProperty ShowActionsProperty =
         DependencyProperty.Register(nameof(ShowActions), typeof(bool), typeof(MenuItemControl), new PropertyMetadata(false));
 
+    public static readonly DependencyProperty IsCompactProperty =
+        DependencyProperty.Register(nameof(IsCompact), typeof(bool), typeof(MenuItemControl), new PropertyMetadata(false, OnIsCompactChanged));
+
     public string Icon
     {
         get => (string)GetValue(IconProperty);
@@ -43,6 +46,12 @@ public sealed partial class MenuItemControl : UserControl
         set => SetValue(ShowActionsProperty, value);
     }
 
+    public bool IsCompact
+    {
+        get => (bool)GetValue(IsCompactProperty);
+        set => SetValue(IsCompactProperty, value);
+    }
+
     public event EventHandler? ItemClicked;
     public event EventHandler? EditClicked;
     public event EventHandler? DeleteClicked;
@@ -54,7 +63,7 @@ public sealed partial class MenuItemControl : UserControl
 
         RootButton.PointerEntered += (_, _) =>
         {
-            if (ShowActions)
+            if (ShowActions && !IsCompact)
             {
                 EditButton.Opacity = 1;
                 EditButton.IsHitTestVisible = true;
@@ -76,6 +85,38 @@ public sealed partial class MenuItemControl : UserControl
         if (d is MenuItemControl control)
         {
             control.UpdateButtonStyle();
+        }
+    }
+
+    private static void OnIsCompactChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is MenuItemControl control)
+        {
+            control.UpdateCompactMode();
+        }
+    }
+
+    private void UpdateCompactMode()
+    {
+        if (IsCompact)
+        {
+            ItemText.Visibility = Visibility.Collapsed;
+            EditButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Collapsed;
+            ItemIcon.Margin = new Thickness(0);
+            RootButton.HorizontalContentAlignment = HorizontalAlignment.Center;
+            RootButton.Padding = new Thickness(8, 10, 8, 10);
+            ToolTipService.SetToolTip(RootButton, Text);
+        }
+        else
+        {
+            ItemText.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Visible;
+            DeleteButton.Visibility = Visibility.Visible;
+            ItemIcon.Margin = new Thickness(0, 0, 12, 0);
+            RootButton.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            RootButton.Padding = new Thickness(12, 8, 12, 8);
+            ToolTipService.SetToolTip(RootButton, null);
         }
     }
 

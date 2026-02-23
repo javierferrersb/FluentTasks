@@ -28,6 +28,16 @@ public sealed partial class TaskListControl : UserControl
             typeof(TaskListControl),
             new PropertyMetadata(null, OnViewModelChanged));
 
+    /// <summary>
+    /// Backing store for <see cref="ShowHamburgerButton"/>.
+    /// </summary>
+    public static readonly DependencyProperty ShowHamburgerButtonProperty =
+        DependencyProperty.Register(
+            nameof(ShowHamburgerButton),
+            typeof(bool),
+            typeof(TaskListControl),
+            new PropertyMetadata(false, OnShowHamburgerButtonChanged));
+
     private TaskItem? _draggedTask;
 
     public TaskListControl()
@@ -44,6 +54,20 @@ public sealed partial class TaskListControl : UserControl
         get => (TaskListViewModel?)GetValue(ViewModelProperty);
         set => SetValue(ViewModelProperty, value);
     }
+
+    /// <summary>
+    /// Whether to show the hamburger menu button in the header.
+    /// </summary>
+    public bool ShowHamburgerButton
+    {
+        get => (bool)GetValue(ShowHamburgerButtonProperty);
+        set => SetValue(ShowHamburgerButtonProperty, value);
+    }
+
+    /// <summary>
+    /// Raised when the hamburger menu button is clicked.
+    /// </summary>
+    public event EventHandler? HamburgerButtonClicked;
 
     /// <summary>
     /// The StatusOrb control exposed so the parent can drive ripple / status animations.
@@ -64,6 +88,19 @@ public sealed partial class TaskListControl : UserControl
             newVm.PropertyChanged += control.ViewModel_PropertyChanged;
             control.SyncAllState();
         }
+    }
+
+    private static void OnShowHamburgerButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is TaskListControl control)
+        {
+            control.HamburgerButton.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
+        }
+    }
+
+    private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+    {
+        HamburgerButtonClicked?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -475,5 +512,11 @@ public sealed partial class TaskListControl : UserControl
                 return result;
         }
         return null;
+    }
+
+    private void ThisControl_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        // Force VisualStateManager to re-evaluate based on control width
+        // This is handled automatically via AdaptiveTrigger on window width
     }
 }
