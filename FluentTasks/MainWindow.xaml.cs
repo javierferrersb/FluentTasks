@@ -86,6 +86,9 @@ public sealed partial class MainWindow : Window
 
         // Subscribe to theme changes
         _settingsService.ThemeChanged += OnThemeChanged;
+
+        // Subscribe to logout event
+        _settingsService.LoggedOut += OnLoggedOut;
     }
 
     private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -116,6 +119,7 @@ public sealed partial class MainWindow : Window
         ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
 
         _settingsService.ThemeChanged -= OnThemeChanged;
+        _settingsService.LoggedOut -= OnLoggedOut;
 
         if (this.Content is FrameworkElement root)
         {
@@ -145,6 +149,13 @@ public sealed partial class MainWindow : Window
         {
             rootElement.RequestedTheme = newTheme;
         }
+    }
+
+    private void OnLoggedOut(object? sender, EventArgs e)
+    {
+        // Restart the application by closing this window and opening a new one
+        // This will trigger re-authentication when the app re-initializes
+        Microsoft.Windows.AppLifecycle.AppInstance.Restart("");
     }
 
     private void UpdateTitleBarButtonColors()

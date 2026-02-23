@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using FluentTasks.Core.Models;
+using FluentTasks.Infrastructure.Google;
 using Microsoft.UI.Xaml;
 using Windows.Storage;
 
@@ -13,6 +14,7 @@ namespace FluentTasks.UI.Services;
 public sealed class SettingsService
 {
     private readonly ApplicationDataContainer _localSettings;
+    private readonly IGoogleAuthService _authService;
     private Window? _mainWindow;
 
     /// <summary>
@@ -20,13 +22,19 @@ public sealed class SettingsService
     /// </summary>
     public event EventHandler<ElementTheme>? ThemeChanged;
 
+    /// <summary>
+    /// Raised when the user logs out and the app should restart.
+    /// </summary>
+    public event EventHandler? LoggedOut;
+
     // Settings keys
     private const string ThemeKey = "AppTheme";
     private const string DefaultFilterKey = "DefaultFilter";
     private const string DefaultSortKey = "DefaultSort";
 
-    public SettingsService()
+    public SettingsService(IGoogleAuthService authService)
     {
+        _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         _localSettings = ApplicationData.Current.LocalSettings;
     }
 
@@ -133,17 +141,20 @@ public sealed class SettingsService
     {
         // Clear all settings except theme preference
         var savedTheme = AppTheme;
-        
+
         _localSettings.Values.Clear();
-        
+
         // Restore theme preference
         AppTheme = savedTheme;
 
         // Clear cache
         await ClearCacheAsync();
 
-        // TODO: Integrate with GoogleAuthService to clear tokens
-        // This would require injecting the auth service or raising an event
+        // Log out from Google Auth service
+        await _authService.LogOutAsync();
+
+        // Notify listeners that user has logged out
+        LoggedOut?.Invoke(this, EventArgs.Empty);
     }
 
     private void ApplyTheme(ElementTheme theme)

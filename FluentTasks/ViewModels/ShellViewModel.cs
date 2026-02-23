@@ -23,6 +23,7 @@ public sealed partial class ShellViewModel : ObservableObject
     private readonly ITaskService _taskService;
     private readonly IDialogService _dialogService;
     private readonly IconStorageService _iconStorageService;
+    private readonly SettingsService _settingsService;
 
     private readonly ObservableCollection<TaskList> _taskListsBackingStore = [];
 
@@ -95,11 +96,13 @@ public sealed partial class ShellViewModel : ObservableObject
     public ShellViewModel(
         ITaskService taskService,
         IDialogService dialogService,
-        IconStorageService iconStorageService)
+        IconStorageService iconStorageService,
+        SettingsService settingsService)
     {
         _taskService = taskService;
         _dialogService = dialogService;
         _iconStorageService = iconStorageService;
+        _settingsService = settingsService;
     }
 
     /// <summary>
@@ -137,7 +140,7 @@ public sealed partial class ShellViewModel : ObservableObject
             TaskListVM.BeginLoading();
 
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
-            TaskListVM.LoadTasks(tasks.ToList(), SortOption.None, FilterOption.Incomplete);
+            TaskListVM.LoadTasks(tasks.ToList(), _settingsService.DefaultSort, _settingsService.DefaultFilter);
 
             StatusText = "Ready";
             ShowSuccess($"Loaded {tasks.Count()} tasks");
