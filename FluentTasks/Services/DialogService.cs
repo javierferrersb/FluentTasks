@@ -43,7 +43,8 @@ internal sealed class DialogService : IDialogService
             PrimaryButtonText = confirmText,
             CloseButtonText = cancelText,
             DefaultButton = ContentDialogButton.Close,
-            XamlRoot = GetXamlRoot()
+            XamlRoot = GetXamlRoot(),
+            RequestedTheme = _currentTheme
         };
 
         var result = await dialog.ShowAsync();
@@ -81,7 +82,8 @@ internal sealed class DialogService : IDialogService
             PrimaryButtonText = "Add",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
-            XamlRoot = GetXamlRoot()
+            XamlRoot = GetXamlRoot(),
+            RequestedTheme = _currentTheme
         };
 
         var result = await dialog.ShowAsync();
@@ -102,7 +104,8 @@ internal sealed class DialogService : IDialogService
 
         var dialog = new Dialogs.TaskDetailsDialog(taskItem)
         {
-            XamlRoot = GetXamlRoot()
+            XamlRoot = GetXamlRoot(),
+            RequestedTheme = _currentTheme
         };
 
         var result = await dialog.ShowAsync();

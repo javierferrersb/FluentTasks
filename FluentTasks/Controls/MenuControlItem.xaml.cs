@@ -81,20 +81,11 @@ public sealed partial class MenuItemControl : UserControl
 
     private void UpdateButtonStyle()
     {
+        // Just switch the style - the Foreground bindings in XAML will automatically
+        // pick up the correct foreground from AccentButtonStyle or SubtleButtonStyle
         RootButton.Style = IsSelected
             ? (Style)Application.Current.Resources["AccentButtonStyle"]
             : (Style)Application.Current.Resources["SubtleButtonStyle"];
-
-        // Use proper theme resource lookup that works with light/dark mode
-        var foregroundKey = IsSelected
-            ? "TextOnAccentFillColorPrimaryBrush"
-            : "TextFillColorPrimaryBrush";
-
-        if (Application.Current.Resources.TryGetValue(foregroundKey, out var brush) && brush is Brush foregroundBrush)
-        {
-            EditButton.Foreground = foregroundBrush;
-            DeleteButton.Foreground = foregroundBrush;
-        }
     }
 
     private void RootButton_Click(object sender, RoutedEventArgs e)

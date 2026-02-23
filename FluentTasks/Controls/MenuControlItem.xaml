@@ -27,13 +27,15 @@
                       Glyph="{x:Bind Icon}"
                       FontSize="16"
                       VerticalAlignment="Center"
-                      Margin="0,0,12,0" />
+                      Margin="0,0,12,0"
+                      Foreground="{Binding Foreground, ElementName=RootButton}" />
 
             <TextBlock x:Name="ItemText"
                        Grid.Column="1"
                        Text="{x:Bind Text}"
                        Style="{StaticResource BodyTextBlockStyle}"
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Center"
+                       Foreground="{Binding Foreground, ElementName=RootButton}" />
 
             <Button x:Name="EditButton"
                     Grid.Column="2"
@@ -44,7 +46,7 @@
                     Padding="4"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Style="{StaticResource SubtleButtonStyle}"
+                    Foreground="{Binding Foreground, ElementName=RootButton}"
                     Opacity="0"
                     IsHitTestVisible="False"
                     Click="EditButton_Click" />
@@ -58,7 +60,7 @@
                     Padding="4"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Style="{StaticResource SubtleButtonStyle}"
+                    Foreground="{Binding Foreground, ElementName=RootButton}"
                     Opacity="0"
                     IsHitTestVisible="False"
                     Click="DeleteButton_Click" />
