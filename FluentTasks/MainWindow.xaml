@@ -19,7 +19,7 @@
                   Height="48"
                   Title="FluentTasks">
             <TitleBar.IconSource>
-                <ImageIconSource ImageSource="ms-appx:///Assets/Square44x44Logo.png" />
+                <ImageIconSource ImageSource="/Assets/Square44x44Logo.png"/>
             </TitleBar.IconSource>
         </TitleBar>
 

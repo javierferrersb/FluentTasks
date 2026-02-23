@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace FluentTasks.UI.Dialogs;
 
@@ -80,12 +79,6 @@ public sealed partial class SettingsDialog : UserControl
 
     private void LoadVersionInfo()
     {
-        var version = Assembly.GetExecutingAssembly().GetName().Version;
-        if (version != null)
-        {
-            VersionText.Text = $"Version {version.Major}.{version.Minor}.{version.Build}";
-        }
-
         var currentYear = DateTime.Now.Year;
         CopyrightText.Text = $"© {currentYear} Javier Ferrer. All rights reserved.";
     }
@@ -181,5 +174,107 @@ public sealed partial class SettingsDialog : UserControl
     private void HamburgerButton_Click(object sender, RoutedEventArgs e)
     {
         HamburgerButtonClicked?.Invoke(this, EventArgs.Empty);
+    }
+
+    private async void AboutDeveloper_Click(object sender, RoutedEventArgs e)
+    {
+        var content = new StackPanel
+        {
+            Spacing = 20,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            MinWidth = 300
+        };
+
+        // Profile picture from GitHub
+        var profileImage = new Microsoft.UI.Xaml.Controls.PersonPicture
+        {
+            Width = 100,
+            Height = 100,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            ProfilePicture = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(
+                new Uri("https://github.com/javierferrersb.png"))
+        };
+        content.Children.Add(profileImage);
+
+        // Name
+        var nameText = new TextBlock
+        {
+            Text = "Javier Ferrer",
+            Style = (Style)Application.Current.Resources["SubtitleTextBlockStyle"],
+            HorizontalAlignment = HorizontalAlignment.Center,
+            FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
+        };
+        content.Children.Add(nameText);
+
+        // Social links
+        var linksPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            Spacing = 12,
+            HorizontalAlignment = HorizontalAlignment.Center
+        };
+
+        // GitHub
+        var githubButton = new HyperlinkButton
+        {
+            NavigateUri = new Uri("https://github.com/javierferrersb"),
+            Content = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Spacing = 6,
+                Children =
+                {
+                    new FontIcon { Glyph = "\uE774", FontSize = 16 },
+                    new TextBlock { Text = "GitHub", VerticalAlignment = VerticalAlignment.Center }
+                }
+            }
+        };
+        linksPanel.Children.Add(githubButton);
+
+        // Twitter/X
+        var twitterButton = new HyperlinkButton
+        {
+            NavigateUri = new Uri("https://x.com/javiferrer01"),
+            Content = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Spacing = 6,
+                Children =
+                {
+                    new FontIcon { Glyph = "\uE8F3", FontSize = 16 },
+                    new TextBlock { Text = "X", VerticalAlignment = VerticalAlignment.Center }
+                }
+            }
+        };
+        linksPanel.Children.Add(twitterButton);
+
+        // LinkedIn
+        var linkedinButton = new HyperlinkButton
+        {
+            NavigateUri = new Uri("https://linkedin.com/in/javierferrersb"),
+            Content = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Spacing = 6,
+                Children =
+                {
+                    new FontIcon { Glyph = "\uE8FA", FontSize = 16 },
+                    new TextBlock { Text = "LinkedIn", VerticalAlignment = VerticalAlignment.Center }
+                }
+            }
+        };
+        linksPanel.Children.Add(linkedinButton);
+
+        content.Children.Add(linksPanel);
+
+        var dialog = new ContentDialog
+        {
+            Title = "About the Developer",
+            Content = content,
+            CloseButtonText = "Close",
+            XamlRoot = XamlRoot
+        };
+
+        await dialog.ShowAsync();
     }
 }
