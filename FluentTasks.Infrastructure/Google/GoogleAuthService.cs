@@ -1,24 +1,45 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using System.Reflection;
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Util.Store;
 
 namespace FluentTasks.Infrastructure.Google
 {
     public class GoogleAuthService : IGoogleAuthService
     {
+        private const string ClientSecretsFileName = "client_secrets.json";
+
         private UserCredential? _credential;
         private readonly string _appDataPath;
-
-        private readonly ClientSecrets _clientSecrets = new()
-        {
-            ClientId = "649786439194-47tih5e6b7kvetmk4dhgntdaiar4u4oo.apps.googleusercontent.com",
-            ClientSecret = "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"
-        };
+        private readonly Lazy<ClientSecrets> _clientSecrets;
 
         public GoogleAuthService()
         {
             _appDataPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "FluentTasks");
+
+            _clientSecrets = new Lazy<ClientSecrets>(LoadClientSecrets);
+        }
+
+        private static ClientSecrets LoadClientSecrets()
+        {
+            // Look for client_secrets.json next to the executable
+            var exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                ?? throw new InvalidOperationException("Could not determine executable directory.");
+
+            var secretsPath = Path.Combine(exeDir, ClientSecretsFileName);
+
+            if (!File.Exists(secretsPath))
+            {
+                throw new FileNotFoundException(
+                    $"Google API credentials not found. Please create '{ClientSecretsFileName}' in the application directory. " +
+                    $"See 'client_secrets.json.template' for the expected format.",
+                    secretsPath);
+            }
+
+            using var stream = File.OpenRead(secretsPath);
+            var secrets = GoogleClientSecrets.FromStream(stream);
+            return secrets.Secrets;
         }
 
         public async Task<UserCredential> GetCredentialAsync()
@@ -27,7 +48,7 @@ namespace FluentTasks.Infrastructure.Google
                 return _credential;
 
             _credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                _clientSecrets,
+                _clientSecrets.Value,
                 ["https://www.googleapis.com/auth/tasks"],
                 "user",
                 CancellationToken.None,

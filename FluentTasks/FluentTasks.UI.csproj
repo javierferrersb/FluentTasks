@@ -122,6 +122,13 @@
     <Folder Include="Views\" />
   </ItemGroup>
 
+  <!-- Copy client_secrets.json to output directory if it exists (not in source control) -->
+  <ItemGroup>
+    <Content Include="client_secrets.json" Condition="Exists('client_secrets.json')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
     Explorer "Package and Publish" context menu entry to be enabled for this project even if
