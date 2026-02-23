@@ -15,10 +15,13 @@ public sealed class SettingsService
     private readonly ApplicationDataContainer _localSettings;
     private Window? _mainWindow;
 
+    /// <summary>
+    /// Raised when the application theme changes.
+    /// </summary>
+    public event EventHandler<ElementTheme>? ThemeChanged;
+
     // Settings keys
     private const string ThemeKey = "AppTheme";
-    private const string StartWithWindowsKey = "StartWithWindows";
-    private const string LaunchMinimizedKey = "LaunchMinimized";
     private const string DefaultFilterKey = "DefaultFilter";
     private const string DefaultSortKey = "DefaultSort";
 
@@ -53,28 +56,6 @@ public sealed class SettingsService
             _localSettings.Values[ThemeKey] = (int)value;
             ApplyTheme(value);
         }
-    }
-
-    /// <summary>
-    /// Gets or sets whether the app should start with Windows.
-    /// </summary>
-    public bool StartWithWindows
-    {
-        get => _localSettings.Values[StartWithWindowsKey] as bool? ?? false;
-        set
-        {
-            _localSettings.Values[StartWithWindowsKey] = value;
-            _ = UpdateStartupTaskAsync(value);
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets whether the app should launch minimized.
-    /// </summary>
-    public bool LaunchMinimized
-    {
-        get => _localSettings.Values[LaunchMinimizedKey] as bool? ?? false;
-        set => _localSettings.Values[LaunchMinimizedKey] = value;
     }
 
     /// <summary>
@@ -171,27 +152,8 @@ public sealed class SettingsService
         {
             rootElement.RequestedTheme = theme;
         }
-    }
 
-    private async Task UpdateStartupTaskAsync(bool enable)
-    {
-        try
-        {
-            var startupTask = await Windows.ApplicationModel.StartupTask.GetAsync("FluentTasksStartup");
-            
-            if (enable)
-            {
-                var state = await startupTask.RequestEnableAsync();
-                // Handle different states if needed
-            }
-            else
-            {
-                startupTask.Disable();
-            }
-        }
-        catch
-        {
-            // Startup task may not be registered or available
-        }
+        // Notify listeners that theme has changed
+        ThemeChanged?.Invoke(this, theme);
     }
 }

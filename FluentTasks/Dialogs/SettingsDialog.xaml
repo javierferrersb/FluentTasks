@@ -9,24 +9,6 @@
             <TextBlock Text="Settings"
                        Style="{StaticResource TitleLargeTextBlockStyle}" />
 
-            <!-- General Section -->
-            <StackPanel Spacing="16">
-                <TextBlock Text="General"
-                           Style="{StaticResource SubtitleTextBlockStyle}" />
-
-                <StackPanel Spacing="12">
-                    <ToggleSwitch x:Name="StartWithWindowsToggle"
-                                  Header="Start with Windows"
-                                  OnContent="On"
-                                  OffContent="Off" />
-
-                    <ToggleSwitch x:Name="LaunchMinimizedToggle"
-                                  Header="Launch minimized"
-                                  OnContent="On"
-                                  OffContent="Off" />
-                </StackPanel>
-            </StackPanel>
-
             <!-- Appearance Section -->
             <StackPanel Spacing="16">
                 <TextBlock Text="Appearance"

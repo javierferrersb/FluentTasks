@@ -1,9 +1,12 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
+using FluentTasks.Core.Models;
 using FluentTasks.UI.Controls;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
 using FluentTasks.UI.ViewModels;
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
@@ -16,12 +19,16 @@ public sealed partial class MainWindow : Window
     private readonly Action _onRippleRequested;
     private readonly Action<OrbStatusKind> _onOrbStatusChanged;
     private readonly Action<string> _onTemporaryStatusRequested;
+    private readonly SettingsService _settingsService;
+    private readonly DialogService _dialogService;
 
     public MainWindow()
     {
         this.InitializeComponent();
 
         ViewModel = App.GetService<ShellViewModel>();
+        _settingsService = App.GetService<SettingsService>();
+        _dialogService = App.GetService<DialogService>();
 
         // Store handlers so they can be unsubscribed on close
         _onRippleRequested = () => TaskList.Orb.TriggerRipple();
@@ -62,15 +69,23 @@ public sealed partial class MainWindow : Window
         SetTitleBar(AppTitleBar);
         this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
+        // Initialize title bar button colors for current theme
+        UpdateTitleBarButtonColors();
+
         // Initialize the dialog service with the XamlRoot once content is loaded
         if (this.Content is FrameworkElement root)
         {
             root.Loaded += (_, _) =>
             {
-                var dialogService = App.GetService<DialogService>();
-                dialogService.SetXamlRoot(root.XamlRoot);
+                _dialogService.SetXamlRoot(root.XamlRoot);
+
+                // Set initial theme for dialogs
+                _dialogService.SetTheme(_settingsService.AppTheme);
             };
         }
+
+        // Subscribe to theme changes
+        _settingsService.ThemeChanged += OnThemeChanged;
     }
 
     private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -99,6 +114,77 @@ public sealed partial class MainWindow : Window
         ViewModel.OrbStatusChanged -= _onOrbStatusChanged;
         ViewModel.TemporaryStatusRequested -= _onTemporaryStatusRequested;
         ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+
+        _settingsService.ThemeChanged -= OnThemeChanged;
+
+        if (this.Content is FrameworkElement root)
+        {
+            root.ActualThemeChanged -= RootElement_ActualThemeChanged;
+        }
+    }
+
+    private void RootElement_ActualThemeChanged(FrameworkElement sender, object args)
+    {
+        // When Windows system theme changes, update the dialog service and title bar
+        _dialogService.SetTheme(sender.ActualTheme);
+        UpdateTitleBarButtonColors();
+
+        // No need to refresh task list - theme resources will update automatically
+    }
+
+    private void OnThemeChanged(object? sender, ElementTheme newTheme)
+    {
+        // Update theme for dialogs
+        _dialogService.SetTheme(newTheme);
+
+        // Update title bar button colors
+        UpdateTitleBarButtonColors();
+
+        // Apply theme immediately - ThemeResources will update automatically
+        if (this.Content is FrameworkElement rootElement)
+        {
+            rootElement.RequestedTheme = newTheme;
+        }
+    }
+
+    private void UpdateTitleBarButtonColors()
+    {
+        // Determine the actual theme being used
+        var actualTheme = ElementTheme.Default;
+        if (this.Content is FrameworkElement rootElement)
+        {
+            actualTheme = rootElement.ActualTheme;
+        }
+
+        var titleBar = this.AppWindow.TitleBar;
+
+        // Reset colors to defaults based on theme
+        if (actualTheme == ElementTheme.Light)
+        {
+            // Light theme colors
+            titleBar.ButtonForegroundColor = Colors.Black;
+            titleBar.ButtonHoverForegroundColor = Colors.Black;
+            titleBar.ButtonPressedForegroundColor = Colors.Black;
+            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonHoverBackgroundColor = null; // Use system default
+            titleBar.ButtonPressedBackgroundColor = null; // Use system default
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        }
+        else
+        {
+            // Dark theme colors
+            titleBar.ButtonForegroundColor = Colors.White;
+            titleBar.ButtonHoverForegroundColor = Colors.White;
+            titleBar.ButtonPressedForegroundColor = Colors.White;
+            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonHoverBackgroundColor = null; // Use system default
+            titleBar.ButtonPressedBackgroundColor = null; // Use system default
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        }
     }
 
     private void OnItemClicked(object? sender, NavItem navItem)
@@ -115,8 +201,7 @@ public sealed partial class MainWindow : Window
 
     private void OnSettingsClicked(object? sender, EventArgs e)
     {
-        var settingsService = App.GetService<SettingsService>();
-        var settingsControl = new Dialogs.SettingsDialog(settingsService);
+        var settingsControl = new Dialogs.SettingsDialog(_settingsService);
 
         SettingsContainer.Content = settingsControl;
         SettingsContainer.Visibility = Visibility.Visible;

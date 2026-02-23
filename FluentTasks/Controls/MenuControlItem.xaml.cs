@@ -85,12 +85,16 @@ public sealed partial class MenuItemControl : UserControl
             ? (Style)Application.Current.Resources["AccentButtonStyle"]
             : (Style)Application.Current.Resources["SubtleButtonStyle"];
 
-        var foregroundBrush = IsSelected
-            ? (Brush)Application.Current.Resources["TextOnAccentFillColorPrimaryBrush"]
-            : (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"];
+        // Use proper theme resource lookup that works with light/dark mode
+        var foregroundKey = IsSelected
+            ? "TextOnAccentFillColorPrimaryBrush"
+            : "TextFillColorPrimaryBrush";
 
-        EditButton.Foreground = foregroundBrush;
-        DeleteButton.Foreground = foregroundBrush;
+        if (Application.Current.Resources.TryGetValue(foregroundKey, out var brush) && brush is Brush foregroundBrush)
+        {
+            EditButton.Foreground = foregroundBrush;
+            DeleteButton.Foreground = foregroundBrush;
+        }
     }
 
     private void RootButton_Click(object sender, RoutedEventArgs e)

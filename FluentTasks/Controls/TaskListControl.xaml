@@ -259,7 +259,8 @@
                                                         <!-- Chips Row -->
                                                         <StackPanel Orientation="Horizontal"
                                                                     Spacing="6">
-                                                            <Border Background="{Binding IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
+                                                            <Border x:Name="DueDateChipBorder"
+                                                                    Background="{Binding IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
                                                                     BorderBrush="{Binding IsOverdue, Converter={StaticResource OverdueToBorderConverter}}"
                                                                     BorderThickness="1"
                                                                     CornerRadius="4"
@@ -267,14 +268,15 @@
                                                                     Visibility="{Binding HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}"
                                                                     Tapped="DateChip_Tapped"
                                                                     Tag="{Binding}">
-                                                                <TextBlock Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
+                                                                <TextBlock x:Name="DueDateChipText"
+                                                                           Text="{Binding DueDate, Converter={StaticResource DateToStringConverter}}"
                                                                            Style="{StaticResource CaptionTextBlockStyle}"
                                                                            Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
                                                                            FontWeight="SemiBold" />
                                                             </Border>
 
-                                                            <Border Background="{ThemeResource SubtleFillColorSecondaryBrush}"
-                                                                    BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
+                                                            <Border Background="{ThemeResource SystemFillColorNeutralBackgroundBrush}"
+                                                                    BorderBrush="{ThemeResource SystemFillColorNeutralBrush}"
                                                                     BorderThickness="1"
                                                                     CornerRadius="4"
                                                                     Padding="6,2"

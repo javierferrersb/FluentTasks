@@ -24,8 +24,6 @@ public sealed partial class SettingsDialog : UserControl
         LoadVersionInfo();
 
         // Wire up event handlers
-        StartWithWindowsToggle.Toggled += StartWithWindowsToggle_Toggled;
-        LaunchMinimizedToggle.Toggled += LaunchMinimizedToggle_Toggled;
         ThemeRadioButtons.SelectionChanged += ThemeRadioButtons_SelectionChanged;
         DefaultFilterComboBox.SelectionChanged += DefaultFilterComboBox_SelectionChanged;
         DefaultSortComboBox.SelectionChanged += DefaultSortComboBox_SelectionChanged;
@@ -34,10 +32,6 @@ public sealed partial class SettingsDialog : UserControl
     private void LoadSettings()
     {
         _isLoading = true;
-
-        // Load startup settings
-        StartWithWindowsToggle.IsOn = _settingsService.StartWithWindows;
-        LaunchMinimizedToggle.IsOn = _settingsService.LaunchMinimized;
 
         // Load theme
         var theme = _settingsService.AppTheme;
@@ -80,22 +74,6 @@ public sealed partial class SettingsDialog : UserControl
 
         var currentYear = DateTime.Now.Year;
         CopyrightText.Text = $"© {currentYear} Javier Ferrer. All rights reserved.";
-    }
-
-    private void StartWithWindowsToggle_Toggled(object sender, RoutedEventArgs e)
-    {
-        if (!_isLoading)
-        {
-            _settingsService.StartWithWindows = StartWithWindowsToggle.IsOn;
-        }
-    }
-
-    private void LaunchMinimizedToggle_Toggled(object sender, RoutedEventArgs e)
-    {
-        if (!_isLoading)
-        {
-            _settingsService.LaunchMinimized = LaunchMinimizedToggle.IsOn;
-        }
     }
 
     private void ThemeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)

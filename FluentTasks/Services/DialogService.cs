@@ -14,6 +14,7 @@ namespace FluentTasks.UI.Services;
 internal sealed class DialogService : IDialogService
 {
     private XamlRoot? _xamlRoot;
+    private ElementTheme _currentTheme = ElementTheme.Default;
 
     /// <summary>
     /// Sets the <see cref="XamlRoot"/> used for presenting dialogs.
@@ -22,6 +23,14 @@ internal sealed class DialogService : IDialogService
     public void SetXamlRoot(XamlRoot xamlRoot)
     {
         _xamlRoot = xamlRoot;
+    }
+
+    /// <summary>
+    /// Updates the current theme for dialogs.
+    /// </summary>
+    public void SetTheme(ElementTheme theme)
+    {
+        _currentTheme = theme;
     }
 
     /// <inheritdoc />
@@ -46,7 +55,8 @@ internal sealed class DialogService : IDialogService
     {
         var dialog = new Dialogs.ListEditorDialog(currentIcon, currentName)
         {
-            XamlRoot = GetXamlRoot()
+            XamlRoot = GetXamlRoot(),
+            RequestedTheme = _currentTheme
         };
 
         var result = await dialog.ShowAsync();

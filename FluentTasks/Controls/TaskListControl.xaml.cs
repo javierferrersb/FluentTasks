@@ -157,14 +157,14 @@ public sealed partial class TaskListControl : UserControl
             case nameof(TaskListViewModel.SortButtonText):
                 SortButtonText.Text = ViewModel!.SortButtonText;
                 SortButtonText.Foreground = ViewModel.IsSortActive
-                    ? (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"]
-                    : (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+                    ? GetThemeResource<Brush>("AccentTextFillColorPrimaryBrush")
+                    : GetThemeResource<Brush>("TextFillColorSecondaryBrush");
                 break;
             case nameof(TaskListViewModel.FilterButtonText):
                 FilterButtonText.Text = ViewModel!.FilterButtonText;
                 FilterButtonText.Foreground = ViewModel.IsFilterActive
-                    ? (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"]
-                    : (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"];
+                    ? GetThemeResource<Brush>("AccentTextFillColorPrimaryBrush")
+                    : GetThemeResource<Brush>("TextFillColorSecondaryBrush");
                 break;
             case nameof(TaskListViewModel.NewTaskTitle):
                 if (NewTaskInput.Text != ViewModel!.NewTaskTitle)
@@ -394,13 +394,35 @@ public sealed partial class TaskListControl : UserControl
     private void TaskCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {
         if (sender is Border border)
-            border.Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+        {
+            // Use SubtleFillColorSecondary for a subtle but visible hover effect
+            border.Background = GetThemeResource<Brush>("SubtleFillColorSecondaryBrush");
+        }
     }
 
     private void TaskCard_PointerExited(object sender, PointerRoutedEventArgs e)
     {
         if (sender is Border border)
-            border.Background = (Brush)Application.Current.Resources["LayerFillColorDefaultBrush"];
+        {
+            // Clear the local value to let the style's ThemeResource take over
+            border.ClearValue(Border.BackgroundProperty);
+        }
+    }
+
+    private T? GetThemeResource<T>(string resourceKey) where T : class
+    {
+        // Try to get resource from XamlRoot first (respects current theme)
+        if (this.XamlRoot?.Content is FrameworkElement root)
+        {
+            if (root.Resources.TryGetValue(resourceKey, out var resource))
+                return resource as T;
+        }
+
+        // Fallback to application resources
+        if (Application.Current.Resources.TryGetValue(resourceKey, out var appResource))
+            return appResource as T;
+
+        return null;
     }
 
     private void TaskTitle_PointerEntered(object sender, PointerRoutedEventArgs e)
