@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using FluentTasks.Core.Models;
 using FluentTasks.UI.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FluentTasks.UI.Controls;
 
@@ -207,6 +207,17 @@ public sealed partial class TaskListControl : UserControl
                 if (NewTaskInput.Text != ViewModel!.NewTaskTitle)
                     NewTaskInput.Text = ViewModel.NewTaskTitle;
                 break;
+            case nameof(TaskListViewModel.CurrentSort):
+                SyncSortCheckedState();
+                break;
+            case nameof(TaskListViewModel.CurrentFilter):
+                SyncFilterCheckedState();
+                break;
+            case nameof(TaskListViewModel.EmptyStateIcon):
+            case nameof(TaskListViewModel.EmptyStateTitle):
+            case nameof(TaskListViewModel.EmptyStateSubtitle):
+                SyncEmptyStateText();
+                break;
         }
     }
 
@@ -221,6 +232,42 @@ public sealed partial class TaskListControl : UserControl
         AddTaskInputGrid.Visibility = ViewModel.ShowAddTaskInput ? Visibility.Visible : Visibility.Collapsed;
         SortButtonText.Text = ViewModel.SortButtonText;
         FilterButtonText.Text = ViewModel.FilterButtonText;
+        SyncSortCheckedState();
+        SyncFilterCheckedState();
+        SyncEmptyStateText();
+    }
+
+    private void SyncSortCheckedState()
+    {
+        if (ViewModel is null) return;
+
+        SortDefault.IsChecked = ViewModel.CurrentSort == SortOption.None;
+        SortDueDateAsc.IsChecked = ViewModel.CurrentSort == SortOption.DueDateAscending;
+        SortDueDateDesc.IsChecked = ViewModel.CurrentSort == SortOption.DueDateDescending;
+        SortAlpha.IsChecked = ViewModel.CurrentSort == SortOption.Alphabetical;
+        SortAlphaRev.IsChecked = ViewModel.CurrentSort == SortOption.AlphabeticalReverse;
+        SortCompleted.IsChecked = ViewModel.CurrentSort == SortOption.CompletedLast;
+    }
+
+    private void SyncFilterCheckedState()
+    {
+        if (ViewModel is null) return;
+
+        FilterAll.IsChecked = ViewModel.CurrentFilter == FilterOption.All;
+        FilterIncomplete.IsChecked = ViewModel.CurrentFilter == FilterOption.Incomplete;
+        FilterCompleted.IsChecked = ViewModel.CurrentFilter == FilterOption.Completed;
+        FilterOverdue.IsChecked = ViewModel.CurrentFilter == FilterOption.Overdue;
+        FilterToday.IsChecked = ViewModel.CurrentFilter == FilterOption.Today;
+        FilterWeek.IsChecked = ViewModel.CurrentFilter == FilterOption.ThisWeek;
+    }
+
+    private void SyncEmptyStateText()
+    {
+        if (ViewModel is null) return;
+
+        EmptyStateIcon.Text = ViewModel.EmptyStateIcon;
+        EmptyStateTitle.Text = ViewModel.EmptyStateTitle;
+        EmptyStateSubtitle.Text = ViewModel.EmptyStateSubtitle;
     }
 
     // --- Add task ---
@@ -339,35 +386,19 @@ public sealed partial class TaskListControl : UserControl
 
     private void SortMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is MenuFlyoutItem item &&
+        if (sender is RadioMenuFlyoutItem item &&
             Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sortOption))
         {
             ViewModel?.SetSort(sortOption);
-
-            SortDefault.Icon = null;
-            SortDueDateAsc.Icon = null;
-            SortDueDateDesc.Icon = null;
-            SortAlpha.Icon = null;
-            SortAlphaRev.Icon = null;
-            SortCompleted.Icon = null;
-            item.Icon = new FontIcon { Glyph = "\uE73E" };
         }
     }
 
     private void FilterMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is MenuFlyoutItem item &&
+        if (sender is RadioMenuFlyoutItem item &&
             Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filterOption))
         {
             ViewModel?.SetFilter(filterOption);
-
-            FilterAll.Icon = null;
-            FilterIncomplete.Icon = null;
-            FilterCompleted.Icon = null;
-            FilterOverdue.Icon = null;
-            FilterToday.Icon = null;
-            FilterWeek.Icon = null;
-            item.Icon = new FontIcon { Glyph = "\uE73E" };
         }
     }
 

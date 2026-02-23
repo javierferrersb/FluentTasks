@@ -6,7 +6,6 @@ using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Xaml;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
@@ -136,14 +135,12 @@ public sealed partial class ShellViewModel : ObservableObject
 
         try
         {
-            StatusText = "Loading...";
             TaskListVM.BeginLoading();
 
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
             TaskListVM.LoadTasks(tasks.ToList(), _settingsService.DefaultSort, _settingsService.DefaultFilter);
 
             StatusText = "Ready";
-            ShowSuccess($"Loaded {tasks.Count()} tasks");
         }
         catch (Exception ex)
         {

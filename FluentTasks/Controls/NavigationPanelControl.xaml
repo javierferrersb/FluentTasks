@@ -41,7 +41,8 @@
 						Background="Transparent"
 						BorderThickness="0"
 						Padding="4"
-						FontSize="12" />
+						FontSize="12"
+						ToolTipService.ToolTip="Create new list" />
 			</Grid>
 
 			<!-- User Lists -->

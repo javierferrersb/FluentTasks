@@ -61,6 +61,15 @@ public sealed partial class TaskListViewModel : ObservableObject
     [ObservableProperty]
     private bool _isFilterActive;
 
+    [ObservableProperty]
+    private string _emptyStateIcon = "✓";
+
+    [ObservableProperty]
+    private string _emptyStateTitle = "No tasks";
+
+    [ObservableProperty]
+    private string _emptyStateSubtitle = "Add a task to get started";
+
     /// <summary>
     /// Whether this is a smart list (aggregated from all lists) vs a single user list.
     /// </summary>
@@ -136,6 +145,7 @@ public sealed partial class TaskListViewModel : ObservableObject
         {
             Tasks = [];
             IsEmpty = true;
+            UpdateEmptyStateText();
             return;
         }
 
@@ -197,6 +207,7 @@ public sealed partial class TaskListViewModel : ObservableObject
 
         Tasks = new ObservableCollection<TaskItem>(filteredList);
         IsEmpty = filteredList.Count == 0;
+        UpdateEmptyStateText();
     }
 
     /// <summary>
@@ -206,6 +217,36 @@ public sealed partial class TaskListViewModel : ObservableObject
     {
         SearchQuery = query;
         ApplySortAndFilter();
+    }
+
+    private void UpdateEmptyStateText()
+    {
+        if (!IsEmpty)
+        {
+            return;
+        }
+
+        bool hasSearchQuery = !string.IsNullOrWhiteSpace(SearchQuery);
+        bool hasActiveFilter = CurrentFilter != FilterOption.All && CurrentFilter != FilterOption.Incomplete;
+
+        if (hasSearchQuery)
+        {
+            EmptyStateIcon = "🔍";
+            EmptyStateTitle = "No results found";
+            EmptyStateSubtitle = "Try a different search term";
+        }
+        else if (hasActiveFilter)
+        {
+            EmptyStateIcon = "🔍";
+            EmptyStateTitle = "No matching tasks";
+            EmptyStateSubtitle = "Try changing or clearing the filter";
+        }
+        else
+        {
+            EmptyStateIcon = "✓";
+            EmptyStateTitle = "No tasks";
+            EmptyStateSubtitle = "Add a task to get started";
+        }
     }
 
     /// <summary>

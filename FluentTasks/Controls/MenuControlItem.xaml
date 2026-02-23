@@ -51,7 +51,8 @@
                     Foreground="{Binding Foreground, ElementName=RootButton}"
                     Opacity="0"
                     IsHitTestVisible="False"
-                    Click="EditButton_Click" />
+                    Click="EditButton_Click"
+                    ToolTipService.ToolTip="Edit list" />
 
             <Button x:Name="DeleteButton"
                     Grid.Column="3"
@@ -65,7 +66,8 @@
                     Foreground="{Binding Foreground, ElementName=RootButton}"
                     Opacity="0"
                     IsHitTestVisible="False"
-                    Click="DeleteButton_Click" />
+                    Click="DeleteButton_Click"
+                    ToolTipService.ToolTip="Delete list" />
         </Grid>
     </Button>
 </UserControl>
