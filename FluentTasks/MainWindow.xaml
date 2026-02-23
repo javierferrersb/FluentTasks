@@ -19,9 +19,7 @@
                   Height="48"
                   Title="FluentTasks">
             <TitleBar.IconSource>
-                <FontIconSource Glyph="&#xE73A;"
-                                FontFamily="Segoe MDL2 Assets"
-                                Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                <ImageIconSource ImageSource="ms-appx:///Assets/Square44x44Logo.png" />
             </TitleBar.IconSource>
         </TitleBar>
 

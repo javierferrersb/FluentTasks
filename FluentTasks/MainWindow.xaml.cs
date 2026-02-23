@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using FluentTasks.Core.Models;
 using FluentTasks.UI.Controls;
@@ -77,6 +78,10 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+
+        // Set window title (appears in taskbar) and icon
+        Title = "FluentTasks";
+        this.AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
 
         // Initialize title bar button colors for current theme
         UpdateTitleBarButtonColors();
