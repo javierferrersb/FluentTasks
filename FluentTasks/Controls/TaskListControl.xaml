@@ -61,10 +61,41 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- Page Header with optional hamburger button - Always visible -->
+        <Grid Grid.Row="0"
+              Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Uid="HamburgerButton"
+                    x:Name="HamburgerButton"
+                    Grid.Column="0"
+                    Click="HamburgerButton_Click"
+                    VerticalAlignment="Center"
+                    Padding="10"
+                    Margin="0,0,8,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Visibility="Collapsed"
+                    ToolTipService.ToolTip="Toggle navigation">
+                <FontIcon Glyph="&#xE700;"
+                          FontSize="18" />
+            </Button>
+
+            <TextBlock Grid.Column="1"
+                       x:Uid="TaskListTitleBlock"
+                       x:Name="TaskListTitle"
+                       Text="My Tasks"
+                       Style="{StaticResource TitleLargeTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed" />
+        </Grid>
+
         <!-- Empty State - Show when no list selected -->
         <StackPanel x:Name="NoListSelectedState"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
+                    Grid.Row="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Spacing="16"
@@ -88,46 +119,14 @@
 
         <!-- Task Content - Show when list selected -->
         <Grid x:Name="TaskContentArea"
-              Grid.RowSpan="2"
+              Grid.Row="1"
               Visibility="Collapsed">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Page Header with optional hamburger button -->
-            <Grid Grid.Row="0"
-                  Margin="0,0,0,16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button x:Uid="HamburgerButton"
-                        x:Name="HamburgerButton"
-                        Grid.Column="0"
-                        Click="HamburgerButton_Click"
-                        VerticalAlignment="Center"
-                        Padding="10"
-                        Margin="0,0,8,0"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Visibility="Collapsed"
-                        ToolTipService.ToolTip="Toggle navigation">
-                    <FontIcon Glyph="&#xE700;"
-                              FontSize="18" />
-                </Button>
-
-                <TextBlock Grid.Column="1"
-                           x:Uid="TaskListTitleBlock"
-                           x:Name="TaskListTitle"
-                           Text="My Tasks"
-                           Style="{StaticResource TitleLargeTextBlockStyle}"
-                           VerticalAlignment="Center" />
-            </Grid>
-
             <!-- Tasks Container -->
-            <Border Grid.Row="1"
+            <Border Grid.Row="0"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
@@ -204,7 +203,8 @@
                             </Button.Flyout>
                             <StackPanel Orientation="Horizontal"
                                         Spacing="6">
-                                <FontIcon Glyph="&#xE8CB;"
+                                <FontIcon x:Name="SortButtonIcon"
+                                          Glyph="&#xE8CB;"
                                           FontSize="14" />
                                 <TextBlock x:Name="SortButtonText"
                                            Text="Sort"
@@ -261,7 +261,8 @@
                             </Button.Flyout>
                             <StackPanel Orientation="Horizontal"
                                         Spacing="6">
-                                <FontIcon Glyph="&#xE71C;"
+                                <FontIcon x:Name="FilterButtonIcon"
+                                          Glyph="&#xE71C;"
                                           FontSize="14" />
                                 <TextBlock x:Name="FilterButtonText"
                                            Text="Filter"

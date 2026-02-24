@@ -91,7 +91,7 @@ public sealed partial class NavigationPanelControl : UserControl
     {
         if (IsCompact)
         {
-            MyListsHeader.Visibility = Visibility.Collapsed;
+            MyListsText.Visibility = Visibility.Collapsed;
             SettingsButtonText.Visibility = Visibility.Collapsed;
             SyncButtonText.Visibility = Visibility.Collapsed;
             SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -99,13 +99,14 @@ public sealed partial class NavigationPanelControl : UserControl
             SettingsButton.Padding = new Thickness(8, 12, 8, 12);
             SyncButton.Padding = new Thickness(8, 12, 8, 12);
             NavContentGrid.Padding = new Thickness(4, 8, 4, 8);
+            CreateListButton.Padding = new Thickness(8, 10, 8, 10);
             ToolTipService.SetToolTip(SettingsButton, GetResource("SettingsButtonTextBlock/Text", "Settings"));
             ToolTipService.SetToolTip(SyncButton, GetResource("SyncButtonTextBlock/Text", "Sync Lists"));
             ToolTipService.SetToolTip(CreateListButton, GetResource("CreateListButton/ToolTipService/ToolTip", "Create new list"));
         }
         else
         {
-            MyListsHeader.Visibility = Visibility.Visible;
+            MyListsText.Visibility = Visibility.Visible;
             SettingsButtonText.Visibility = Visibility.Visible;
             SyncButtonText.Visibility = Visibility.Visible;
             SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -113,6 +114,7 @@ public sealed partial class NavigationPanelControl : UserControl
             SettingsButton.Padding = new Thickness(20, 12, 20, 12);
             SyncButton.Padding = new Thickness(20, 12, 20, 12);
             NavContentGrid.Padding = new Thickness(8, 2, 8, 8);
+            CreateListButton.Padding = new Thickness(4, 4, 4, 4);
             ToolTipService.SetToolTip(SettingsButton, null);
             ToolTipService.SetToolTip(SyncButton, null);
             ToolTipService.SetToolTip(CreateListButton, null);

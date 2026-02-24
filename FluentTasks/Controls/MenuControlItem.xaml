@@ -13,7 +13,20 @@
             Margin="4,2"
             Padding="12,8"
             Style="{StaticResource SubtleButtonStyle}"
-            Click="RootButton_Click">
+            Click="RootButton_Click"
+            RightTapped="RootButton_RightTapped">
+        <Button.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem x:Uid="EditMenuFlyoutItem"
+                                Text="Edit"
+                                Icon="Edit"
+                                Click="EditContextMenuItem_Click" />
+                <MenuFlyoutItem x:Uid="DeleteMenuFlyoutItem"
+                                Text="Delete"
+                                Icon="Delete"
+                                Click="DeleteContextMenuItem_Click" />
+            </MenuFlyout>
+        </Button.ContextFlyout>
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

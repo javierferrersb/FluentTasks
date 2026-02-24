@@ -110,6 +110,7 @@ public sealed partial class TaskListControl : UserControl
     {
         NoListSelectedState.Visibility = Visibility.Collapsed;
         TaskContentArea.Visibility = Visibility.Visible;
+        TaskListTitle.Visibility = Visibility.Visible;
     }
 
     /// <summary>
@@ -119,6 +120,7 @@ public sealed partial class TaskListControl : UserControl
     {
         TaskContentArea.Visibility = Visibility.Collapsed;
         NoListSelectedState.Visibility = Visibility.Visible;
+        TaskListTitle.Visibility = Visibility.Collapsed;
     }
 
     /// <summary>
@@ -232,6 +234,21 @@ public sealed partial class TaskListControl : UserControl
         AddTaskInputGrid.Visibility = ViewModel.ShowAddTaskInput ? Visibility.Visible : Visibility.Collapsed;
         SortButtonText.Text = ViewModel.SortButtonText;
         FilterButtonText.Text = ViewModel.FilterButtonText;
+
+        // Set sort button colors
+        var sortForeground = ViewModel.IsSortActive
+            ? GetThemeResource<Brush>("TextFillColorPrimaryBrush")
+            : GetThemeResource<Brush>("AccentTextFillColorSecondaryBrush");
+        SortButtonText.Foreground = sortForeground;
+        SortButtonIcon.Foreground = sortForeground;
+
+        // Set filter button colors
+        var filterForeground = ViewModel.IsFilterActive
+            ? GetThemeResource<Brush>("TextFillColorPrimaryBrush")
+            : GetThemeResource<Brush>("AccentTextFillColorSecondaryBrush");
+        FilterButtonText.Foreground = filterForeground;
+        FilterButtonIcon.Foreground = filterForeground;
+
         SyncSortCheckedState();
         SyncFilterCheckedState();
         SyncEmptyStateText();

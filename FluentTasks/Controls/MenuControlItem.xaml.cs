@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using System;
 
@@ -134,12 +135,28 @@ public sealed partial class MenuItemControl : UserControl
         ItemClicked?.Invoke(this, EventArgs.Empty);
     }
 
+    private void RootButton_RightTapped(object sender, Microsoft.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+    {
+        // The context menu will be shown automatically via Button.ContextFlyout
+        // This handler is here in case we need to do any custom logic in the future
+    }
+
     private void EditButton_Click(object sender, RoutedEventArgs e)
     {
         EditClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        DeleteClicked?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void EditContextMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        EditClicked?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void DeleteContextMenuItem_Click(object sender, RoutedEventArgs e)
     {
         DeleteClicked?.Invoke(this, EventArgs.Empty);
     }
