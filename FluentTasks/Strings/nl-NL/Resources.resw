@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Welkom bij FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Laten we een korte rondleiding doen om je op weg te helpen.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Aan de slag!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Rondleiding overslaan</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Je takenlijsten</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>All your task lists appear here. Click any list to view its tasks, or click the + button to create a new list.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Rondleiding overslaan</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Je taken</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Your tasks appear here. Use the search bar to find tasks, or filter and sort them using the buttons in the toolbar.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Rondleiding overslaan</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Stay in Sync</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Your tasks sync automatically with Google Tasks. Click the sync button anytime to manually refresh your data.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Got it!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Rondleiding overslaan</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>A modern, native Google Tasks client for Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Synchroniseren met Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Your tasks sync seamlessly with Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Stay Organized</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Create lists and subtasks to organize your work</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Vervaldatums</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Set due dates and never miss a deadline</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Filter and Sort</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Find tasks quickly with powerful filters</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Beginnen</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Verbind je account</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Sign in with your Google account to sync your tasks across all your devices</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Inloggen met Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Bezig met inloggen...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Your data stays private</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Inloggen mislukt</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>We konden je niet inloggen. Probeer het opnieuw.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Mijn lijsten</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Nieuwe lijst maken</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Lijsten synchroniseren</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Selecteer een lijst om te beginnen</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Kies een takenlijst in de zijbalk of maak een nieuwe</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Mijn taken</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Navigatie wisselen</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Sorteren</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Filteren</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Taken zoeken...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Nieuwe taak toevoegen...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Taak toevoegen</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Geen taken</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Voeg een taak toe om te beginnen</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Gereed</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Opslaan (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Annuleren (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Subtaak toevoegen</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Taakdetails</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Taak verwijderen</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Vervaldatum (vroegst)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Vervaldatum (laatst)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A tot Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z tot A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Voltooide onderaan</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Alle taken</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Onvoltooid</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Achterstallig</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Vandaag vervalt</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Deze week vervalt</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Lijst bewerken</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Lijst verwijderen</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Uiterlijk</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Choose how FluentTasks looks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Licht</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Donker</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Systeeminstelling gebruiken</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Lijsten</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Configure default list behavior</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Standaardfilter</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Standaardsortering</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Gegevens</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Lokale gegevensopslag beheren</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Cache wissen</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Remove locally cached data. Your tasks will be re-downloaded on next sync.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Beheer je Google-accountverbinding</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Sign out of your Google account. You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>A modern, fluent task management app for Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Gebouwd met</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Made with</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>from Spain</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Over de ontwikkelaar</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Bekijk op GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Gelicenseerd onder MIT-licentie</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Cache wissen?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>This will remove all locally cached data. Your tasks will be re-downloaded on the next sync.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Cache gewist</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Lokale cache is succesvol gewist.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Uitloggen?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Over de ontwikkelaar</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Alle taken</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Onvoltooid</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Achterstallig</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Vandaag</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Deze week</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Geen (mijn volgorde)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Vervaldatum (eerst vroegst)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Vervaldatum (eerst laatst)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Alfabetisch (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Alfabetisch (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Voltooide onderaan</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Lijstdetails</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Lijstnaam</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Voer lijstnaam in...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Pictogram</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Taakdetails</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Taaktitel</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Vervaldatum</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Geen vervaldatum</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Notities</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Voeg details over deze taak toe...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>{0} dagen te laat</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Vandaag vervalt</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Morgen vervalt</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Vervalt over {0} dagen</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Kies een pictogram</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Selecteren</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Taal gewijzigd</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Start de app opnieuw om de nieuwe taal toe te passen.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Nu opnieuw starten</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Sluiten</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Failed to update list</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Deze week vervalt</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Sign out of your Google account. You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. All rights reserved.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Selecteren</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Taken zoeken...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Subtaak toevoegen</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot has not been set. Call SetXamlRoot first.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Vervalt {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Bezig met inloggen...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Beheer je Google-accountverbinding</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Opslaan (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Lijsten</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Achterstallig</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Gesynchroniseerd</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Mijn lijsten</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>{0} dagen te laat</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Filteren</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Subtaak gemaakt</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Onvoltooid</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Voltooide onderaan</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Vervaldatum (vroegst)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Vervalt {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Taak opnieuw geordend</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Synchronisatie mislukt</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Morgen vervalt</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Voeg details over deze taak toe...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>List created</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Lijst verwijderen</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Lijstnaam</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Geen taken</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Over de ontwikkelaar</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Selecteer een lijst om te beginnen</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Made with</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Taak voltooid</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Taaktitel</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Gereed</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Notities</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Taak toevoegen</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Probeer het filter te wijzigen of te wissen</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Taak verwijderen</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Taak bijgewerkt</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Set due dates and never miss a deadline</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Voeg een taak toe om te beginnen</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Taak verwijderen mislukt</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Voer een taaktitel in</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Please select a list first</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Standaardsortering</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Filter and Sort</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Vervaldatums</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Taak verwijderd</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabetisch (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>List deleted</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Vandaag vervalt</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Synchroniseren...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>A modern, native Google Tasks client for Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Alle taken</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Geen resultaten gevonden</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>from Spain</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Failed to reorder</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Geen vervaldatum</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Lijstdetails</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Bekijk op GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Your data stays private</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Vervaldatum (eerst laatst)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Vervaldatum (laatst)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Lokale gegevensopslag beheren</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabetisch (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Pictogram</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Sign in with your Google account to sync your tasks across all your devices</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Kies een takenlijst in de zijbalk of maak een nieuwe</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Kies een pictogram</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Uiterlijk</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Fout: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Gebouwd met</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Donker</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Sorteren</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Synchronisatiefout: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Choose how FluentTasks looks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>A modern, fluent task management app for Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Nieuwe lijst</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A tot Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Lijst bewerken</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Configure default list behavior</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Voeg een taak toe om te beginnen</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Standaardfilter</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Licht</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Stay Organized</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Achterstallig</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Taak bijwerken mislukt</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Vervaldatum</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>This task has {0} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Deze week</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Alle taken</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Geen taken</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>List updated</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Alles voltooien</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Vandaag vervalt</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Navigatie wisselen</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Find tasks quickly with powerful filters</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Vervaldatum (eerst vroegst)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Taakdetails</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Gegevens</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Taak gemaakt</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Lijsten synchroniseren</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Add subtask to: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Your tasks sync seamlessly with Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Subtaken voltooien?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Verbind je account</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Annuleren (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Fout: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Lijst verwijderen?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>Taaktitel mag niet leeg zijn</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Geen (mijn volgorde)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Remove locally cached data. Your tasks will be re-downloaded on next sync.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Geen overeenkomende taken</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Mijn taken</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Taak heropend</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Voltooide onderaan</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Navigatie wisselen</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Gereed</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Nieuwe lijst maken</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Create lists and subtasks to organize your work</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>1 dag te laat</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Cache wissen</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Subtaaktitel...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Nieuwe taak toevoegen...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Vandaag</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Systeeminstelling gebruiken</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Inloggen met Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Netwerkfout: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Synchroniseren met Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Taakdetails</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Verbonden</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>{0} lijsten gesynchroniseerd</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Onvoltooid</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z tot A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?\n\nAll tasks in this list will be permanently deleted.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Probeer een andere zoekterm</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Failed to delete list</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Voer lijstnaam in...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Gelicenseerd onder MIT-licentie</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Deze week vervalt</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A tot Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Voltooide onderaan</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Voltooid</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Alle taken</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Beginnen</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vandaag vervalt</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Onvoltooid</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vervaldatum (laatst)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z tot A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vervaldatum (vroegst)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Achterstallig</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

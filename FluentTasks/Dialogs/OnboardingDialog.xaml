@@ -32,14 +32,16 @@
                                        Height="128"
                                        HorizontalAlignment="Center" />
 
-                                <TextBlock Text="Welcome to FluentTasks"
+                                <TextBlock x:Uid="OnboardingWelcomeTitleBlock"
+                                           Text="Welcome to FluentTasks"
                                            Style="{StaticResource TitleLargeTextBlockStyle}"
                                            FontSize="32"
                                            FontWeight="SemiBold"
                                            HorizontalAlignment="Center"
                                            TextAlignment="Center" />
 
-                                <TextBlock Text="A modern, native Google Tasks client for Windows"
+                                <TextBlock x:Uid="OnboardingWelcomeSubtitleBlock"
+                                           Text="A modern, native Google Tasks client for Windows"
                                            Style="{StaticResource SubtitleTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center"
@@ -80,9 +82,11 @@
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
                                         </Border>
-                                        <TextBlock Text="Sync with Google"
+                                        <TextBlock x:Uid="OnboardingFeatureSyncTitleBlock"
+                                                   Text="Sync with Google"
                                                    Style="{StaticResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="Your tasks sync seamlessly with Google Tasks"
+                                        <TextBlock x:Uid="OnboardingFeatureSyncDescriptionBlock"
+                                                   Text="Your tasks sync seamlessly with Google Tasks"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                    TextWrapping="Wrap" />
@@ -110,9 +114,11 @@
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
                                         </Border>
-                                        <TextBlock Text="Stay Organized"
+                                        <TextBlock x:Uid="OnboardingFeatureOrganizeTitleBlock"
+                                                   Text="Stay Organized"
                                                    Style="{StaticResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="Create lists and subtasks to organize your work"
+                                        <TextBlock x:Uid="OnboardingFeatureOrganizeDescriptionBlock"
+                                                   Text="Create lists and subtasks to organize your work"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                    TextWrapping="Wrap" />
@@ -140,9 +146,11 @@
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
                                         </Border>
-                                        <TextBlock Text="Due Dates"
+                                        <TextBlock x:Uid="OnboardingFeatureDueDatesTitleBlock"
+                                                   Text="Due Dates"
                                                    Style="{StaticResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="Set due dates and never miss a deadline"
+                                        <TextBlock x:Uid="OnboardingFeatureDueDatesDescriptionBlock"
+                                                   Text="Set due dates and never miss a deadline"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                    TextWrapping="Wrap" />
@@ -170,9 +178,11 @@
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center" />
                                         </Border>
-                                        <TextBlock Text="Filter and Sort"
+                                        <TextBlock x:Uid="OnboardingFeatureFilterSortTitleBlock"
+                                                   Text="Filter and Sort"
                                                    Style="{StaticResource BodyStrongTextBlockStyle}" />
-                                        <TextBlock Text="Find tasks quickly with powerful filters"
+                                        <TextBlock x:Uid="OnboardingFeatureFilterSortDescriptionBlock"
+                                                   Text="Find tasks quickly with powerful filters"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                    TextWrapping="Wrap" />
@@ -209,7 +219,8 @@
                                      Opacity="0.4" />
                         </StackPanel>
 
-                        <Button Grid.Column="2"
+                        <Button x:Uid="OnboardingGetStartedActionButton"
+                                Grid.Column="2"
                                 Content="Get Started"
                                 Style="{StaticResource AccentButtonStyle}"
                                 Click="NextButton_Click"
@@ -251,14 +262,16 @@
                             <!-- Sign In Text -->
                             <StackPanel Spacing="12"
                                         HorizontalAlignment="Center">
-                                <TextBlock Text="Connect Your Account"
+                                <TextBlock x:Uid="OnboardingSignInTitleBlock"
+                                           Text="Connect Your Account"
                                            Style="{StaticResource TitleLargeTextBlockStyle}"
                                            FontSize="28"
                                            FontWeight="SemiBold"
                                            HorizontalAlignment="Center"
                                            TextAlignment="Center" />
 
-                                <TextBlock Text="Sign in with your Google account to sync your tasks across all your devices"
+                                <TextBlock x:Uid="OnboardingSignInDescriptionBlock"
+                                           Text="Sign in with your Google account to sync your tasks across all your devices"
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center"
@@ -268,7 +281,8 @@
                             </StackPanel>
 
                             <!-- Google Sign In Button -->
-                            <Button x:Name="GoogleSignInButton"
+                            <Button x:Uid="OnboardingGoogleSignInButton"
+                                    x:Name="GoogleSignInButton"
                                     Click="GoogleSignInButton_Click"
                                     HorizontalAlignment="Center"
                                     Padding="0"
@@ -300,6 +314,7 @@
                                     </Viewbox>
 
                                     <TextBlock Grid.Column="1"
+                                               x:Uid="OnboardingSignInButtonTextBlock"
                                                Text="Sign in with Google"
                                                Style="{StaticResource BodyStrongTextBlockStyle}"
                                                VerticalAlignment="Center" />
@@ -314,7 +329,8 @@
                                 <ProgressRing IsActive="True"
                                               Width="32"
                                               Height="32" />
-                                <TextBlock Text="Signing you in..."
+                                <TextBlock x:Uid="OnboardingSigningInTextBlock"
+                                           Text="Signing you in..."
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center" />
@@ -330,11 +346,13 @@
                                     <FontIcon Glyph="&#xE72E;"
                                               FontSize="14"
                                               Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                    <TextBlock Text="Your data stays private"
+                                    <TextBlock x:Uid="OnboardingPrivacyTitleBlock"
+                                               Text="Your data stays private"
                                                Style="{StaticResource CaptionTextBlockStyle}"
                                                Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                 </StackPanel>
-                                <TextBlock Text="All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information."
+                                <TextBlock x:Uid="OnboardingPrivacyDescriptionBlock"
+                                           Text="All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information."
                                            Style="{StaticResource CaptionTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                            HorizontalAlignment="Center"
@@ -355,7 +373,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="Back"
+                        <Button x:Uid="OnboardingBackActionButton"
+                                Content="Back"
                                 Click="BackButton_Click"
                                 HorizontalAlignment="Left"
                                 Padding="24,10" />

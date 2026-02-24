@@ -5,6 +5,9 @@ using FluentTasks.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Resources;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -57,6 +60,11 @@ namespace FluentTasks.UI
         {
             var settingsService = GetService<SettingsService>();
 
+            // Apply language preference before creating any windows.
+            // If restart provided an explicit language argument, use it first.
+            var launchLanguage = TryGetLaunchLanguage(args.Arguments) ?? settingsService.AppLanguage;
+            ApplyLanguagePreference(launchLanguage);
+
             // Check if user has completed onboarding
             if (!settingsService.HasCompletedOnboarding)
             {
@@ -70,6 +78,46 @@ namespace FluentTasks.UI
                 // Show main window directly
                 ShowMainWindow();
             }
+        }
+
+        /// <summary>
+        /// Applies the user's language preference to the application.
+        /// </summary>
+        /// <param name="languagePreference">The language code or "auto" for Windows default.</param>
+        private void ApplyLanguagePreference(string languagePreference)
+        {
+            var effectiveLanguage = LanguageService.GetEffectiveLanguage(languagePreference);
+
+            // Set the primary language for resource loading
+            // This affects ResourceLoader.GetString() calls
+            // Note: In Windows App SDK, we set this at the process level
+            try
+            {
+                // Set the override language for the application
+                // This will be used by ResourceLoader for all subsequent calls
+                Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = effectiveLanguage;
+
+                // Ensure thread UI culture aligns with MRT language immediately.
+                var culture = new CultureInfo(effectiveLanguage);
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+                CultureInfo.DefaultThreadCurrentUICulture = culture;
+            }
+            catch
+            {
+                // Fallback: language will be determined by ResourceLoader automatically
+                // based on Windows language settings
+            }
+        }
+
+        private static string? TryGetLaunchLanguage(string arguments)
+        {
+            if (string.IsNullOrWhiteSpace(arguments))
+            {
+                return null;
+            }
+
+            var match = Regex.Match(arguments, @"(?:^|\s)--lang=([A-Za-z]{2,3}(?:-[A-Za-z0-9]+)*)");
+            return match.Success ? match.Groups[1].Value : null;
         }
 
         private void OnOnboardingCompleted(object? sender, System.EventArgs e)

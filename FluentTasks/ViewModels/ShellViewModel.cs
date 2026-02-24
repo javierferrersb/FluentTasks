@@ -5,6 +5,7 @@ using FluentTasks.Core.Services;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,6 +24,7 @@ public sealed partial class ShellViewModel : ObservableObject
     private readonly IDialogService _dialogService;
     private readonly IconStorageService _iconStorageService;
     private readonly SettingsService _settingsService;
+    private readonly ResourceLoader _resourceLoader = new();
 
     private readonly ObservableCollection<TaskList> _taskListsBackingStore = [];
 
@@ -60,7 +62,7 @@ public sealed partial class ShellViewModel : ObservableObject
     private NavItem? _selectedNavItem;
 
     [ObservableProperty]
-    private string _statusText = "Ready";
+    private string _statusText = string.Empty;
 
     [ObservableProperty]
     private string _actionText = string.Empty;
@@ -102,6 +104,7 @@ public sealed partial class ShellViewModel : ObservableObject
         _dialogService = dialogService;
         _iconStorageService = iconStorageService;
         _settingsService = settingsService;
+        _statusText = GetResource("ShellStatusReady", "Ready");
     }
 
     /// <summary>
@@ -140,12 +143,12 @@ public sealed partial class ShellViewModel : ObservableObject
             var tasks = await _taskService.GetTasksAsync(selectedList.Id);
             TaskListVM.LoadTasks(tasks.ToList(), _settingsService.DefaultSort, _settingsService.DefaultFilter);
 
-            StatusText = "Ready";
+            StatusText = GetResource("ShellStatusReady", "Ready");
         }
         catch (Exception ex)
         {
             TaskListVM.EndLoading();
-            ShowError($"Error: {ex.Message}");
+            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -194,7 +197,7 @@ public sealed partial class ShellViewModel : ObservableObject
         {
             _isSyncing = true;
             OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
-            StatusText = "Syncing...";
+            StatusText = GetResource("ShellStatusSyncing", "Syncing...");
 
             var taskLists = await _taskService.GetTaskListsAsync();
 
@@ -221,20 +224,20 @@ public sealed partial class ShellViewModel : ObservableObject
 
             LastSyncTime = DateTimeOffset.Now;
             OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
-            StatusText = "Synced";
-            ShowSuccess($"Synced {taskLists.Count()} lists");
+            StatusText = GetResource("ShellStatusSynced", "Synced");
+            ShowSuccess(string.Format(GetResource("ShellStatusSyncedListsFormat", "Synced {0} lists"), taskLists.Count()));
         }
         catch (HttpRequestException ex)
         {
             OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
-            StatusText = "Offline";
-            ShowError($"Network error: {ex.Message}");
+            StatusText = GetResource("ShellStatusOffline", "Offline");
+            ShowError(string.Format(GetResource("ShellStatusNetworkErrorFormat", "Network error: {0}"), ex.Message));
         }
         catch (Exception ex)
         {
             OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
-            StatusText = "Sync failed";
-            ShowError($"Sync error: {ex.Message}");
+            StatusText = GetResource("ShellStatusSyncFailed", "Sync failed");
+            ShowError(string.Format(GetResource("ShellStatusSyncErrorFormat", "Sync error: {0}"), ex.Message));
         }
         finally
         {
@@ -248,7 +251,7 @@ public sealed partial class ShellViewModel : ObservableObject
     [RelayCommand]
     private async Task CreateListAsync()
     {
-        var result = await _dialogService.ShowListEditorAsync("\uE8F4", "New List");
+        var result = await _dialogService.ShowListEditorAsync("\uE8F4", GetResource("ShellNewListDefaultName", "New List"));
         if (result.Name is null)
             return;
 
@@ -267,12 +270,12 @@ public sealed partial class ShellViewModel : ObservableObject
                 Data = newList
             });
 
-            ShowSuccess("List created");
+            ShowSuccess(GetResource("ShellStatusListCreated", "List created"));
             ScheduleSyncAfterChange();
         }
         catch (Exception ex)
         {
-            ShowError($"Error: {ex.Message}");
+            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -307,17 +310,17 @@ public sealed partial class ShellViewModel : ObservableObject
 
                 // Force collection refresh
                 RefreshUserLists();
-                ShowSuccess("List updated");
+                ShowSuccess(GetResource("ShellStatusListUpdated", "List updated"));
                 ScheduleSyncAfterChange();
             }
             else
             {
-                ShowWarning("Failed to update list");
+                ShowWarning(GetResource("ShellStatusFailedUpdateList", "Failed to update list"));
             }
         }
         catch (Exception ex)
         {
-            ShowError($"Error: {ex.Message}");
+            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -330,10 +333,12 @@ public sealed partial class ShellViewModel : ObservableObject
             return;
 
         var confirmed = await _dialogService.ShowConfirmationAsync(
-            "Delete List?",
-            $"Are you sure you want to delete \"{selectedList.Title}\"?\n\nAll tasks in this list will be permanently deleted.",
-            "Delete",
-            "Cancel");
+            GetResource("ShellDeleteListDialogTitle", "Delete List?"),
+            string.Format(
+                GetResource("ShellDeleteListDialogMessageFormat", "Are you sure you want to delete \"{0}\"?\n\nAll tasks in this list will be permanently deleted."),
+                selectedList.Title),
+            GetResource("ShellDeleteListDialogPrimary", "Delete"),
+            GetResource("ShellDeleteListDialogClose", "Cancel"));
 
         if (!confirmed)
             return;
@@ -355,17 +360,17 @@ public sealed partial class ShellViewModel : ObservableObject
                     IsTaskContentVisible = false;
                 }
 
-                ShowSuccess("List deleted");
+                ShowSuccess(GetResource("ShellStatusListDeleted", "List deleted"));
                 ScheduleSyncAfterChange();
             }
             else
             {
-                ShowWarning("Failed to delete list");
+                ShowWarning(GetResource("ShellStatusFailedDeleteList", "Failed to delete list"));
             }
         }
         catch (Exception ex)
         {
-            ShowError($"Error: {ex.Message}");
+            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -443,7 +448,7 @@ public sealed partial class ShellViewModel : ObservableObject
         {
             _isSyncing = true;
             OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
-            StatusText = "Syncing...";
+            StatusText = GetResource("ShellStatusSyncing", "Syncing...");
 
             // Sync task lists
             var taskLists = await _taskService.GetTaskListsAsync();
@@ -471,20 +476,20 @@ public sealed partial class ShellViewModel : ObservableObject
 
             LastSyncTime = DateTimeOffset.Now;
             OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
-            StatusText = "Synced";
+            StatusText = GetResource("ShellStatusSynced", "Synced");
             RippleRequested?.Invoke();
         }
         catch (HttpRequestException)
         {
             // Network error - silent failure for background sync
             OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
-            StatusText = "Offline";
+            StatusText = GetResource("ShellStatusOffline", "Offline");
         }
         catch (Exception ex)
         {
             // Unexpected error - log but don't interrupt user
             OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
-            StatusText = "Sync failed";
+            StatusText = GetResource("ShellStatusSyncFailed", "Sync failed");
             System.Diagnostics.Debug.WriteLine($"[AutoSync] Error: {ex}");
         }
         finally
@@ -513,7 +518,7 @@ public sealed partial class ShellViewModel : ObservableObject
         catch (HttpRequestException)
         {
             OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
-            StatusText = "Offline";
+            StatusText = GetResource("ShellStatusOffline", "Offline");
         }
         catch (Exception ex)
         {
@@ -558,10 +563,11 @@ public sealed partial class ShellViewModel : ObservableObject
     private void ShowSuccess(string message)
     {
         // If we're currently offline but an operation succeeds, we're back online
-        if (StatusText == "Offline" || StatusText == "Sync failed")
+        if (StatusText == GetResource("ShellStatusOffline", "Offline") ||
+            StatusText == GetResource("ShellStatusSyncFailed", "Sync failed"))
         {
             OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
-            StatusText = "Connected";
+            StatusText = GetResource("ShellStatusConnected", "Connected");
         }
 
         RippleRequested?.Invoke();
@@ -571,7 +577,7 @@ public sealed partial class ShellViewModel : ObservableObject
     private void ShowError(string message)
     {
         OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
-        StatusText = "Offline";
+        StatusText = GetResource("ShellStatusOffline", "Offline");
         TemporaryStatusRequested?.Invoke(message);
     }
 
@@ -584,6 +590,12 @@ public sealed partial class ShellViewModel : ObservableObject
     private void ShowInfo(string message)
     {
         TemporaryStatusRequested?.Invoke(message);
+    }
+
+    private string GetResource(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
     }
 }
 

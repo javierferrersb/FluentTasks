@@ -2,6 +2,7 @@ using System;
 using FluentTasks.Infrastructure.Google;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.Dialogs;
 
@@ -11,6 +12,7 @@ namespace FluentTasks.UI.Dialogs;
 public sealed partial class OnboardingDialog : UserControl
 {
     private readonly IGoogleAuthService _authService;
+    private readonly ResourceLoader _resourceLoader;
 
     /// <summary>
     /// Raised when onboarding is completed successfully.
@@ -21,6 +23,7 @@ public sealed partial class OnboardingDialog : UserControl
     {
         ArgumentNullException.ThrowIfNull(authService);
         _authService = authService;
+        _resourceLoader = new ResourceLoader();
         InitializeComponent();
     }
 
@@ -76,9 +79,9 @@ public sealed partial class OnboardingDialog : UserControl
             // Show error dialog
             var dialog = new ContentDialog
             {
-                Title = "Sign-in failed",
-                Content = "We couldn't sign you in. Please try again.",
-                CloseButtonText = "OK",
+                Title = _resourceLoader.GetString("OnboardingSignInFailedTitle"),
+                Content = _resourceLoader.GetString("OnboardingSignInFailedMessage"),
+                CloseButtonText = _resourceLoader.GetString("OnboardingSignInFailedCloseButton"),
                 XamlRoot = XamlRoot
             };
             await dialog.ShowAsync();

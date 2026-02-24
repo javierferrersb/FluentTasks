@@ -11,6 +11,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI;
 
@@ -23,12 +24,14 @@ public sealed partial class MainWindow : Window
     private readonly Action<string> _onTemporaryStatusRequested;
     private readonly SettingsService _settingsService;
     private readonly DialogService _dialogService;
+    private readonly ResourceLoader _resourceLoader;
     private bool _shouldShowTeachingTips;
 
     public MainWindow()
     {
         this.InitializeComponent();
 
+        _resourceLoader = new ResourceLoader();
         ViewModel = App.GetService<ShellViewModel>();
         _settingsService = App.GetService<SettingsService>();
         _dialogService = App.GetService<DialogService>();
@@ -81,7 +84,7 @@ public sealed partial class MainWindow : Window
         this.AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
         // Set window title (appears in taskbar) and icon
-        Title = "FluentTasks";
+        Title = _resourceLoader.GetString("AppWindowTitle");
         this.AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
 
         // Initialize title bar button colors for current theme

@@ -4,6 +4,7 @@ using FluentTasks.UI.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.Controls;
 
@@ -12,6 +13,8 @@ namespace FluentTasks.UI.Controls;
 /// </summary>
 public sealed partial class NavigationPanelControl : UserControl
 {
+    private readonly ResourceLoader _resourceLoader = new();
+
     /// <summary>
     /// User-created task list navigation items.
     /// </summary>
@@ -96,9 +99,9 @@ public sealed partial class NavigationPanelControl : UserControl
             SettingsButton.Padding = new Thickness(8, 12, 8, 12);
             SyncButton.Padding = new Thickness(8, 12, 8, 12);
             NavContentGrid.Padding = new Thickness(4, 8, 4, 8);
-            ToolTipService.SetToolTip(SettingsButton, "Settings");
-            ToolTipService.SetToolTip(SyncButton, "Sync Lists");
-            ToolTipService.SetToolTip(CreateListButton, "Create new list");
+            ToolTipService.SetToolTip(SettingsButton, GetResource("SettingsButtonTextBlock/Text", "Settings"));
+            ToolTipService.SetToolTip(SyncButton, GetResource("SyncButtonTextBlock/Text", "Sync Lists"));
+            ToolTipService.SetToolTip(CreateListButton, GetResource("CreateListButton/ToolTipService/ToolTip", "Create new list"));
         }
         else
         {
@@ -194,5 +197,11 @@ public sealed partial class NavigationPanelControl : UserControl
         {
             menuItem.IsCompact = IsCompact;
         }
+    }
+
+    private string GetResource(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
     }
 }

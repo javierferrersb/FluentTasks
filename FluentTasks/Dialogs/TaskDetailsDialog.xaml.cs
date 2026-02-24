@@ -1,6 +1,7 @@
 using FluentTasks.Core.Models;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.Dialogs;
 
@@ -12,10 +13,12 @@ public sealed partial class TaskDetailsDialog : ContentDialog
     private string _originalTitle;
     private DateTimeOffset? _originalDueDate;
     private DateTimeOffset? _tempDueDate;
+    private readonly ResourceLoader _resourceLoader;
 
     public TaskDetailsDialog(TaskItem task)
     {
         Task = task;
+        _resourceLoader = new ResourceLoader();
 
         // Save original values
         _originalTitle = task.Title;
@@ -77,25 +80,25 @@ public sealed partial class TaskDetailsDialog : ContentDialog
 
         if (Task.IsCompleted)
         {
-            StatusInfo.Text = "Completed";
+            StatusInfo.Text = _resourceLoader.GetString("TaskDetailsStatusCompleted");
         }
         else if (daysUntilDue < 0)
         {
-            StatusInfo.Text = $"Overdue by {Math.Abs(daysUntilDue)} days";
+            StatusInfo.Text = string.Format(_resourceLoader.GetString("TaskDetailsStatusOverdue"), Math.Abs(daysUntilDue));
             StatusInfo.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(
                 Microsoft.UI.Colors.Red);
         }
         else if (daysUntilDue == 0)
         {
-            StatusInfo.Text = "Due today";
+            StatusInfo.Text = _resourceLoader.GetString("TaskDetailsStatusDueToday");
         }
         else if (daysUntilDue == 1)
         {
-            StatusInfo.Text = "Due tomorrow";
+            StatusInfo.Text = _resourceLoader.GetString("TaskDetailsStatusDueTomorrow");
         }
         else
         {
-            StatusInfo.Text = $"Due in {daysUntilDue} days";
+            StatusInfo.Text = string.Format(_resourceLoader.GetString("TaskDetailsStatusDueInDays"), daysUntilDue);
         }
     }
 }

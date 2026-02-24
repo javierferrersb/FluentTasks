@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Chào mừng bạn đến với FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Hãy xem qua nhanh để bạn bắt đầu dễ dàng hơn.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Bắt đầu thôi!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Bỏ qua hướng dẫn</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Danh sách công việc của bạn</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Tất cả danh sách công việc của bạn hiển thị ở đây. Nhấp vào một danh sách để xem công việc hoặc nhấn + để tạo danh sách mới.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Tiếp theo</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Bỏ qua hướng dẫn</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Công việc của bạn</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Công việc của bạn hiển thị ở đây. Dùng thanh tìm kiếm để tìm công việc hoặc lọc và sắp xếp bằng thanh công cụ.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Tiếp theo</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Bỏ qua hướng dẫn</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Luôn đồng bộ</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Công việc tự động đồng bộ với Google Tasks. Nhấn nút đồng bộ bất cứ lúc nào để làm mới dữ liệu thủ công.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Đã hiểu!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Bỏ qua hướng dẫn</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Chào mừng đến FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Chào mừng đến FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Ứng dụng Google Tasks hiện đại, gốc cho Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Đồng bộ với Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Công việc của bạn đồng bộ mượt mà với Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Luôn ngăn nắp</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Tạo danh sách và công việc con để sắp xếp công việc</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Ngày đến hạn</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Đặt hạn và không bỏ lỡ thời hạn nào</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Lọc và sắp xếp</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Tìm công việc nhanh với bộ lọc mạnh mẽ</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Bắt đầu</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Kết nối tài khoản của bạn</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Đăng nhập bằng tài khoản Google để đồng bộ công việc trên mọi thiết bị</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Đăng nhập với Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Đang đăng nhập...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Dữ liệu của bạn luôn riêng tư</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Tất cả dữ liệu nằm trên thiết bị của bạn và máy chủ Google. FluentTasks không thu thập hay lưu trữ thông tin cá nhân.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Đăng nhập thất bại</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>Không thể đăng nhập. Vui lòng thử lại.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Danh sách của tôi</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Tạo danh sách mới</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Đồng bộ danh sách</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Chọn một danh sách để bắt đầu</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Chọn danh sách từ thanh bên hoặc tạo danh sách mới</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Công việc của tôi</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Bật/tắt điều hướng</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Bộ lọc</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Tìm kiếm công việc...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Thêm công việc mới...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Thêm công việc</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Không có công việc</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Thêm công việc để bắt đầu</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Sẵn sàng</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Lưu (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Hủy (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Thêm công việc con</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Chi tiết công việc</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Xóa công việc</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Hạn (gần nhất)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Hạn (xa nhất)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A đến Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z đến A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Hoàn thành để cuối</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Tất cả công việc</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Chưa hoàn thành</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Hôm nay đến hạn</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Tuần này đến hạn</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Sửa danh sách</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Xóa danh sách</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Chọn giao diện FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Tối</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Dùng cài đặt hệ thống</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Cấu hình hành vi mặc định của danh sách</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Bộ lọc mặc định</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Thứ tự sắp xếp mặc định</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Dữ liệu</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Quản lý lưu trữ dữ liệu cục bộ</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Xóa dữ liệu đệm cục bộ. Công việc sẽ được tải lại ở lần đồng bộ tiếp theo.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Quản lý kết nối tài khoản Google</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Đăng xuất tài khoản Google. Bạn cần đăng nhập lại để truy cập công việc.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Ứng dụng quản lý công việc hiện đại cho Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Xây dựng bằng</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Làm bằng</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>từ Tây Ban Nha</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Về nhà phát triển</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Xem trên GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Theo giấy phép MIT</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Thao tác này sẽ xóa toàn bộ dữ liệu đệm cục bộ. Công việc sẽ được tải lại ở lần đồng bộ kế tiếp.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Đã xóa bộ nhớ đệm</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Đã xóa bộ nhớ đệm cục bộ thành công.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Đăng xuất?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Bạn cần đăng nhập lại để truy cập công việc.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Về nhà phát triển</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Tất cả công việc</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Chưa hoàn thành</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Hôm nay</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Tuần này</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Không (thứ tự của tôi)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Hạn (gần nhất trước)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Hạn (xa nhất trước)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Theo chữ cái (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Theo chữ cái (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Hoàn thành để cuối</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Chi tiết danh sách</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Tên danh sách</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Nhập tên danh sách...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Biểu tượng</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Chi tiết công việc</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Tiêu đề công việc</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Ngày đến hạn</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Không có ngày đến hạn</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Thêm chi tiết cho công việc này...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Quá hạn {0} ngày</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Hôm nay đến hạn</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Đến hạn ngày mai</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Đến hạn sau {0} ngày</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Chọn biểu tượng</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Đã đổi ngôn ngữ</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Vui lòng khởi động lại ứng dụng để áp dụng ngôn ngữ mới.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Khởi động lại ngay</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Để sau</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Không thể cập nhật danh sách</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Tuần này đến hạn</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Đăng xuất tài khoản Google. Bạn cần đăng nhập lại để truy cập công việc.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Bảo lưu mọi quyền.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Tìm kiếm công việc...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Thêm công việc con</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot chưa được đặt. Hãy gọi SetXamlRoot trước.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Đến hạn {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Đang đăng nhập...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Quản lý kết nối tài khoản Google</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Lưu (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Đã đồng bộ</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Danh sách của tôi</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Quá hạn {0} ngày</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Bộ lọc</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Đã tạo công việc con</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Chưa hoàn thành</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Hoàn thành để cuối</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Hạn (gần nhất)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Đến hạn {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Đã sắp xếp lại công việc</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Đồng bộ thất bại</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Đến hạn ngày mai</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Thêm chi tiết cho công việc này...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Đã tạo danh sách</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Xóa danh sách</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Tên danh sách</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Không có công việc</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Về nhà phát triển</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Chọn một danh sách để bắt đầu</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Làm bằng</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Đã hoàn thành công việc</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Tiêu đề công việc</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Sẵn sàng</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Thêm công việc</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Hãy thử đổi hoặc xóa bộ lọc</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Xóa công việc</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Đã cập nhật công việc</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Đặt hạn và không bỏ lỡ thời hạn nào</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Thêm công việc để bắt đầu</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Không thể xóa công việc</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Vui lòng nhập tiêu đề công việc</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Vui lòng chọn danh sách trước</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Thứ tự sắp xếp mặc định</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Lọc và sắp xếp</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Ngày đến hạn</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Đã xóa công việc</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Theo chữ cái (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Đã xóa danh sách</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Hôm nay đến hạn</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Đang đồng bộ...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Ứng dụng Google Tasks hiện đại, gốc cho Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Tất cả công việc</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Không tìm thấy kết quả</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>từ Tây Ban Nha</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Không thể sắp xếp lại</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Không có ngày đến hạn</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Chi tiết danh sách</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Xem trên GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Dữ liệu của bạn luôn riêng tư</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Ngoại tuyến</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Hạn (xa nhất trước)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Hạn (xa nhất)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Quản lý lưu trữ dữ liệu cục bộ</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Theo chữ cái (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Biểu tượng</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Đăng nhập bằng tài khoản Google để đồng bộ công việc trên mọi thiết bị</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Chọn danh sách từ thanh bên hoặc tạo danh sách mới</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Chọn biểu tượng</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Lỗi: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Chào mừng đến FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Xây dựng bằng</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Tất cả dữ liệu nằm trên thiết bị của bạn và máy chủ Google. FluentTasks không thu thập hay lưu trữ thông tin cá nhân.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Tối</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Lỗi đồng bộ: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Chọn giao diện FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Ứng dụng quản lý công việc hiện đại cho Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Danh sách mới</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A đến Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sửa danh sách</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Cấu hình hành vi mặc định của danh sách</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Thêm công việc để bắt đầu</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Bộ lọc mặc định</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Sáng</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Luôn ngăn nắp</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Không thể cập nhật công việc</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Ngày đến hạn</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Công việc này có {0} công việc con chưa hoàn thành.
+
+Khi hoàn thành công việc cha, tất cả công việc con cũng sẽ được hoàn thành.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Tuần này</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Tất cả công việc</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Không có công việc</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Đã cập nhật danh sách</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Hoàn thành tất cả</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Hôm nay đến hạn</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bật/tắt điều hướng</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Tìm công việc nhanh với bộ lọc mạnh mẽ</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Hạn (gần nhất trước)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Chi tiết công việc</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Dữ liệu</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Đã tạo công việc</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Đồng bộ danh sách</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Thêm công việc con vào: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Công việc của bạn đồng bộ mượt mà với Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Hoàn thành cả công việc con?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Kết nối tài khoản của bạn</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Hủy (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Lỗi: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Xóa danh sách?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>Tiêu đề công việc không được để trống</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Không (thứ tự của tôi)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Xóa dữ liệu đệm cục bộ. Công việc sẽ được tải lại ở lần đồng bộ tiếp theo.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Không có công việc phù hợp</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Công việc của tôi</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Đã mở lại công việc</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Hoàn thành để cuối</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bật/tắt điều hướng</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Chào mừng đến FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Sẵn sàng</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tạo danh sách mới</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Tạo danh sách và công việc con để sắp xếp công việc</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Quá hạn 1 ngày</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Xóa bộ nhớ đệm</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Tiêu đề công việc con...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Thêm công việc mới...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Hôm nay</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Dùng cài đặt hệ thống</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Đăng nhập với Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Lỗi mạng: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Đồng bộ với Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Chi tiết công việc</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Đã kết nối</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Đã đồng bộ {0} danh sách</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Chưa hoàn thành</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z đến A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Bạn có chắc muốn xóa "{0}"?
+
+Tất cả công việc trong danh sách này sẽ bị xóa vĩnh viễn.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Thử từ khóa tìm kiếm khác</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Không thể xóa danh sách</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Nhập tên danh sách...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Theo giấy phép MIT</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Tuần này đến hạn</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A đến Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Mặc định</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Hoàn thành để cuối</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Đã hoàn thành</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Tất cả công việc</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Bắt đầu</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Hôm nay đến hạn</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Chưa hoàn thành</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Hạn (xa nhất)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z đến A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Hạn (gần nhất)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Quá hạn</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

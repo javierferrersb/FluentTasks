@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>¡Bienvenido a FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Hagamos un recorrido rápido para ayudarte a empezar.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>¡Vamos!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Omitir recorrido</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Tus listas de tareas</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Todas tus listas de tareas aparecen aquí. Haz clic en una lista para ver sus tareas o en + para crear una nueva.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Omitir recorrido</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Tus tareas</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Tus tareas aparecen aquí. Usa la búsqueda para encontrarlas o filtra y ordénalas con la barra de herramientas.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Omitir recorrido</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Mantente sincronizado</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Tus tareas se sincronizan automáticamente con Google Tasks. Pulsa sincronizar cuando quieras para actualizar tus datos.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>¡Entendido!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Omitir recorrido</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Bienvenido a FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Bienvenido a FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Un cliente moderno y nativo de Google Tasks para Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Sincroniza con Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Tus tareas se sincronizan perfectamente con Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Mantente organizado</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Crea listas y subtareas para organizar tu trabajo</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Fechas de vencimiento</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Establece fechas de vencimiento y no vuelvas a perder un plazo</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Filtrar y ordenar</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Encuentra tareas rápidamente con filtros potentes</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Conecta tu cuenta</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Inicia sesión con tu cuenta de Google para sincronizar tus tareas en todos tus dispositivos</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Iniciar sesión con Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Iniciando sesión...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Tus datos permanecen privados</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Tus datos permanecen en tu dispositivo y en los servidores de Google. FluentTasks no recopila ni almacena datos personales.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Error al iniciar sesión</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>No pudimos iniciar sesión. Inténtalo de nuevo.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Mis listas</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Crear nueva lista</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Sincronizar listas</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Selecciona una lista para comenzar</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Elige una lista de tareas en la barra lateral o crea una nueva</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Mis tareas</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Alternar navegación</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Buscar tareas...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Agregar una nueva tarea...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Agregar tarea</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>No hay tareas</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Agrega una tarea para comenzar</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Guardar (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Cancelar (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Agregar subtarea</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Detalles de la tarea</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Eliminar tarea</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Predeterminado</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Fecha de vencimiento (más próxima)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Fecha de vencimiento (más lejana)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A a Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z a A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Completadas al final</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Todas las tareas</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Incompletas</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Completadas</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Vencidas</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Vence hoy</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Vence esta semana</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Editar lista</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Eliminar lista</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Elige cómo se ve FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Usar configuración del sistema</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Listas</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Configura el comportamiento predeterminado de las listas</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Filtro predeterminado</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Orden predeterminado</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Datos</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Gestiona el almacenamiento local de datos</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Borrar caché</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Elimina datos almacenados en caché localmente. Tus tareas se volverán a descargar en la próxima sincronización.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Gestiona la conexión de tu cuenta de Google</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Cierra sesión de tu cuenta de Google. Tendrás que iniciar sesión de nuevo para acceder a tus tareas.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Una aplicación moderna de gestión de tareas para Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Creado con</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Hecho con</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>desde España</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Acerca del desarrollador</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Ver en GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Licencia MIT</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>¿Borrar caché?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Esto eliminará todos los datos en caché local. Tus tareas se volverán a descargar en la próxima sincronización.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Caché borrada</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>La caché local se ha borrado correctamente.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>¿Cerrar sesión?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Tendrás que iniciar sesión de nuevo para acceder a tus tareas.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Acerca del desarrollador</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Todas las tareas</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Incompletas</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Completadas</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Vencidas</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Hoy</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Esta semana</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Ninguno (mi orden)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Fecha de vencimiento (más próxima primero)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Fecha de vencimiento (más lejana primero)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Alfabético (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Alfabético (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Completadas al final</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Detalles de la lista</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Nombre de la lista</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Introduce el nombre de la lista...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Icono</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Detalles de la tarea</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Título de la tarea</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Fecha de vencimiento</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Sin fecha de vencimiento</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Agrega detalles sobre esta tarea...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Completada</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Vencida hace {0} días</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Vence hoy</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Vence mañana</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Vence en {0} días</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Elige un icono</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Idioma cambiado</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Reinicia la aplicación para aplicar el nuevo idioma.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Reiniciar ahora</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Más tarde</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>No se pudo actualizar la lista</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Vence esta semana</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Cierra sesión de tu cuenta de Google. Tendrás que iniciar sesión de nuevo para acceder a tus tareas.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Todos los derechos reservados.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Buscar tareas...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Agregar subtarea</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot no se ha establecido. Llama primero a SetXamlRoot.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Vence {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Iniciando sesión...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Gestiona la conexión de tu cuenta de Google</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Guardar (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Listas</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Vencidas</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Sincronizado</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Mis listas</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Vence con {0} días de retraso</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Subtarea creada</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Incompletas</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Completadas al final</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Fecha de vencimiento (más próxima)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Vence {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Tarea reordenada</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Sincronización fallida</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Vence mañana</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Predeterminado</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Agrega detalles sobre esta tarea...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Lista creada</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Eliminar lista</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Nombre de la lista</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>No hay tareas</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Acerca del desarrollador</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Selecciona una lista para comenzar</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Hecho con</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Tarea completada</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Título de la tarea</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Agregar tarea</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Prueba cambiando o quitando el filtro</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Eliminar tarea</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Tarea actualizada</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Establece fechas de vencimiento y no vuelvas a perder un plazo</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Agrega una tarea para comenzar</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>No se pudo eliminar la tarea</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Introduce un título para la tarea</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Primero selecciona una lista</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Orden predeterminado</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Filtrar y ordenar</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Fechas de vencimiento</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Tarea eliminada</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabético (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Lista eliminada</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Vence hoy</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Sincronizando...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Un cliente moderno y nativo de Google Tasks para Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Todas las tareas</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>No se encontraron resultados</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>desde España</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>No se pudo reordenar</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Sin fecha de vencimiento</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Detalles de la lista</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Ver en GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Tus datos permanecen privados</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Sin conexión</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Fecha de vencimiento (más lejana primero)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Fecha de vencimiento (más reciente)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Gestiona el almacenamiento local de datos</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabético (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Icono</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Inicia sesión con tu cuenta de Google para sincronizar tus tareas en todos tus dispositivos</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Elige una lista de tareas en la barra lateral o crea una nueva</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Elige un icono</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Bienvenido a FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Creado con</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Tus datos permanecen en tu dispositivo y en los servidores de Google. FluentTasks no recopila ni almacena datos personales.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Error de sincronización: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Elige cómo se ve FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Una aplicación moderna de gestión de tareas para Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Nueva lista</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A a Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Editar lista</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Configura el comportamiento predeterminado de las listas</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Agrega una tarea para comenzar</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Filtro predeterminado</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Mantente organizado</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Vencidas</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>No se pudo actualizar la tarea</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Fecha de vencimiento</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Esta tarea tiene {0} subtarea(s) incompleta(s).
+
+Completar la tarea principal también completará todas las subtareas.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Esta semana</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Todas las tareas</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>No hay tareas</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Lista actualizada</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Completar todo</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Completadas</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Vence hoy</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Alternar navegación</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Encuentra tareas rápidamente con filtros potentes</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Fecha de vencimiento (más próxima primero)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Detalles de la tarea</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Datos</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Tarea creada</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Sincronizar listas</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Completadas</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Agregar subtarea a: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Tus tareas se sincronizan perfectamente con Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>¿Completar subtareas?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Conecta tu cuenta</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Cancelar (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>¿Eliminar lista?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>El título de la tarea no puede estar vacío</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Ninguno (mi orden)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Elimina datos almacenados en caché localmente. Tus tareas se volverán a descargar en la próxima sincronización.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>No hay tareas que coincidan</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Mis tareas</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Tarea reabierta</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Completadas al final</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Alternar navegación</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Bienvenido a FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Crear nueva lista</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Crea listas y subtareas para organizar tu trabajo</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Vence con 1 día de retraso</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Borrar caché</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Título de la subtarea...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Agregar una nueva tarea...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Hoy</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Usar configuración del sistema</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Iniciar sesión con Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Error de red: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Sincroniza con Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Detalles de la tarea</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Conectado</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Se sincronizaron {0} listas</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Incompletas</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z a A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>¿Seguro que quieres eliminar "{0}"?
+
+Todas las tareas de esta lista se eliminarán permanentemente.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Prueba con otro término de búsqueda</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>No se pudo eliminar la lista</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Introduce el nombre de la lista...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Licencia MIT</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vence esta semana</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A a Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Predeterminado</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Completadas al final</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Completadas</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Todas las tareas</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Comenzar</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vence hoy</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Incompletas</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Fecha de vencimiento (más lejana)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z a A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Fecha de vencimiento (más próxima)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Vencidas</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

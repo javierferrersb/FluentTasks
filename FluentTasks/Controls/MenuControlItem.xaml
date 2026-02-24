@@ -39,7 +39,8 @@
                        TextTrimming="CharacterEllipsis"
                        Foreground="{Binding Foreground, ElementName=RootButton}" />
 
-            <Button x:Name="EditButton"
+            <Button x:Uid="EditButton"
+                    x:Name="EditButton"
                     Grid.Column="2"
                     Content="&#xE70F;"
                     FontFamily="Segoe MDL2 Assets"
@@ -54,7 +55,8 @@
                     Click="EditButton_Click"
                     ToolTipService.ToolTip="Edit list" />
 
-            <Button x:Name="DeleteButton"
+            <Button x:Uid="DeleteButton"
+                    x:Name="DeleteButton"
                     Grid.Column="3"
                     Content="&#xE74D;"
                     FontFamily="Segoe MDL2 Assets"

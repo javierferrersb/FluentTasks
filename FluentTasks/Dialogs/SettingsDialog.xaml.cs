@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Linq;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.Dialogs;
 
@@ -13,7 +14,9 @@ namespace FluentTasks.UI.Dialogs;
 public sealed partial class SettingsDialog : UserControl
 {
     private readonly SettingsService _settingsService;
+    private readonly ResourceLoader _resourceLoader;
     private bool _isLoading;
+    private bool _isShowingRestartDialog;
 
     /// <summary>
     /// Raised when the hamburger menu button is clicked.
@@ -32,8 +35,14 @@ public sealed partial class SettingsDialog : UserControl
     public SettingsDialog(SettingsService settingsService)
     {
         _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
+        _resourceLoader = new ResourceLoader();
         InitializeComponent();
+
+        _isLoading = true;
+        LoadLanguages();
         LoadSettings();
+        _isLoading = false;
+
         LoadVersionInfo();
 
         // Wire up event handlers
@@ -44,8 +53,6 @@ public sealed partial class SettingsDialog : UserControl
 
     private void LoadSettings()
     {
-        _isLoading = true;
-
         // Load theme
         var theme = _settingsService.AppTheme;
         ThemeRadioButtons.SelectedIndex = theme switch
@@ -55,6 +62,16 @@ public sealed partial class SettingsDialog : UserControl
             ElementTheme.Default => 2,
             _ => 2
         };
+
+        // Load language
+        var language = _settingsService.AppLanguage;
+        var languageItem = LanguageComboBox.Items
+            .OfType<LanguageInfo>()
+            .FirstOrDefault(item => item.Code == language);
+        if (languageItem != null)
+        {
+            LanguageComboBox.SelectedItem = languageItem;
+        }
 
         // Load default filter
         var filterItem = DefaultFilterComboBox.Items
@@ -73,14 +90,20 @@ public sealed partial class SettingsDialog : UserControl
         {
             DefaultSortComboBox.SelectedItem = sortItem;
         }
+    }
 
-        _isLoading = false;
+    private void LoadLanguages()
+    {
+        var languages = LanguageService.GetSupportedLanguages();
+        LanguageComboBox.ItemsSource = languages;
     }
 
     private void LoadVersionInfo()
     {
         var currentYear = DateTime.Now.Year;
-        CopyrightText.Text = $"© {currentYear} Javier Ferrer. All rights reserved.";
+        CopyrightText.Text = string.Format(
+            GetStringOrFallback("SettingsCopyrightFormat", "© {0} Javier Ferrer. All rights reserved."),
+            currentYear);
     }
 
     private void ThemeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,14 +147,58 @@ public sealed partial class SettingsDialog : UserControl
         }
     }
 
+    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_isLoading || LanguageComboBox.SelectedItem is not LanguageInfo languageInfo)
+            return;
+
+        // Ignore no-op selections to prevent duplicate restart prompts.
+        if (string.Equals(_settingsService.AppLanguage, languageInfo.Code, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        _settingsService.AppLanguage = languageInfo.Code;
+
+        // Show restart notification
+        _ = ShowRestartNotificationAsync();
+    }
+
+    private async System.Threading.Tasks.Task ShowRestartNotificationAsync()
+    {
+        if (_isShowingRestartDialog)
+            return;
+
+        _isShowingRestartDialog = true;
+        var dialog = new ContentDialog
+        {
+            Title = GetStringOrFallback("LanguageChangeTitle", "Language Changed"),
+            Content = GetStringOrFallback("LanguageChangeMessage", "Please restart the application to apply the new language."),
+            PrimaryButtonText = GetStringOrFallback("RestartNow", "Restart Now"),
+            CloseButtonText = GetStringOrFallback("Later", "Later"),
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = XamlRoot
+        };
+
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            // Restart with explicit language argument so the next process
+            // applies the selected language immediately.
+            var effectiveLanguage = LanguageService.GetEffectiveLanguage(_settingsService.AppLanguage);
+            var restartArgs = $"--lang={effectiveLanguage}";
+            Microsoft.Windows.AppLifecycle.AppInstance.Restart(restartArgs);
+        }
+
+        _isShowingRestartDialog = false;
+    }
+
     private async void ClearCache_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new ContentDialog
         {
-            Title = "Clear cache?",
-            Content = "This will remove all locally cached data. Your tasks will be re-downloaded on the next sync.",
-            PrimaryButtonText = "Clear",
-            CloseButtonText = "Cancel",
+            Title = _resourceLoader.GetString("SettingsClearCacheConfirmTitle"),
+            Content = _resourceLoader.GetString("SettingsClearCacheConfirmMessage"),
+            PrimaryButtonText = _resourceLoader.GetString("SettingsClearCachePrimaryButton"),
+            CloseButtonText = _resourceLoader.GetString("SettingsClearCacheCloseButton"),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = XamlRoot
         };
@@ -143,9 +210,9 @@ public sealed partial class SettingsDialog : UserControl
 
             var confirmDialog = new ContentDialog
             {
-                Title = "Cache cleared",
-                Content = "Local cache has been cleared successfully.",
-                CloseButtonText = "OK",
+                Title = _resourceLoader.GetString("SettingsCacheClearedTitle"),
+                Content = _resourceLoader.GetString("SettingsCacheClearedMessage"),
+                CloseButtonText = _resourceLoader.GetString("OnboardingSignInFailedCloseButton"),
                 XamlRoot = XamlRoot
             };
             await confirmDialog.ShowAsync();
@@ -156,10 +223,10 @@ public sealed partial class SettingsDialog : UserControl
     {
         var dialog = new ContentDialog
         {
-            Title = "Log out?",
-            Content = "You'll need to sign in again to access your tasks.",
-            PrimaryButtonText = "Log out",
-            CloseButtonText = "Cancel",
+            Title = _resourceLoader.GetString("SettingsLogOutConfirmTitle"),
+            Content = _resourceLoader.GetString("SettingsLogOutConfirmMessage"),
+            PrimaryButtonText = _resourceLoader.GetString("SettingsLogOutPrimaryButton"),
+            CloseButtonText = _resourceLoader.GetString("SettingsLogOutCloseButton"),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = XamlRoot
         };
@@ -225,7 +292,7 @@ public sealed partial class SettingsDialog : UserControl
                 Children =
                 {
                     new FontIcon { Glyph = "\uE774", FontSize = 16 },
-                    new TextBlock { Text = "GitHub", VerticalAlignment = VerticalAlignment.Center }
+                    new TextBlock { Text = GetStringOrFallback("GitHub", "GitHub"), VerticalAlignment = VerticalAlignment.Center }
                 }
             }
         };
@@ -259,7 +326,7 @@ public sealed partial class SettingsDialog : UserControl
                 Children =
                 {
                     new FontIcon { Glyph = "\uE8FA", FontSize = 16 },
-                    new TextBlock { Text = "LinkedIn", VerticalAlignment = VerticalAlignment.Center }
+                    new TextBlock { Text = GetStringOrFallback("LinkedIn", "LinkedIn"), VerticalAlignment = VerticalAlignment.Center }
                 }
             }
         };
@@ -269,12 +336,18 @@ public sealed partial class SettingsDialog : UserControl
 
         var dialog = new ContentDialog
         {
-            Title = "About the Developer",
+            Title = _resourceLoader.GetString("SettingsAboutDeveloperTitle"),
             Content = content,
-            CloseButtonText = "Close",
+            CloseButtonText = GetStringOrFallback("CloseButton", "Close"),
             XamlRoot = XamlRoot
         };
 
         await dialog.ShowAsync();
+    }
+
+    private string GetStringOrFallback(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
     }
 }

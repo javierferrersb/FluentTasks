@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Merħba f'FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Ejja nagħmlu dawra qasira biex ngħinuk tibda.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Ejja nibdew!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Aqbeż id-dawra</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Il-listi tal-kompiti tiegħek</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Il-listi kollha tal-kompiti tiegħek jidhru hawn. Ikklikkja kwalunkwe lista biex tara l-kompiti tagħha, jew ikklikkja l-buttuna + biex toħloq lista ġdida.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Li jmiss</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Aqbeż id-dawra</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Il-kompiti tiegħek</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Il-kompiti tiegħek jidhru hawn. Uża l-bar tat-tiftix biex issib kompiti, jew iffiltrahom u ssortjahom bil-buttuni fit-toolbar.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Li jmiss</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Aqbeż id-dawra</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Ibqa' sinkronizzat</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Il-kompiti tiegħek jissinkronizzaw awtomatikament ma' Google Tasks. Ikklikkja l-buttuna tas-sinkronizzazzjoni fi kwalunkwe ħin biex taġġorna d-dejta manwalment.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Fhimt!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Aqbeż id-dawra</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Merħba f'FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Merħba f'FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Klijent modern u nattiv ta' Google Tasks għal Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Issinkronizza ma' Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Il-kompiti tiegħek jissinkronizzaw bla xkiel ma' Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Ibqa' organizzat</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Oħloq listi u sottokompiti biex torganizza x-xogħol tiegħek</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Skadenzi</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Issettja skadenzi u qatt ma titlef deadline</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Iffiltra u issortja</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Sib kompiti malajr b'filtri qawwija</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Ibda</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Lura</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Qabbad il-kont tiegħek</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Idħol bil-kont Google tiegħek biex tissinkronizza l-kompiti fuq il-mezzi kollha tiegħek</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Idħol b'Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Qed nidħluk...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Id-dejta tiegħek tibqa' privata</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Id-dejta kollha tiegħek tibqa' fuq it-tagħmir tiegħek u s-servers ta' Google. FluentTasks ma jiġborx u ma jaħżinx informazzjoni personali.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Id-dħul falla</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>Ma stajniex nidħluk. Jekk jogħġbok erġa' pprova.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>Tajjeb</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Il-listi tiegħi</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Oħloq lista ġdida</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Issettjar</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Issinkronizza l-listi</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Agħżel lista biex tibda</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Agħżel lista ta' kompiti mill-sidebar jew oħloq waħda ġdida</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Il-kompiti tiegħi</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Ibdel in-navigazzjoni</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Issortja</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Filtru</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Fittex kompiti...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Żid kompitu ġdid...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Żid kompitu</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Ebda kompitu</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Żid kompitu biex tibda</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Lest</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Issejvja (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Ikkanċella (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Żid sottokompitu</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Dettalji tal-kompitu</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Ħassar kompitu</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar kmieni)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar tard)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A sa Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z sa A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Lesti fl-aħħar</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Il-kompiti kollha</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Mhux kompluti</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Skaduti</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Jiskadi llum</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Jiskadi din il-ġimgħa</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Editja l-lista</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Ħassar il-lista</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Issettjar</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Dehra</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Agħżel kif jidher FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Ċar</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Skur</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Uża l-issettjar tas-sistema</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Lingwa</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Listi</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Ikkonfigura l-imġiba default tal-lista</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Filtru default</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Ordni default tas-sorting</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Dejta</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Immaniġġja l-ħażna lokali tad-dejta</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Naddaf il-cache</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Neħħi d-dejta fil-cache lokali. Il-kompiti tiegħek jerġgħu jitniżżlu fis-sinkronizzazzjoni li jmiss.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Kont</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Immaniġġja l-konnessjoni tal-kont Google tiegħek</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Oħroġ</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Oħroġ mill-kont Google tiegħek. Trid terġa' tidħol biex taċċessa l-kompiti tiegħek.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>App moderna għall-immaniġġjar tal-kompiti għal Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Mibnija b'</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Magħmula b'</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>minn Spanja</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Dwar l-Iżviluppatur</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Ara fuq GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Liċenzjata taħt il-Liċenzja MIT</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Tnaddaf il-cache?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Dan ineħħi d-dejta kollha fil-cache lokali. Il-kompiti tiegħek jerġgħu jitniżżlu fis-sinkronizzazzjoni li jmiss.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Naddaf</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Il-cache tnaddfet</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Il-cache lokali tnaddfet b'suċċess.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Toħroġ?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Trid terġa' tidħol biex taċċessa l-kompiti tiegħek.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Oħroġ</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Dwar l-Iżviluppatur</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Il-kompiti kollha</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Mhux kompluti</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Skaduti</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Illum</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Din il-ġimgħa</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Xejn (l-ordni tiegħi)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar qrib l-ewwel)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar tard l-ewwel)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Alfabetiku (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Alfabetiku (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Lesti fl-aħħar</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Dettalji tal-lista</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Issejvja</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Isem tal-lista</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Daħħal isem tal-lista...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Dettalji tal-kompitu</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Issejvja</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Titlu</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Titlu tal-kompitu</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Data ta' skadenza</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>L-ebda data ta' skadenza</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Naddaf</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Noti</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Żid dettalji dwar dan il-kompitu...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Stat</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Skadut b'{0} ijiem</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Jiskadi llum</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Jiskadi għada</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Jiskadi fi {0} ijiem</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Agħżel ikona</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Agħżel</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Il-lingwa nbidlet</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Jekk jogħġbok erġa' ibda l-applikazzjoni biex tapplika l-lingwa l-ġdida.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Erġa' ibda issa</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Aktar tard</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Agħlaq</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Issejvja</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Falla l-aġġornament tal-lista</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Jiskadi din il-ġimgħa</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Oħroġ mill-kont Google tiegħek. Trid terġa' tidħol biex taċċessa l-kompiti tiegħek.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Id-drittijiet kollha riżervati.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Agħżel</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Fittex kompiti...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Ħassar</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Żid sottokompitu</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot ma ġiex issettjat. Sejjaħ SetXamlRoot l-ewwel.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Jiskadi {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Qed nidħluk...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Immaniġġja l-konnessjoni tal-kont Google tiegħek</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Issejvja (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Listi</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Skaduti</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Issinkronizzat</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Issettjar</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Il-listi tiegħi</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Skadut b'{0} ijiem</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Filtru</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>Tajjeb</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Inħoloq sottokompitu</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Mhux kompluti</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Lesti fl-aħħar</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar kmieni)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Kont</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Lingwa</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Jiskadi {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Il-kompitu ġie rranġat mill-ġdid</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Is-sinkronizzazzjoni falliet</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Jiskadi għada</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Żid dettalji dwar dan il-kompitu...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Inħolqot lista</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ħassar il-lista</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Isem tal-lista</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Ebda kompitu</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Dwar l-Iżviluppatur</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Agħżel lista biex tibda</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Magħmula b'</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Issejvja</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Il-kompitu tlesta</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Titlu tal-kompitu</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Lest</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Noti</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Żid kompitu</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Ipprova ibdel jew naddaf il-filtru</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ħassar kompitu</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Il-kompitu ġie aġġornat</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Issettja skadenzi u qatt ma titlef deadline</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Żid kompitu biex tibda</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Falla t-tħassir tal-kompitu</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Jekk jogħġbok daħħal titlu tal-kompitu</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Jekk jogħġbok agħżel lista l-ewwel</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Ordni default tas-sorting</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Iffiltra u issortja</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Skadenzi</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Il-kompitu tħassar</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabetiku (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Il-lista tħassret</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Jiskadi llum</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Qed tissinkronizza...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Klijent modern u nattiv ta' Google Tasks għal Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Il-kompiti kollha</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Ma nstabux riżultati</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>minn Spanja</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Falla l-arranġament mill-ġdid</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>L-ebda data ta' skadenza</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Dettalji tal-lista</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Ara fuq GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Id-dejta tiegħek tibqa' privata</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Mhux konness</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar tard l-ewwel)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar tard)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Immaniġġja l-ħażna lokali tad-dejta</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabetiku (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Idħol bil-kont Google tiegħek biex tissinkronizza l-kompiti fuq il-mezzi kollha tiegħek</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Agħżel lista ta' kompiti mill-sidebar jew oħloq waħda ġdida</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Agħżel ikona</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Issettjar</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Dehra</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Żball: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Merħba f'FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Mibnija b'</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Id-dejta kollha tiegħek tibqa' fuq it-tagħmir tiegħek u s-servers ta' Google. FluentTasks ma jiġborx u ma jaħżinx informazzjoni personali.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Skur</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Issortja</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Żball ta' sinkronizzazzjoni: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Agħżel kif jidher FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>App moderna għall-immaniġġjar tal-kompiti għal Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Lista ġdida</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A sa Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Editja l-lista</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Ikkonfigura l-imġiba default tal-lista</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Żid kompitu biex tibda</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Filtru default</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Titlu</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Ċar</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Ibqa' organizzat</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Skaduti</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Falla l-aġġornament tal-kompitu</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Data ta' skadenza</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Dan il-kompitu għandu {0} sottokompiti mhux kompluti.\n\nIl-kompitu prinċipali meta jitlesta, jtemm ukoll is-sottokompiti kollha.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Din il-ġimgħa</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Il-kompiti kollha</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Ebda kompitu</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Oħroġ</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Il-lista ġiet aġġornata</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Imla kollox</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Jiskadi llum</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ibdel in-navigazzjoni</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Sib kompiti malajr b'filtri qawwija</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar qrib l-ewwel)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Dettalji tal-kompitu</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Dejta</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Inħoloq kompitu</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Issinkronizza l-listi</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Lingwa</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Żid sottokompitu ma': {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Il-kompiti tiegħek jissinkronizzaw bla xkiel ma' Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Tlesti s-sottokompiti?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Qabbad il-kont tiegħek</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ikkanċella (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Żball: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Żid</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Tħassar il-lista?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>It-titlu tal-kompitu ma jistax ikun vojt</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Xejn (l-ordni tiegħi)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Neħħi d-dejta fil-cache lokali. Il-kompiti tiegħek jerġgħu jitniżżlu fis-sinkronizzazzjoni li jmiss.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Ebda kompitu li jaqbel</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Il-kompiti tiegħi</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Il-kompitu reġa' nfetaħ</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Lesti fl-aħħar</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ibdel in-navigazzjoni</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Merħba f'FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Lest</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Oħloq lista ġdida</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Oħloq listi u sottokompiti biex torganizza x-xogħol tiegħek</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Skadut b'jum 1</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Naddaf il-cache</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Titlu tas-sottokompitu...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Żid kompitu ġdid...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Illum</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Uża l-issettjar tas-sistema</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Idħol b'Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Żball tan-netwerk: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Issinkronizza ma' Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Dettalji tal-kompitu</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Konness</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Naddaf</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Issinkronizzati {0} listi</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Mhux kompluti</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Stat</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z sa A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Żgur li trid tħassar "{0}"?\n\nIl-kompiti kollha f'din il-lista se jitħassru b'mod permanenti.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Ipprova terminu ta' tfittxija differenti</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Falla t-tħassir tal-lista</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Daħħal isem tal-lista...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Liċenzjata taħt il-Liċenzja MIT</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Jiskadi din il-ġimgħa</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A sa Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Lesti fl-aħħar</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Kompluti</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Il-kompiti kollha</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Ibda</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Jiskadi llum</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Lura</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Mhux kompluti</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar tard)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z sa A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Data ta' skadenza (l-aktar kmieni)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Skaduti</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

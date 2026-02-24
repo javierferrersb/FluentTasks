@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>FluentTasks में आपका स्वागत है! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>शुरू करने में मदद के लिए एक छोटा सा टूर देखते हैं।</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>चलिए शुरू करें!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>टूर छोड़ें</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>आपकी टास्क सूचियाँ</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>यहाँ आपकी सभी टास्क सूचियाँ दिखाई देती हैं। किसी सूची को देखने के लिए उस पर क्लिक करें, या नई सूची बनाने के लिए + दबाएँ।</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>अगला</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>टूर छोड़ें</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>आपके टास्क</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>यहाँ आपके टास्क दिखाई देते हैं। टास्क खोजने के लिए सर्च बार का उपयोग करें, या टूलबार से फ़िल्टर और क्रमबद्ध करें।</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>अगला</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>टूर छोड़ें</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>हमेशा सिंक में रहें</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>आपके टास्क Google Tasks के साथ स्वतः सिंक होते हैं। डेटा को मैन्युअली रीफ्रेश करने के लिए कभी भी सिंक बटन दबाएँ।</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>समझ गया</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>टूर छोड़ें</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>FluentTasks में आपका स्वागत है</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>FluentTasks में आपका स्वागत है</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Windows के लिए आधुनिक Google Tasks क्लाइंट</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Google के साथ सिंक करें</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>आपके टास्क Google Tasks के साथ सहज रूप से सिंक होते हैं</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>संगठित रहें</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>अपने काम को व्यवस्थित करने के लिए सूचियाँ और उप-टास्क बनाएं</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>नियत तिथियाँ</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>नियत तिथि सेट करें और कोई समयसीमा न चूकें</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>फ़िल्टर और क्रमबद्ध</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>शक्तिशाली फ़िल्टर से टास्क जल्दी खोजें</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>शुरू करें</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>वापस</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>अपना खाता जोड़ें</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>अपने सभी डिवाइसों पर टास्क सिंक करने के लिए अपने Google खाते से साइन इन करें</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Google से साइन इन करें</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>साइन इन किया जा रहा है...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>आपका डेटा निजी रहता है</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>आपका सारा डेटा आपके डिवाइस और Google के सर्वर पर रहता है। FluentTasks कोई व्यक्तिगत जानकारी एकत्र या संग्रहीत नहीं करता।</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>साइन-इन विफल</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>हम साइन इन नहीं कर पाए। कृपया फिर प्रयास करें।</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>ठीक है</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>मेरी सूचियाँ</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>नई सूची बनाएं</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>सूचियाँ सिंक करें</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>शुरू करने के लिए एक सूची चुनें</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>साइडबार से एक टास्क सूची चुनें या नई बनाएं</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>मेरे टास्क</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>नेविगेशन टॉगल करें</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>क्रमबद्ध करें</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>फ़िल्टर</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>टास्क खोजें...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>नया टास्क जोड़ें...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>टास्क जोड़ें</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>कोई टास्क नहीं</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>शुरू करने के लिए एक टास्क जोड़ें</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>तैयार</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>सहेजें (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>रद्द करें (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>उप-टास्क जोड़ें</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>टास्क विवरण</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>टास्क हटाएँ</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>डिफ़ॉल्ट</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>नियत तिथि (सबसे नज़दीक)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>नियत तिथि (सबसे बाद)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A से Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z से A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>पूर्ण कार्य अंत में</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>सभी टास्क</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>अपूर्ण</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>समयसीमा पार</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>आज नियत</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>इस सप्ताह नियत</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>सूची संपादित करें</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>सूची हटाएँ</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>रूप</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>FluentTasks का रूप चुनें</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>हल्का</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>गहरा</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>सिस्टम सेटिंग का उपयोग करें</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>सूचियाँ</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>सूचियों का डिफ़ॉल्ट व्यवहार सेट करें</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>डिफ़ॉल्ट फ़िल्टर</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>डिफ़ॉल्ट क्रम</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>डेटा</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>स्थानीय डेटा स्टोरेज प्रबंधित करें</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>कैश साफ़ करें</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>स्थानीय कैश्ड डेटा हटाएँ। अगली सिंक पर आपके टास्क फिर से डाउनलोड होंगे।</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>खाता</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>अपने Google खाते का कनेक्शन प्रबंधित करें</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>लॉग आउट</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>अपने Google खाते से साइन आउट करें। टास्क देखने के लिए फिर से साइन इन करना होगा।</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Windows के लिए एक आधुनिक टास्क प्रबंधन ऐप</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>इससे निर्मित</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>के साथ बनाया गया</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>स्पेन से</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>डेवलपर के बारे में</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>GitHub पर देखें</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>MIT लाइसेंस के अंतर्गत</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>क्या कैश साफ़ करें?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>यह सभी स्थानीय कैश्ड डेटा हटाएगा। अगली सिंक पर टास्क फिर से डाउनलोड होंगे।</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>साफ़ करें</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>कैश साफ़ हुआ</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>स्थानीय कैश सफलतापूर्वक साफ़ हो गया।</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>लॉग आउट करें?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>टास्क देखने के लिए फिर से साइन इन करना होगा।</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>लॉग आउट</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>डेवलपर के बारे में</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>सभी टास्क</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>अपूर्ण</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>समयसीमा पार</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>आज</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>यह सप्ताह</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>कोई नहीं (मेरा क्रम)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>नियत तिथि (सबसे पहले निकट)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>नियत तिथि (सबसे पहले बाद)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>वर्णक्रम (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>वर्णक्रम (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>पूर्ण कार्य अंत में</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>सूची विवरण</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>सूची का नाम</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>सूची का नाम दर्ज करें...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>आइकन</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>टास्क विवरण</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>शीर्षक</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>टास्क शीर्षक</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>नियत तिथि</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>कोई नियत तिथि नहीं</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>साफ़ करें</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>नोट्स</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>इस टास्क के बारे में विवरण जोड़ें...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>स्थिति</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>{0} दिन विलंबित</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>आज नियत</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>कल नियत</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>{0} दिनों में नियत</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>एक आइकन चुनें</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>चुनें</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>भाषा बदली गई</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>नई भाषा लागू करने के लिए ऐप पुनः शुरू करें।</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>अभी पुनः शुरू करें</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>बाद में</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>बंद करें</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>सूची अपडेट नहीं हो सकी</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>इस सप्ताह नियत</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>अपने Google खाते से साइन आउट करें। टास्क देखने के लिए फिर से साइन इन करना होगा।</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. सर्वाधिकार सुरक्षित।</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>चुनें</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>टास्क खोजें...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>हटाएँ</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>उप-टास्क जोड़ें</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot सेट नहीं किया गया है। पहले SetXamlRoot कॉल करें।</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>नियत {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>साइन इन किया जा रहा है...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>अपने Google खाते का कनेक्शन प्रबंधित करें</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>सहेजें (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>सूचियाँ</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>समयसीमा पार</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>सिंक हो गया</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>मेरी सूचियाँ</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>{0} दिन विलंबित</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>फ़िल्टर</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>ठीक है</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>उप-टास्क बनाया गया</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>अपूर्ण</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>पूर्ण कार्य अंत में</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>नियत तिथि (सबसे नज़दीक)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>खाता</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>नियत {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>टास्क पुनः क्रमित</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>सिंक विफल</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>कल नियत</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>डिफ़ॉल्ट</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>इस टास्क के बारे में विवरण जोड़ें...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>सूची बनाई गई</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>सूची हटाएँ</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>सूची का नाम</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>कोई टास्क नहीं</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>डेवलपर के बारे में</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>शुरू करने के लिए एक सूची चुनें</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>के साथ बनाया गया</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>टास्क पूरा हुआ</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>टास्क शीर्षक</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>तैयार</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>नोट्स</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>टास्क जोड़ें</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>फ़िल्टर बदलें या हटाएँ</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>टास्क हटाएँ</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>टास्क अपडेट हुआ</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>नियत तिथि सेट करें और कोई समयसीमा न चूकें</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>शुरू करने के लिए एक टास्क जोड़ें</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>टास्क हटाया नहीं जा सका</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>कृपया टास्क शीर्षक दर्ज करें</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>कृपया पहले एक सूची चुनें</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>डिफ़ॉल्ट क्रम</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>फ़िल्टर और क्रमबद्ध</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>नियत तिथियाँ</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>टास्क हटाया गया</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>वर्णक्रम (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>सूची हटाई गई</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>आज नियत</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>सिंक किया जा रहा है...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Windows के लिए आधुनिक Google Tasks क्लाइंट</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>सभी टास्क</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>कोई परिणाम नहीं मिला</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>स्पेन से</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>पुनः क्रमित नहीं हो सका</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>कोई नियत तिथि नहीं</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>सूची विवरण</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>GitHub पर देखें</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>आपका डेटा निजी रहता है</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>ऑफ़लाइन</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>नियत तिथि (सबसे पहले बाद)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>नियत तिथि (सबसे बाद)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>स्थानीय डेटा स्टोरेज प्रबंधित करें</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>वर्णक्रम (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>आइकन</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>अपने सभी डिवाइसों पर टास्क सिंक करने के लिए अपने Google खाते से साइन इन करें</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>साइडबार से एक टास्क सूची चुनें या नई बनाएं</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>एक आइकन चुनें</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>रूप</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>त्रुटि: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>FluentTasks में आपका स्वागत है</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>इससे निर्मित</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>आपका सारा डेटा आपके डिवाइस और Google के सर्वर पर रहता है। FluentTasks कोई व्यक्तिगत जानकारी एकत्र या संग्रहीत नहीं करता।</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>गहरा</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>क्रमबद्ध करें</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>सिंक त्रुटि: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>FluentTasks का रूप चुनें</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Windows के लिए एक आधुनिक टास्क प्रबंधन ऐप</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>नई सूची</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A से Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>सूची संपादित करें</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>सूचियों का डिफ़ॉल्ट व्यवहार सेट करें</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>शुरू करने के लिए एक टास्क जोड़ें</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>डिफ़ॉल्ट फ़िल्टर</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>शीर्षक</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>हल्का</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>संगठित रहें</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>समयसीमा पार</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>टास्क अपडेट नहीं हो सका</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>नियत तिथि</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>इस टास्क में {0} अपूर्ण उप-टास्क हैं।
+
+मुख्य टास्क पूरा करने पर सभी उप-टास्क भी पूरे हो जाएंगे।</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>यह सप्ताह</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>सभी टास्क</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>कोई टास्क नहीं</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>लॉग आउट</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>सूची अपडेट हुई</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>सभी पूर्ण करें</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>आज नियत</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>नेविगेशन टॉगल करें</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>शक्तिशाली फ़िल्टर से टास्क जल्दी खोजें</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>नियत तिथि (सबसे पहले निकट)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>टास्क विवरण</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>डेटा</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>टास्क बनाया गया</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>सूचियाँ सिंक करें</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>{0} में उप-टास्क जोड़ें</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>आपके टास्क Google Tasks के साथ सहज रूप से सिंक होते हैं</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>उप-टास्क पूर्ण करें?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>अपना खाता जोड़ें</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>रद्द करें (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>त्रुटि: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>जोड़ें</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>सूची हटाएँ?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>टास्क शीर्षक खाली नहीं हो सकता</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>कोई नहीं (मेरा क्रम)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>स्थानीय कैश्ड डेटा हटाएँ। अगली सिंक पर आपके टास्क फिर से डाउनलोड होंगे।</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>मेल खाते टास्क नहीं मिले</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>मेरे टास्क</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>टास्क फिर खोला गया</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>पूर्ण कार्य अंत में</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>नेविगेशन टॉगल करें</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks में आपका स्वागत है</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>तैयार</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>नई सूची बनाएं</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>अपने काम को व्यवस्थित करने के लिए सूचियाँ और उप-टास्क बनाएं</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>1 दिन विलंबित</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>कैश साफ़ करें</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>उप-टास्क शीर्षक...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>नया टास्क जोड़ें...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>आज</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>सिस्टम सेटिंग का उपयोग करें</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Google से साइन इन करें</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>नेटवर्क त्रुटि: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Google के साथ सिंक करें</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>टास्क विवरण</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>कनेक्टेड</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>साफ़ करें</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>{0} सूचियाँ सिंक हुईं</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>अपूर्ण</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>स्थिति</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z से A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>क्या आप वाकई "{0}" हटाना चाहते हैं?
+
+इस सूची के सभी टास्क स्थायी रूप से हट जाएंगे।</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>कोई दूसरा खोज शब्द आज़माएँ</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>सूची हटाई नहीं जा सकी</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>सूची का नाम दर्ज करें...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>MIT लाइसेंस के अंतर्गत</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>इस सप्ताह नियत</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A से Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>डिफ़ॉल्ट</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>पूर्ण कार्य अंत में</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>पूर्ण</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>सभी टास्क</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>शुरू करें</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>आज नियत</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>वापस</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>अपूर्ण</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>नियत तिथि (सबसे बाद)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z से A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>नियत तिथि (सबसे नज़दीक)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>समयसीमा पार</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

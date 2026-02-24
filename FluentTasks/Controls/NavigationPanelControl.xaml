@@ -27,13 +27,15 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
-				<TextBlock x:Name="MyListsText"
+				<TextBlock x:Uid="MyListsTextBlock"
+						   x:Name="MyListsText"
 						   Text="My Lists"
 						   Grid.Column="0"
 						   Style="{StaticResource CaptionTextBlockStyle}"
 						   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
 						   FontWeight="SemiBold" />
-				<Button x:Name="CreateListButton"
+				<Button x:Uid="CreateListButton"
+						x:Name="CreateListButton"
 						Content="&#xE710;"
 						Grid.Column="1"
 						FontFamily="Segoe MDL2 Assets"
@@ -66,8 +68,9 @@
 			</ScrollViewer>
 
 			<!-- Settings -->
-			<Button x:Name="SettingsButton"
+			<Button x:Uid="SettingsButton"
 					Grid.Row="2"
+					x:Name="SettingsButton"
 					Click="Settings_Click"
 					HorizontalAlignment="Stretch"
 					HorizontalContentAlignment="Left"
@@ -79,14 +82,16 @@
 					<FontIcon x:Name="SettingsIcon"
 							  Glyph="&#xE713;"
 							  FontSize="16" />
-					<TextBlock x:Name="SettingsButtonText"
+					<TextBlock x:Uid="SettingsButtonTextBlock"
+							   x:Name="SettingsButtonText"
 							   Text="Settings" />
 				</StackPanel>
 			</Button>
 
 			<!-- Sync -->
-			<Button x:Name="SyncButton"
+			<Button x:Uid="SyncButton"
 					Grid.Row="3"
+					x:Name="SyncButton"
 					Click="Sync_Click"
 					HorizontalAlignment="Stretch"
 					HorizontalContentAlignment="Left"
@@ -98,7 +103,8 @@
 					<FontIcon x:Name="SyncIcon"
 							  Glyph="&#xE72C;"
 							  FontSize="16" />
-					<TextBlock x:Name="SyncButtonText"
+					<TextBlock x:Uid="SyncButtonTextBlock"
+							   x:Name="SyncButtonText"
 							   Text="Sync Lists" />
 				</StackPanel>
 			</Button>

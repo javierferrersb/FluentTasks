@@ -4,6 +4,7 @@ using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.Services;
 
@@ -15,6 +16,7 @@ internal sealed class DialogService : IDialogService
 {
     private XamlRoot? _xamlRoot;
     private ElementTheme _currentTheme = ElementTheme.Default;
+    private readonly ResourceLoader _resourceLoader = new();
 
     /// <summary>
     /// Sets the <see cref="XamlRoot"/> used for presenting dialogs.
@@ -34,14 +36,21 @@ internal sealed class DialogService : IDialogService
     }
 
     /// <inheritdoc />
-    public async Task<bool> ShowConfirmationAsync(string title, string content, string confirmText = "OK", string cancelText = "Cancel")
+    public async Task<bool> ShowConfirmationAsync(string title, string content, string confirmText = "", string cancelText = "")
     {
+        var primaryText = string.IsNullOrWhiteSpace(confirmText)
+            ? GetResource("DialogDefaultConfirm", "OK")
+            : confirmText;
+        var closeText = string.IsNullOrWhiteSpace(cancelText)
+            ? GetResource("DialogDefaultCancel", "Cancel")
+            : cancelText;
+
         var dialog = new ContentDialog
         {
             Title = title,
             Content = content,
-            PrimaryButtonText = confirmText,
-            CloseButtonText = cancelText,
+            PrimaryButtonText = primaryText,
+            CloseButtonText = closeText,
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = GetXamlRoot(),
             RequestedTheme = _currentTheme
@@ -79,8 +88,8 @@ internal sealed class DialogService : IDialogService
         {
             Title = title,
             Content = textBox,
-            PrimaryButtonText = "Add",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = GetResource("DialogTextInputPrimary", "Add"),
+            CloseButtonText = GetResource("DialogDefaultCancel", "Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = GetXamlRoot(),
             RequestedTheme = _currentTheme
@@ -114,6 +123,13 @@ internal sealed class DialogService : IDialogService
 
     private XamlRoot GetXamlRoot()
     {
-        return _xamlRoot ?? throw new InvalidOperationException("XamlRoot has not been set. Call SetXamlRoot first.");
+        return _xamlRoot ?? throw new InvalidOperationException(
+            GetResource("DialogServiceXamlRootNotSetError", "XamlRoot has not been set. Call SetXamlRoot first."));
+    }
+
+    private string GetResource(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
     }
 }

@@ -1,10 +1,13 @@
-﻿using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 
 namespace FluentTasks.UI.Converters;
 
 public class DateToStringConverter : IValueConverter
 {
+    private readonly ResourceLoader _resourceLoader = new();
+
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         if (value is DateTimeOffset date)
@@ -16,17 +19,25 @@ public class DateToStringConverter : IValueConverter
             {
                 var daysOverdue = Math.Abs(daysUntil);
                 return daysOverdue == 1
-                    ? "Overdue by 1 day"
-                    : $"Overdue by {daysOverdue} days";
+                    ? GetResource("DateToStringOverdueOneDay", "Overdue by 1 day")
+                    : string.Format(GetResource("DateToStringOverdueManyDays", "Overdue by {0} days"), daysOverdue);
             }
             else if (daysUntil == 0)
-                return "Due Today";
+            {
+                return GetResource("DateToStringDueToday", "Due Today");
+            }
             else if (daysUntil == 1)
-                return "Due Tomorrow";
+            {
+                return GetResource("DateToStringDueTomorrow", "Due Tomorrow");
+            }
             else if (daysUntil <= 7)
-                return $"Due {date.ToString("dddd")}";
+            {
+                return string.Format(GetResource("DateToStringDueDayOfWeek", "Due {0}"), date.ToString("dddd"));
+            }
             else
-                return $"Due {date.ToString("MMM d")}";
+            {
+                return string.Format(GetResource("DateToStringDueDate", "Due {0}"), date.ToString("MMM d"));
+            }
         }
 
         return string.Empty;
@@ -35,5 +46,11 @@ public class DateToStringConverter : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, string language)
     {
         throw new NotImplementedException();
+    }
+
+    private string GetResource(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
     }
 }

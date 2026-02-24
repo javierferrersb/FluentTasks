@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- App Window -->
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <!-- MainWindow Teaching Tips -->
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>欢迎使用 FluentTasks！🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>让我们快速浏览一下，帮助您入门。</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>开始吧！</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>跳过导览</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>您的任务列表</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>所有任务列表都会显示在这里。点击任何列表可查看其任务，或点击 + 按钮创建新列表。</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>跳过导览</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>您的任务</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>您的任务会显示在这里。使用搜索栏查找任务，或使用工具栏中的按钮筛选和排序任务。</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>跳过导览</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>保持同步</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>您的任务会与 Google Tasks 自动同步。随时点击同步按钮可手动刷新数据。</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>知道了！</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>跳过导览</value>
+  </data>
+  <!-- OnboardingWindow -->
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>欢迎使用 FluentTasks</value>
+  </data>
+  <!-- OnboardingDialog Page 1 - Welcome -->
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>欢迎使用 FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>一款现代化的原生 Google Tasks Windows 客户端</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>与 Google 同步</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>您的任务可与 Google Tasks 无缝同步</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>保持有序</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>创建列表和子任务来组织您的工作</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>截止日期</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>设置截止日期，绝不错过任何期限</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>筛选和排序</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>使用强大的筛选功能快速查找任务</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>开始使用</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <!-- OnboardingDialog Page 2 - Sign In -->
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>连接您的账户</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>使用 Google 账户登录，以便在所有设备上同步任务</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>使用 Google 登录</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>正在登录...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>您的数据保持私密</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>您所有的数据都保存在您的设备和 Google 服务器上。FluentTasks 不会收集或存储任何个人信息。</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>无法登录。请重试。</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <!-- NavigationPanelControl -->
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>我的列表</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>创建新列表</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>同步列表</value>
+  </data>
+  <!-- TaskListControl -->
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>选择一个列表以开始使用</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>从侧边栏选择一个任务列表或创建一个新列表</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>我的任务</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>切换导航</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>搜索任务...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>添加新任务...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>添加任务</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>暂无任务</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>添加任务以开始使用</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>保存 (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>取消 (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>添加子任务</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>任务详情</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>删除任务</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <!-- Sort Menu Items -->
+  <data name="SortDefault" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>截止日期（最早）</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>截止日期（最晚）</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A 到 Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z 到 A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>最后完成</value>
+  </data>
+  <!-- Filter Menu Items -->
+  <data name="FilterAll" xml:space="preserve">
+    <value>所有任务</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>已逾期</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>今天到期</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>本周到期</value>
+  </data>
+  <!-- MenuItemControl -->
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>编辑列表</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>删除列表</value>
+  </data>
+  <!-- SettingsDialog -->
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>选择 FluentTasks 的外观</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>使用系统设置</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>列表</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>配置默认列表行为</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>默认筛选</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>默认排序顺序</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>管理本地数据存储</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>删除本地缓存的数据。下次同步时将重新下载任务。</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>管理您的 Google 账户连接</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>退出 Google 账户。您需要重新登录才能访问任务。</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>一款现代化、流畅的 Windows 任务管理应用</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>构建于</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>用心制作</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>来自西班牙</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>关于开发者</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>在 GitHub 上查看</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>基于 MIT 许可证授权</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>清除缓存？</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>这将删除所有本地缓存的数据。下次同步时将重新下载任务。</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>缓存已清除</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>本地缓存已成功清除。</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>退出登录？</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>您需要重新登录才能访问任务。</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>关于开发者</value>
+  </data>
+  <!-- ComboBox Items - Settings -->
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>所有任务</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>已逾期</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>今天</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>本周</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>无（我的顺序）</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>截止日期（最近优先）</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>截止日期（最远优先）</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>字母顺序 (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>字母顺序 (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>最后完成</value>
+  </data>
+  <!-- ListEditorDialog -->
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>列表详情</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>列表名称</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>输入列表名称...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>图标</value>
+  </data>
+  <!-- TaskDetailsDialog -->
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>任务详情</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>任务标题</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>截止日期</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>无截止日期</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>添加有关此任务的详情...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>已逾期 {0} 天</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>今天到期</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>明天到期</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>{0} 天后到期</value>
+  </data>
+  <!-- IconPickerDialog -->
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>选择图标</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <!-- Tech Stack Badges -->
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <!-- Language Change Dialog -->
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>语言已更改</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>请重新启动应用程序以应用新语言。</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>立即重启</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>稍后</value>
+  </data>
+  <!-- Social Media -->
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>更新列表失败</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>本周到期</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>退出 Google 账户。您需要重新登录才能访问任务。</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer。保留所有权利。</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜索任务...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>添加子任务</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot 尚未设置。请先调用 SetXamlRoot。</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>{0} 到期</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>正在登录...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>管理您的 Google 账户连接</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>保存 (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>列表</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>已逾期</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>已同步</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>我的列表</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>已逾期 {0} 天</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>子任务已创建</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>最后完成</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>截止日期（最早）</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>{0}到期</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>任务已重新排序</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>同步失败</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>明天到期</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>添加有关此任务的详情...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>列表已创建</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除列表</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>列表名称</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>暂无任务</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>关于开发者</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>选择一个列表以开始使用</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>用心制作</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}：{1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>任务已完成</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>任务标题</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>添加任务</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>尝试更改或清除筛选</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除任务</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>任务已更新</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>设置截止日期，绝不错过任何期限</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>添加任务以开始使用</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>删除任务失败</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>请输入任务标题</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>请先选择一个列表</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>默认排序顺序</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>筛选和排序</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>截止日期</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>任务已删除</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>字母顺序 (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>列表已删除</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>今天到期</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>正在同步...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>一款现代化的原生 Google Tasks Windows 客户端</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>所有任务</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>未找到结果</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>来自西班牙</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>重新排序失败</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>无截止日期</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>列表详情</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>在 GitHub 上查看</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>您的数据保持私密</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>截止日期（最远优先）</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>截止日期（最晚）</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>管理本地数据存储</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>字母顺序 (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>图标</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>使用 Google 账户登录，以便在所有设备上同步任务</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>从侧边栏选择一个任务列表或创建一个新列表</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>选择图标</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>错误：{0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>欢迎使用 FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>构建于</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>您所有的数据都保存在您的设备和 Google 服务器上。FluentTasks 不会收集或存储任何个人信息。</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>同步错误：{0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>选择 FluentTasks 的外观</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>一款现代化、流畅的 Windows 任务管理应用</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}：{1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>新列表</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A 到 Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>编辑列表</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>配置默认列表行为</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>添加任务以开始使用</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>默认筛选</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>保持有序</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>已逾期</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>更新任务失败</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>截止日期</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>此任务有 {0} 个未完成的子任务。\n\n完成父任务也将完成所有子任务。</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>本周</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>所有任务</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>暂无任务</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>列表已更新</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>全部完成</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>今天到期</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>切换导航</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>使用强大的筛选功能快速查找任务</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>截止日期（最近优先）</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>任务详情</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>任务已创建</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>同步列表</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>添加子任务到：{0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>您的任务可与 Google Tasks 无缝同步</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>完成子任务？</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>连接您的账户</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>取消 (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>错误：{0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>删除列表？</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>任务标题不能为空</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>无（我的顺序）</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>删除本地缓存的数据。下次同步时将重新下载任务。</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>无匹配任务</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>我的任务</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>任务已重新打开</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>最后完成</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>切换导航</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>欢迎使用 FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>创建新列表</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>创建列表和子任务来组织您的工作</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>已逾期 1 天</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>子任务标题...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>添加新任务...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>今天</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>使用系统设置</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>使用 Google 登录</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>网络错误：{0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>与 Google 同步</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>任务详情</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>已同步 {0} 个列表</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z 到 A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>您确定要删除"{0}"吗？\n\n此列表中的所有任务将被永久删除。</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>尝试使用不同的搜索词</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>删除列表失败</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>输入列表名称...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>基于 MIT 许可证授权</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>本周到期</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A 到 Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>最后完成</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>所有任务</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>开始使用</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>今天到期</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>截止日期（最晚）</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z 到 A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>截止日期（最早）</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>已逾期</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+</root>

@@ -27,12 +27,18 @@ public sealed class SettingsService
     /// </summary>
     public event EventHandler? LoggedOut;
 
+    /// <summary>
+    /// Raised when the language preference changes.
+    /// </summary>
+    public event EventHandler<string>? LanguageChanged;
+
     // Settings keys
     private const string ThemeKey = "AppTheme";
     private const string DefaultFilterKey = "DefaultFilter";
     private const string DefaultSortKey = "DefaultSort";
     private const string HasCompletedOnboardingKey = "HasCompletedOnboarding";
     private const string HasSeenTeachingTipsKey = "HasSeenTeachingTips";
+    private const string LanguageKey = "AppLanguage";
 
     public SettingsService(IGoogleAuthService authService)
     {
@@ -116,6 +122,32 @@ public sealed class SettingsService
     {
         get => _localSettings.Values[HasSeenTeachingTipsKey] is bool seen && seen;
         set => _localSettings.Values[HasSeenTeachingTipsKey] = value;
+    }
+
+    /// <summary>
+    /// Gets or sets the application language preference.
+    /// "auto" means use Windows setting.
+    /// </summary>
+    public string AppLanguage
+    {
+        get
+        {
+            if (_localSettings.Values[LanguageKey] is string language)
+            {
+                return language;
+            }
+            return "auto"; // Default to Windows setting
+        }
+        set
+        {
+            _localSettings.Values[LanguageKey] = value;
+            // Persist the override immediately so MRT picks it up on the very next process start.
+            // Without this, PrimaryLanguageOverride would only be set inside OnLaunched (after MRT
+            // has already initialized), causing the language change to require two restarts.
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride =
+                LanguageService.GetEffectiveLanguage(value);
+            LanguageChanged?.Invoke(this, value);
+        }
     }
 
     /// <summary>

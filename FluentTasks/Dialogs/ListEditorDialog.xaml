@@ -1,6 +1,7 @@
 <ContentDialog x:Class="FluentTasks.UI.Dialogs.ListEditorDialog"
                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Uid="ListEditorDialog"
                Title="List Details"
                PrimaryButtonText="Save"
                CloseButtonText="Cancel"
@@ -17,6 +18,7 @@
         <!-- Name Input -->
         <TextBox x:Name="NameTextBox"
                  Grid.Row="0"
+                 x:Uid="ListNameTextBox"
                  Header="List name"
                  PlaceholderText="Enter list name..."
                  MaxLength="100" />
@@ -24,7 +26,8 @@
         <!-- Icon Picker -->
         <StackPanel Grid.Row="1"
                     Spacing="8">
-            <TextBlock Text="Icon"
+            <TextBlock x:Uid="IconTextBlock"
+                       Text="Icon"
                        Style="{StaticResource CaptionTextBlockStyle}" />
             <GridView x:Name="IconGrid"
                       SelectionMode="Single"

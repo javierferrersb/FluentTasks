@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
 using FluentTasks.UI.Services;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI.ViewModels;
 
@@ -18,6 +19,7 @@ public sealed partial class TaskListViewModel : ObservableObject
 {
     private readonly ITaskService _taskService;
     private readonly IDialogService _dialogService;
+    private readonly ResourceLoader _resourceLoader;
 
     private List<TaskItem> _allTasks = [];
     private TaskList? _selectedList;
@@ -50,13 +52,13 @@ public sealed partial class TaskListViewModel : ObservableObject
     private string _newTaskTitle = string.Empty;
 
     [ObservableProperty]
-    private string _sortButtonText = "Sort";
+    private string _sortButtonText = string.Empty;
 
     [ObservableProperty]
     private bool _isSortActive;
 
     [ObservableProperty]
-    private string _filterButtonText = "Filter";
+    private string _filterButtonText = string.Empty;
 
     [ObservableProperty]
     private bool _isFilterActive;
@@ -65,10 +67,10 @@ public sealed partial class TaskListViewModel : ObservableObject
     private string _emptyStateIcon = "✓";
 
     [ObservableProperty]
-    private string _emptyStateTitle = "No tasks";
+    private string _emptyStateTitle = string.Empty;
 
     [ObservableProperty]
-    private string _emptyStateSubtitle = "Add a task to get started";
+    private string _emptyStateSubtitle = string.Empty;
 
     /// <summary>
     /// Whether this is a smart list (aggregated from all lists) vs a single user list.
@@ -89,6 +91,12 @@ public sealed partial class TaskListViewModel : ObservableObject
     {
         _taskService = taskService;
         _dialogService = dialogService;
+        _resourceLoader = new ResourceLoader();
+
+        _sortButtonText = GetResource("TaskListSortBase", "Sort");
+        _filterButtonText = GetResource("TaskListFilterBase", "Filter");
+        _emptyStateTitle = GetResource("TaskListEmptyStateDefaultTitle", "No tasks");
+        _emptyStateSubtitle = GetResource("TaskListEmptyStateDefaultSubtitle", "Add a task to get started");
     }
 
     /// <summary>
@@ -232,20 +240,20 @@ public sealed partial class TaskListViewModel : ObservableObject
         if (hasSearchQuery)
         {
             EmptyStateIcon = "🔍";
-            EmptyStateTitle = "No results found";
-            EmptyStateSubtitle = "Try a different search term";
+            EmptyStateTitle = GetResource("TaskListEmptyStateNoResultsTitle", "No results found");
+            EmptyStateSubtitle = GetResource("TaskListEmptyStateNoResultsSubtitle", "Try a different search term");
         }
         else if (hasActiveFilter)
         {
             EmptyStateIcon = "🔍";
-            EmptyStateTitle = "No matching tasks";
-            EmptyStateSubtitle = "Try changing or clearing the filter";
+            EmptyStateTitle = GetResource("TaskListEmptyStateNoMatchingTitle", "No matching tasks");
+            EmptyStateSubtitle = GetResource("TaskListEmptyStateNoMatchingSubtitle", "Try changing or clearing the filter");
         }
         else
         {
             EmptyStateIcon = "✓";
-            EmptyStateTitle = "No tasks";
-            EmptyStateSubtitle = "Add a task to get started";
+            EmptyStateTitle = GetResource("TaskListEmptyStateDefaultTitle", "No tasks");
+            EmptyStateSubtitle = GetResource("TaskListEmptyStateDefaultSubtitle", "Add a task to get started");
         }
     }
 
@@ -277,13 +285,13 @@ public sealed partial class TaskListViewModel : ObservableObject
     {
         if (_selectedList is null)
         {
-            RaiseStatus(StatusKind.Info, "Please select a list first");
+            RaiseStatus(StatusKind.Info, GetResource("TaskListStatusSelectListFirst", "Please select a list first"));
             return;
         }
 
         if (string.IsNullOrWhiteSpace(NewTaskTitle))
         {
-            RaiseStatus(StatusKind.Info, "Please enter a task title");
+            RaiseStatus(StatusKind.Info, GetResource("TaskListStatusEnterTaskTitle", "Please enter a task title"));
             return;
         }
 
@@ -296,12 +304,12 @@ public sealed partial class TaskListViewModel : ObservableObject
             ApplySortAndFilter();
 
             NewTaskTitle = string.Empty;
-            RaiseStatus(StatusKind.Success, "Task created");
+            RaiseStatus(StatusKind.Success, GetResource("TaskListStatusTaskCreated", "Task created"));
             SyncRequested?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -323,10 +331,12 @@ public sealed partial class TaskListViewModel : ObservableObject
                 if (subtasks.Count > 0)
                 {
                     var confirmed = await _dialogService.ShowConfirmationAsync(
-                        "Complete subtasks?",
-                        $"This task has {subtasks.Count} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks.",
-                        "Complete All",
-                        "Cancel");
+                        GetResource("TaskListConfirmCompleteSubtasksTitle", "Complete subtasks?"),
+                        string.Format(
+                            GetResource("TaskListConfirmCompleteSubtasksMessage", "This task has {0} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks."),
+                            subtasks.Count),
+                        GetResource("TaskListConfirmCompleteSubtasksPrimary", "Complete All"),
+                        GetResource("TaskListConfirmCompleteSubtasksClose", "Cancel"));
 
                     if (!confirmed) return false;
                 }
@@ -337,17 +347,19 @@ public sealed partial class TaskListViewModel : ObservableObject
             if (success)
             {
                 await ReloadTasksAsync();
-                RaiseStatus(StatusKind.Success, newCompletedState ? "Task completed" : "Task reopened");
+                RaiseStatus(StatusKind.Success, newCompletedState
+                    ? GetResource("TaskListStatusTaskCompleted", "Task completed")
+                    : GetResource("TaskListStatusTaskReopened", "Task reopened"));
                 SyncRequested?.Invoke(this, EventArgs.Empty);
                 return true;
             }
 
-            RaiseStatus(StatusKind.Warning, "Failed to update task");
+            RaiseStatus(StatusKind.Warning, GetResource("TaskListStatusFailedUpdateTask", "Failed to update task"));
             return false;
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
             return false;
         }
     }
@@ -368,17 +380,17 @@ public sealed partial class TaskListViewModel : ObservableObject
             {
                 _allTasks.Remove(task);
                 ApplySortAndFilter();
-                RaiseStatus(StatusKind.Success, "Task deleted");
+                RaiseStatus(StatusKind.Success, GetResource("TaskListStatusTaskDeleted", "Task deleted"));
                 SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
-                RaiseStatus(StatusKind.Warning, "Failed to delete task");
+                RaiseStatus(StatusKind.Warning, GetResource("TaskListStatusFailedDeleteTask", "Failed to delete task"));
             }
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -408,7 +420,7 @@ public sealed partial class TaskListViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(task.EditTitle))
         {
-            RaiseStatus(StatusKind.Info, "Task title cannot be empty");
+            RaiseStatus(StatusKind.Info, GetResource("TaskListStatusTaskTitleEmpty", "Task title cannot be empty"));
             return;
         }
 
@@ -420,17 +432,17 @@ public sealed partial class TaskListViewModel : ObservableObject
             if (success)
             {
                 task.IsEditing = false;
-                RaiseStatus(StatusKind.Success, "Task updated");
+                RaiseStatus(StatusKind.Success, GetResource("TaskListStatusTaskUpdated", "Task updated"));
                 SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
-                RaiseStatus(StatusKind.Warning, "Failed to update task");
+                RaiseStatus(StatusKind.Warning, GetResource("TaskListStatusFailedUpdateTask", "Failed to update task"));
             }
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -460,18 +472,18 @@ public sealed partial class TaskListViewModel : ObservableObject
                 if (success)
                 {
                     await ReloadTasksAsync();
-                    RaiseStatus(StatusKind.Success, "Task updated");
+                    RaiseStatus(StatusKind.Success, GetResource("TaskListStatusTaskUpdated", "Task updated"));
                     SyncRequested?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
-                    RaiseStatus(StatusKind.Warning, "Failed to update task");
+                    RaiseStatus(StatusKind.Warning, GetResource("TaskListStatusFailedUpdateTask", "Failed to update task"));
                 }
             }
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -484,8 +496,8 @@ public sealed partial class TaskListViewModel : ObservableObject
             return;
 
         var subtaskTitle = await _dialogService.ShowTextInputAsync(
-            $"Add subtask to: {parentTask.Title}",
-            "Subtask title...");
+            string.Format(GetResource("TaskListAddSubtaskDialogTitleFormat", "Add subtask to: {0}"), parentTask.Title),
+            GetResource("TaskListAddSubtaskDialogPlaceholder", "Subtask title..."));
 
         if (subtaskTitle is null)
             return;
@@ -499,12 +511,12 @@ public sealed partial class TaskListViewModel : ObservableObject
                 parentTask.DueDate);
 
             await ReloadTasksAsync();
-            RaiseStatus(StatusKind.Success, "Subtask created");
+            RaiseStatus(StatusKind.Success, GetResource("TaskListStatusSubtaskCreated", "Subtask created"));
             SyncRequested?.Invoke(this, EventArgs.Empty);
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -567,17 +579,17 @@ public sealed partial class TaskListViewModel : ObservableObject
             if (success)
             {
                 await ReloadTasksAsync();
-                RaiseStatus(StatusKind.Success, "Task reordered");
+                RaiseStatus(StatusKind.Success, GetResource("TaskListStatusTaskReordered", "Task reordered"));
                 SyncRequested?.Invoke(this, EventArgs.Empty);
             }
             else
             {
-                RaiseStatus(StatusKind.Warning, "Failed to reorder");
+                RaiseStatus(StatusKind.Warning, GetResource("TaskListStatusFailedReorderTask", "Failed to reorder"));
             }
         }
         catch (Exception ex)
         {
-            RaiseStatus(StatusKind.Error, $"Error: {ex.Message}");
+            RaiseStatus(StatusKind.Error, string.Format(GetResource("TaskListStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 
@@ -669,33 +681,43 @@ public sealed partial class TaskListViewModel : ObservableObject
     private void UpdateButtonAppearances()
     {
         IsSortActive = CurrentSort != SortOption.None;
-        SortButtonText = IsSortActive ? $"Sort: {GetSortDisplayText(CurrentSort)}" : "Sort";
+        SortButtonText = IsSortActive
+            ? string.Format(GetResource("TaskListSortLabelFormat", "{0}: {1}"), GetResource("TaskListSortBase", "Sort"), GetSortDisplayText(CurrentSort))
+            : GetResource("TaskListSortBase", "Sort");
 
         IsFilterActive = CurrentFilter != FilterOption.Incomplete;
-        FilterButtonText = IsFilterActive ? $"Filter: {GetFilterDisplayText(CurrentFilter)}" : "Filter";
+        FilterButtonText = IsFilterActive
+            ? string.Format(GetResource("TaskListFilterLabelFormat", "{0}: {1}"), GetResource("TaskListFilterBase", "Filter"), GetFilterDisplayText(CurrentFilter))
+            : GetResource("TaskListFilterBase", "Filter");
     }
 
-    private static string GetSortDisplayText(SortOption sort) => sort switch
+    private string GetSortDisplayText(SortOption sort) => sort switch
     {
-        SortOption.None => "Default",
-        SortOption.DueDateAscending => "Due date (earliest)",
-        SortOption.DueDateDescending => "Due date (latest)",
-        SortOption.Alphabetical => "A to Z",
-        SortOption.AlphabeticalReverse => "Z to A",
-        SortOption.CompletedLast => "Completed last",
-        _ => "Sort"
+        SortOption.None => GetResource("TaskListSortOptionDefault", "Default"),
+        SortOption.DueDateAscending => GetResource("TaskListSortOptionDueDateAsc", "Due date (earliest)"),
+        SortOption.DueDateDescending => GetResource("TaskListSortOptionDueDateDesc", "Due date (latest)"),
+        SortOption.Alphabetical => GetResource("TaskListSortOptionAlphabetical", "A to Z"),
+        SortOption.AlphabeticalReverse => GetResource("TaskListSortOptionAlphabeticalReverse", "Z to A"),
+        SortOption.CompletedLast => GetResource("TaskListSortOptionCompletedLast", "Completed last"),
+        _ => GetResource("TaskListSortBase", "Sort")
     };
 
-    private static string GetFilterDisplayText(FilterOption filter) => filter switch
+    private string GetFilterDisplayText(FilterOption filter) => filter switch
     {
-        FilterOption.All => "All tasks",
-        FilterOption.Incomplete => "Incomplete",
-        FilterOption.Completed => "Completed",
-        FilterOption.Overdue => "Overdue",
-        FilterOption.Today => "Due today",
-        FilterOption.ThisWeek => "Due this week",
-        _ => "Filter"
+        FilterOption.All => GetResource("TaskListFilterOptionAll", "All tasks"),
+        FilterOption.Incomplete => GetResource("TaskListFilterOptionIncomplete", "Incomplete"),
+        FilterOption.Completed => GetResource("TaskListFilterOptionCompleted", "Completed"),
+        FilterOption.Overdue => GetResource("TaskListFilterOptionOverdue", "Overdue"),
+        FilterOption.Today => GetResource("TaskListFilterOptionToday", "Due today"),
+        FilterOption.ThisWeek => GetResource("TaskListFilterOptionThisWeek", "Due this week"),
+        _ => GetResource("TaskListFilterBase", "Filter")
     };
+
+    private string GetResource(string key, string fallback)
+    {
+        var value = _resourceLoader.GetString(key);
+        return string.IsNullOrWhiteSpace(value) ? fallback : value;
+    }
 
     private void RaiseStatus(StatusKind kind, string message)
     {

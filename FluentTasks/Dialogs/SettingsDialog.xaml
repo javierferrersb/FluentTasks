@@ -15,6 +15,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button x:Name="HamburgerButton"
+                        x:Uid="SettingsHamburgerButton"
                         Grid.Column="0"
                         Click="HamburgerButton_Click"
                         VerticalAlignment="Center"
@@ -28,7 +29,8 @@
                               FontSize="18" />
                 </Button>
 
-                <TextBlock Grid.Column="1"
+                <TextBlock x:Uid="SettingsTitleBlock"
+                           Grid.Column="1"
                            Text="Settings"
                            Style="{StaticResource TitleLargeTextBlockStyle}"
                            VerticalAlignment="Center" />
@@ -54,9 +56,11 @@
                                       VerticalAlignment="Center" />
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Appearance"
+                            <TextBlock x:Uid="SettingsAppearanceTitleBlock"
+                                       Text="Appearance"
                                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-                            <TextBlock Text="Choose how FluentTasks looks"
+                            <TextBlock x:Uid="SettingsAppearanceDescriptionBlock"
+                                       Text="Choose how FluentTasks looks"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
@@ -69,7 +73,8 @@
                                         Spacing="12">
                                 <FontIcon Glyph="&#xE706;"
                                           FontSize="18" />
-                                <TextBlock Text="Light"
+                                <TextBlock x:Uid="SettingsThemeLightTextBlock"
+                                           Text="Light"
                                            VerticalAlignment="Center" />
                             </StackPanel>
                         </RadioButton>
@@ -79,7 +84,8 @@
                                         Spacing="12">
                                 <FontIcon Glyph="&#xE708;"
                                           FontSize="18" />
-                                <TextBlock Text="Dark"
+                                <TextBlock x:Uid="SettingsThemeDarkTextBlock"
+                                           Text="Dark"
                                            VerticalAlignment="Center" />
                             </StackPanel>
                         </RadioButton>
@@ -89,11 +95,32 @@
                                         Spacing="12">
                                 <FontIcon Glyph="&#xE770;"
                                           FontSize="18" />
-                                <TextBlock Text="Use system setting"
+                                <TextBlock x:Uid="SettingsThemeSystemTextBlock"
+                                           Text="Use system setting"
                                            VerticalAlignment="Center" />
                             </StackPanel>
                         </RadioButton>
                     </RadioButtons>
+
+                    <!-- Language Selector -->
+                    <ComboBox x:Name="LanguageComboBox"
+                              x:Uid="LanguageComboBox"
+                              Header="Language"
+                              Margin="0,8,0,0"
+                              HorizontalAlignment="Stretch"
+                              SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8">
+                                    <FontIcon Glyph="&#xF2B7;"
+                                              FontSize="16" />
+                                    <TextBlock x:Uid="LanguageHeaderTextBlock"
+                                               Text="Language" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.HeaderTemplate>
+                    </ComboBox>
                 </StackPanel>
             </Border>
 
@@ -117,9 +144,11 @@
                                       VerticalAlignment="Center" />
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Lists"
+                            <TextBlock x:Uid="SettingsListsTitleTextBlock"
+                                       Text="Lists"
                                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-                            <TextBlock Text="Configure default list behavior"
+                            <TextBlock x:Uid="SettingsListsDescriptionTextBlock"
+                                       Text="Configure default list behavior"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
@@ -128,36 +157,50 @@
                     <StackPanel Spacing="16"
                                 Margin="0,8,0,0">
                         <ComboBox x:Name="DefaultFilterComboBox"
+                                  x:Uid="DefaultFilterComboBox"
                                   Header="Default filter"
                                   HorizontalAlignment="Stretch">
-                            <ComboBoxItem Content="All tasks"
+                            <ComboBoxItem x:Uid="DefaultFilterAllComboBoxItem"
+                                          Content="All tasks"
                                           Tag="All" />
-                            <ComboBoxItem Content="Incomplete"
+                            <ComboBoxItem x:Uid="DefaultFilterIncompleteComboBoxItem"
+                                          Content="Incomplete"
                                           Tag="Incomplete" />
-                            <ComboBoxItem Content="Completed"
+                            <ComboBoxItem x:Uid="DefaultFilterCompletedComboBoxItem"
+                                          Content="Completed"
                                           Tag="Completed" />
-                            <ComboBoxItem Content="Overdue"
+                            <ComboBoxItem x:Uid="DefaultFilterOverdueComboBoxItem"
+                                          Content="Overdue"
                                           Tag="Overdue" />
-                            <ComboBoxItem Content="Today"
+                            <ComboBoxItem x:Uid="DefaultFilterTodayComboBoxItem"
+                                          Content="Today"
                                           Tag="Today" />
-                            <ComboBoxItem Content="This week"
+                            <ComboBoxItem x:Uid="DefaultFilterThisWeekComboBoxItem"
+                                          Content="This week"
                                           Tag="ThisWeek" />
                         </ComboBox>
 
                         <ComboBox x:Name="DefaultSortComboBox"
+                                  x:Uid="DefaultSortComboBox"
                                   Header="Default sort order"
                                   HorizontalAlignment="Stretch">
-                            <ComboBoxItem Content="None (my order)"
+                            <ComboBoxItem x:Uid="DefaultSortNoneComboBoxItem"
+                                          Content="None (my order)"
                                           Tag="None" />
-                            <ComboBoxItem Content="Due date (soonest first)"
+                            <ComboBoxItem x:Uid="DefaultSortDueDateAscendingComboBoxItem"
+                                          Content="Due date (soonest first)"
                                           Tag="DueDateAscending" />
-                            <ComboBoxItem Content="Due date (latest first)"
+                            <ComboBoxItem x:Uid="DefaultSortDueDateDescendingComboBoxItem"
+                                          Content="Due date (latest first)"
                                           Tag="DueDateDescending" />
-                            <ComboBoxItem Content="Alphabetical (A-Z)"
+                            <ComboBoxItem x:Uid="DefaultSortAlphabeticalComboBoxItem"
+                                          Content="Alphabetical (A-Z)"
                                           Tag="Alphabetical" />
-                            <ComboBoxItem Content="Alphabetical (Z-A)"
+                            <ComboBoxItem x:Uid="DefaultSortAlphabeticalReverseComboBoxItem"
+                                          Content="Alphabetical (Z-A)"
                                           Tag="AlphabeticalReverse" />
-                            <ComboBoxItem Content="Completed last"
+                            <ComboBoxItem x:Uid="DefaultSortCompletedLastComboBoxItem"
+                                          Content="Completed last"
                                           Tag="CompletedLast" />
                         </ComboBox>
                     </StackPanel>
@@ -184,9 +227,11 @@
                                       VerticalAlignment="Center" />
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Data"
+                            <TextBlock x:Uid="SettingsDataTitleTextBlock"
+                                       Text="Data"
                                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-                            <TextBlock Text="Manage local data storage"
+                            <TextBlock x:Uid="SettingsDataDescriptionTextBlock"
+                                       Text="Manage local data storage"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
@@ -199,11 +244,13 @@
                                         Spacing="8">
                                 <FontIcon Glyph="&#xE74D;"
                                           FontSize="16" />
-                                <TextBlock Text="Clear cache" />
+                                <TextBlock x:Uid="SettingsClearCacheTextBlock"
+                                           Text="Clear cache" />
                             </StackPanel>
                         </Button>
 
-                        <TextBlock Text="Remove locally cached data. Your tasks will be re-downloaded on next sync."
+                        <TextBlock x:Uid="SettingsClearCacheDescriptionTextBlock"
+                                   Text="Remove locally cached data. Your tasks will be re-downloaded on next sync."
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                    TextWrapping="Wrap" />
@@ -231,9 +278,11 @@
                                       VerticalAlignment="Center" />
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Account"
+                            <TextBlock x:Uid="SettingsAccountTitleTextBlock"
+                                       Text="Account"
                                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-                            <TextBlock Text="Manage your Google account connection"
+                            <TextBlock x:Uid="SettingsAccountDescriptionTextBlock"
+                                       Text="Manage your Google account connection"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
@@ -247,11 +296,13 @@
                                         Spacing="8">
                                 <FontIcon Glyph="&#xE7E8;"
                                           FontSize="16" />
-                                <TextBlock Text="Log out" />
+                                <TextBlock x:Uid="SettingsLogOutTextBlock"
+                                           Text="Log out" />
                             </StackPanel>
                         </Button>
 
-                        <TextBlock Text="Sign out of your Google account. You'll need to sign in again to access your tasks."
+                        <TextBlock x:Uid="SettingsLogOutDescriptionTextBlock"
+                                   Text="Sign out of your Google account. You'll need to sign in again to access your tasks."
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                    TextWrapping="Wrap" />
@@ -276,13 +327,15 @@
                                    Width="44"
                                    Height="44"
                                    VerticalAlignment="Center" />
-                            <TextBlock Text="FluentTasks"
+                            <TextBlock x:Uid="SettingsAppNameTextBlock"
+                                       Text="FluentTasks"
                                        Style="{StaticResource SubtitleTextBlockStyle}"
                                        FontWeight="SemiBold"
                                        VerticalAlignment="Center" />
                         </StackPanel>
 
-                        <TextBlock Text="A modern, fluent task management app for Windows"
+                        <TextBlock x:Uid="SettingsAboutAppDescriptionTextBlock"
+                                   Text="A modern, fluent task management app for Windows"
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                    HorizontalAlignment="Center"
@@ -293,7 +346,8 @@
                     <!-- Tech Stack Badges -->
                     <StackPanel Spacing="8"
                                 HorizontalAlignment="Center">
-                        <TextBlock Text="Built with"
+                        <TextBlock x:Uid="SettingsBuiltWithTextBlock"
+                                   Text="Built with"
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                    HorizontalAlignment="Center" />
@@ -305,7 +359,8 @@
                                     BorderThickness="1"
                                     CornerRadius="4"
                                     Padding="10,6">
-                                <TextBlock Text="WinUI 3"
+                                <TextBlock x:Uid="SettingsTechWinUI3TextBlock"
+                                           Text="WinUI 3"
                                            Style="{StaticResource CaptionTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             </Border>
@@ -314,7 +369,8 @@
                                     BorderThickness="1"
                                     CornerRadius="4"
                                     Padding="10,6">
-                                <TextBlock Text=".NET 10"
+                                <TextBlock x:Uid="SettingsTechDotNet10TextBlock"
+                                           Text=".NET 10"
                                            Style="{StaticResource CaptionTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             </Border>
@@ -323,7 +379,8 @@
                                     BorderThickness="1"
                                     CornerRadius="4"
                                     Padding="10,6">
-                                <TextBlock Text="Windows App SDK"
+                                <TextBlock x:Uid="SettingsTechWindowsAppSDKTextBlock"
+                                           Text="Windows App SDK"
                                            Style="{StaticResource CaptionTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             </Border>
@@ -334,7 +391,8 @@
                                 CornerRadius="4"
                                 Padding="10,6"
                                 HorizontalAlignment="Center">
-                            <TextBlock Text="Google Tasks API"
+                            <TextBlock x:Uid="SettingsTechGoogleTasksAPITextBlock"
+                                       Text="Google Tasks API"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </Border>
@@ -346,14 +404,16 @@
                         <StackPanel Orientation="Horizontal"
                                     Spacing="6"
                                     HorizontalAlignment="Center">
-                            <TextBlock Text="Made with"
+                            <TextBlock x:Uid="SettingsMadeWithTextBlock"
+                                       Text="Made with"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                        VerticalAlignment="Center" />
                             <TextBlock Text="❤️"
                                        FontSize="16"
                                        VerticalAlignment="Center" />
-                            <TextBlock Text="from Spain"
+                            <TextBlock x:Uid="SettingsFromSpainTextBlock"
+                                       Text="from Spain"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                        VerticalAlignment="Center" />
@@ -392,7 +452,8 @@
                                             Spacing="10">
                                     <FontIcon Glyph="&#xE77B;"
                                               FontSize="18" />
-                                    <TextBlock Text="About the Developer"
+                                    <TextBlock x:Uid="SettingsAboutDeveloperTextBlock"
+                                               Text="About the Developer"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -410,7 +471,8 @@
                                             Spacing="10">
                                     <FontIcon Glyph="&#xE774;"
                                               FontSize="18" />
-                                    <TextBlock Text="View on GitHub"
+                                    <TextBlock x:Uid="SettingsViewOnGitHubTextBlock"
+                                               Text="View on GitHub"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                VerticalAlignment="Center" />
                                 </StackPanel>
@@ -425,7 +487,8 @@
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />
-                        <TextBlock Text="Licensed under MIT License"
+                        <TextBlock x:Uid="SettingsLicensedUnderTextBlock"
+                                   Text="Licensed under MIT License"
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center" />

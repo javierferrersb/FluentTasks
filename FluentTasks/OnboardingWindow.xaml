@@ -14,7 +14,8 @@
         </Grid.RowDefinitions>
 
         <!-- Custom Title Bar -->
-        <TitleBar x:Name="AppTitleBar"
+        <TitleBar x:Uid="OnboardingTitleBar"
+                  x:Name="AppTitleBar"
                   Grid.Row="0"
                   Height="48"
                   Title="Welcome to FluentTasks">

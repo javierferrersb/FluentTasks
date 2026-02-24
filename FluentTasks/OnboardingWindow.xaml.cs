@@ -4,6 +4,7 @@ using FluentTasks.Infrastructure.Google;
 using FluentTasks.UI.Dialogs;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FluentTasks.UI;
 
@@ -13,6 +14,7 @@ namespace FluentTasks.UI;
 public sealed partial class OnboardingWindow : Window
 {
     private readonly SettingsService _settingsService;
+    private readonly ResourceLoader _resourceLoader;
 
     /// <summary>
     /// Raised when onboarding is completed and the main app should start.
@@ -23,6 +25,7 @@ public sealed partial class OnboardingWindow : Window
     {
         InitializeComponent();
 
+        _resourceLoader = new ResourceLoader();
         _settingsService = App.GetService<SettingsService>();
 
         // Set up custom title bar
@@ -30,7 +33,7 @@ public sealed partial class OnboardingWindow : Window
         SetTitleBar(AppTitleBar);
 
         // Set window title and icon
-        Title = "Welcome to FluentTasks";
+        Title = _resourceLoader.GetString("OnboardingWindowTitle");
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"));
 
         // Initialize settings and theme

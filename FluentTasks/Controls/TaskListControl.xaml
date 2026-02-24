@@ -69,15 +69,18 @@
                     HorizontalAlignment="Center"
                     Spacing="16"
                     Visibility="Visible">
-            <TextBlock Text="📋"
+            <TextBlock x:Uid="TaskListNoListSelectedIconTextBlock"
+                       Text="📋"
                        FontSize="64"
                        HorizontalAlignment="Center"
                        Opacity="0.3" />
-            <TextBlock Text="Select a list to get started"
+            <TextBlock x:Uid="TaskListNoListSelectedTitleBlock"
+                       Text="Select a list to get started"
                        Style="{StaticResource TitleTextBlockStyle}"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        HorizontalAlignment="Center" />
-            <TextBlock Text="Choose a task list from the sidebar or create a new one"
+            <TextBlock x:Uid="TaskListNoListSelectedSubtitleBlock"
+                       Text="Choose a task list from the sidebar or create a new one"
                        Style="{StaticResource BodyTextBlockStyle}"
                        Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                        HorizontalAlignment="Center" />
@@ -100,7 +103,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="HamburgerButton"
+                <Button x:Uid="HamburgerButton"
+                        x:Name="HamburgerButton"
                         Grid.Column="0"
                         Click="HamburgerButton_Click"
                         VerticalAlignment="Center"
@@ -115,6 +119,7 @@
                 </Button>
 
                 <TextBlock Grid.Column="1"
+                           x:Uid="TaskListTitleBlock"
                            x:Name="TaskListTitle"
                            Text="My Tasks"
                            Style="{StaticResource TitleLargeTextBlockStyle}"
@@ -150,7 +155,8 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Sort Button -->
-                        <Button x:Name="SortButton"
+                        <Button x:Uid="SortButton"
+                                x:Name="SortButton"
                                 Grid.Column="0"
                                 Background="Transparent"
                                 BorderThickness="0"
@@ -158,32 +164,38 @@
                                 Margin="0,0,8,0">
                             <Button.Flyout>
                                 <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                                    <RadioMenuFlyoutItem x:Name="SortDefault"
+                                    <RadioMenuFlyoutItem x:Uid="SortDefaultMenuFlyoutItem"
+                                                         x:Name="SortDefault"
                                                          Text="Default"
                                                          Click="SortMenuItem_Click"
                                                          Tag="None"
                                                          GroupName="SortOptions" />
-                                    <RadioMenuFlyoutItem x:Name="SortDueDateAsc"
+                                    <RadioMenuFlyoutItem x:Uid="SortDueDateAscMenuFlyoutItem"
+                                                         x:Name="SortDueDateAsc"
                                                          Text="Due date (earliest)"
                                                          Click="SortMenuItem_Click"
                                                          Tag="DueDateAscending"
                                                          GroupName="SortOptions" />
-                                    <RadioMenuFlyoutItem x:Name="SortDueDateDesc"
+                                    <RadioMenuFlyoutItem x:Uid="SortDueDateDescMenuFlyoutItem"
+                                                         x:Name="SortDueDateDesc"
                                                          Text="Due date (latest)"
                                                          Click="SortMenuItem_Click"
                                                          Tag="DueDateDescending"
                                                          GroupName="SortOptions" />
-                                    <RadioMenuFlyoutItem x:Name="SortAlpha"
+                                    <RadioMenuFlyoutItem x:Uid="SortAlphaMenuFlyoutItem"
+                                                         x:Name="SortAlpha"
                                                          Text="A to Z"
                                                          Click="SortMenuItem_Click"
                                                          Tag="Alphabetical"
                                                          GroupName="SortOptions" />
-                                    <RadioMenuFlyoutItem x:Name="SortAlphaRev"
+                                    <RadioMenuFlyoutItem x:Uid="SortAlphaRevMenuFlyoutItem"
+                                                         x:Name="SortAlphaRev"
                                                          Text="Z to A"
                                                          Click="SortMenuItem_Click"
                                                          Tag="AlphabeticalReverse"
                                                          GroupName="SortOptions" />
-                                    <RadioMenuFlyoutItem x:Name="SortCompleted"
+                                    <RadioMenuFlyoutItem x:Uid="SortCompletedMenuFlyoutItem"
+                                                         x:Name="SortCompleted"
                                                          Text="Completed last"
                                                          Click="SortMenuItem_Click"
                                                          Tag="CompletedLast"
@@ -201,39 +213,46 @@
                         </Button>
 
                         <!-- Filter Button -->
-                        <Button x:Name="FilterButton"
+                        <Button x:Uid="FilterButton"
+                                x:Name="FilterButton"
                                 Grid.Column="1"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Padding="8,4">
                             <Button.Flyout>
                                 <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                                    <RadioMenuFlyoutItem x:Name="FilterAll"
+                                    <RadioMenuFlyoutItem x:Uid="FilterAllMenuFlyoutItem"
+                                                         x:Name="FilterAll"
                                                          Text="All tasks"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="All"
                                                          GroupName="FilterOptions" />
-                                    <RadioMenuFlyoutItem x:Name="FilterIncomplete"
+                                    <RadioMenuFlyoutItem x:Uid="FilterIncompleteMenuFlyoutItem"
+                                                         x:Name="FilterIncomplete"
                                                          Text="Incomplete"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="Incomplete"
                                                          GroupName="FilterOptions" />
-                                    <RadioMenuFlyoutItem x:Name="FilterCompleted"
+                                    <RadioMenuFlyoutItem x:Uid="FilterCompletedMenuFlyoutItem"
+                                                         x:Name="FilterCompleted"
                                                          Text="Completed"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="Completed"
                                                          GroupName="FilterOptions" />
-                                    <RadioMenuFlyoutItem x:Name="FilterOverdue"
+                                    <RadioMenuFlyoutItem x:Uid="FilterOverdueMenuFlyoutItem"
+                                                         x:Name="FilterOverdue"
                                                          Text="Overdue"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="Overdue"
                                                          GroupName="FilterOptions" />
-                                    <RadioMenuFlyoutItem x:Name="FilterToday"
+                                    <RadioMenuFlyoutItem x:Uid="FilterTodayMenuFlyoutItem"
+                                                         x:Name="FilterToday"
                                                          Text="Due today"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="Today"
                                                          GroupName="FilterOptions" />
-                                    <RadioMenuFlyoutItem x:Name="FilterWeek"
+                                    <RadioMenuFlyoutItem x:Uid="FilterWeekMenuFlyoutItem"
+                                                         x:Name="FilterWeek"
                                                          Text="Due this week"
                                                          Click="FilterMenuItem_Click"
                                                          Tag="ThisWeek"
@@ -251,7 +270,8 @@
                         </Button>
 
                         <!-- Search Box -->
-                        <AutoSuggestBox Grid.Column="2"
+                        <AutoSuggestBox x:Uid="SearchBox"
+                                        Grid.Column="2"
                                         x:Name="SearchBox"
                                         PlaceholderText="Search tasks..."
                                         QueryIcon="Find"
@@ -278,8 +298,9 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox x:Name="NewTaskInput"
+                        <TextBox x:Uid="NewTaskInput"
                                  Grid.Column="0"
+                                 x:Name="NewTaskInput"
                                  PlaceholderText="Add a new task..."
                                  VerticalAlignment="Center">
                             <TextBox.KeyboardAccelerators>
@@ -296,7 +317,8 @@
                                         Spacing="6">
                                 <FontIcon Glyph="&#xE710;"
                                           FontSize="14" />
-                                <TextBlock x:Name="AddTaskButtonText"
+                                <TextBlock x:Uid="AddTaskButtonTextBlock"
+                                           x:Name="AddTaskButtonText"
                                            Text="Add Task" />
                             </StackPanel>
                         </Button>
@@ -377,7 +399,8 @@
                                                                     Visibility="{Binding ShowParentChip, Converter={StaticResource BoolToVisibilityConverter}}">
                                                                 <StackPanel Orientation="Horizontal"
                                                                             Spacing="4">
-                                                                    <TextBlock Text="↳"
+                                                                    <TextBlock x:Uid="SubtaskIndicatorTextBlock"
+                                                                               Text="↳"
                                                                                Style="{StaticResource CaptionTextBlockStyle}"
                                                                                Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
                                                                     <TextBlock Text="{Binding ParentTitle}"
@@ -422,7 +445,8 @@
                                                             </TextBox.KeyboardAccelerators>
                                                         </TextBox>
 
-                                                        <Button Grid.Column="1"
+                                                        <Button x:Uid="SaveEditButton"
+                                                                Grid.Column="1"
                                                                 Content="&#xE8FB;"
                                                                 FontFamily="Segoe MDL2 Assets"
                                                                 Click="SaveEdit_Click"
@@ -431,7 +455,8 @@
                                                                 Padding="8,4"
                                                                 ToolTipService.ToolTip="Save (Enter)" />
 
-                                                        <Button Grid.Column="2"
+                                                        <Button x:Uid="CancelEditButton"
+                                                                Grid.Column="2"
                                                                 Content="&#xE711;"
                                                                 FontFamily="Segoe MDL2 Assets"
                                                                 Click="CancelEdit_Click"
@@ -441,7 +466,8 @@
                                                     </Grid>
 
                                                     <!-- Add Subtask Button -->
-                                                    <Button Grid.Column="2"
+                                                    <Button x:Uid="AddSubtaskButton"
+                                                            Grid.Column="2"
                                                             Click="AddSubtask_Click"
                                                             Tag="{Binding}"
                                                             Style="{StaticResource TaskActionButtonStyle}"
@@ -454,7 +480,8 @@
                                                     </Button>
 
                                                     <!-- Details Button -->
-                                                    <Button Grid.Column="3"
+                                                    <Button x:Uid="TaskDetailsButton"
+                                                            Grid.Column="3"
                                                             Click="TaskDetails_Click"
                                                             Tag="{Binding}"
                                                             Style="{StaticResource TaskActionButtonStyle}"
@@ -467,7 +494,8 @@
                                                     </Button>
 
                                                     <!-- Delete Button -->
-                                                    <Button Grid.Column="4"
+                                                    <Button x:Uid="DeleteTaskButton"
+                                                            Grid.Column="4"
                                                             Click="DeleteTask_Click"
                                                             Tag="{Binding}"
                                                             Style="{StaticResource TaskActionButtonStyle}"
@@ -492,17 +520,20 @@
                                         Spacing="12"
                                         Margin="0,60,0,0"
                                         Visibility="Collapsed">
-                                <TextBlock x:Name="EmptyStateIcon"
+                                <TextBlock x:Uid="EmptyStateIconTextBlock"
+                                           x:Name="EmptyStateIcon"
                                            Text="✓"
                                            FontSize="48"
                                            HorizontalAlignment="Center"
                                            Opacity="0.3" />
-                                <TextBlock x:Name="EmptyStateTitle"
+                                <TextBlock x:Uid="EmptyStateTitleTextBlock"
+                                           x:Name="EmptyStateTitle"
                                            Text="No tasks"
                                            Style="{StaticResource SubtitleTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center" />
-                                <TextBlock x:Name="EmptyStateSubtitle"
+                                <TextBlock x:Uid="EmptyStateSubtitleTextBlock"
+                                           x:Name="EmptyStateSubtitle"
                                            Text="Add a task to get started"
                                            Style="{StaticResource CaptionTextBlockStyle}"
                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
@@ -534,7 +565,8 @@
                                     Spacing="8">
                             <controls:StatusOrb x:Name="StatusOrb"
                                                 VerticalAlignment="Center" />
-                            <TextBlock x:Name="StatusText"
+                            <TextBlock x:Uid="StatusTextBlock"
+                                       x:Name="StatusText"
                                        Text="Ready"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
