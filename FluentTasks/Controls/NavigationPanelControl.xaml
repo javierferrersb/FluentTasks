@@ -14,40 +14,43 @@
 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 
-			<!-- My Lists Header Text Only -->
-			<TextBlock x:Uid="MyListsTextBlock"
-					   x:Name="MyListsText"
-					   Grid.Row="0"
-					   Text="My Lists"
-					   Padding="16,16,16,8"
-					   Style="{StaticResource CaptionTextBlockStyle}"
-					   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-					   FontWeight="SemiBold" />
-
-			<!-- Create List Button - Always Visible -->
-			<Button x:Uid="CreateListButton"
-					x:Name="CreateListButton"
-					Grid.Row="1"
-					Content="&#xE710;"
-					FontFamily="Segoe MDL2 Assets"
-					Click="CreateList_Click"
-					Background="Transparent"
-					BorderThickness="0"
-					Padding="4"
-					FontSize="12"
-					HorizontalAlignment="Center"
-					ToolTipService.ToolTip="Create new list"
-					Margin="0,0,0,8"
-					Style="{StaticResource SubtleButtonStyle}" />
+			<!-- My Lists Header - Text and Create Button -->
+			<Grid x:Name="MyListsHeader"
+				  Grid.Row="0"
+				  Padding="16,16,16,8">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock x:Uid="MyListsTextBlock"
+						   x:Name="MyListsText"
+						   Text="My Lists"
+						   Grid.Column="0"
+						   Style="{StaticResource CaptionTextBlockStyle}"
+						   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+						   FontWeight="SemiBold" />
+				<Button x:Uid="CreateListButton"
+						x:Name="CreateListButton"
+						Grid.Column="1"
+						Content="&#xE710;"
+						FontFamily="Segoe MDL2 Assets"
+						Click="CreateList_Click"
+						Background="Transparent"
+						BorderThickness="0"
+						Padding="4"
+						FontSize="12"
+						Style="{StaticResource SubtleButtonStyle}"
+						ToolTipService.ToolTip="Create new list"
+						HorizontalAlignment="Right" />
+			</Grid>
 
 			<!-- User Lists -->
-			<ScrollViewer Grid.Row="2">
+			<ScrollViewer Grid.Row="1">
 				<ItemsControl x:Name="UserListsView"
 							  ItemsSource="{x:Bind UserLists, Mode=OneWay}">
 					<ItemsControl.ItemTemplate>
@@ -68,7 +71,7 @@
 
 			<!-- Settings -->
 			<Button x:Uid="SettingsButton"
-					Grid.Row="3"
+					Grid.Row="2"
 					x:Name="SettingsButton"
 					Click="Settings_Click"
 					HorizontalAlignment="Stretch"
@@ -89,7 +92,7 @@
 
 			<!-- Sync -->
 			<Button x:Uid="SyncButton"
-					Grid.Row="4"
+					Grid.Row="3"
 					x:Name="SyncButton"
 					Click="Sync_Click"
 					HorizontalAlignment="Stretch"

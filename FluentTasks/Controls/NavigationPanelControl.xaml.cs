@@ -92,6 +92,7 @@ public sealed partial class NavigationPanelControl : UserControl
         if (IsCompact)
         {
             MyListsText.Visibility = Visibility.Collapsed;
+            CreateListButton.Visibility = Visibility.Visible;
             SettingsButtonText.Visibility = Visibility.Collapsed;
             SyncButtonText.Visibility = Visibility.Collapsed;
             SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -99,7 +100,15 @@ public sealed partial class NavigationPanelControl : UserControl
             SettingsButton.Padding = new Thickness(8, 12, 8, 12);
             SyncButton.Padding = new Thickness(8, 12, 8, 12);
             NavContentGrid.Padding = new Thickness(4, 8, 4, 8);
+            CreateListButton.HorizontalAlignment = HorizontalAlignment.Center;
             CreateListButton.Padding = new Thickness(8, 10, 8, 10);
+
+            // Center the button in the grid by adjusting column widths
+            var col0 = MyListsHeader.ColumnDefinitions[0];
+            var col1 = MyListsHeader.ColumnDefinitions[1];
+            col0.Width = new GridLength(1, GridUnitType.Star);
+            col1.Width = new GridLength(1, GridUnitType.Star);
+
             ToolTipService.SetToolTip(SettingsButton, GetResource("SettingsButtonTextBlock/Text", "Settings"));
             ToolTipService.SetToolTip(SyncButton, GetResource("SyncButtonTextBlock/Text", "Sync Lists"));
             ToolTipService.SetToolTip(CreateListButton, GetResource("CreateListButton/ToolTipService/ToolTip", "Create new list"));
@@ -107,6 +116,7 @@ public sealed partial class NavigationPanelControl : UserControl
         else
         {
             MyListsText.Visibility = Visibility.Visible;
+            CreateListButton.Visibility = Visibility.Visible;
             SettingsButtonText.Visibility = Visibility.Visible;
             SyncButtonText.Visibility = Visibility.Visible;
             SettingsButton.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -114,7 +124,15 @@ public sealed partial class NavigationPanelControl : UserControl
             SettingsButton.Padding = new Thickness(20, 12, 20, 12);
             SyncButton.Padding = new Thickness(20, 12, 20, 12);
             NavContentGrid.Padding = new Thickness(8, 2, 8, 8);
+            CreateListButton.HorizontalAlignment = HorizontalAlignment.Right;
             CreateListButton.Padding = new Thickness(4, 4, 4, 4);
+
+            // Restore normal column widths
+            var col0 = MyListsHeader.ColumnDefinitions[0];
+            var col1 = MyListsHeader.ColumnDefinitions[1];
+            col0.Width = new GridLength(1, GridUnitType.Star);
+            col1.Width = GridLength.Auto;
+
             ToolTipService.SetToolTip(SettingsButton, null);
             ToolTipService.SetToolTip(SyncButton, null);
             ToolTipService.SetToolTip(CreateListButton, null);
