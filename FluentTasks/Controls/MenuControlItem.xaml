@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:FluentTasks.UI.Controls"
              mc:Ignorable="d">
 
     <Button x:Name="RootButton"
@@ -37,7 +38,7 @@
 
             <FontIcon x:Name="ItemIcon"
                       Grid.Column="0"
-                      Glyph="{x:Bind Icon}"
+                      Glyph="{x:Bind Icon, Mode=OneWay}"
                       FontSize="16"
                       VerticalAlignment="Center"
                       HorizontalAlignment="Center"
@@ -46,7 +47,7 @@
 
             <TextBlock x:Name="ItemText"
                        Grid.Column="1"
-                       Text="{x:Bind Text}"
+                       Text="{x:Bind Text, Mode=OneWay}"
                        Style="{StaticResource BodyTextBlockStyle}"
                        VerticalAlignment="Center"
                        TextTrimming="CharacterEllipsis"

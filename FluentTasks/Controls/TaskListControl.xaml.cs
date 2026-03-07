@@ -337,15 +337,26 @@ public sealed partial class TaskListControl : UserControl
 
     // --- Edit inline ---
 
-    private void TaskTitle_Tapped(object sender, TappedRoutedEventArgs e)
+    private void TaskTitle_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        if (sender is not TextBlock textBlock || textBlock.Tag is not TaskItem task) return;
+        if (sender is not TextBlock textBlock) return;
 
-        ViewModel?.BeginEditTask(task);
+        // Only handle left button clicks
+        var pointerPoint = e.GetCurrentPoint(textBlock);
+        if (pointerPoint.Properties.IsLeftButtonPressed == false) return;
+
+        // Try to get the task from Tag first, then from DataContext
+        TaskItem? task = textBlock.Tag as TaskItem ?? textBlock.DataContext as TaskItem;
+        if (task is null || ViewModel is null) return;
+
+        // Mark the event as handled to prevent drag operations
+        e.Handled = true;
+
+        ViewModel.BeginEditTask(task);
 
         DispatcherQueue.TryEnqueue(async () =>
         {
-            await Task.Delay(50);
+            await Task.Delay(100);
             FocusEditTextBox(task);
         });
     }

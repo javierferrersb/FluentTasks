@@ -640,7 +640,7 @@
     <value>Due {0}</value>
   </data>
   <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
-    <value>Î“Ã¥â”‚</value>
+    <value>↳</value>
   </data>
   <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
     <value>Signing you in...</value>

@@ -1,7 +1,8 @@
 <Window x:Class="FluentTasks.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:FluentTasks.UI.Controls">
+        xmlns:controls="using:FluentTasks.UI.Controls"
+        xmlns:vm="using:FluentTasks.UI.ViewModels">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -14,8 +15,8 @@
         </Grid.RowDefinitions>
 
         <!-- Custom Title Bar -->
-        <TitleBar x:Name="AppTitleBar"
-                  x:Uid="AppTitleBar"
+        <TitleBar x:Uid="AppTitleBar"
+                  x:Name="AppTitleBar"
                   Grid.Row="0"
                   Height="48"
                   Title="FluentTasks">
@@ -34,7 +35,13 @@
             <!-- Left Sidebar -->
             <controls:NavigationPanelControl x:Name="NavigationPanel"
                                              Grid.Column="0"
-                                             UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}" />
+                                             UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}"
+                                             ItemClicked="NavigationPanel_ItemClicked"
+                                             EditClicked="NavigationPanel_EditClicked"
+                                             DeleteClicked="NavigationPanel_DeleteClicked"
+                                             CreateListClicked="NavigationPanel_CreateListClicked"
+                                             SyncClicked="NavigationPanel_SyncClicked"
+                                             SettingsClicked="NavigationPanel_SettingsClicked" />
 
             <!-- Right Content Area -->
             <controls:TaskListControl x:Name="TaskList"
@@ -62,7 +69,13 @@
                     Width="280"
                     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
                 <controls:NavigationPanelControl x:Name="OverlayNavigationPanel"
-                                                 UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}" />
+                                                 UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}"
+                                                 ItemClicked="OverlayNavigationPanel_ItemClicked"
+                                                 EditClicked="OverlayNavigationPanel_EditClicked"
+                                                 DeleteClicked="OverlayNavigationPanel_DeleteClicked"
+                                                 CreateListClicked="OverlayNavigationPanel_CreateListClicked"
+                                                 SyncClicked="OverlayNavigationPanel_SyncClicked"
+                                                 SettingsClicked="OverlayNavigationPanel_SettingsClicked" />
             </Border>
         </Grid>
 

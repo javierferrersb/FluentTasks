@@ -48,6 +48,7 @@ namespace FluentTasks.UI
                     // ViewModels
                     services.AddTransient<ShellViewModel>();
                     services.AddTransient<TaskListViewModel>();
+                    services.AddTransient<SettingsViewModel>();
                 })
                 .Build();
         }

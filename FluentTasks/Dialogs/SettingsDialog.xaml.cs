@@ -1,5 +1,5 @@
-using FluentTasks.Core.Models;
 using FluentTasks.UI.Services;
+using FluentTasks.UI.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -11,9 +11,9 @@ namespace FluentTasks.UI.Dialogs;
 /// <summary>
 /// Unified settings control with all settings on a single page.
 /// </summary>
-public sealed partial class SettingsDialog : UserControl
+public sealed partial class SettingsDialog : UserControl, IDisposable
 {
-    private readonly SettingsService _settingsService;
+    private readonly SettingsViewModel _viewModel;
     private readonly ResourceLoader _resourceLoader;
     private bool _isLoading;
     private bool _isShowingRestartDialog;
@@ -32,9 +32,9 @@ public sealed partial class SettingsDialog : UserControl
         set => HamburgerButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    public SettingsDialog(SettingsService settingsService)
+    public SettingsDialog(SettingsViewModel viewModel)
     {
-        _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
+        _viewModel = viewModel;
         _resourceLoader = new ResourceLoader();
         InitializeComponent();
 
@@ -45,57 +45,44 @@ public sealed partial class SettingsDialog : UserControl
 
         LoadVersionInfo();
 
+        // Wire up ViewModel events
+        _viewModel.LanguageChanged += ViewModel_LanguageChanged;
+
         // Wire up event handlers
         ThemeRadioButtons.SelectionChanged += ThemeRadioButtons_SelectionChanged;
         DefaultFilterComboBox.SelectionChanged += DefaultFilterComboBox_SelectionChanged;
         DefaultSortComboBox.SelectionChanged += DefaultSortComboBox_SelectionChanged;
     }
 
+    private void ViewModel_LanguageChanged(object? sender, EventArgs e)
+    {
+        _ = ShowRestartNotificationAsync();
+    }
+
     private void LoadSettings()
     {
         // Load theme
-        var theme = _settingsService.AppTheme;
-        ThemeRadioButtons.SelectedIndex = theme switch
-        {
-            ElementTheme.Light => 0,
-            ElementTheme.Dark => 1,
-            ElementTheme.Default => 2,
-            _ => 2
-        };
+        ThemeRadioButtons.SelectedIndex = _viewModel.SelectedThemeIndex;
 
         // Load language
-        var language = _settingsService.AppLanguage;
         var languageItem = LanguageComboBox.Items
             .OfType<LanguageInfo>()
-            .FirstOrDefault(item => item.Code == language);
+            .FirstOrDefault(item => item.Code == _viewModel.SelectedLanguage?.Code);
         if (languageItem != null)
         {
             LanguageComboBox.SelectedItem = languageItem;
         }
 
         // Load default filter
-        var filterItem = DefaultFilterComboBox.Items
-            .OfType<ComboBoxItem>()
-            .FirstOrDefault(item => item.Tag?.ToString() == _settingsService.DefaultFilter.ToString());
-        if (filterItem != null)
-        {
-            DefaultFilterComboBox.SelectedItem = filterItem;
-        }
+        DefaultFilterComboBox.SelectedIndex = _viewModel.SelectedDefaultFilterIndex;
 
         // Load default sort
-        var sortItem = DefaultSortComboBox.Items
-            .OfType<ComboBoxItem>()
-            .FirstOrDefault(item => item.Tag?.ToString() == _settingsService.DefaultSort.ToString());
-        if (sortItem != null)
-        {
-            DefaultSortComboBox.SelectedItem = sortItem;
-        }
+        DefaultSortComboBox.SelectedIndex = _viewModel.SelectedDefaultSortIndex;
     }
 
     private void LoadLanguages()
     {
-        var languages = LanguageService.GetSupportedLanguages();
-        LanguageComboBox.ItemsSource = languages;
+        LanguageComboBox.ItemsSource = _viewModel.AvailableLanguages;
     }
 
     private void LoadVersionInfo()
@@ -113,15 +100,15 @@ public sealed partial class SettingsDialog : UserControl
 
         if (selectedButton.Tag is string tag)
         {
-            var theme = tag switch
+            var themeIndex = tag switch
             {
-                "Light" => ElementTheme.Light,
-                "Dark" => ElementTheme.Dark,
-                "Default" => ElementTheme.Default,
-                _ => ElementTheme.Default
+                "Light" => 0,
+                "Dark" => 1,
+                "Default" => 2,
+                _ => 2
             };
 
-            _settingsService.AppTheme = theme;
+            _viewModel.SetThemeCommand.Execute(themeIndex);
         }
     }
 
@@ -130,10 +117,7 @@ public sealed partial class SettingsDialog : UserControl
         if (_isLoading || DefaultFilterComboBox.SelectedItem is not ComboBoxItem item)
             return;
 
-        if (Enum.TryParse<FilterOption>(item.Tag?.ToString(), out var filter))
-        {
-            _settingsService.DefaultFilter = filter;
-        }
+        _viewModel.SetDefaultFilterCommand.Execute(DefaultFilterComboBox.SelectedIndex);
     }
 
     private void DefaultSortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -141,25 +125,16 @@ public sealed partial class SettingsDialog : UserControl
         if (_isLoading || DefaultSortComboBox.SelectedItem is not ComboBoxItem item)
             return;
 
-        if (Enum.TryParse<SortOption>(item.Tag?.ToString(), out var sort))
-        {
-            _settingsService.DefaultSort = sort;
-        }
+        _viewModel.SetDefaultSortCommand.Execute(DefaultSortComboBox.SelectedIndex);
     }
 
-    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_isLoading || LanguageComboBox.SelectedItem is not LanguageInfo languageInfo)
             return;
 
-        // Ignore no-op selections to prevent duplicate restart prompts.
-        if (string.Equals(_settingsService.AppLanguage, languageInfo.Code, StringComparison.OrdinalIgnoreCase))
-            return;
-
-        _settingsService.AppLanguage = languageInfo.Code;
-
-        // Show restart notification
-        _ = ShowRestartNotificationAsync();
+        // The ViewModel handles the language change and will trigger the restart dialog
+        _viewModel.SelectedLanguage = languageInfo;
     }
 
     private async System.Threading.Tasks.Task ShowRestartNotificationAsync()
@@ -181,11 +156,7 @@ public sealed partial class SettingsDialog : UserControl
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            // Restart with explicit language argument so the next process
-            // applies the selected language immediately.
-            var effectiveLanguage = LanguageService.GetEffectiveLanguage(_settingsService.AppLanguage);
-            var restartArgs = $"--lang={effectiveLanguage}";
-            Microsoft.Windows.AppLifecycle.AppInstance.Restart(restartArgs);
+            await _viewModel.RestartWithNewLanguageAsync();
         }
 
         _isShowingRestartDialog = false;
@@ -206,7 +177,7 @@ public sealed partial class SettingsDialog : UserControl
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            await _settingsService.ClearCacheAsync();
+            await _viewModel.ClearCacheCommand.ExecuteAsync(null);
 
             var confirmDialog = new ContentDialog
             {
@@ -234,7 +205,7 @@ public sealed partial class SettingsDialog : UserControl
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            await _settingsService.LogOutAsync();
+            await _viewModel.LogOutCommand.ExecuteAsync(null);
         }
     }
 
@@ -349,5 +320,11 @@ public sealed partial class SettingsDialog : UserControl
     {
         var value = _resourceLoader.GetString(key);
         return string.IsNullOrWhiteSpace(value) ? fallback : value;
+    }
+
+    public void Dispose()
+    {
+        _viewModel.LanguageChanged -= ViewModel_LanguageChanged;
+        _viewModel.Dispose();
     }
 }

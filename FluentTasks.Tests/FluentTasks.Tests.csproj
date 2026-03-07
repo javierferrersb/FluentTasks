@@ -1,0 +1,17 @@
+﻿<Project Sdk="MSTest.Sdk/4.0.1">
+
+  <PropertyGroup>
+	<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseVSTest>true</UseVSTest>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
+    <ProjectReference Include="..\FluentTasks\FluentTasks.UI.csproj" />
+  </ItemGroup>
+
+</Project>

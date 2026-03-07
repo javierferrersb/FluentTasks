@@ -25,7 +25,6 @@ public sealed partial class ShellViewModel : ObservableObject
     private readonly IconStorageService _iconStorageService;
     private readonly SettingsService _settingsService;
     private readonly ResourceLoader _resourceLoader = new();
-
     private readonly ObservableCollection<TaskList> _taskListsBackingStore = [];
 
     // Auto-sync infrastructure
@@ -34,13 +33,16 @@ public sealed partial class ShellViewModel : ObservableObject
     private EventHandler<object>? _autoSyncTickHandler;
     private EventHandler<object>? _debounceTickHandler;
     private bool _isSyncing;
-    private bool _isAutoSyncEnabled = true;
     private int _autoSyncIntervalMinutes = 5;
-    private const int MIN_SYNC_INTERVAL_MINUTES = 2;
-    private const int MAX_SYNC_INTERVAL_MINUTES = 60;
+    private const int MinSyncIntervalMinutes = 2;
+    private const int MaxSyncIntervalMinutes = 60;
 
     [ObservableProperty]
     private DateTimeOffset? _lastSyncTime;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AutoSyncIntervalMinutes))]
+    private bool _isAutoSyncEnabled = true;
 
     /// <summary>
     /// Gets or sets the auto-sync interval in minutes, clamped between MIN_SYNC_INTERVAL_MINUTES and MAX_SYNC_INTERVAL_MINUTES.
@@ -50,7 +52,7 @@ public sealed partial class ShellViewModel : ObservableObject
         get => _autoSyncIntervalMinutes;
         set
         {
-            _autoSyncIntervalMinutes = Math.Clamp(value, MIN_SYNC_INTERVAL_MINUTES, MAX_SYNC_INTERVAL_MINUTES);
+            _autoSyncIntervalMinutes = Math.Clamp(value, MinSyncIntervalMinutes, MaxSyncIntervalMinutes);
             OnPropertyChanged();
         }
     }
@@ -63,9 +65,6 @@ public sealed partial class ShellViewModel : ObservableObject
 
     [ObservableProperty]
     private string _statusText = string.Empty;
-
-    [ObservableProperty]
-    private string _actionText = string.Empty;
 
     [ObservableProperty]
     private bool _isNoListSelected = true;
@@ -105,6 +104,94 @@ public sealed partial class ShellViewModel : ObservableObject
         _iconStorageService = iconStorageService;
         _settingsService = settingsService;
         _statusText = GetResource("ShellStatusReady", "Ready");
+    }
+
+    [RelayCommand]
+    private async Task SyncAsync()
+    {
+        if (_isSyncing)
+            return;
+
+        try
+        {
+            _isSyncing = true;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
+            StatusText = GetResource("ShellStatusSyncing", "Syncing...");
+
+            var taskLists = await _taskService.GetTaskListsAsync();
+
+            _taskListsBackingStore.Clear();
+            UserLists.Clear();
+
+            foreach (var list in taskLists)
+            {
+                _taskListsBackingStore.Add(list);
+
+                var icon = _iconStorageService.GetIcon(list.Id);
+                UserLists.Add(new NavItem
+                {
+                    Id = list.Id,
+                    Title = list.Title,
+                    Icon = icon,
+                    Type = NavItemType.UserList,
+                    Data = list
+                });
+            }
+
+            await RefreshCurrentViewAsync();
+
+            LastSyncTime = DateTimeOffset.Now;
+            OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
+            StatusText = GetResource("ShellStatusSynced", "Synced");
+            ShowSuccess(string.Format(GetResource("ShellStatusSyncedListsFormat", "Synced {0} lists"), taskLists.Count()));
+        }
+        catch (HttpRequestException ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = GetResource("ShellStatusOffline", "Offline");
+            ShowError(string.Format(GetResource("ShellStatusNetworkErrorFormat", "Network error: {0}"), ex.Message));
+        }
+        catch (Exception ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+            StatusText = GetResource("ShellStatusSyncFailed", "Sync failed");
+            ShowError(string.Format(GetResource("ShellStatusSyncErrorFormat", "Sync error: {0}"), ex.Message));
+        }
+        finally
+        {
+            _isSyncing = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task CreateListAsync()
+    {
+        var result = await _dialogService.ShowListEditorAsync("\uE8F4", GetResource("ShellNewListDefaultName", "New List"));
+        if (result.Name is null)
+            return;
+
+        try
+        {
+            var newList = await _taskService.CreateTaskListAsync(result.Name);
+            _iconStorageService.SetIcon(newList.Id, result.Icon ?? "\uE8F4");
+
+            _taskListsBackingStore.Add(newList);
+            UserLists.Add(new NavItem
+            {
+                Id = newList.Id,
+                Title = newList.Title,
+                Icon = result.Icon ?? "\uE8F4",
+                Type = NavItemType.UserList,
+                Data = newList
+            });
+
+            ShowSuccess(GetResource("ShellStatusListCreated", "List created"));
+            ScheduleSyncAfterChange();
+        }
+        catch (Exception ex)
+        {
+            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
+        }
     }
 
     /// <summary>
@@ -180,102 +267,6 @@ public sealed partial class ShellViewModel : ObservableObject
             case StatusKind.Info:
                 ShowInfo(e.Message);
                 break;
-        }
-    }
-
-    /// <summary>
-    /// Syncs task lists from the remote service.
-    /// User-initiated sync (Ctrl+R) that provides full error feedback.
-    /// </summary>
-    [RelayCommand]
-    private async Task SyncAsync()
-    {
-        if (_isSyncing)
-            return;
-
-        try
-        {
-            _isSyncing = true;
-            OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
-            StatusText = GetResource("ShellStatusSyncing", "Syncing...");
-
-            var taskLists = await _taskService.GetTaskListsAsync();
-
-            _taskListsBackingStore.Clear();
-            UserLists.Clear();
-
-            foreach (var list in taskLists)
-            {
-                _taskListsBackingStore.Add(list);
-
-                var icon = _iconStorageService.GetIcon(list.Id);
-                UserLists.Add(new NavItem
-                {
-                    Id = list.Id,
-                    Title = list.Title,
-                    Icon = icon,
-                    Type = NavItemType.UserList,
-                    Data = list
-                });
-            }
-
-            // Refresh current view if a list is selected
-            await RefreshCurrentViewAsync();
-
-            LastSyncTime = DateTimeOffset.Now;
-            OrbStatusChanged?.Invoke(OrbStatusKind.Connected);
-            StatusText = GetResource("ShellStatusSynced", "Synced");
-            ShowSuccess(string.Format(GetResource("ShellStatusSyncedListsFormat", "Synced {0} lists"), taskLists.Count()));
-        }
-        catch (HttpRequestException ex)
-        {
-            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
-            StatusText = GetResource("ShellStatusOffline", "Offline");
-            ShowError(string.Format(GetResource("ShellStatusNetworkErrorFormat", "Network error: {0}"), ex.Message));
-        }
-        catch (Exception ex)
-        {
-            OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
-            StatusText = GetResource("ShellStatusSyncFailed", "Sync failed");
-            ShowError(string.Format(GetResource("ShellStatusSyncErrorFormat", "Sync error: {0}"), ex.Message));
-        }
-        finally
-        {
-            _isSyncing = false;
-        }
-    }
-
-    /// <summary>
-    /// Creates a new task list via dialog.
-    /// </summary>
-    [RelayCommand]
-    private async Task CreateListAsync()
-    {
-        var result = await _dialogService.ShowListEditorAsync("\uE8F4", GetResource("ShellNewListDefaultName", "New List"));
-        if (result.Name is null)
-            return;
-
-        try
-        {
-            var newList = await _taskService.CreateTaskListAsync(result.Name);
-            _iconStorageService.SetIcon(newList.Id, result.Icon ?? "\uE8F4");
-
-            _taskListsBackingStore.Add(newList);
-            UserLists.Add(new NavItem
-            {
-                Id = newList.Id,
-                Title = newList.Title,
-                Icon = result.Icon ?? "\uE8F4",
-                Type = NavItemType.UserList,
-                Data = newList
-            });
-
-            ShowSuccess(GetResource("ShellStatusListCreated", "List created"));
-            ScheduleSyncAfterChange();
-        }
-        catch (Exception ex)
-        {
-            ShowError(string.Format(GetResource("ShellStatusErrorFormat", "Error: {0}"), ex.Message));
         }
     }
 

@@ -16,7 +16,6 @@ namespace FluentTasks.Core.Models
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ShowAddSubtaskButton))]
-        [NotifyPropertyChangedFor(nameof(ShowAddSubtaskButton))]
         private bool _isEditing;
 
         [ObservableProperty]
