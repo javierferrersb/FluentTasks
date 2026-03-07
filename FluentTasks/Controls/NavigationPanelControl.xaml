@@ -51,22 +51,34 @@
 
             <!-- User Lists -->
             <ScrollViewer Grid.Row="1">
-                <ItemsControl x:Name="UserListsView"
-                              ItemsSource="{x:Bind UserLists, Mode=OneWay}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="models:NavItem">
-                            <controls:MenuItemControl Icon="{x:Bind Icon}"
-                                                      Text="{x:Bind Title}"
-                                                      IsSelected="{x:Bind IsSelected, Mode=OneWay}"
-                                                      ShowActions="True"
-                                                      ItemClicked="MenuItem_Clicked"
-                                                      EditClicked="MenuItem_EditClicked"
-                                                      DeleteClicked="MenuItem_DeleteClicked"
-                                                      Tag="{x:Bind}"
-                                                      Loaded="MenuItem_Loaded" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <Grid>
+                    <!-- Skeleton loading state for initial app launch -->
+                    <StackPanel x:Name="NavSkeletonState"
+                                Visibility="Collapsed">
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonNavItemTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonNavItemTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonNavItemTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonNavItemTemplate}" />
+                    </StackPanel>
+
+                    <!-- Actual list items -->
+                    <ItemsControl x:Name="UserListsView"
+                                  ItemsSource="{x:Bind UserLists, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:NavItem">
+                                <controls:MenuItemControl Icon="{x:Bind Icon}"
+                                                          Text="{x:Bind Title}"
+                                                          IsSelected="{x:Bind IsSelected, Mode=OneWay}"
+                                                          ShowActions="True"
+                                                          ItemClicked="MenuItem_Clicked"
+                                                          EditClicked="MenuItem_EditClicked"
+                                                          DeleteClicked="MenuItem_DeleteClicked"
+                                                          Tag="{x:Bind}"
+                                                          Loaded="MenuItem_Loaded" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </ScrollViewer>
 
             <!-- Settings -->

@@ -30,6 +30,13 @@ public sealed partial class NavigationPanelControl : UserControl
         DependencyProperty.Register(nameof(IsCompact), typeof(bool),
             typeof(NavigationPanelControl), new PropertyMetadata(false, OnIsCompactChanged));
 
+    /// <summary>
+    /// Whether the navigation panel is in the initial loading state (showing skeleton items).
+    /// </summary>
+    public static readonly DependencyProperty IsInitialLoadingProperty =
+        DependencyProperty.Register(nameof(IsInitialLoading), typeof(bool),
+            typeof(NavigationPanelControl), new PropertyMetadata(false, OnIsInitialLoadingChanged));
+
     public ObservableCollection<NavItem> UserLists
     {
         get => (ObservableCollection<NavItem>)GetValue(UserListsProperty);
@@ -46,6 +53,12 @@ public sealed partial class NavigationPanelControl : UserControl
     {
         get => (bool)GetValue(IsCompactProperty);
         set => SetValue(IsCompactProperty, value);
+    }
+
+    public bool IsInitialLoading
+    {
+        get => (bool)GetValue(IsInitialLoadingProperty);
+        set => SetValue(IsInitialLoadingProperty, value);
     }
 
     /// <summary>Raised when any navigation item is clicked.</summary>
@@ -84,6 +97,16 @@ public sealed partial class NavigationPanelControl : UserControl
         if (d is NavigationPanelControl control)
         {
             control.UpdateCompactMode();
+        }
+    }
+
+    private static void OnIsInitialLoadingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NavigationPanelControl control)
+        {
+            var isLoading = (bool)e.NewValue;
+            control.NavSkeletonState.Visibility = isLoading ? Visibility.Visible : Visibility.Collapsed;
+            control.UserListsView.Visibility = isLoading ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 

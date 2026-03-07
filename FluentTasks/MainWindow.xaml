@@ -36,6 +36,7 @@
             <controls:NavigationPanelControl x:Name="NavigationPanel"
                                              Grid.Column="0"
                                              UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}"
+                                             IsInitialLoading="{x:Bind ViewModel.IsInitialLoading, Mode=OneWay}"
                                              ItemClicked="NavigationPanel_ItemClicked"
                                              EditClicked="NavigationPanel_EditClicked"
                                              DeleteClicked="NavigationPanel_DeleteClicked"
@@ -70,6 +71,7 @@
                     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
                 <controls:NavigationPanelControl x:Name="OverlayNavigationPanel"
                                                  UserLists="{x:Bind ViewModel.UserLists, Mode=OneWay}"
+                                                 IsInitialLoading="{x:Bind ViewModel.IsInitialLoading, Mode=OneWay}"
                                                  ItemClicked="OverlayNavigationPanel_ItemClicked"
                                                  EditClicked="OverlayNavigationPanel_EditClicked"
                                                  DeleteClicked="OverlayNavigationPanel_DeleteClicked"

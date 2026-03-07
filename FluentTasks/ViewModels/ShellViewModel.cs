@@ -61,6 +61,9 @@ public sealed partial class ShellViewModel : ObservableObject
     }
 
     [ObservableProperty]
+    private bool _isInitialLoading = true;
+
+    [ObservableProperty]
     private ObservableCollection<NavItem> _userLists = [];
 
     [ObservableProperty]
@@ -412,7 +415,7 @@ public sealed partial class ShellViewModel : ObservableObject
         _autoSyncTimer.Start();
 
         // Perform initial sync on startup
-        _ = PerformAutoSyncAsync();
+        _ = PerformInitialSyncAsync();
     }
 
     /// <summary>
@@ -519,6 +522,21 @@ public sealed partial class ShellViewModel : ObservableObject
         finally
         {
             _isSyncing = false;
+        }
+    }
+
+    /// <summary>
+    /// Performs the first sync after app launch and clears the initial loading state.
+    /// </summary>
+    private async Task PerformInitialSyncAsync()
+    {
+        try
+        {
+            await PerformAutoSyncAsync();
+        }
+        finally
+        {
+            IsInitialLoading = false;
         }
     }
 

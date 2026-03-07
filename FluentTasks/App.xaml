@@ -123,6 +123,37 @@
                     </Grid>
                 </Border>
             </DataTemplate>
+
+            <!-- Skeleton nav item template for sidebar loading state -->
+            <DataTemplate x:Key="SkeletonNavItemTemplate">
+                <Grid Margin="4,2"
+                      Padding="12,8"
+                      MinHeight="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0"
+                               Width="16"
+                               Height="16"
+                               RadiusX="4"
+                               RadiusY="4"
+                               Fill="{ThemeResource CardStrokeColorDefaultBrush}"
+                               Opacity="0.3"
+                               VerticalAlignment="Center"
+                               Margin="0,0,12,0" />
+                    <Rectangle Grid.Column="1"
+                               Height="14"
+                               RadiusX="2"
+                               RadiusY="2"
+                               Fill="{ThemeResource CardStrokeColorDefaultBrush}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Opacity="0.3"
+                               MaxWidth="160"
+                               MinWidth="80" />
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
