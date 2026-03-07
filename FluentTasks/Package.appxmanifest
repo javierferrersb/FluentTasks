@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="645b8942-f8bf-44dc-a10b-baf54d2edbe6"
-    Publisher="CN=fsb14"
-    Version="1.0.0.0" />
+    Name="JavierFerrerSB.FluentTasks"
+    Publisher="CN=JavierFerrerSB"
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="645b8942-f8bf-44dc-a10b-baf54d2edbe6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>FluentTasks</DisplayName>
-    <PublisherDisplayName>fsb14</PublisherDisplayName>
+    <PublisherDisplayName>Javier Ferrer SB</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -77,7 +77,7 @@
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="FluentTasks"
-        Description="FluentTasks"
+        Description="A modern Google Tasks client for Windows"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
