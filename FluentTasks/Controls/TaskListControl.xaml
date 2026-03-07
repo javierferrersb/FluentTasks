@@ -314,7 +314,7 @@
                         </TextBox>
 
                         <Button Grid.Column="1"
-                                Command="{x:Bind ViewModel.AddTaskCommand}"
+                                Command="{x:Bind ViewModel.AddTaskCommand, Mode=OneWay}"
                                 Style="{StaticResource AccentButtonStyle}"
                                 VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal"
