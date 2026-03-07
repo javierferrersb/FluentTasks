@@ -19,6 +19,11 @@ internal sealed class DialogService : IDialogService
     private readonly ResourceLoader _resourceLoader = new();
 
     /// <summary>
+    /// True while a ContentDialog is being shown.
+    /// </summary>
+    public bool IsDialogOpen { get; private set; }
+
+    /// <summary>
     /// Sets the <see cref="XamlRoot"/> used for presenting dialogs.
     /// Must be called once after the main window content is loaded.
     /// </summary>
@@ -56,8 +61,16 @@ internal sealed class DialogService : IDialogService
             RequestedTheme = _currentTheme
         };
 
-        var result = await dialog.ShowAsync();
-        return result == ContentDialogResult.Primary;
+        IsDialogOpen = true;
+        try
+        {
+            var result = await dialog.ShowAsync();
+            return result == ContentDialogResult.Primary;
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
     }
 
     /// <inheritdoc />
@@ -69,7 +82,16 @@ internal sealed class DialogService : IDialogService
             RequestedTheme = _currentTheme
         };
 
-        var result = await dialog.ShowAsync();
+        IsDialogOpen = true;
+        ContentDialogResult result;
+        try
+        {
+            result = await dialog.ShowAsync();
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
 
         if (result == ContentDialogResult.Primary && dialog.ListName is not null && dialog.SelectedIcon is not null)
         {
@@ -95,7 +117,16 @@ internal sealed class DialogService : IDialogService
             RequestedTheme = _currentTheme
         };
 
-        var result = await dialog.ShowAsync();
+        IsDialogOpen = true;
+        ContentDialogResult result;
+        try
+        {
+            result = await dialog.ShowAsync();
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
 
         if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(textBox.Text))
         {
@@ -117,8 +148,16 @@ internal sealed class DialogService : IDialogService
             RequestedTheme = _currentTheme
         };
 
-        var result = await dialog.ShowAsync();
-        return result == ContentDialogResult.Primary;
+        IsDialogOpen = true;
+        try
+        {
+            var result = await dialog.ShowAsync();
+            return result == ContentDialogResult.Primary;
+        }
+        finally
+        {
+            IsDialogOpen = false;
+        }
     }
 
     private XamlRoot GetXamlRoot()

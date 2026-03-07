@@ -12,11 +12,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- App Window -->
+  
   <data name="AppWindowTitle" xml:space="preserve">
     <value>FluentTasks</value>
   </data>
-  <!-- MainWindow Teaching Tips -->
+  
   <data name="WelcomeTip.Title" xml:space="preserve">
     <value>歡迎使用 FluentTasks！🎉</value>
   </data>
@@ -65,11 +65,11 @@
   <data name="SyncTip.CloseButtonContent" xml:space="preserve">
     <value>跳過導覽</value>
   </data>
-  <!-- OnboardingWindow -->
+  
   <data name="OnboardingWindowTitle" xml:space="preserve">
     <value>歡迎使用 FluentTasks</value>
   </data>
-  <!-- OnboardingDialog Page 1 - Welcome -->
+  
   <data name="OnboardingWelcomeTitle" xml:space="preserve">
     <value>歡迎使用 FluentTasks</value>
   </data>
@@ -106,7 +106,7 @@
   <data name="OnboardingBackButton" xml:space="preserve">
     <value>返回</value>
   </data>
-  <!-- OnboardingDialog Page 2 - Sign In -->
+  
   <data name="OnboardingSignInTitle" xml:space="preserve">
     <value>連線您的帳戶</value>
   </data>
@@ -134,7 +134,7 @@
   <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
     <value>確定</value>
   </data>
-  <!-- NavigationPanelControl -->
+  
   <data name="NavigationPanelMyListsText" xml:space="preserve">
     <value>我的列表</value>
   </data>
@@ -147,7 +147,7 @@
   <data name="NavigationPanelSyncButtonText" xml:space="preserve">
     <value>同步列表</value>
   </data>
-  <!-- TaskListControl -->
+  
   <data name="TaskListEmptyStateIcon" xml:space="preserve">
     <value>📋</value>
   </data>
@@ -208,7 +208,7 @@
   <data name="TaskListSubtaskIndicator" xml:space="preserve">
     <value>↳</value>
   </data>
-  <!-- Sort Menu Items -->
+  
   <data name="SortDefault" xml:space="preserve">
     <value>預設</value>
   </data>
@@ -227,7 +227,7 @@
   <data name="SortCompleted" xml:space="preserve">
     <value>最後完成</value>
   </data>
-  <!-- Filter Menu Items -->
+  
   <data name="FilterAll" xml:space="preserve">
     <value>所有任務</value>
   </data>
@@ -246,14 +246,14 @@
   <data name="FilterWeek" xml:space="preserve">
     <value>本週到期</value>
   </data>
-  <!-- MenuItemControl -->
+  
   <data name="MenuItemEditToolTip" xml:space="preserve">
     <value>編輯列表</value>
   </data>
   <data name="MenuItemDeleteToolTip" xml:space="preserve">
     <value>刪除列表</value>
   </data>
-  <!-- SettingsDialog -->
+  
   <data name="SettingsTitle" xml:space="preserve">
     <value>設定</value>
   </data>
@@ -365,7 +365,7 @@
   <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
     <value>關於開發者</value>
   </data>
-  <!-- ComboBox Items - Settings -->
+  
   <data name="FilterAllTasks" xml:space="preserve">
     <value>所有任務</value>
   </data>
@@ -402,7 +402,7 @@
   <data name="SortCompletedLast" xml:space="preserve">
     <value>最後完成</value>
   </data>
-  <!-- ListEditorDialog -->
+  
   <data name="ListEditorDialogTitle" xml:space="preserve">
     <value>列表詳情</value>
   </data>
@@ -421,7 +421,7 @@
   <data name="ListEditorIconHeader" xml:space="preserve">
     <value>圖示</value>
   </data>
-  <!-- TaskDetailsDialog -->
+  
   <data name="TaskDetailsDialogTitle" xml:space="preserve">
     <value>任務詳情</value>
   </data>
@@ -470,7 +470,7 @@
   <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
     <value>{0} 天後到期</value>
   </data>
-  <!-- IconPickerDialog -->
+  
   <data name="IconPickerDialogTitle" xml:space="preserve">
     <value>選擇圖示</value>
   </data>
@@ -480,7 +480,7 @@
   <data name="IconPickerCloseButton" xml:space="preserve">
     <value>取消</value>
   </data>
-  <!-- Tech Stack Badges -->
+  
   <data name="TechWinUI3" xml:space="preserve">
     <value>WinUI 3</value>
   </data>
@@ -493,7 +493,7 @@
   <data name="TechGoogleTasksAPI" xml:space="preserve">
     <value>Google Tasks API</value>
   </data>
-  <!-- Language Change Dialog -->
+  
   <data name="LanguageChangeTitle" xml:space="preserve">
     <value>語言已變更</value>
   </data>
@@ -506,7 +506,7 @@
   <data name="Later" xml:space="preserve">
     <value>稍後</value>
   </data>
-  <!-- Social Media -->
+  
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
@@ -1116,4 +1116,67 @@
   <data name="ShellStatusReAuthenticating" xml:space="preserve">
     <value>正在登入...</value>
   </data>
-</root>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>鍵盤快速鍵</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>關閉 (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>按住 Ctrl 顯示  ·  按 ? 或 Ctrl+Shift+? 切換  ·  Esc 關閉</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>導覽</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>工作</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>檢視與應用程式</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>瀏覽工作</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>聚焦搜尋方塊</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>清除選取 / 關閉</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>建立新工作</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>建立新清單</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>編輯所選工作</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>切換工作完成狀態</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>切換完成狀態 (替代)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>刪除所選工作</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>開啟工作詳細資料</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>新增子工作</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>同步 / 重新整理</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>開啟設定</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>顯示快速鍵</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>關閉應用程式</value>
+  </data>
+  </root>

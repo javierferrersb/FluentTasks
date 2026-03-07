@@ -1203,4 +1203,67 @@
   <data name="ShellStatusReAuthenticating" xml:space="preserve">
     <value>Signing in...</value>
   </data>
+  <data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>Hold Ctrl to show  ·  Press ? or Ctrl+Shift+? to toggle  ·  Esc to close</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>View &amp; App</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>Navigate tasks</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>Focus search box</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>Clear selection / Close</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>Create new task</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>Create new list</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>Edit selected task</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>Toggle task completion</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>Toggle completion (alt)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>Delete selected task</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>Open task details</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>Add subtask</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>Sync / Refresh</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>Show shortcuts overlay</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>Close application</value>
+  </data>
 </root>

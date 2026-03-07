@@ -78,10 +78,14 @@
                                                  CreateListClicked="OverlayNavigationPanel_CreateListClicked"
                                                  SyncClicked="OverlayNavigationPanel_SyncClicked"
                                                  SettingsClicked="OverlayNavigationPanel_SettingsClicked" />
-            </Border>
-        </Grid>
+                 </Border>
+            </Grid>
 
-        <!-- Teaching Tips for onboarding guidance -->
+            <!-- Keyboard Shortcuts Overlay -->
+            <controls:ShortcutsOverlayControl x:Name="ShortcutsOverlay"
+                                               Grid.Row="1" />
+
+            <!-- Teaching Tips for onboarding guidance -->
         <TeachingTip x:Uid="WelcomeTip"
                      x:Name="WelcomeTip"
                      PreferredPlacement="Center"

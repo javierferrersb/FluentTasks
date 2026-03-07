@@ -6,10 +6,14 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.System;
 
 namespace FluentTasks.UI;
 
@@ -80,6 +84,10 @@ public sealed partial class MainWindow : Window
             };
 
             root.SizeChanged += (_, _) => UpdateResponsiveLayout();
+
+            // Keyboard shortcut handling
+            root.PreviewKeyDown += Root_PreviewKeyDown;
+            root.PreviewKeyUp += Root_PreviewKeyUp;
         }
 
         // Subscribe to theme and logout events
@@ -169,6 +177,8 @@ public sealed partial class MainWindow : Window
         if (Content is FrameworkElement root)
         {
             root.ActualThemeChanged -= RootElement_ActualThemeChanged;
+            root.PreviewKeyDown -= Root_PreviewKeyDown;
+            root.PreviewKeyUp -= Root_PreviewKeyUp;
         }
     }
 
@@ -264,6 +274,8 @@ public sealed partial class MainWindow : Window
                 : Visibility.Visible;
         };
 
+        settingsControl.ShowShortcutsRequested += (_, _) => ShowShortcutsOverlay();
+
         SettingsContainer.Content = settingsControl;
         SettingsContainer.Visibility = Visibility.Visible;
         TaskList.Visibility = Visibility.Collapsed;
@@ -308,6 +320,267 @@ public sealed partial class MainWindow : Window
             ? Visibility.Collapsed
             : Visibility.Visible;
     }
+
+    #region Keyboard Shortcuts
+
+    /// <summary>
+    /// Returns true when the focused element is a text input, so standard editing shortcuts are preserved.
+    /// In WinUI 3 desktop apps the parameterless overload can return null; the XamlRoot overload is required.
+    /// </summary>
+    private bool IsFocusInTextInput()
+    {
+        if (Content is not FrameworkElement { XamlRoot: { } xamlRoot })
+            return false;
+
+        var focused = FocusManager.GetFocusedElement(xamlRoot);
+        return focused is TextBox or AutoSuggestBox or RichEditBox or PasswordBox;
+    }
+
+    private void Root_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        // Ignore modifier-only keys; the overlay polls Ctrl state independently.
+        if (e.Key is VirtualKey.Control or VirtualKey.Shift or VirtualKey.Menu)
+            return;
+
+        // Dismiss overlay on Escape
+        if (e.Key == VirtualKey.Escape && ShortcutsOverlay.IsOpen)
+        {
+            ShortcutsOverlay.HideOverlay();
+            e.Handled = true;
+            return;
+        }
+
+        var ctrl = Microsoft.UI.Input.InputKeyboardSource.GetKeyStateForCurrentThread(VirtualKey.Control)
+                       .HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
+        var shift = Microsoft.UI.Input.InputKeyboardSource.GetKeyStateForCurrentThread(VirtualKey.Shift)
+                        .HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
+        var alt = Microsoft.UI.Input.InputKeyboardSource.GetKeyStateForCurrentThread(VirtualKey.Menu)
+                      .HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
+
+        // If overlay is open, dismiss it before executing the shortcut
+        if (ShortcutsOverlay.IsOpen)
+            ShortcutsOverlay.HideOverlay();
+
+        bool inTextInput = IsFocusInTextInput();
+
+        // --- Shortcuts that work even in text input ---
+        if (ctrl && !shift && !alt)
+        {
+            switch (e.Key)
+            {
+                case VirtualKey.F:
+                    TaskList.FocusSearchBox();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.R:
+                    _ = ViewModel.SyncCommand.ExecuteAsync(null);
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.W:
+                case VirtualKey.Q:
+                    Close();
+                    e.Handled = true;
+                    return;
+            }
+        }
+
+        if (ctrl && shift && !alt)
+        {
+            // Ctrl+Shift+? (VirtualKey 191 = OEM question mark / forward slash)
+            if (e.Key == (VirtualKey)191)
+            {
+                ShortcutsOverlay.ToggleOverlay();
+                e.Handled = true;
+                return;
+            }
+        }
+
+        // --- Shortcuts that require NO text input focus ---
+        if (inTextInput)
+            return;
+
+        // ? key (OEM question mark = VirtualKey 191) without modifiers for overlay toggle
+        if (!ctrl && !shift && !alt && e.Key == (VirtualKey)191)
+        {
+            ShortcutsOverlay.ToggleOverlay();
+            e.Handled = true;
+            return;
+        }
+
+        // No modifiers
+        if (!ctrl && !shift && !alt)
+        {
+            switch (e.Key)
+            {
+                case VirtualKey.Down:
+                    ViewModel.TaskListVM?.SelectNextTask();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.Up:
+                    ViewModel.TaskListVM?.SelectPreviousTask();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.Space:
+                    _ = ToggleSelectedTaskCompletionAsync();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.Delete:
+                case VirtualKey.Back:
+                    _ = DeleteSelectedTaskAsync();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.Enter:
+                case VirtualKey.F2:
+                    EditSelectedTask();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.Escape:
+                    HandleEscape();
+                    e.Handled = true;
+                    return;
+            }
+        }
+
+        // Ctrl (no shift, no alt)
+        if (ctrl && !shift && !alt)
+        {
+            switch (e.Key)
+            {
+                case VirtualKey.N:
+                    FocusNewTask();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.D:
+                    _ = ToggleSelectedTaskCompletionAsync();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.E:
+                    _ = ShowSelectedTaskDetailsAsync();
+                    e.Handled = true;
+                    return;
+
+                // Ctrl+, (comma) — Open settings
+                case (VirtualKey)188:
+                    OnSettingsClicked();
+                    e.Handled = true;
+                    return;
+            }
+        }
+
+        // Ctrl+Shift (no alt)
+        if (ctrl && shift && !alt)
+        {
+            switch (e.Key)
+            {
+                case VirtualKey.N:
+                    _ = ViewModel.CreateListCommand.ExecuteAsync(null);
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.S:
+                    _ = AddSubtaskToSelectedAsync();
+                    e.Handled = true;
+                    return;
+
+                case VirtualKey.D:
+                    _ = ShowSelectedTaskDetailsAsync();
+                    e.Handled = true;
+                    return;
+            }
+        }
+    }
+
+    private void Root_PreviewKeyUp(object sender, KeyRoutedEventArgs e)
+    {
+        // Ctrl release is handled by the overlay's poll timer; nothing needed here.
+    }
+
+    // --- Keyboard action helpers ---
+
+    private async Task ToggleSelectedTaskCompletionAsync()
+    {
+        var vm = ViewModel.TaskListVM;
+        var task = vm?.SelectedTask;
+        if (task is null || vm is null) return;
+
+        await vm.CompleteTaskAsync(task, !task.IsCompleted);
+    }
+
+    private async Task DeleteSelectedTaskAsync()
+    {
+        var vm = ViewModel.TaskListVM;
+        var task = vm?.SelectedTask;
+        if (task is null || vm is null) return;
+
+        await vm.DeleteTaskAsync(task);
+    }
+
+    private void EditSelectedTask()
+    {
+        var vm = ViewModel.TaskListVM;
+        var task = vm?.SelectedTask;
+        if (task is null || vm is null) return;
+
+        vm.BeginEditTask(task);
+        TaskList.FocusEditTextBoxForTask(task);
+    }
+
+    private async Task ShowSelectedTaskDetailsAsync()
+    {
+        var vm = ViewModel.TaskListVM;
+        var task = vm?.SelectedTask;
+        if (task is null || vm is null) return;
+
+        await vm.ShowDetailsAsync(task);
+    }
+
+    private async Task AddSubtaskToSelectedAsync()
+    {
+        var vm = ViewModel.TaskListVM;
+        var task = vm?.SelectedTask;
+        if (task is null || vm is null) return;
+
+        await vm.AddSubtaskAsync(task);
+    }
+
+    private void FocusNewTask()
+    {
+        HideSettingsAndShowTaskList();
+        TaskList.FocusNewTaskInput();
+    }
+
+    private void HandleEscape()
+    {
+        var vm = ViewModel.TaskListVM;
+        if (vm is null) return;
+
+        // If a task is being edited, cancel the edit
+        var editingTask = vm.Tasks.FirstOrDefault(t => t.IsEditing);
+        if (editingTask is not null)
+        {
+            vm.CancelEdit(editingTask);
+            return;
+        }
+
+        // Otherwise clear keyboard selection
+        vm.ClearSelection();
+    }
+
+    /// <summary>
+    /// Shows the keyboard shortcuts overlay. Called from settings or other UI triggers.
+    /// </summary>
+    public void ShowShortcutsOverlay() => ShortcutsOverlay.ShowOverlay();
+
+    #endregion
 
     #region Teaching Tips
 

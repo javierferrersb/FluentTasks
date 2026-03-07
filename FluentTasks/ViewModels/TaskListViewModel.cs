@@ -31,6 +31,9 @@ public sealed partial class TaskListViewModel : ObservableObject
     private ObservableCollection<TaskItem> _tasks = [];
 
     [ObservableProperty]
+    private int _selectedTaskIndex = -1;
+
+    [ObservableProperty]
     private SortOption _currentSort = SortOption.None;
 
     [ObservableProperty]
@@ -616,6 +619,40 @@ public sealed partial class TaskListViewModel : ObservableObject
 
         return true;
     }
+
+    // --- Keyboard navigation ---
+
+    /// <summary>
+    /// Returns the currently selected task, or null if nothing is selected.
+    /// </summary>
+    public TaskItem? SelectedTask =>
+        SelectedTaskIndex >= 0 && SelectedTaskIndex < Tasks.Count ? Tasks[SelectedTaskIndex] : null;
+
+    /// <summary>
+    /// Moves keyboard selection to the next task.
+    /// </summary>
+    public void SelectNextTask()
+    {
+        if (Tasks.Count == 0) return;
+        SelectedTaskIndex = Math.Min(SelectedTaskIndex + 1, Tasks.Count - 1);
+    }
+
+    /// <summary>
+    /// Moves keyboard selection to the previous task.
+    /// </summary>
+    public void SelectPreviousTask()
+    {
+        if (Tasks.Count == 0) return;
+        if (SelectedTaskIndex < 0)
+            SelectedTaskIndex = 0;
+        else
+            SelectedTaskIndex = Math.Max(SelectedTaskIndex - 1, 0);
+    }
+
+    /// <summary>
+    /// Clears the current keyboard selection.
+    /// </summary>
+    public void ClearSelection() => SelectedTaskIndex = -1;
 
     private async Task ReloadTasksAsync()
     {

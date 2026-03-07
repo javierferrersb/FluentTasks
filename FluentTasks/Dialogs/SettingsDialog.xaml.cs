@@ -24,6 +24,11 @@ public sealed partial class SettingsDialog : UserControl, IDisposable
     public event EventHandler? HamburgerButtonClicked;
 
     /// <summary>
+    /// Raised when the user requests to see keyboard shortcuts.
+    /// </summary>
+    public event EventHandler? ShowShortcutsRequested;
+
+    /// <summary>
     /// Whether to show the hamburger menu button in the header.
     /// </summary>
     public bool ShowHamburgerButton
@@ -212,6 +217,11 @@ public sealed partial class SettingsDialog : UserControl, IDisposable
     private void HamburgerButton_Click(object sender, RoutedEventArgs e)
     {
         HamburgerButtonClicked?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void ShowShortcuts_Click(object sender, RoutedEventArgs e)
+    {
+        ShowShortcutsRequested?.Invoke(this, EventArgs.Empty);
     }
 
     private async void AboutDeveloper_Click(object sender, RoutedEventArgs e)

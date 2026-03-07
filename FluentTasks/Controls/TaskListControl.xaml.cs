@@ -220,6 +220,9 @@ public sealed partial class TaskListControl : UserControl
             case nameof(TaskListViewModel.EmptyStateSubtitle):
                 SyncEmptyStateText();
                 break;
+            case nameof(TaskListViewModel.SelectedTaskIndex):
+                UpdateSelectionVisual();
+                break;
         }
     }
 
@@ -533,7 +536,100 @@ public sealed partial class TaskListControl : UserControl
             textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
     }
 
+    // --- Keyboard selection visual ---
+
+    private int _lastHighlightedIndex = -1;
+
+    /// <summary>
+    /// Updates the visual highlight on the selected task card and scrolls it into view.
+    /// </summary>
+    private void UpdateSelectionVisual()
+    {
+        // Clear previous highlight
+        ClearTaskHighlight(_lastHighlightedIndex);
+
+        var index = ViewModel?.SelectedTaskIndex ?? -1;
+        if (index < 0)
+        {
+            _lastHighlightedIndex = -1;
+            return;
+        }
+
+        _lastHighlightedIndex = index;
+
+        var container = TasksView.TryGetElement(index);
+        var border = FindBorderInVisualTree(container);
+        if (border is not null)
+        {
+            border.BorderBrush = GetThemeResource<Brush>("AccentFillColorDefaultBrush");
+            border.BorderThickness = new Thickness(2);
+        }
+
+        // Scroll the selected item into view
+        container?.StartBringIntoView(new BringIntoViewOptions { AnimationDesired = true });
+    }
+
+    private void ClearTaskHighlight(int index)
+    {
+        if (index < 0) return;
+
+        var container = TasksView.TryGetElement(index);
+        var border = FindBorderInVisualTree(container);
+        if (border is not null)
+        {
+            border.ClearValue(Border.BorderBrushProperty);
+            border.BorderThickness = new Thickness(1);
+        }
+    }
+
+    private static Border? FindBorderInVisualTree(DependencyObject? parent)
+    {
+        if (parent is null) return null;
+
+        var count = VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
+        {
+            var child = VisualTreeHelper.GetChild(parent, i);
+            if (child is Border border && border.Tag is TaskItem)
+                return border;
+
+            var result = FindBorderInVisualTree(child);
+            if (result is not null)
+                return result;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Moves keyboard focus to the new-task input box.
+    /// </summary>
+    public void FocusNewTaskInput()
+    {
+        NewTaskInput.Focus(FocusState.Programmatic);
+    }
+
+    /// <summary>
+    /// Moves keyboard focus to the search box.
+    /// </summary>
+    public void FocusSearchBox()
+    {
+        SearchBox.Focus(FocusState.Programmatic);
+    }
+
     // --- Focus helpers ---
+
+    /// <summary>
+    /// Focuses the inline edit TextBox for the given task after a short delay
+    /// to allow the visual tree to update.
+    /// </summary>
+    public void FocusEditTextBoxForTask(TaskItem task)
+    {
+        DispatcherQueue.TryEnqueue(async () =>
+        {
+            await Task.Delay(100);
+            FocusEditTextBox(task);
+        });
+    }
 
     private void FocusEditTextBox(TaskItem task)
     {

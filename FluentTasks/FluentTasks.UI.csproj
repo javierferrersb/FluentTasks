@@ -64,6 +64,9 @@
     <Page Update="Dialogs\OnboardingDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Controls\ShortcutsOverlayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <None Update="Dialogs\SettingsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>

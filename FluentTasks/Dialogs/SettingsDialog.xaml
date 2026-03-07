@@ -258,6 +258,53 @@
                 </StackPanel>
             </Border>
 
+            <!-- Keyboard Shortcuts Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xEDA7;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Keyboard Shortcuts"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock Text="View all available keyboard shortcuts"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8"
+                                Margin="0,8,0,0">
+                        <Button Click="ShowShortcuts_Click">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+                                <FontIcon Glyph="&#xEDA7;"
+                                          FontSize="16" />
+                                <TextBlock Text="Show Keyboard Shortcuts" />
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock Text="Press ? or hold Ctrl to see shortcuts at any time."
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
             <!-- Account Section Card -->
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
