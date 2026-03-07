@@ -41,8 +41,8 @@ public sealed partial class SettingsViewModel : ObservableObject, IDisposable
     public SettingsViewModel(SettingsService settingsService)
     {
         _settingsService = settingsService;
-        LoadSettings();
         LoadLanguages();
+        LoadSettings();
         LoadCopyrightText();
 
         // Subscribe to language changes

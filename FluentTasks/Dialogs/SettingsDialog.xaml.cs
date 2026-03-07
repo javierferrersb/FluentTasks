@@ -54,7 +54,8 @@ public sealed partial class SettingsDialog : UserControl, IDisposable
         _viewModel.LanguageChanged += ViewModel_LanguageChanged;
 
         // Wire up event handlers
-        ThemeRadioButtons.SelectionChanged += ThemeRadioButtons_SelectionChanged;
+        // TODO: Re-enable once light/dark mode theme switching is reliable
+        // ThemeRadioButtons.SelectionChanged += ThemeRadioButtons_SelectionChanged;
         DefaultFilterComboBox.SelectionChanged += DefaultFilterComboBox_SelectionChanged;
         DefaultSortComboBox.SelectionChanged += DefaultSortComboBox_SelectionChanged;
     }
@@ -66,8 +67,8 @@ public sealed partial class SettingsDialog : UserControl, IDisposable
 
     private void LoadSettings()
     {
-        // Load theme
-        ThemeRadioButtons.SelectedIndex = _viewModel.SelectedThemeIndex;
+        // TODO: Re-enable once light/dark mode theme switching is reliable
+        // ThemeRadioButtons.SelectedIndex = _viewModel.SelectedThemeIndex;
 
         // Load language
         var languageItem = LanguageComboBox.Items
@@ -98,24 +99,25 @@ public sealed partial class SettingsDialog : UserControl, IDisposable
             currentYear);
     }
 
-    private void ThemeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (_isLoading || ThemeRadioButtons.SelectedItem is not RadioButton selectedButton)
-            return;
-
-        if (selectedButton.Tag is string tag)
-        {
-            var themeIndex = tag switch
-            {
-                "Light" => 0,
-                "Dark" => 1,
-                "Default" => 2,
-                _ => 2
-            };
-
-            _viewModel.SetThemeCommand.Execute(themeIndex);
-        }
-    }
+    // TODO: Re-enable once light/dark mode theme switching is reliable
+    // private void ThemeRadioButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    // {
+    //     if (_isLoading || ThemeRadioButtons.SelectedItem is not RadioButton selectedButton)
+    //         return;
+    //
+    //     if (selectedButton.Tag is string tag)
+    //     {
+    //         var themeIndex = tag switch
+    //         {
+    //             "Light" => 0,
+    //             "Dark" => 1,
+    //             "Default" => 2,
+    //             _ => 2
+    //         };
+    //
+    //         _viewModel.SetThemeCommand.Execute(themeIndex);
+    //     }
+    // }
 
     private void DefaultFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
