@@ -118,6 +118,8 @@ public sealed partial class ShellViewModel : ObservableObject
             OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
             StatusText = GetResource("ShellStatusSyncing", "Syncing...");
 
+            var selectedId = SelectedNavItem?.Id;
+
             var taskLists = await _taskService.GetTaskListsAsync();
 
             _taskListsBackingStore.Clear();
@@ -128,14 +130,22 @@ public sealed partial class ShellViewModel : ObservableObject
                 _taskListsBackingStore.Add(list);
 
                 var icon = _iconStorageService.GetIcon(list.Id);
-                UserLists.Add(new NavItem
+                var navItem = new NavItem
                 {
                     Id = list.Id,
                     Title = list.Title,
                     Icon = icon,
                     Type = NavItemType.UserList,
                     Data = list
-                });
+                };
+
+                if (navItem.Id == selectedId)
+                {
+                    navItem.IsSelected = true;
+                    SelectedNavItem = navItem;
+                }
+
+                UserLists.Add(navItem);
             }
 
             await RefreshCurrentViewAsync();
@@ -441,6 +451,8 @@ public sealed partial class ShellViewModel : ObservableObject
             OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
             StatusText = GetResource("ShellStatusSyncing", "Syncing...");
 
+            var selectedId = SelectedNavItem?.Id;
+
             // Sync task lists
             var taskLists = await _taskService.GetTaskListsAsync();
 
@@ -452,14 +464,22 @@ public sealed partial class ShellViewModel : ObservableObject
                 _taskListsBackingStore.Add(list);
 
                 var icon = _iconStorageService.GetIcon(list.Id);
-                UserLists.Add(new NavItem
+                var navItem = new NavItem
                 {
                     Id = list.Id,
                     Title = list.Title,
                     Icon = icon,
                     Type = NavItemType.UserList,
                     Data = list
-                });
+                };
+
+                if (navItem.Id == selectedId)
+                {
+                    navItem.IsSelected = true;
+                    SelectedNavItem = navItem;
+                }
+
+                UserLists.Add(navItem);
             }
 
             // Refresh current view if a list is selected
