@@ -1,0 +1,1211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Laipni lūdzam FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Apskatīsim īsu ceļvedi, lai palīdzētu sākt darbu.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Sāksim!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Izlaist ceļvedi</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Jūsu uzdevumu saraksti</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Visi jūsu uzdevumu saraksti tiek rādīti šeit. Noklikšķiniet uz jebkura saraksta, lai skatītu tā uzdevumus, vai noklikšķiniet uz + pogas, lai izveidotu jaunu sarakstu.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Tālāk</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Izlaist ceļvedi</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Jūsu uzdevumi</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Jūsu uzdevumi tiek rādīti šeit. Izmantojiet meklēšanas joslu, lai atrastu uzdevumus, vai filtrējiet un kārtojiet tos ar rīkjoslas pogām.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Tālāk</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Izlaist ceļvedi</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Esiet sinhronizēts</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Jūsu uzdevumi automātiski sinhronizējas ar Google Tasks. Noklikšķiniet uz sinhronizācijas pogas jebkurā laikā, lai manuāli atsvaidzinātu datus.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Sapratu!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Izlaist ceļvedi</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Laipni lūdzam FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Laipni lūdzam FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Mūsdienīgs, vietējs Google Tasks klients sistēmai Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Sinhronizēt ar Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Jūsu uzdevumi tiek nemanāmi sinhronizēti ar Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Esiet organizēts</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Izveidojiet sarakstus un apakšuzdevumus, lai organizētu darbu</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Izpildes termiņi</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Iestatiet termiņus un nekad nepalaidiet garām termiņu</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Filtrēšana un kārtošana</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Ātri atrodiet uzdevumus ar jaudīgiem filtriem</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Sākt</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Atpakaļ</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Pievienojiet savu kontu</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Pierakstieties ar savu Google kontu, lai sinhronizētu uzdevumus visās ierīcēs</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Pierakstīties ar Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Notiek pierakstīšanās...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Jūsu dati paliek privāti</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Visi jūsu dati paliek jūsu ierīcē un Google serveros. FluentTasks nevāc un neglabā personisko informāciju.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Pierakstīšanās neizdevās</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>Neizdevās jūs pierakstīt. Lūdzu, mēģiniet vēlreiz.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>Labi</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Mani saraksti</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Izveidot jaunu sarakstu</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Iestatījumi</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Sinhronizēt sarakstus</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Lai sāktu, izvēlieties sarakstu</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Izvēlieties uzdevumu sarakstu sānu joslā vai izveidojiet jaunu</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Mani uzdevumi</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Pārslēgt navigāciju</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Kārtot</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Filtrs</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Meklēt uzdevumus...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Pievienot jaunu uzdevumu...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Pievienot uzdevumu</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Nav uzdevumu</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Pievienojiet uzdevumu, lai sāktu</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Gatavs</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Saglabāt (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Atcelt (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Pievienot apakšuzdevumu</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Uzdevuma detaļas</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Dzēst uzdevumu</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Noklusējums</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Termiņš (agrākais)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Termiņš (vēlākais)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A līdz Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z līdz A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Pabeigtie beigās</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Visi uzdevumi</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Nepabeigti</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Nokavēti</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Termiņš šodien</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Termiņš šonedēļ</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Rediģēt sarakstu</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Dzēst sarakstu</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Iestatījumi</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Izskats</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Izvēlieties, kā izskatās FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Gaišs</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Tumšs</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Izmantot sistēmas iestatījumu</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Valoda</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Saraksti</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Konfigurēt noklusējuma saraksta darbību</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Noklusējuma filtrs</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Noklusējuma kārtošanas secība</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Dati</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Pārvaldīt lokālo datu glabāšanu</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Notīrīt kešatmiņu</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Noņemiet lokāli kešatmiņā saglabātos datus. Jūsu uzdevumi tiks atkārtoti lejupielādēti nākamās sinhronizācijas laikā.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Konts</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Pārvaldīt Google konta savienojumu</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Izrakstīties</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Izrakstieties no sava Google konta. Lai piekļūtu uzdevumiem, būs jāpierakstās vēlreiz.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Mūsdienīga, plūstoša uzdevumu pārvaldības lietotne Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Izveidots ar</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Radīts ar</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>no Spānijas</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Par izstrādātāju</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Skatīt GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Licencēts ar MIT licenci</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Notīrīt kešatmiņu?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Tas noņems visus lokāli kešatmiņā saglabātos datus. Jūsu uzdevumi tiks atkārtoti lejupielādēti nākamajā sinhronizācijā.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Notīrīt</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Kešatmiņa notīrīta</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Lokālā kešatmiņa veiksmīgi notīrīta.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Izrakstīties?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Lai piekļūtu uzdevumiem, jums būs jāpierakstās vēlreiz.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Izrakstīties</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Par izstrādātāju</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Visi uzdevumi</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Nepabeigti</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Nokavēti</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Šodien</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Šī nedēļa</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Nav (mana secība)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Termiņš (drīzākais pirmais)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Termiņš (vēlākais pirmais)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Alfabētiski (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Alfabētiski (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Pabeigtie beigās</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Saraksta detaļas</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Saglabāt</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Saraksta nosaukums</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Ievadiet saraksta nosaukumu...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Uzdevuma detaļas</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Saglabāt</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Nosaukums</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Uzdevuma nosaukums</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Izpildes termiņš</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Nav termiņa</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Notīrīt</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Piezīmes</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Pievienojiet detaļas par šo uzdevumu...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Statuss</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Nokavēts par {0} dienām</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Termiņš šodien</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Termiņš rīt</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Termiņš pēc {0} dienām</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Izvēlieties ikonu</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Izvēlēties</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Valoda mainīta</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Lūdzu, restartējiet lietotni, lai piemērotu jauno valodu.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Restartēt tagad</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Vēlāk</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Aizvērt</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Saglabāt</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Neizdevās atjaunināt sarakstu</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Termiņš šonedēļ</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Izrakstieties no sava Google konta. Lai piekļūtu uzdevumiem, būs jāpierakstās vēlreiz.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Visas tiesības aizsargātas.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Izvēlēties</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Meklēt uzdevumus...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Dzēst</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Pievienot apakšuzdevumu</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot nav iestatīts. Vispirms izsauciet SetXamlRoot.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Termiņš {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Notiek pierakstīšanās...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Pārvaldīt Google konta savienojumu</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Saglabāt (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Saraksti</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Nokavēti</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Sinhronizēts</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Iestatījumi</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Mani saraksti</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Nokavēts par {0} dienām</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Filtrs</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>Labi</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Apakšuzdevums izveidots</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Nepabeigti</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Pabeigtie beigās</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Termiņš (agrākais)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Konts</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Valoda</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Termiņš {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Uzdevums pārkārtots</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Sinhronizācija neizdevās</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Termiņš rīt</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Noklusējums</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Pievienojiet detaļas par šo uzdevumu...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Saraksts izveidots</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Dzēst sarakstu</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Saraksta nosaukums</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Nav uzdevumu</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Par izstrādātāju</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Lai sāktu, izvēlieties sarakstu</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Radīts ar</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Saglabāt</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Uzdevums pabeigts</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Uzdevuma nosaukums</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Gatavs</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Piezīmes</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Pievienot uzdevumu</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Mēģiniet mainīt vai notīrīt filtru</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Dzēst uzdevumu</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Uzdevums atjaunināts</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Iestatiet termiņus un nekad nepalaidiet garām termiņu</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Pievienojiet uzdevumu, lai sāktu</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Neizdevās dzēst uzdevumu</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Lūdzu, ievadiet uzdevuma nosaukumu</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Lūdzu, vispirms izvēlieties sarakstu</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Noklusējuma kārtošanas secība</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Filtrēšana un kārtošana</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Izpildes termiņi</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Uzdevums dzēsts</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabētiski (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Saraksts dzēsts</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Termiņš šodien</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Notiek sinhronizācija...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Mūsdienīgs, vietējs Google Tasks klients sistēmai Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Visi uzdevumi</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Rezultāti netika atrasti</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>no Spānijas</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Neizdevās pārkārtot</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Nav termiņa</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Saraksta detaļas</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Skatīt GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Jūsu dati paliek privāti</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Bezsaistē</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Termiņš (vēlākais pirmais)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Termiņš (vēlākais)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Pārvaldīt lokālo datu glabāšanu</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Alfabētiski (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Pierakstieties ar savu Google kontu, lai sinhronizētu uzdevumus visās ierīcēs</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Izvēlieties uzdevumu sarakstu sānu joslā vai izveidojiet jaunu</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Izvēlieties ikonu</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Iestatījumi</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Izskats</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Kļūda: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Laipni lūdzam FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Izveidots ar</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Visi jūsu dati paliek jūsu ierīcē un Google serveros. FluentTasks nevāc un neglabā personisko informāciju.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Tumšs</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Kārtot</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Sinhronizācijas kļūda: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Izvēlieties, kā izskatās FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Mūsdienīga, plūstoša uzdevumu pārvaldības lietotne Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Jauns saraksts</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A līdz Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rediģēt sarakstu</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Konfigurēt noklusējuma saraksta darbību</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Pievienojiet uzdevumu, lai sāktu</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Noklusējuma filtrs</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Nosaukums</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Gaišs</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Esiet organizēts</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Nokavēti</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Neizdevās atjaunināt uzdevumu</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Izpildes termiņš</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Šim uzdevumam ir {0} nepabeigti apakšuzdevumi.\n\nPabeidzot galveno uzdevumu, tiks pabeigti arī visi apakšuzdevumi.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Šī nedēļa</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Visi uzdevumi</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Nav uzdevumu</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Izrakstīties</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Saraksts atjaunināts</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Pabeigt visus</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Termiņš šodien</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Pārslēgt navigāciju</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Ātri atrodiet uzdevumus ar jaudīgiem filtriem</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Termiņš (drīzākais pirmais)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Uzdevuma detaļas</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Dati</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Uzdevums izveidots</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Sinhronizēt sarakstus</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Valoda</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Pievienot apakšuzdevumu: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Jūsu uzdevumi tiek nemanāmi sinhronizēti ar Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Pabeigt apakšuzdevumus?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Pievienojiet savu kontu</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Atcelt (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Kļūda: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Pievienot</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Dzēst sarakstu?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>Uzdevuma nosaukums nevar būt tukšs</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Nav (mana secība)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Noņemiet lokāli kešatmiņā saglabātos datus. Jūsu uzdevumi tiks atkārtoti lejupielādēti nākamās sinhronizācijas laikā.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Nav atbilstošu uzdevumu</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Mani uzdevumi</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Uzdevums atkārtoti atvērts</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Pabeigtie beigās</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Pārslēgt navigāciju</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Laipni lūdzam FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Gatavs</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Izveidot jaunu sarakstu</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Izveidojiet sarakstus un apakšuzdevumus, lai organizētu darbu</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Nokavēts par 1 dienu</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Notīrīt kešatmiņu</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Apakšuzdevuma nosaukums...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Pievienot jaunu uzdevumu...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Šodien</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Izmantot sistēmas iestatījumu</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Pierakstīties ar Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Tīkla kļūda: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Sinhronizēt ar Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Uzdevuma detaļas</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Savienots</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Notīrīt</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Sinhronizēti {0} saraksti</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Nepabeigti</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Statuss</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z līdz A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Vai tiešām vēlaties dzēst "{0}"?\n\nVisi uzdevumi šajā sarakstā tiks neatgriezeniski dzēsti.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Mēģiniet citu meklēšanas vārdu</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Neizdevās dzēst sarakstu</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Ievadiet saraksta nosaukumu...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Licencēts ar MIT licenci</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Termiņš šonedēļ</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A līdz Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Noklusējums</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Pabeigtie beigās</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Pabeigti</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Visi uzdevumi</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Sākt</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Termiņš šodien</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Atpakaļ</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Nepabeigti</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Termiņš (vēlākais)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z līdz A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Termiņš (agrākais)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Nokavēti</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Sesija beigusies</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Jūsu Google pierakstīšanās ir beigusies. Vai vēlaties pierakstīties vēlreiz?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Pierakstīties</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Atcelt</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Sesija beigusies</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Pierakstīšanās...</value>
+  </data>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>Tastatūras saīsnes</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aizvērt (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>Turiet Ctrl, lai parādītu  ·  Nospiediet ? vai Ctrl+Shift+?, lai pārslēgtu  ·  Esc, lai aizvērtu</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>Navigācija</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>Uzdevumi</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>Skats un lietotne</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>Pārvietoties pa uzdevumiem</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>Fokusēt meklēšanas lauku</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>Notīrīt atlasi / Aizvērt</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>Izveidot jaunu uzdevumu</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>Izveidot jaunu sarakstu</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>Rediģēt atlasīto uzdevumu</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>Pārslēgt uzdevuma pabeigšanu</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>Pārslēgt pabeigšanu (alt)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>Dzēst atlasīto uzdevumu</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>Atvērt uzdevuma detaļas</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>Pievienot apakšuzdevumu</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>Sinhronizēt / Atsvaidzināt</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>Atvērt iestatījumus</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>Rādīt saīsnes</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>Aizvērt lietotni</value>
+  </data>
+  </root>

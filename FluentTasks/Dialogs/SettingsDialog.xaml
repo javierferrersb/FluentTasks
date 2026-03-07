@@ -1,0 +1,550 @@
+<UserControl x:Class="FluentTasks.UI.Dialogs.SettingsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24"
+                    Padding="24,20"
+                    MaxWidth="600">
+
+            <!-- Header with optional hamburger button -->
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="HamburgerButton"
+                        x:Uid="SettingsHamburgerButton"
+                        Grid.Column="0"
+                        Click="HamburgerButton_Click"
+                        VerticalAlignment="Center"
+                        Padding="10"
+                        Margin="0,0,8,0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Visibility="Collapsed"
+                        ToolTipService.ToolTip="Toggle navigation">
+                    <FontIcon Glyph="&#xE700;"
+                              FontSize="18" />
+                </Button>
+
+                <TextBlock x:Uid="SettingsTitleBlock"
+                           Grid.Column="1"
+                           Text="Settings"
+                           Style="{StaticResource TitleLargeTextBlockStyle}"
+                           VerticalAlignment="Center" />
+            </Grid>
+
+            <!-- Appearance Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xE790;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Uid="SettingsAppearanceTitleBlock"
+                                       Text="Appearance"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Uid="SettingsAppearanceDescriptionBlock"
+                                       Text="Choose how FluentTasks looks"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- TODO: Re-enable once light/dark mode theme switching is reliable
+                    <RadioButtons x:Name="ThemeRadioButtons"
+                                  Margin="0,8,0,0">
+                        <RadioButton Tag="Light">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="12">
+                                <FontIcon Glyph="&#xE706;"
+                                          FontSize="18" />
+                                <TextBlock x:Uid="SettingsThemeLightTextBlock"
+                                           Text="Light"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Tag="Dark">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="12">
+                                <FontIcon Glyph="&#xE708;"
+                                          FontSize="18" />
+                                <TextBlock x:Uid="SettingsThemeDarkTextBlock"
+                                           Text="Dark"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Tag="Default">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="12">
+                                <FontIcon Glyph="&#xE770;"
+                                          FontSize="18" />
+                                <TextBlock x:Uid="SettingsThemeSystemTextBlock"
+                                           Text="Use system setting"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </RadioButton>
+                    </RadioButtons>
+                    -->
+
+                    <!-- Language Selector -->
+                    <ComboBox x:Name="LanguageComboBox"
+                              x:Uid="LanguageComboBox"
+                              Header="Language"
+                              Margin="0,8,0,0"
+                              HorizontalAlignment="Stretch"
+                              SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8">
+                                    <FontIcon Glyph="&#xF2B7;"
+                                              FontSize="16" />
+                                    <TextBlock x:Uid="LanguageHeaderTextBlock"
+                                               Text="Language" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.HeaderTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Lists Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xE8A5;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Uid="SettingsListsTitleTextBlock"
+                                       Text="Lists"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Uid="SettingsListsDescriptionTextBlock"
+                                       Text="Configure default list behavior"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="16"
+                                Margin="0,8,0,0">
+                        <ComboBox x:Name="DefaultFilterComboBox"
+                                  x:Uid="DefaultFilterComboBox"
+                                  Header="Default filter"
+                                  HorizontalAlignment="Stretch">
+                            <ComboBoxItem x:Uid="DefaultFilterAllComboBoxItem"
+                                          Content="All tasks"
+                                          Tag="All" />
+                            <ComboBoxItem x:Uid="DefaultFilterIncompleteComboBoxItem"
+                                          Content="Incomplete"
+                                          Tag="Incomplete" />
+                            <ComboBoxItem x:Uid="DefaultFilterCompletedComboBoxItem"
+                                          Content="Completed"
+                                          Tag="Completed" />
+                            <ComboBoxItem x:Uid="DefaultFilterOverdueComboBoxItem"
+                                          Content="Overdue"
+                                          Tag="Overdue" />
+                            <ComboBoxItem x:Uid="DefaultFilterTodayComboBoxItem"
+                                          Content="Today"
+                                          Tag="Today" />
+                            <ComboBoxItem x:Uid="DefaultFilterThisWeekComboBoxItem"
+                                          Content="This week"
+                                          Tag="ThisWeek" />
+                        </ComboBox>
+
+                        <ComboBox x:Name="DefaultSortComboBox"
+                                  x:Uid="DefaultSortComboBox"
+                                  Header="Default sort order"
+                                  HorizontalAlignment="Stretch">
+                            <ComboBoxItem x:Uid="DefaultSortNoneComboBoxItem"
+                                          Content="None (my order)"
+                                          Tag="None" />
+                            <ComboBoxItem x:Uid="DefaultSortDueDateAscendingComboBoxItem"
+                                          Content="Due date (soonest first)"
+                                          Tag="DueDateAscending" />
+                            <ComboBoxItem x:Uid="DefaultSortDueDateDescendingComboBoxItem"
+                                          Content="Due date (latest first)"
+                                          Tag="DueDateDescending" />
+                            <ComboBoxItem x:Uid="DefaultSortAlphabeticalComboBoxItem"
+                                          Content="Alphabetical (A-Z)"
+                                          Tag="Alphabetical" />
+                            <ComboBoxItem x:Uid="DefaultSortAlphabeticalReverseComboBoxItem"
+                                          Content="Alphabetical (Z-A)"
+                                          Tag="AlphabeticalReverse" />
+                            <ComboBoxItem x:Uid="DefaultSortCompletedLastComboBoxItem"
+                                          Content="Completed last"
+                                          Tag="CompletedLast" />
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Data Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xE7F1;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Uid="SettingsDataTitleTextBlock"
+                                       Text="Data"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Uid="SettingsDataDescriptionTextBlock"
+                                       Text="Manage local data storage"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8"
+                                Margin="0,8,0,0">
+                        <Button Click="ClearCache_Click">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+                                <FontIcon Glyph="&#xE74D;"
+                                          FontSize="16" />
+                                <TextBlock x:Uid="SettingsClearCacheTextBlock"
+                                           Text="Clear cache" />
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock x:Uid="SettingsClearCacheDescriptionTextBlock"
+                                   Text="Remove locally cached data. Your tasks will be re-downloaded on next sync."
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Keyboard Shortcuts Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xEDA7;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Keyboard Shortcuts"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock Text="View all available keyboard shortcuts"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8"
+                                Margin="0,8,0,0">
+                        <Button Click="ShowShortcuts_Click">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+                                <FontIcon Glyph="&#xEDA7;"
+                                          FontSize="16" />
+                                <TextBlock Text="Show Keyboard Shortcuts" />
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock Text="Press ? or hold Ctrl to see shortcuts at any time."
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Account Section Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="12">
+                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                CornerRadius="6"
+                                Width="36"
+                                Height="36">
+                            <FontIcon Glyph="&#xE77B;"
+                                      FontSize="18"
+                                      Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Uid="SettingsAccountTitleTextBlock"
+                                       Text="Account"
+                                       Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Uid="SettingsAccountDescriptionTextBlock"
+                                       Text="Manage your Google account connection"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8"
+                                Margin="0,8,0,0">
+                        <Button Click="LogOut_Click"
+                                Style="{StaticResource AccentButtonStyle}">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+                                <FontIcon Glyph="&#xE7E8;"
+                                          FontSize="16" />
+                                <TextBlock x:Uid="SettingsLogOutTextBlock"
+                                           Text="Log out" />
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock x:Uid="SettingsLogOutDescriptionTextBlock"
+                                   Text="Sign out of your Google account. You'll need to sign in again to access your tasks."
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- About Section - Hero Style Card -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="24">
+                <StackPanel Spacing="24">
+                    <!-- App Branding -->
+                    <StackPanel Spacing="12"
+                                HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="12"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/Assets/Square44x44Logo.png"
+                                   Width="44"
+                                   Height="44"
+                                   VerticalAlignment="Center" />
+                            <TextBlock x:Uid="SettingsAppNameTextBlock"
+                                       Text="FluentTasks"
+                                       Style="{StaticResource SubtitleTextBlockStyle}"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <TextBlock x:Uid="SettingsAboutAppDescriptionTextBlock"
+                                   Text="A modern, fluent task management app for Windows"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Tech Stack Badges -->
+                    <StackPanel Spacing="8"
+                                HorizontalAlignment="Center">
+                        <TextBlock x:Uid="SettingsBuiltWithTextBlock"
+                                   Text="Built with"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   HorizontalAlignment="Center" />
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="8"
+                                    HorizontalAlignment="Center">
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="10,6">
+                                <TextBlock x:Uid="SettingsTechWinUI3TextBlock"
+                                           Text="WinUI 3"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </Border>
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="10,6">
+                                <TextBlock x:Uid="SettingsTechDotNet10TextBlock"
+                                           Text=".NET 10"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </Border>
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="10,6">
+                                <TextBlock x:Uid="SettingsTechWindowsAppSDKTextBlock"
+                                           Text="Windows App SDK"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </Border>
+                        </StackPanel>
+                        <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="10,6"
+                                HorizontalAlignment="Center">
+                            <TextBlock x:Uid="SettingsTechGoogleTasksAPITextBlock"
+                                       Text="Google Tasks API"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Made with love from Spain -->
+                    <StackPanel Spacing="8"
+                                HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="6"
+                                    HorizontalAlignment="Center">
+                            <TextBlock x:Uid="SettingsMadeWithTextBlock"
+                                       Text="Made with"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="❤️"
+                                       FontSize="16"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Uid="SettingsFromSpainTextBlock"
+                                       Text="from Spain"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                            <!-- Spain flag using colored rectangles -->
+                            <Border CornerRadius="2"
+                                    Width="24"
+                                    Height="16"
+                                    VerticalAlignment="Center"
+                                    Margin="4,0,0,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="4" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="4" />
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Background="#C60B1E" CornerRadius="2,2,0,0" />
+                                    <Border Grid.Row="1" Background="#FFC400" />
+                                    <Border Grid.Row="2" Background="#C60B1E" CornerRadius="0,0,2,2" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Action Buttons -->
+                    <StackPanel Spacing="8"
+                                HorizontalAlignment="Center">
+                        <HyperlinkButton x:Name="AboutDeveloperLink"
+                                         Click="AboutDeveloper_Click"
+                                         HorizontalAlignment="Center">
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="16,10">
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="10">
+                                    <FontIcon Glyph="&#xE77B;"
+                                              FontSize="18" />
+                                    <TextBlock x:Uid="SettingsAboutDeveloperTextBlock"
+                                               Text="About the Developer"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </HyperlinkButton>
+
+                        <HyperlinkButton NavigateUri="https://github.com/javierferrersb/FluentTasks"
+                                         HorizontalAlignment="Center">
+                            <Border Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="16,10">
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="10">
+                                    <FontIcon Glyph="&#xE774;"
+                                              FontSize="18" />
+                                    <TextBlock x:Uid="SettingsViewOnGitHubTextBlock"
+                                               Text="View on GitHub"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </HyperlinkButton>
+                    </StackPanel>
+
+                    <!-- Footer -->
+                    <StackPanel Spacing="2"
+                                HorizontalAlignment="Center">
+                        <TextBlock x:Name="CopyrightText"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock x:Uid="SettingsLicensedUnderTextBlock"
+                                   Text="Licensed under MIT License"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

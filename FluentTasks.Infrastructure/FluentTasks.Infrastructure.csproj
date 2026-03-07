@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<TrimMode>partial</TrimMode>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Google\" />
-    <Folder Include="Storage\" />
+    <ProjectReference Include="..\FluentTasks.Core\FluentTasks.Core.csproj" />
   </ItemGroup>
 
 </Project>

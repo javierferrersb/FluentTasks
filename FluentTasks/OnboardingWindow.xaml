@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="FluentTasks.UI.OnboardingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Custom Title Bar -->
+        <TitleBar x:Uid="OnboardingTitleBar"
+                  x:Name="AppTitleBar"
+                  Grid.Row="0"
+                  Height="48"
+                  Title="Welcome to FluentTasks">
+            <TitleBar.IconSource>
+                <ImageIconSource ImageSource="ms-appx:///Assets/Square44x44Logo.png" />
+            </TitleBar.IconSource>
+        </TitleBar>
+
+        <!-- Onboarding Content -->
+        <ContentControl x:Name="OnboardingContent"
+                        Grid.Row="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch" />
+    </Grid>
+</Window>

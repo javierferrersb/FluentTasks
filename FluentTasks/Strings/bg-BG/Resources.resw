@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Добре дошли във FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Нека направим кратка обиколка, за да започнете по-бързо.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Да започваме!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Пропусни обиколката</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Вашите списъци със задачи</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Всички ваши списъци със задачи се показват тук. Щракнете върху списък, за да видите задачите, или натиснете + за нов списък.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Напред</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Пропусни обиколката</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Вашите задачи</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Тук се показват вашите задачи. Използвайте търсене, или филтрирайте и сортирайте чрез лентата с инструменти.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Напред</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Пропусни обиколката</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Останете синхронизирани</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Вашите задачи се синхронизират автоматично с Google Tasks. Натиснете бутона за синхронизиране по всяко време за ръчно опресняване.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Разбрах!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Пропусни обиколката</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Добре дошли във FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Добре дошли във FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Модерен, нативен клиент за Google Tasks за Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Синхронизирай с Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Задачите ви се синхронизират безпроблемно с Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Бъдете организирани</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Създавайте списъци и подзадачи, за да организирате работата си</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Крайни срокове</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Задавайте крайни срокове и не пропускайте важни дати</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Филтриране и сортиране</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Намирайте задачи бързо с мощни филтри</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Започни</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Свържете своя акаунт</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Влезте с Google акаунт, за да синхронизирате задачите на всички устройства</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Вход с Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Влизане...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Вашите данни остават поверителни</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Всички данни остават на устройството ви и сървърите на Google. FluentTasks не събира и не съхранява лични данни.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Неуспешен вход</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>Не успяхме да влезем. Моля, опитайте отново.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Моите списъци</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Създай нов списък</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Синхронизирай списъците</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Изберете списък, за да започнете</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Изберете списък от страничната лента или създайте нов</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Моите задачи</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Превключи навигацията</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Сортиране</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Филтър</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Търси задачи...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Добави нова задача...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Добави задача</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Няма задачи</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Добавете задача, за да започнете</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Запази (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Отказ (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Добави подзадача</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Детайли за задачата</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Изтрий задача</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>По подразбиране</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Краен срок (най-ранен)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Краен срок (най-късен)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A до Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z до A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Завършените накрая</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Всички задачи</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Незавършени</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Просрочени</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Срок днес</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Срок тази седмица</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Редактирай списъка</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Изтрий списъка</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Облик</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Изберете как изглежда FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Светъл</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Тъмен</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Използвай системната настройка</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Език</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Списъци</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Настройте поведението по подразбиране на списъците</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Филтър по подразбиране</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Сортиране по подразбиране</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Данни</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Управлявайте локалното съхранение</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Изчисти кеша</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Премахва локално кешираните данни. Задачите ще бъдат изтеглени отново при следваща синхронизация.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Акаунт</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Управлявайте връзката с Google акаунта</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Изход</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Излезте от Google акаунта си. Ще трябва да влезете отново, за да достъпите задачите.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Модерно приложение за управление на задачи за Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Създадено с</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Направено с</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>от Испания</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>За разработчика</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Виж в GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Лицензирано под MIT</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Да се изчисти ли кешът?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Това ще премахне всички локално кеширани данни. Задачите ще бъдат изтеглени отново при следваща синхронизация.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Изчисти</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Кешът е изчистен</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Локалният кеш беше изчистен успешно.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Изход?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Ще трябва да влезете отново, за да достъпите задачите.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Изход</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>За разработчика</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Всички задачи</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Незавършени</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Просрочени</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Днес</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Тази седмица</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Няма (моят ред)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Краен срок (най-скоро първо)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Краен срок (най-късно първо)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>Азбучно (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Азбучно (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Завършените накрая</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Детайли за списъка</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Име на списъка</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Въведете име на списъка...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Икона</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Детайли за задачата</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Заглавие</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Заглавие на задачата</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Краен срок</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Няма краен срок</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Изчисти</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Бележки</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Добавете детайли за тази задача...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Състояние</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Просрочено с {0} дни</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Срок днес</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Срок утре</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Срок след {0} дни</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Избери икона</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Избери</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Езикът е променен</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Рестартирайте приложението, за да приложите новия език.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Рестартирай сега</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>По-късно</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Затвори</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Неуспешно обновяване на списъка</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Срок тази седмица</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Излезте от Google акаунта си. Ще трябва да влезете отново, за да достъпите задачите.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Всички права запазени.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Избери</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Търси задачи...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Изтрий</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Добави подзадача</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot не е зададен. Първо извикайте SetXamlRoot.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Срок: {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Влизане...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Управлявайте връзката с Google акаунта</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Запази (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Списъци</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Просрочени</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Синхронизирано</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Моите списъци</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Просрочено с {0} дни</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Филтър</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Подзадачата е създадена</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Незавършени</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Завършените накрая</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Краен срок (най-ранен)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Акаунт</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Език</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Срок: {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Редът на задачите е променен</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Синхронизацията се провали</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Срок утре</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>По подразбиране</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Добавете детайли за тази задача...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Списъкът е създаден</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Изтрий списъка</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Име на списъка</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Няма задачи</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>За разработчика</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Изберете списък, за да започнете</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Направено с</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Задачата е завършена</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Заглавие на задачата</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Бележки</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Добави задача</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Опитайте да промените или изчистите филтъра</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Изтрий задача</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Задачата е обновена</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Задавайте крайни срокове и не пропускайте важни дати</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Добавете задача, за да започнете</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Неуспешно изтриване на задачата</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Моля, въведете заглавие на задача</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Моля, първо изберете списък</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Сортиране по подразбиране</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Филтриране и сортиране</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Крайни срокове</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Задачата е изтрита</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Азбучно (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Списъкът е изтрит</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Срок днес</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Синхронизиране...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Модерен, нативен клиент за Google Tasks за Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Всички задачи</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Няма намерени резултати</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>от Испания</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Неуспешно пренареждане</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Няма краен срок</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Детайли за списъка</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Виж в GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Вашите данни остават поверителни</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Офлайн</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Краен срок (най-късно първо)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Краен срок (най-късен)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Управлявайте локалното съхранение</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Азбучно (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Икона</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Влезте с Google акаунт, за да синхронизирате задачите на всички устройства</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Изберете списък от страничната лента или създайте нов</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Избери икона</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Облик</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Грешка: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Добре дошли във FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Създадено с</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Всички данни остават на устройството ви и сървърите на Google. FluentTasks не събира и не съхранява лични данни.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Тъмен</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Сортиране</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Грешка при синхронизация: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Изберете как изглежда FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Модерно приложение за управление на задачи за Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Нов списък</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A до Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Редактирай списъка</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Настройте поведението по подразбиране на списъците</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Добавете задача, за да започнете</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Филтър по подразбиране</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Заглавие</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Светъл</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Бъдете организирани</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Просрочени</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Неуспешно обновяване на задачата</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Краен срок</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Тази задача има {0} незавършени подзадачи.
+
+Завършването на родителската задача ще завърши и всички подзадачи.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Тази седмица</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Всички задачи</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Няма задачи</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Изход</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Списъкът е обновен</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Завърши всички</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Срок днес</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Превключи навигацията</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Намирайте задачи бързо с мощни филтри</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Краен срок (най-скоро първо)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Детайли за задачата</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Данни</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Задачата е създадена</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Синхронизирай списъците</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Език</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Добави подзадача към: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Задачите ви се синхронизират безпроблемно с Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Да се завършат и подзадачите?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Свържете своя акаунт</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Отказ (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Грешка: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Добави</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Изтриване на списък?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>Заглавието на задачата не може да е празно</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Няма (моят ред)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Премахва локално кешираните данни. Задачите ще бъдат изтеглени отново при следваща синхронизация.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Няма съвпадащи задачи</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Моите задачи</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Задачата е отворена отново</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Завършените накрая</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Превключи навигацията</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Добре дошли във FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Създай нов списък</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Създавайте списъци и подзадачи, за да организирате работата си</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Просрочено с 1 ден</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Изчисти кеша</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Заглавие на подзадачата...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Добави нова задача...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Днес</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Използвай системната настройка</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Вход с Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Мрежова грешка: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Синхронизирай с Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Детайли за задачата</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Свързан</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Изчисти</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Синхронизирани списъци: {0}</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Незавършени</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Състояние</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z до A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Сигурни ли сте, че искате да изтриете "{0}"?
+
+Всички задачи в този списък ще бъдат изтрити окончателно.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Опитайте друг термин за търсене</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Неуспешно изтриване на списъка</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Въведете име на списъка...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Лицензирано под MIT</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Срок тази седмица</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A до Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>По подразбиране</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Завършените накрая</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Завършени</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Всички задачи</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Започни</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Срок днес</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Незавършени</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Краен срок (най-късен)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z до A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Краен срок (най-ранен)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Просрочени</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Сесията изтече</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Входът ви в Google е изтекъл. Искате ли да влезете отново?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Сесията изтече</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Влизане...</value>
+  </data>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>Клавишни комбинации</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Затваряне (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>Задръжте Ctrl за показване  ·  Натиснете ? или Ctrl+Shift+? за превключване  ·  Esc за затваряне</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>Навигация</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>Изглед и приложение</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>Навигация между задачите</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>Фокус върху полето за търсене</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>Изчистване на избора / Затваряне</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>Създаване на нова задача</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>Създаване на нов списък</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>Редактиране на избраната задача</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>Превключване на завършеността</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>Превключване на завършеността (алт.)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>Изтриване на избраната задача</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>Отваряне на детайли за задачата</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>Добавяне на подзадача</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>Синхронизиране / Опресняване</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>Отваряне на настройки</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>Показване на клавишните комбинации</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>Затваряне на приложението</value>
+  </data>
+  </root>

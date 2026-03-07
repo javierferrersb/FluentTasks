@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>Tervetuloa FluentTasksiin! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>Tehdään nopea kierros, jotta pääset alkuun.</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>Aloitetaan!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>Ohita esittely</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>Tehtävälistasi</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>Kaikki tehtävälistasi näkyvät täällä. Napsauta mitä tahansa listaa nähdäksesi sen tehtävät tai luo uusi lista + -painikkeella.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>Seuraava</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>Ohita esittely</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>Tehtäväsi</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Tehtäväsi näkyvät täällä. Etsi tehtäviä hakupalkilla tai suodata ja lajittele niitä työkalupalkin painikkeilla.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>Seuraava</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>Ohita esittely</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Pysy synkronoituna</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Tehtäväsi synkronoituvat automaattisesti Google Tasksin kanssa. Voit päivittää tiedot manuaalisesti milloin tahansa synkronointipainikkeella.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Selvä!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>Ohita esittely</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Tervetuloa FluentTasksiin</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Tervetuloa FluentTasksiin</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Moderni, natiivi Google Tasks -sovellus Windowsille</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Synkronoi Googlen kanssa</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Tehtäväsi synkronoituvat saumattomasti Google Tasksin kanssa</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Pysy järjestyksessä</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Luo listoja ja alatehtäviä työsi järjestämiseen</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>Eräpäivät</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Aseta eräpäivät äläkä missaa määräaikoja</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Suodata ja lajittele</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Löydä tehtävät nopeasti tehokkailla suodattimilla</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>Aloita</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>Takaisin</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>Yhdistä tilisi</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Kirjaudu Google-tililläsi synkronoidaksesi tehtäväsi kaikilla laitteillasi</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Kirjaudu sisään Googlella</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>Kirjaudutaan sisään...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Tietosi pysyvät yksityisinä</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>Kaikki tietosi pysyvät laitteellasi ja Googlen palvelimilla. FluentTasks ei kerää tai tallenna henkilökohtaisia tietoja.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>Sisäänkirjautuminen epäonnistui</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>Sisäänkirjautuminen epäonnistui. Yritä uudelleen.</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>Sulje</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>Listani</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>Luo uusi lista</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>Synkronoi listat</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>Valitse lista aloittaaksesi</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>Valitse tehtävälista sivupalkista tai luo uusi</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>Tehtäväni</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>Vaihda navigointia</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>Lajittele</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>Suodata</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>Etsi tehtäviä...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>Lisää uusi tehtävä...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>Lisää tehtävä</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>Ei tehtäviä</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>Lisää tehtävä aloittaaksesi</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>Valmis</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>Tallenna (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>Peruuta (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>Lisää alitehtävä</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>Tehtävän tiedot</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>Poista tehtävä</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>Oletus</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>Eräpäivä (aikaisin)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>Eräpäivä (myöhäisin)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A–Ö</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Ö–A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>Valmiit viimeisenä</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Kaikki tehtävät</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>Keskeneräiset</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>Myöhässä</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>Erääntyy tänään</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>Erääntyy tällä viikolla</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>Muokkaa listaa</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>Poista lista</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>Ulkoasu</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Valitse, miltä FluentTasks näyttää</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Vaalea</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Tumma</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Käytä järjestelmäasetusta</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>Kieli</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>Listat</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Määritä listojen oletustoiminta</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>Oletussuodatin</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>Oletusjärjestys</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>Tiedot</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>Hallitse paikallista tallennusta</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>Tyhjennä välimuisti</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Poista paikallisesti välimuistiin tallennetut tiedot. Tehtäväsi ladataan uudelleen seuraavan synkronoinnin yhteydessä.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>Tili</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Hallinnoi Google-tilisi yhteyttä</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>Kirjaudu ulos</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Kirjaudu ulos Google-tililtäsi. Sinun on kirjauduttava uudelleen sisään käyttääksesi tehtäviäsi.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Moderni tehtävienhallintasovellus Windowsille</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>Rakennettu käyttäen</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Tehty</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>Espanjasta</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>Tietoja kehittäjästä</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>Näytä GitHubissa</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>Lisensoitu MIT-lisenssillä</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>Tyhjennetäänkö välimuisti?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>Tämä poistaa kaikki paikallisesti välimuistiin tallennetut tiedot. Tehtäväsi ladataan uudelleen seuraavan synkronoinnin yhteydessä.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>Tyhjennä</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>Välimuisti tyhjennetty</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>Paikallinen välimuisti tyhjennettiin onnistuneesti.</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>Kirjaudutaanko ulos?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>Sinun on kirjauduttava uudelleen sisään käyttääksesi tehtäviäsi.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>Kirjaudu ulos</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>Tietoja kehittäjästä</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>Kaikki tehtävät</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>Keskeneräiset</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>Myöhässä</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>Tänään</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>Tällä viikolla</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>Ei mitään (oma järjestys)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>Eräpäivä (aikaisin ensin)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>Eräpäivä (myöhäisin ensin)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>A–Ö</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>Ö–A</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>Valmiit viimeisenä</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>Listan tiedot</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>Listan nimi</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>Anna listan nimi...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>Kuvake</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>Tehtävän tiedot</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>Otsikko</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>Tehtävän otsikko</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>Eräpäivä</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>Ei eräpäivää</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>Tyhjennä</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>Muistiinpanot</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>Lisää lisätietoja tästä tehtävästä...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>Tila</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>Myöhässä {0} päivää</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>Erääntyy tänään</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>Erääntyy huomenna</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>Erääntyy {0} päivän kuluttua</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>Valitse kuvake</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>Valitse</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Kieli vaihdettu</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Käynnistä sovellus uudelleen ottaaksesi uuden kielen käyttöön.</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>Käynnistä nyt uudelleen</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Myöhemmin</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Sulje</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>Listan päivittäminen epäonnistui</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>Erääntyy tällä viikolla</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Kirjaudu ulos Google-tililtäsi. Sinun on kirjauduttava uudelleen sisään käyttääksesi tehtäviäsi.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. Kaikki oikeudet pidätetään.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Valitse</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Etsi tehtäviä...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>Poista</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Lisää alitehtävä</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRootia ei ole asetettu. Kutsu ensin SetXamlRoot.</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>Eräpäivä {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>Kirjaudutaan sisään...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Hallinnoi Google-tilisi yhteyttä</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tallenna (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>Listat</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>Myöhässä</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>Synkronoitu</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>Listani</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>Myöhässä {0} päivää</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>Suodata</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>Vahvista</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>Alatehtävä luotu</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>Keskeneräiset</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>Valmiit viimeisenä</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>Eräpäivä (aikaisin)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>Tili</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>Kieli</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>Eräpäivä {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>Tehtävän järjestystä muutettu</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>Synkronointi epäonnistui</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>Erääntyy huomenna</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>Oletus</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>Lisää lisätietoja tästä tehtävästä...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>Lista luotu</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Poista lista</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>Listan nimi</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>Ei tehtäviä</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>Tietoja kehittäjästä</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>Valitse lista aloittaaksesi</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Tehty</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Tallenna</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>Tehtävä valmis</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>Tehtävän otsikko</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>Valmis</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>Muistiinpanot</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>Lisää tehtävä</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>Yritä muuttaa tai poistaa suodatin</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Poista tehtävä</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>Tehtävä päivitetty</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Aseta eräpäivät äläkä missaa määräaikoja</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>Lisää tehtävä aloittaaksesi</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>Tehtävän poistaminen epäonnistui</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>Anna tehtävän otsikko</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Valitse ensin lista</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>Oletusjärjestys</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Suodata ja lajittele</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>Eräpäivät</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>Tehtävä poistettu</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>Aakkosjärjestys (Ö-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>Lista poistettu</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>Erääntyy tänään</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>Synkronoidaan...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Moderni, natiivi Google Tasks -sovellus Windowsille</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>Kaikki tehtävät</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>Tuloksia ei löytynyt</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>Espanjasta</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>Järjestyksen muuttaminen epäonnistui</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>Ei eräpäivää</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>Listan tiedot</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>Näytä GitHubissa</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Tietosi pysyvät yksityisinä</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>Ei yhteyttä</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>Eräpäivä (myöhäisin ensin)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>Eräpäivä (myöhäisin)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Hallitse paikallista tallennusta</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>Aakkosjärjestys (A-Ö)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>Kuvake</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Kirjaudu Google-tililläsi synkronoidaksesi tehtäväsi kaikilla laitteillasi</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>Valitse tehtävälista sivupalkista tai luo uusi</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>Valitse kuvake</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>Asetukset</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>Ulkoasu</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>Virhe: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Tervetuloa FluentTasksiin</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>Rakennettu käyttäen</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>Kaikki tietosi pysyvät laitteellasi ja Googlen palvelimilla. FluentTasks ei kerää tai tallenna henkilökohtaisia tietoja.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>Tumma</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>Lajittele</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>Synkronointivirhe: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Valitse, miltä FluentTasks näyttää</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Moderni tehtävienhallintasovellus Windowsille</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>Uusi lista</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A–Ö</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Muokkaa listaa</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Määritä listojen oletustoiminta</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>Lisää tehtävä aloittaaksesi</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>Oletussuodatin</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>Otsikko</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>Vaalea</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Pysy järjestyksessä</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>Myöhässä</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>Tehtävän päivittäminen epäonnistui</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>Eräpäivä</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>Tässä tehtävässä on {0} keskeneräistä alatehtävää.
+
+Päätehtävän merkitseminen valmiiksi merkitsee myös kaikki alatehtävät valmiiksi.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>Tällä viikolla</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>Kaikki tehtävät</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>Ei tehtäviä</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>Kirjaudu ulos</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>Lista päivitetty</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>Merkitse kaikki valmiiksi</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>Erääntyy tänään</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Vaihda navigointia</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Löydä tehtävät nopeasti tehokkailla suodattimilla</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>Eräpäivä (aikaisin ensin)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>Tehtävän tiedot</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>Tiedot</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>Tehtävä luotu</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>Synkronoi listat</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>Kieli</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>Lisää alatehtävä kohteeseen: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Tehtäväsi synkronoituvat saumattomasti Google Tasksin kanssa</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>Merkitäänkö alatehtävät valmiiksi?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>Yhdistä tilisi</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Peruuta (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>Virhe: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>Lisää</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>Poistetaanko lista?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>Tehtävän otsikko ei voi olla tyhjä</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>Ei mitään (oma järjestys)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Poista paikallisesti välimuistiin tallennetut tiedot. Tehtäväsi ladataan uudelleen seuraavan synkronoinnin yhteydessä.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>Ei vastaavia tehtäviä</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>Tehtäväni</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>Tehtävä avattu uudelleen</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>Valmiit viimeisenä</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Vaihda navigointia</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Tervetuloa FluentTasksiin</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>Valmis</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Luo uusi lista</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Luo listoja ja alatehtäviä työsi järjestämiseen</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>Myöhässä 1 päivä</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>Tyhjennä välimuisti</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>Alitehtävän otsikko...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>Lisää uusi tehtävä...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>Tänään</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>Käytä järjestelmäasetusta</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Kirjaudu sisään Googlella</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>Verkkovirhe: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Synkronoi Googlen kanssa</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tehtävän tiedot</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>Yhdistetty</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>Tyhjennä</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>Synkronoitu {0} listaa</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>Keskeneräiset</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>Tila</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Ö–A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Haluatko varmasti poistaa listan "{0}"?
+
+Kaikki tämän listan tehtävät poistetaan pysyvästi.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>Kokeile toista hakutermiä</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>Listan poistaminen epäonnistui</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Anna listan nimi...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>Lisensoitu MIT-lisenssillä</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Erääntyy tällä viikolla</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A–Ö</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Oletus</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Valmiit viimeisenä</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Valmiit</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Kaikki tehtävät</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>Aloita</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Erääntyy tänään</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>Takaisin</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Keskeneräiset</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Eräpäivä (myöhäisin)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Ö–A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Eräpäivä (aikaisin)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Myöhässä</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Istunto vanhentunut</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Google-kirjautumisesi on vanhentunut. Haluatko kirjautua uudelleen?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Kirjaudu</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Istunto vanhentunut</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Kirjaudutaan...</value>
+  </data>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>Pikanäppäimet</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sulje (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>Pidä Ctrl pohjassa näyttääksesi  ·  Paina ? tai Ctrl+Shift+? vaihtaaksesi  ·  Esc sulkeaksesi</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>Navigointi</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>Tehtävät</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>Näkymä ja sovellus</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>Selaa tehtäviä</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>Kohdista hakukenttään</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>Tyhjennä valinta / Sulje</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>Luo uusi tehtävä</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>Luo uusi lista</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>Muokkaa valittua tehtävää</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>Vaihda tehtävän valmiustila</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>Vaihda valmiustila (vaihtoehto)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>Poista valittu tehtävä</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>Avaa tehtävän tiedot</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>Lisää alitehtävä</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>Synkronoi / Päivitä</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>Avaa asetukset</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>Näytä pikanäppäimet</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>Sulje sovellus</value>
+  </data>
+  </root>

@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>ยินดีต้อนรับสู่ FluentTasks! 🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>มาดูทัวร์สั้นๆ เพื่อช่วยให้คุณเริ่มต้นได้เร็วขึ้น</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>เริ่มกันเลย!</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>ข้ามทัวร์</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>รายการงานของคุณ</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>รายการงานทั้งหมดของคุณจะแสดงที่นี่ คลิกรายการใดก็ได้เพื่อดูงาน หรือคลิก + เพื่อสร้างรายการใหม่</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>ถัดไป</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>ข้ามทัวร์</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>งานของคุณ</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>งานของคุณจะแสดงที่นี่ ใช้แถบค้นหาเพื่อหางาน หรือใช้ปุ่มในแถบเครื่องมือเพื่อกรองและเรียงลำดับ</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>ถัดไป</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>ข้ามทัวร์</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>ซิงค์อยู่เสมอ</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>งานของคุณจะซิงค์กับ Google Tasks โดยอัตโนมัติ กดปุ่มซิงค์ได้ทุกเมื่อเพื่อรีเฟรชข้อมูลด้วยตนเอง</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>เข้าใจแล้ว</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>ข้ามทัวร์</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>ยินดีต้อนรับสู่ FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>ยินดีต้อนรับสู่ FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>ไคลเอนต์ Google Tasks แบบเนทีฟที่ทันสมัยสำหรับ Windows</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>ซิงค์กับ Google</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>งานของคุณซิงค์กับ Google Tasks ได้อย่างราบรื่น</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>จัดระเบียบอยู่เสมอ</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>สร้างรายการและงานย่อยเพื่อจัดระเบียบงานของคุณ</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>วันครบกำหนด</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>ตั้งวันครบกำหนดและไม่พลาดกำหนดเวลา</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>กรองและเรียงลำดับ</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>ค้นหางานได้เร็วด้วยตัวกรองที่ทรงพลัง</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>เริ่มต้น</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>ย้อนกลับ</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>เชื่อมต่อบัญชีของคุณ</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้ด้วยบัญชี Google เพื่อซิงค์งานของคุณในทุกอุปกรณ์</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้ด้วย Google</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>กำลังลงชื่อเข้าใช้...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>ข้อมูลของคุณเป็นส่วนตัว</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>ข้อมูลทั้งหมดของคุณอยู่ในอุปกรณ์และเซิร์ฟเวอร์ของ Google เท่านั้น FluentTasks ไม่เก็บข้อมูลส่วนบุคคล</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้ไม่สำเร็จ</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>ไม่สามารถลงชื่อเข้าใช้ได้ โปรดลองอีกครั้ง</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>รายการของฉัน</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>สร้างรายการใหม่</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>การตั้งค่า</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>ซิงค์รายการ</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>เลือกรายการเพื่อเริ่มต้น</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>เลือกรายการงานจากแถบด้านข้างหรือสร้างรายการใหม่</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>งานของฉัน</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>สลับแถบนำทาง</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>เรียงลำดับ</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>ตัวกรอง</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>ค้นหางาน...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>เพิ่มงานใหม่...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>เพิ่มงาน</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>ไม่มีงาน</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>เพิ่มงานเพื่อเริ่มต้น</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>พร้อม</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>บันทึก (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>ยกเลิก (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>เพิ่มงานย่อย</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>รายละเอียดงาน</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>ลบงาน</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>ค่าเริ่มต้น</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>กำหนดส่ง (เร็วที่สุด)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>กำหนดส่ง (ช้าที่สุด)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A ถึง Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z ถึง A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>งานที่เสร็จแล้วไว้ท้ายสุด</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>งานทั้งหมด</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>ยังไม่เสร็จ</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>เกินกำหนด</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>ครบกำหนดวันนี้</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>ครบกำหนดสัปดาห์นี้</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>แก้ไขรายการ</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>ลบรายการ</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>การตั้งค่า</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>ลักษณะ</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>เลือกหน้าตาของ FluentTasks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>สว่าง</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>มืด</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>ใช้การตั้งค่าระบบ</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>ภาษา</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>รายการ</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>ตั้งค่าพฤติกรรมเริ่มต้นของรายการ</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>ตัวกรองเริ่มต้น</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>การเรียงลำดับเริ่มต้น</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>ข้อมูล</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>จัดการพื้นที่จัดเก็บข้อมูลในเครื่อง</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>ล้างแคช</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>ลบข้อมูลแคชในเครื่อง งานของคุณจะถูกดาวน์โหลดใหม่ในการซิงค์ครั้งถัดไป</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>บัญชี</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>จัดการการเชื่อมต่อบัญชี Google ของคุณ</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>ออกจากบัญชี Google ของคุณ คุณจะต้องลงชื่อเข้าใช้อีกครั้งเพื่อเข้าถึงงาน</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>แอปจัดการงานสมัยใหม่สำหรับ Windows</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>พัฒนาด้วย</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>สร้างด้วย</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>จากสเปน</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>เกี่ยวกับนักพัฒนา</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>ดูบน GitHub</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>ภายใต้สัญญาอนุญาต MIT</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>ล้างแคชหรือไม่?</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>การดำเนินการนี้จะลบข้อมูลแคชในเครื่องทั้งหมด งานของคุณจะถูกดาวน์โหลดใหม่ในการซิงค์ครั้งถัดไป</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>ล้าง</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>ล้างแคชแล้ว</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>ล้างแคชในเครื่องเรียบร้อยแล้ว</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>ออกจากระบบหรือไม่?</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>คุณจะต้องลงชื่อเข้าใช้อีกครั้งเพื่อเข้าถึงงาน</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>เกี่ยวกับนักพัฒนา</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>งานทั้งหมด</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>ยังไม่เสร็จ</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>เกินกำหนด</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>วันนี้</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>สัปดาห์นี้</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>ไม่มี (ตามลำดับของฉัน)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>กำหนดส่ง (ใกล้ที่สุดก่อน)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>กำหนดส่ง (ไกลที่สุดก่อน)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>ตามตัวอักษร (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>ตามตัวอักษร (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>งานที่เสร็จแล้วไว้ท้ายสุด</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>รายละเอียดรายการ</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>ชื่อรายการ</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>ป้อนชื่อรายการ...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>ไอคอน</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>รายละเอียดงาน</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>ชื่อเรื่อง</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>ชื่องาน</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>วันครบกำหนด</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>ไม่มีกำหนดส่ง</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>ล้าง</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>เพิ่มรายละเอียดเกี่ยวกับงานนี้...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>สถานะ</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>เกินกำหนด {0} วัน</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>ครบกำหนดวันนี้</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>ครบกำหนดพรุ่งนี้</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>ครบกำหนดในอีก {0} วัน</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>เลือกไอคอน</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>เลือก</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>เปลี่ยนภาษาแล้ว</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>โปรดรีสตาร์ทแอปเพื่อใช้ภาษาใหม่</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>รีสตาร์ทตอนนี้</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>ภายหลัง</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>ปิด</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>อัปเดตรายการไม่สำเร็จ</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>ครบกำหนดสัปดาห์นี้</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>ออกจากบัญชี Google ของคุณ คุณจะต้องลงชื่อเข้าใช้อีกครั้งเพื่อเข้าถึงงาน</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. สงวนลิขสิทธิ์</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>เลือก</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>ค้นหางาน...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>เพิ่มงานย่อย</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>ยังไม่ได้ตั้งค่า XamlRoot โปรดเรียก SetXamlRoot ก่อน</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>ครบกำหนด {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>กำลังลงชื่อเข้าใช้...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>จัดการการเชื่อมต่อบัญชี Google ของคุณ</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>บันทึก (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>รายการ</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>เกินกำหนด</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>ซิงค์แล้ว</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>การตั้งค่า</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>รายการของฉัน</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>เกินกำหนด {0} วัน</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>ตัวกรอง</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>สร้างงานย่อยแล้ว</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>ยังไม่เสร็จ</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>งานที่เสร็จแล้วไว้ท้ายสุด</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>กำหนดส่ง (เร็วที่สุด)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>บัญชี</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>ภาษา</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>ครบกำหนด {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>จัดลำดับงานใหม่แล้ว</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>ซิงค์ไม่สำเร็จ</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>ครบกำหนดพรุ่งนี้</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>ค่าเริ่มต้น</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>เพิ่มรายละเอียดเกี่ยวกับงานนี้...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>สร้างรายการแล้ว</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ลบรายการ</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>ชื่อรายการ</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>ไม่มีงาน</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>เกี่ยวกับนักพัฒนา</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>เลือกรายการเพื่อเริ่มต้น</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>สร้างด้วย</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>ทำงานเสร็จแล้ว</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>ชื่องาน</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>พร้อม</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>เพิ่มงาน</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>ลองเปลี่ยนหรือล้างตัวกรอง</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ลบงาน</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>อัปเดตงานแล้ว</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>ตั้งวันครบกำหนดและไม่พลาดกำหนดเวลา</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>เพิ่มงานเพื่อเริ่มต้น</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>ลบงานไม่สำเร็จ</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>โปรดใส่ชื่องาน</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>โปรดเลือกรายการก่อน</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>การเรียงลำดับเริ่มต้น</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>กรองและเรียงลำดับ</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>วันครบกำหนด</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>ลบงานแล้ว</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>ตามตัวอักษร (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>ลบรายการแล้ว</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>ครบกำหนดวันนี้</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>กำลังซิงค์...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>ไคลเอนต์ Google Tasks แบบเนทีฟที่ทันสมัยสำหรับ Windows</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>งานทั้งหมด</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>ไม่พบผลลัพธ์</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>จากสเปน</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>จัดลำดับใหม่ไม่สำเร็จ</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>ไม่มีกำหนดส่ง</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>รายละเอียดรายการ</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>ดูบน GitHub</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>ข้อมูลของคุณเป็นส่วนตัว</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>ออฟไลน์</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>กำหนดส่ง (ไกลที่สุดก่อน)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>กำหนดส่ง (ช้าที่สุด)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>จัดการพื้นที่จัดเก็บข้อมูลในเครื่อง</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>ตามตัวอักษร (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>ไอคอน</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้ด้วยบัญชี Google เพื่อซิงค์งานของคุณในทุกอุปกรณ์</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>เลือกรายการงานจากแถบด้านข้างหรือสร้างรายการใหม่</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>เลือกไอคอน</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>การตั้งค่า</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>ลักษณะ</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>ข้อผิดพลาด: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>ยินดีต้อนรับสู่ FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>พัฒนาด้วย</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>ข้อมูลทั้งหมดของคุณอยู่ในอุปกรณ์และเซิร์ฟเวอร์ของ Google เท่านั้น FluentTasks ไม่เก็บข้อมูลส่วนบุคคล</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>มืด</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>เรียงลำดับ</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>ข้อผิดพลาดการซิงค์: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>เลือกหน้าตาของ FluentTasks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>แอปจัดการงานสมัยใหม่สำหรับ Windows</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>รายการใหม่</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A ถึง Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>แก้ไขรายการ</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>ตั้งค่าพฤติกรรมเริ่มต้นของรายการ</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>เพิ่มงานเพื่อเริ่มต้น</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>ตัวกรองเริ่มต้น</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>ชื่อเรื่อง</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>สว่าง</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>จัดระเบียบอยู่เสมอ</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>เกินกำหนด</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>อัปเดตงานไม่สำเร็จ</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>วันครบกำหนด</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>งานนี้มีงานย่อยที่ยังไม่เสร็จ {0} รายการ
+
+เมื่อทำงานหลักเสร็จ งานย่อยทั้งหมดจะเสร็จด้วย</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>สัปดาห์นี้</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>งานทั้งหมด</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>ไม่มีงาน</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>อัปเดตรายการแล้ว</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>ทำทั้งหมดให้เสร็จ</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>ครบกำหนดวันนี้</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>สลับแถบนำทาง</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>ค้นหางานได้เร็วด้วยตัวกรองที่ทรงพลัง</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>กำหนดส่ง (ใกล้ที่สุดก่อน)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>รายละเอียดงาน</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>ข้อมูล</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>สร้างงานแล้ว</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>ซิงค์รายการ</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>ภาษา</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>เพิ่มงานย่อยไปที่: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>งานของคุณซิงค์กับ Google Tasks ได้อย่างราบรื่น</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>ทำงานย่อยให้เสร็จด้วยหรือไม่?</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>เชื่อมต่อบัญชีของคุณ</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ยกเลิก (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>ข้อผิดพลาด: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>เพิ่ม</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>ลบรายการหรือไม่?</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>ชื่องานต้องไม่ว่าง</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>ไม่มี (ตามลำดับของฉัน)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>ลบข้อมูลแคชในเครื่อง งานของคุณจะถูกดาวน์โหลดใหม่ในการซิงค์ครั้งถัดไป</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>ไม่พบงานที่ตรงกัน</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>งานของฉัน</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>เปิดงานอีกครั้งแล้ว</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>งานที่เสร็จแล้วไว้ท้ายสุด</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>สลับแถบนำทาง</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>ยินดีต้อนรับสู่ FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>พร้อม</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>สร้างรายการใหม่</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>สร้างรายการและงานย่อยเพื่อจัดระเบียบงานของคุณ</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>เกินกำหนด 1 วัน</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>ล้างแคช</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>ชื่องานย่อย...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>เพิ่มงานใหม่...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>วันนี้</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>ใช้การตั้งค่าระบบ</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้ด้วย Google</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>ข้อผิดพลาดเครือข่าย: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>ซิงค์กับ Google</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>รายละเอียดงาน</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>เชื่อมต่อแล้ว</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>ล้าง</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>ซิงค์ {0} รายการแล้ว</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>ยังไม่เสร็จ</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>สถานะ</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z ถึง A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>คุณแน่ใจหรือไม่ว่าต้องการลบ "{0}"?
+
+งานทั้งหมดในรายการนี้จะถูกลบถาวร</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>ลองใช้คำค้นหาอื่น</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>ลบรายการไม่สำเร็จ</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>ป้อนชื่อรายการ...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>ภายใต้สัญญาอนุญาต MIT</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>ครบกำหนดสัปดาห์นี้</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A ถึง Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>ค่าเริ่มต้น</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>งานที่เสร็จแล้วไว้ท้ายสุด</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>เสร็จแล้ว</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>งานทั้งหมด</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>เริ่มต้น</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>ครบกำหนดวันนี้</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>ย้อนกลับ</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>ยังไม่เสร็จ</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>กำหนดส่ง (ช้าที่สุด)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z ถึง A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>กำหนดส่ง (เร็วที่สุด)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>เกินกำหนด</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>เซสชันหมดอายุ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>การลงชื่อเข้าใช้ Google ของคุณหมดอายุแล้ว ต้องการลงชื่อเข้าใช้อีกครั้งหรือไม่?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>เซสชันหมดอายุ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>กำลังลงชื่อเข้าใช้...</value>
+  </data>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>แป้นพิมพ์ลัด</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ปิด (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>กด Ctrl ค้างเพื่อแสดง  ·  กด ? หรือ Ctrl+Shift+? เพื่อสลับ  ·  Esc เพื่อปิด</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>การนำทาง</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>งาน</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>มุมมองและแอป</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>เลื่อนดูงาน</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>โฟกัสช่องค้นหา</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>ล้างการเลือก / ปิด</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>สร้างงานใหม่</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>สร้างรายการใหม่</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>แก้ไขงานที่เลือก</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>สลับสถานะเสร็จสิ้น</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>สลับเสร็จสิ้น (ทางเลือก)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>ลบงานที่เลือก</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>เปิดรายละเอียดงาน</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>เพิ่มงานย่อย</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>ซิงค์ / รีเฟรช</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>เปิดการตั้งค่า</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>แสดงแป้นพิมพ์ลัด</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>ปิดแอปพลิเคชัน</value>
+  </data>
+  </root>

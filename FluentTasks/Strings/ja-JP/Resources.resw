@@ -1,0 +1,1211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppWindowTitle" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="WelcomeTip.Title" xml:space="preserve">
+    <value>FluentTasksへようこそ！🎉</value>
+  </data>
+  <data name="WelcomeTip.Subtitle" xml:space="preserve">
+    <value>すぐに使い始められるように、簡単なツアーをご案内します。</value>
+  </data>
+  <data name="WelcomeTip.ActionButtonContent" xml:space="preserve">
+    <value>始めましょう！</value>
+  </data>
+  <data name="WelcomeTip.CloseButtonContent" xml:space="preserve">
+    <value>ツアーをスキップ</value>
+  </data>
+  <data name="NavigationTip.Title" xml:space="preserve">
+    <value>タスクリスト</value>
+  </data>
+  <data name="NavigationTip.Subtitle" xml:space="preserve">
+    <value>All your task lists appear here. Click any list to view its tasks, or click the + button to create a new list.</value>
+  </data>
+  <data name="NavigationTip.ActionButtonContent" xml:space="preserve">
+    <value>次へ</value>
+  </data>
+  <data name="NavigationTip.CloseButtonContent" xml:space="preserve">
+    <value>ツアーをスキップ</value>
+  </data>
+  <data name="TaskListTip.Title" xml:space="preserve">
+    <value>タスク</value>
+  </data>
+  <data name="TaskListTip.Subtitle" xml:space="preserve">
+    <value>Your tasks appear here. Use the search bar to find tasks, or filter and sort them using the buttons in the toolbar.</value>
+  </data>
+  <data name="TaskListTip.ActionButtonContent" xml:space="preserve">
+    <value>次へ</value>
+  </data>
+  <data name="TaskListTip.CloseButtonContent" xml:space="preserve">
+    <value>ツアーをスキップ</value>
+  </data>
+  <data name="SyncTip.Title" xml:space="preserve">
+    <value>Stay in Sync</value>
+  </data>
+  <data name="SyncTip.Subtitle" xml:space="preserve">
+    <value>Your tasks sync automatically with Google Tasks. Click the sync button anytime to manually refresh your data.</value>
+  </data>
+  <data name="SyncTip.ActionButtonContent" xml:space="preserve">
+    <value>Got it!</value>
+  </data>
+  <data name="SyncTip.CloseButtonContent" xml:space="preserve">
+    <value>ツアーをスキップ</value>
+  </data>
+  <data name="OnboardingWindowTitle" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeTitle" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitle" xml:space="preserve">
+    <value>Windows向けのモダンなGoogle Tasksクライアント</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitle" xml:space="preserve">
+    <value>Googleと同期</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescription" xml:space="preserve">
+    <value>Your tasks sync seamlessly with Google Tasks</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitle" xml:space="preserve">
+    <value>Stay Organized</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescription" xml:space="preserve">
+    <value>Create lists and subtasks to organize your work</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitle" xml:space="preserve">
+    <value>期限</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescription" xml:space="preserve">
+    <value>Set due dates and never miss a deadline</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitle" xml:space="preserve">
+    <value>Filter and Sort</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescription" xml:space="preserve">
+    <value>Find tasks quickly with powerful filters</value>
+  </data>
+  <data name="OnboardingGetStartedButton" xml:space="preserve">
+    <value>開始</value>
+  </data>
+  <data name="OnboardingBackButton" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="OnboardingSignInTitle" xml:space="preserve">
+    <value>アカウントを接続</value>
+  </data>
+  <data name="OnboardingSignInDescription" xml:space="preserve">
+    <value>Sign in with your Google account to sync your tasks across all your devices</value>
+  </data>
+  <data name="OnboardingSignInButton" xml:space="preserve">
+    <value>Googleでサインイン</value>
+  </data>
+  <data name="OnboardingSigningInText" xml:space="preserve">
+    <value>サインイン中...</value>
+  </data>
+  <data name="OnboardingPrivacyTitle" xml:space="preserve">
+    <value>Your data stays private</value>
+  </data>
+  <data name="OnboardingPrivacyDescription" xml:space="preserve">
+    <value>All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information.</value>
+  </data>
+  <data name="OnboardingSignInFailedTitle" xml:space="preserve">
+    <value>サインインに失敗しました</value>
+  </data>
+  <data name="OnboardingSignInFailedMessage" xml:space="preserve">
+    <value>サインインできませんでした。もう一度お試しください。</value>
+  </data>
+  <data name="OnboardingSignInFailedCloseButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NavigationPanelMyListsText" xml:space="preserve">
+    <value>マイリスト</value>
+  </data>
+  <data name="NavigationPanelCreateListToolTip" xml:space="preserve">
+    <value>新しいリストを作成</value>
+  </data>
+  <data name="NavigationPanelSettingsButtonText" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="NavigationPanelSyncButtonText" xml:space="preserve">
+    <value>リストを同期</value>
+  </data>
+  <data name="TaskListEmptyStateIcon" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="TaskListNoListSelectedTitle" xml:space="preserve">
+    <value>開始するにはリストを選択してください</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitle" xml:space="preserve">
+    <value>サイドバーからタスクリストを選択するか、新しく作成してください</value>
+  </data>
+  <data name="TaskListDefaultTitle" xml:space="preserve">
+    <value>マイタスク</value>
+  </data>
+  <data name="TaskListHamburgerButtonToolTip" xml:space="preserve">
+    <value>ナビゲーション切替</value>
+  </data>
+  <data name="TaskListSortButtonText" xml:space="preserve">
+    <value>並べ替え</value>
+  </data>
+  <data name="TaskListFilterButtonText" xml:space="preserve">
+    <value>フィルター</value>
+  </data>
+  <data name="TaskListSearchBoxPlaceholderText" xml:space="preserve">
+    <value>タスクを検索...</value>
+  </data>
+  <data name="TaskListNewTaskPlaceholderText" xml:space="preserve">
+    <value>新しいタスクを追加...</value>
+  </data>
+  <data name="TaskListAddTaskButtonText" xml:space="preserve">
+    <value>タスクを追加</value>
+  </data>
+  <data name="TaskListEmptyStateIconText" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="TaskListEmptyStateTitle" xml:space="preserve">
+    <value>タスクはありません</value>
+  </data>
+  <data name="TaskListEmptyStateSubtitle" xml:space="preserve">
+    <value>開始するにはタスクを追加してください</value>
+  </data>
+  <data name="TaskListStatusReady" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="TaskListSaveButtonToolTip" xml:space="preserve">
+    <value>保存 (Enter)</value>
+  </data>
+  <data name="TaskListCancelButtonToolTip" xml:space="preserve">
+    <value>キャンセル (Esc)</value>
+  </data>
+  <data name="TaskListAddSubtaskToolTip" xml:space="preserve">
+    <value>サブタスクを追加</value>
+  </data>
+  <data name="TaskListDetailsToolTip" xml:space="preserve">
+    <value>タスク詳細</value>
+  </data>
+  <data name="TaskListDeleteToolTip" xml:space="preserve">
+    <value>タスクを削除</value>
+  </data>
+  <data name="TaskListSubtaskIndicator" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="SortDefault" xml:space="preserve">
+    <value>既定</value>
+  </data>
+  <data name="SortDueDateAsc" xml:space="preserve">
+    <value>期限 (近い順)</value>
+  </data>
+  <data name="SortDueDateDesc" xml:space="preserve">
+    <value>期限 (遠い順)</value>
+  </data>
+  <data name="SortAlpha" xml:space="preserve">
+    <value>A→Z</value>
+  </data>
+  <data name="SortAlphaRev" xml:space="preserve">
+    <value>Z→A</value>
+  </data>
+  <data name="SortCompleted" xml:space="preserve">
+    <value>完了を最後に表示</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>すべてのタスク</value>
+  </data>
+  <data name="FilterIncomplete" xml:space="preserve">
+    <value>未完了</value>
+  </data>
+  <data name="FilterCompleted" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="FilterOverdue" xml:space="preserve">
+    <value>期限超過</value>
+  </data>
+  <data name="FilterToday" xml:space="preserve">
+    <value>今日が期限</value>
+  </data>
+  <data name="FilterWeek" xml:space="preserve">
+    <value>今週が期限</value>
+  </data>
+  <data name="MenuItemEditToolTip" xml:space="preserve">
+    <value>リストを編集</value>
+  </data>
+  <data name="MenuItemDeleteToolTip" xml:space="preserve">
+    <value>リストを削除</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SettingsAppearanceTitle" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="SettingsAppearanceDescription" xml:space="preserve">
+    <value>Choose how FluentTasks looks</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>システム設定を使用</value>
+  </data>
+  <data name="SettingsLanguageHeader" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="SettingsListsTitle" xml:space="preserve">
+    <value>リスト</value>
+  </data>
+  <data name="SettingsListsDescription" xml:space="preserve">
+    <value>Configure default list behavior</value>
+  </data>
+  <data name="SettingsDefaultFilterHeader" xml:space="preserve">
+    <value>既定のフィルター</value>
+  </data>
+  <data name="SettingsDefaultSortHeader" xml:space="preserve">
+    <value>既定の並び順</value>
+  </data>
+  <data name="SettingsDataTitle" xml:space="preserve">
+    <value>データ</value>
+  </data>
+  <data name="SettingsDataDescription" xml:space="preserve">
+    <value>ローカルデータ保存を管理</value>
+  </data>
+  <data name="SettingsClearCacheButton" xml:space="preserve">
+    <value>キャッシュを削除</value>
+  </data>
+  <data name="SettingsClearCacheDescription" xml:space="preserve">
+    <value>Remove locally cached data. Your tasks will be re-downloaded on next sync.</value>
+  </data>
+  <data name="SettingsAccountTitle" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
+  <data name="SettingsAccountDescription" xml:space="preserve">
+    <value>Googleアカウント接続を管理</value>
+  </data>
+  <data name="SettingsLogOutButton" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="SettingsLogOutDescription" xml:space="preserve">
+    <value>Sign out of your Google account. You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsAboutAppDescription" xml:space="preserve">
+    <value>Windows向けのモダンなタスク管理アプリ</value>
+  </data>
+  <data name="SettingsBuiltWith" xml:space="preserve">
+    <value>使用技術</value>
+  </data>
+  <data name="SettingsMadeWith" xml:space="preserve">
+    <value>Made with</value>
+  </data>
+  <data name="SettingsFromSpain" xml:space="preserve">
+    <value>from Spain</value>
+  </data>
+  <data name="SettingsAboutDeveloperButton" xml:space="preserve">
+    <value>開発者について</value>
+  </data>
+  <data name="SettingsViewOnGitHubButton" xml:space="preserve">
+    <value>GitHubで表示</value>
+  </data>
+  <data name="SettingsLicensedUnder" xml:space="preserve">
+    <value>MITライセンス</value>
+  </data>
+  <data name="SettingsClearCacheConfirmTitle" xml:space="preserve">
+    <value>キャッシュを削除しますか？</value>
+  </data>
+  <data name="SettingsClearCacheConfirmMessage" xml:space="preserve">
+    <value>This will remove all locally cached data. Your tasks will be re-downloaded on the next sync.</value>
+  </data>
+  <data name="SettingsClearCachePrimaryButton" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="SettingsClearCacheCloseButton" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="SettingsCacheClearedTitle" xml:space="preserve">
+    <value>キャッシュを削除しました</value>
+  </data>
+  <data name="SettingsCacheClearedMessage" xml:space="preserve">
+    <value>ローカルキャッシュを削除しました。</value>
+  </data>
+  <data name="SettingsLogOutConfirmTitle" xml:space="preserve">
+    <value>ログアウトしますか？</value>
+  </data>
+  <data name="SettingsLogOutConfirmMessage" xml:space="preserve">
+    <value>You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsLogOutPrimaryButton" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="SettingsLogOutCloseButton" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="SettingsAboutDeveloperTitle" xml:space="preserve">
+    <value>開発者について</value>
+  </data>
+  <data name="FilterAllTasks" xml:space="preserve">
+    <value>すべてのタスク</value>
+  </data>
+  <data name="FilterIncompleteTasks" xml:space="preserve">
+    <value>未完了</value>
+  </data>
+  <data name="FilterCompletedTasks" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="FilterOverdueTasks" xml:space="preserve">
+    <value>期限超過</value>
+  </data>
+  <data name="FilterTodayTasks" xml:space="preserve">
+    <value>今日</value>
+  </data>
+  <data name="FilterThisWeek" xml:space="preserve">
+    <value>今週</value>
+  </data>
+  <data name="SortNone" xml:space="preserve">
+    <value>なし (自分の順序)</value>
+  </data>
+  <data name="SortDueDateSoonest" xml:space="preserve">
+    <value>期限 (近い順)</value>
+  </data>
+  <data name="SortDueDateLatest" xml:space="preserve">
+    <value>期限 (遠い順)</value>
+  </data>
+  <data name="SortAlphaAZ" xml:space="preserve">
+    <value>アルファベット (A-Z)</value>
+  </data>
+  <data name="SortAlphaZA" xml:space="preserve">
+    <value>アルファベット (Z-A)</value>
+  </data>
+  <data name="SortCompletedLast" xml:space="preserve">
+    <value>完了を最後に表示</value>
+  </data>
+  <data name="ListEditorDialogTitle" xml:space="preserve">
+    <value>リスト詳細</value>
+  </data>
+  <data name="ListEditorPrimaryButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="ListEditorCloseButton" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="ListEditorNameHeader" xml:space="preserve">
+    <value>リスト名</value>
+  </data>
+  <data name="ListEditorNamePlaceholder" xml:space="preserve">
+    <value>リスト名を入力...</value>
+  </data>
+  <data name="ListEditorIconHeader" xml:space="preserve">
+    <value>アイコン</value>
+  </data>
+  <data name="TaskDetailsDialogTitle" xml:space="preserve">
+    <value>タスク詳細</value>
+  </data>
+  <data name="TaskDetailsPrimaryButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="TaskDetailsCloseButton" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="TaskDetailsTitleHeader" xml:space="preserve">
+    <value>タイトル</value>
+  </data>
+  <data name="TaskDetailsTitlePlaceholder" xml:space="preserve">
+    <value>タスク名</value>
+  </data>
+  <data name="TaskDetailsDueDateHeader" xml:space="preserve">
+    <value>期限日</value>
+  </data>
+  <data name="TaskDetailsDueDatePlaceholder" xml:space="preserve">
+    <value>期限なし</value>
+  </data>
+  <data name="TaskDetailsClearDueDateButton" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="TaskDetailsNotesHeader" xml:space="preserve">
+    <value>メモ</value>
+  </data>
+  <data name="TaskDetailsNotesPlaceholder" xml:space="preserve">
+    <value>このタスクの詳細を追加...</value>
+  </data>
+  <data name="TaskDetailsStatusHeader" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="TaskDetailsStatusCompleted" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="TaskDetailsStatusOverdue" xml:space="preserve">
+    <value>{0}日遅れ</value>
+  </data>
+  <data name="TaskDetailsStatusDueToday" xml:space="preserve">
+    <value>今日が期限</value>
+  </data>
+  <data name="TaskDetailsStatusDueTomorrow" xml:space="preserve">
+    <value>明日が期限</value>
+  </data>
+  <data name="TaskDetailsStatusDueInDays" xml:space="preserve">
+    <value>{0}日後が期限</value>
+  </data>
+  <data name="IconPickerDialogTitle" xml:space="preserve">
+    <value>アイコンを選択</value>
+  </data>
+  <data name="IconPickerPrimaryButton" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="IconPickerCloseButton" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="TechWinUI3" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="TechDotNet10" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TechWindowsAppSDK" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="TechGoogleTasksAPI" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>言語が変更されました</value>
+  </data>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>新しい言語を適用するにはアプリを再起動してください。</value>
+  </data>
+  <data name="RestartNow" xml:space="preserve">
+    <value>今すぐ再起動</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>後で</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="TaskDetailsDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="ShellStatusFailedUpdateList" xml:space="preserve">
+    <value>リストの更新に失敗しました</value>
+  </data>
+  <data name="TaskListFilterOptionThisWeek" xml:space="preserve">
+    <value>今週が期限</value>
+  </data>
+  <data name="SettingsLogOutDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Sign out of your Google account. You'll need to sign in again to access your tasks.</value>
+  </data>
+  <data name="SettingsCopyrightFormat" xml:space="preserve">
+    <value>© {0} Javier Ferrer. All rights reserved.</value>
+  </data>
+  <data name="IconPickerDialog.PrimaryButtonText" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>タスクを検索...</value>
+  </data>
+  <data name="ShellDeleteListDialogPrimary" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="AddSubtaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>サブタスクを追加</value>
+  </data>
+  <data name="DialogServiceXamlRootNotSetError" xml:space="preserve">
+    <value>XamlRoot が設定されていません。先に SetXamlRoot を呼び出してください。</value>
+  </data>
+  <data name="IconPickerDialog.CloseButtonText" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="DateToStringDueDate" xml:space="preserve">
+    <value>期限: {0}</value>
+  </data>
+  <data name="SubtaskIndicatorTextBlock.Text" xml:space="preserve">
+    <value>↳</value>
+  </data>
+  <data name="OnboardingSigningInTextBlock.Text" xml:space="preserve">
+    <value>サインイン中...</value>
+  </data>
+  <data name="SettingsAccountDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Googleアカウント接続を管理</value>
+  </data>
+  <data name="SaveEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>保存 (Enter)</value>
+  </data>
+  <data name="SettingsListsTitleTextBlock.Text" xml:space="preserve">
+    <value>リスト</value>
+  </data>
+  <data name="TaskListFilterOptionOverdue" xml:space="preserve">
+    <value>期限超過</value>
+  </data>
+  <data name="ShellStatusSynced" xml:space="preserve">
+    <value>同期完了</value>
+  </data>
+  <data name="SettingsButtonTextBlock.Text" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="MyListsTextBlock.Text" xml:space="preserve">
+    <value>マイリスト</value>
+  </data>
+  <data name="DateToStringOverdueManyDays" xml:space="preserve">
+    <value>{0}日遅れ</value>
+  </data>
+  <data name="TaskListFilterBase" xml:space="preserve">
+    <value>フィルター</value>
+  </data>
+  <data name="DialogDefaultConfirm" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="TaskListStatusSubtaskCreated" xml:space="preserve">
+    <value>サブタスクを作成しました</value>
+  </data>
+  <data name="DefaultFilterIncompleteComboBoxItem.Content" xml:space="preserve">
+    <value>未完了</value>
+  </data>
+  <data name="DefaultSortCompletedLastComboBoxItem.Content" xml:space="preserve">
+    <value>完了を最後に表示</value>
+  </data>
+  <data name="TaskListSortOptionDueDateAsc" xml:space="preserve">
+    <value>期限 (近い順)</value>
+  </data>
+  <data name="SettingsAccountTitleTextBlock.Text" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
+  <data name="LanguageComboBox.Header" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="DateToStringDueDayOfWeek" xml:space="preserve">
+    <value>期限: {0}</value>
+  </data>
+  <data name="TaskListStatusTaskReordered" xml:space="preserve">
+    <value>タスクの順序を変更しました</value>
+  </data>
+  <data name="ShellStatusSyncFailed" xml:space="preserve">
+    <value>同期に失敗しました</value>
+  </data>
+  <data name="DateToStringDueTomorrow" xml:space="preserve">
+    <value>明日が期限</value>
+  </data>
+  <data name="TaskListSortOptionDefault" xml:space="preserve">
+    <value>既定</value>
+  </data>
+  <data name="NotesTextBox.PlaceholderText" xml:space="preserve">
+    <value>このタスクの詳細を追加...</value>
+  </data>
+  <data name="ShellStatusListCreated" xml:space="preserve">
+    <value>リストを作成しました</value>
+  </data>
+  <data name="DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>リストを削除</value>
+  </data>
+  <data name="ListNameTextBox.Header" xml:space="preserve">
+    <value>リスト名</value>
+  </data>
+  <data name="EmptyStateTitleTextBlock.Text" xml:space="preserve">
+    <value>タスクはありません</value>
+  </data>
+  <data name="SettingsAboutDeveloperTextBlock.Text" xml:space="preserve">
+    <value>開発者について</value>
+  </data>
+  <data name="TaskListNoListSelectedTitleBlock.Text" xml:space="preserve">
+    <value>開始するにはリストを選択してください</value>
+  </data>
+  <data name="SettingsMadeWithTextBlock.Text" xml:space="preserve">
+    <value>Made with</value>
+  </data>
+  <data name="TaskDetailsDialog.CloseButtonText" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="ListEditorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="TaskListFilterLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TaskListStatusTaskCompleted" xml:space="preserve">
+    <value>タスクを完了しました</value>
+  </data>
+  <data name="TaskTitleTextBox.PlaceholderText" xml:space="preserve">
+    <value>タスク名</value>
+  </data>
+  <data name="StatusTextBlock.Text" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="NotesTextBox.Header" xml:space="preserve">
+    <value>メモ</value>
+  </data>
+  <data name="AddTaskButtonTextBlock.Text" xml:space="preserve">
+    <value>タスクを追加</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingSubtitle" xml:space="preserve">
+    <value>フィルターを変更または解除してください</value>
+  </data>
+  <data name="DeleteTaskButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>タスクを削除</value>
+  </data>
+  <data name="TaskListStatusTaskUpdated" xml:space="preserve">
+    <value>タスクを更新しました</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesDescriptionBlock.Text" xml:space="preserve">
+    <value>Set due dates and never miss a deadline</value>
+  </data>
+  <data name="EmptyStateSubtitleTextBlock.Text" xml:space="preserve">
+    <value>開始するにはタスクを追加してください</value>
+  </data>
+  <data name="TaskListStatusFailedDeleteTask" xml:space="preserve">
+    <value>タスクの削除に失敗しました</value>
+  </data>
+  <data name="TaskListStatusEnterTaskTitle" xml:space="preserve">
+    <value>タスク名を入力してください</value>
+  </data>
+  <data name="ListEditorDialog.CloseButtonText" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="EmptyStateIconTextBlock.Text" xml:space="preserve">
+    <value>☹</value>
+  </data>
+  <data name="SettingsTechGoogleTasksAPITextBlock.Text" xml:space="preserve">
+    <value>Google Tasks API</value>
+  </data>
+  <data name="TaskListStatusSelectListFirst" xml:space="preserve">
+    <value>Please select a list first</value>
+  </data>
+  <data name="DefaultSortComboBox.Header" xml:space="preserve">
+    <value>既定の並び順</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortTitleBlock.Text" xml:space="preserve">
+    <value>Filter and Sort</value>
+  </data>
+  <data name="OnboardingFeatureDueDatesTitleBlock.Text" xml:space="preserve">
+    <value>期限</value>
+  </data>
+  <data name="TaskListStatusTaskDeleted" xml:space="preserve">
+    <value>タスクを削除しました</value>
+  </data>
+  <data name="DefaultSortAlphabeticalReverseComboBoxItem.Content" xml:space="preserve">
+    <value>アルファベット (Z-A)</value>
+  </data>
+  <data name="ShellStatusListDeleted" xml:space="preserve">
+    <value>リストを削除しました</value>
+  </data>
+  <data name="DialogDefaultCancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="DateToStringDueToday" xml:space="preserve">
+    <value>今日が期限</value>
+  </data>
+  <data name="ShellStatusSyncing" xml:space="preserve">
+    <value>同期中...</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksClose" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="OnboardingWelcomeSubtitleBlock.Text" xml:space="preserve">
+    <value>Windows向けのモダンなGoogle Tasksクライアント</value>
+  </data>
+  <data name="DefaultFilterAllComboBoxItem.Content" xml:space="preserve">
+    <value>すべてのタスク</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsTitle" xml:space="preserve">
+    <value>結果が見つかりません</value>
+  </data>
+  <data name="SettingsFromSpainTextBlock.Text" xml:space="preserve">
+    <value>from Spain</value>
+  </data>
+  <data name="TaskListStatusFailedReorderTask" xml:space="preserve">
+    <value>並べ替えに失敗しました</value>
+  </data>
+  <data name="DueDatePicker.PlaceholderText" xml:space="preserve">
+    <value>期限なし</value>
+  </data>
+  <data name="ListEditorDialog.Title" xml:space="preserve">
+    <value>リスト詳細</value>
+  </data>
+  <data name="SettingsViewOnGitHubTextBlock.Text" xml:space="preserve">
+    <value>GitHubで表示</value>
+  </data>
+  <data name="OnboardingPrivacyTitleBlock.Text" xml:space="preserve">
+    <value>Your data stays private</value>
+  </data>
+  <data name="ShellStatusOffline" xml:space="preserve">
+    <value>オフライン</value>
+  </data>
+  <data name="DefaultSortDueDateDescendingComboBoxItem.Content" xml:space="preserve">
+    <value>期限 (遠い順)</value>
+  </data>
+  <data name="TaskListSortOptionDueDateDesc" xml:space="preserve">
+    <value>期限 (遠い順)</value>
+  </data>
+  <data name="SettingsTechWinUI3TextBlock.Text" xml:space="preserve">
+    <value>WinUI 3</value>
+  </data>
+  <data name="SettingsDataDescriptionTextBlock.Text" xml:space="preserve">
+    <value>ローカルデータ保存を管理</value>
+  </data>
+  <data name="DefaultSortAlphabeticalComboBoxItem.Content" xml:space="preserve">
+    <value>アルファベット (A-Z)</value>
+  </data>
+  <data name="IconTextBlock.Text" xml:space="preserve">
+    <value>アイコン</value>
+  </data>
+  <data name="OnboardingSignInDescriptionBlock.Text" xml:space="preserve">
+    <value>Sign in with your Google account to sync your tasks across all your devices</value>
+  </data>
+  <data name="TaskListNoListSelectedSubtitleBlock.Text" xml:space="preserve">
+    <value>サイドバーからタスクリストを選択するか、新しく作成してください</value>
+  </data>
+  <data name="IconPickerDialog.Title" xml:space="preserve">
+    <value>アイコンを選択</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="SettingsTitleBlock.Text" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SettingsAppearanceTitleBlock.Text" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="TaskListStatusErrorFormat" xml:space="preserve">
+    <value>エラー: {0}</value>
+  </data>
+  <data name="OnboardingWelcomeTitleBlock.Text" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="SettingsBuiltWithTextBlock.Text" xml:space="preserve">
+    <value>使用技術</value>
+  </data>
+  <data name="OnboardingPrivacyDescriptionBlock.Text" xml:space="preserve">
+    <value>All your data stays on your device and Google's servers. FluentTasks doesn't collect or store any personal information.</value>
+  </data>
+  <data name="SettingsTechWindowsAppSDKTextBlock.Text" xml:space="preserve">
+    <value>Windows App SDK</value>
+  </data>
+  <data name="SettingsThemeDarkTextBlock.Text" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="TaskListSortBase" xml:space="preserve">
+    <value>並べ替え</value>
+  </data>
+  <data name="SettingsAppNameTextBlock.Text" xml:space="preserve">
+    <value>FluentTasks</value>
+  </data>
+  <data name="ShellStatusSyncErrorFormat" xml:space="preserve">
+    <value>同期エラー: {0}</value>
+  </data>
+  <data name="SettingsAppearanceDescriptionBlock.Text" xml:space="preserve">
+    <value>Choose how FluentTasks looks</value>
+  </data>
+  <data name="SettingsAboutAppDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Windows向けのモダンなタスク管理アプリ</value>
+  </data>
+  <data name="TaskListSortLabelFormat" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="ShellNewListDefaultName" xml:space="preserve">
+    <value>新しいリスト</value>
+  </data>
+  <data name="TaskListSortOptionAlphabetical" xml:space="preserve">
+    <value>A→Z</value>
+  </data>
+  <data name="EditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>リストを編集</value>
+  </data>
+  <data name="SettingsListsDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Configure default list behavior</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultSubtitle" xml:space="preserve">
+    <value>開始するにはタスクを追加してください</value>
+  </data>
+  <data name="ShellDeleteListDialogClose" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="DefaultFilterComboBox.Header" xml:space="preserve">
+    <value>既定のフィルター</value>
+  </data>
+  <data name="TaskTitleTextBox.Header" xml:space="preserve">
+    <value>タイトル</value>
+  </data>
+  <data name="SettingsThemeLightTextBlock.Text" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeTitleBlock.Text" xml:space="preserve">
+    <value>Stay Organized</value>
+  </data>
+  <data name="DefaultFilterOverdueComboBoxItem.Content" xml:space="preserve">
+    <value>期限超過</value>
+  </data>
+  <data name="TaskListStatusFailedUpdateTask" xml:space="preserve">
+    <value>タスクの更新に失敗しました</value>
+  </data>
+  <data name="DueDateTextBlock.Text" xml:space="preserve">
+    <value>期限日</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksMessage" xml:space="preserve">
+    <value>This task has {0} incomplete subtask(s).\n\nCompleting the parent task will also complete all subtasks.</value>
+  </data>
+  <data name="DefaultFilterThisWeekComboBoxItem.Content" xml:space="preserve">
+    <value>今週</value>
+  </data>
+  <data name="TaskListFilterOptionAll" xml:space="preserve">
+    <value>すべてのタスク</value>
+  </data>
+  <data name="TaskListEmptyStateDefaultTitle" xml:space="preserve">
+    <value>タスクはありません</value>
+  </data>
+  <data name="SettingsLogOutTextBlock.Text" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="ShellStatusListUpdated" xml:space="preserve">
+    <value>リストを更新しました</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksPrimary" xml:space="preserve">
+    <value>すべて完了</value>
+  </data>
+  <data name="TaskListFilterOptionCompleted" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="TaskListFilterOptionToday" xml:space="preserve">
+    <value>今日が期限</value>
+  </data>
+  <data name="SettingsHamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ナビゲーション切替</value>
+  </data>
+  <data name="OnboardingFeatureFilterSortDescriptionBlock.Text" xml:space="preserve">
+    <value>Find tasks quickly with powerful filters</value>
+  </data>
+  <data name="DefaultSortDueDateAscendingComboBoxItem.Content" xml:space="preserve">
+    <value>期限 (近い順)</value>
+  </data>
+  <data name="TaskDetailsDialog.Title" xml:space="preserve">
+    <value>タスク詳細</value>
+  </data>
+  <data name="SettingsDataTitleTextBlock.Text" xml:space="preserve">
+    <value>データ</value>
+  </data>
+  <data name="TaskListStatusTaskCreated" xml:space="preserve">
+    <value>タスクを作成しました</value>
+  </data>
+  <data name="SyncButtonTextBlock.Text" xml:space="preserve">
+    <value>リストを同期</value>
+  </data>
+  <data name="DefaultFilterCompletedComboBoxItem.Content" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="LanguageHeaderTextBlock.Text" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogTitleFormat" xml:space="preserve">
+    <value>サブタスクを追加: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncDescriptionBlock.Text" xml:space="preserve">
+    <value>Your tasks sync seamlessly with Google Tasks</value>
+  </data>
+  <data name="TaskListConfirmCompleteSubtasksTitle" xml:space="preserve">
+    <value>サブタスクも完了しますか？</value>
+  </data>
+  <data name="OnboardingSignInTitleBlock.Text" xml:space="preserve">
+    <value>アカウントを接続</value>
+  </data>
+  <data name="CancelEditButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>キャンセル (Esc)</value>
+  </data>
+  <data name="ShellStatusErrorFormat" xml:space="preserve">
+    <value>エラー: {0}</value>
+  </data>
+  <data name="DialogTextInputPrimary" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="ShellDeleteListDialogTitle" xml:space="preserve">
+    <value>リストを削除しますか？</value>
+  </data>
+  <data name="TaskListStatusTaskTitleEmpty" xml:space="preserve">
+    <value>タスク名は空にできません</value>
+  </data>
+  <data name="DefaultSortNoneComboBoxItem.Content" xml:space="preserve">
+    <value>なし (自分の順序)</value>
+  </data>
+  <data name="SettingsClearCacheDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Remove locally cached data. Your tasks will be re-downloaded on next sync.</value>
+  </data>
+  <data name="TaskListEmptyStateNoMatchingTitle" xml:space="preserve">
+    <value>一致するタスクはありません</value>
+  </data>
+  <data name="TaskListTitleBlock.Text" xml:space="preserve">
+    <value>マイタスク</value>
+  </data>
+  <data name="TaskListStatusTaskReopened" xml:space="preserve">
+    <value>タスクを再開しました</value>
+  </data>
+  <data name="TaskListSortOptionCompletedLast" xml:space="preserve">
+    <value>完了を最後に表示</value>
+  </data>
+  <data name="HamburgerButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ナビゲーション切替</value>
+  </data>
+  <data name="OnboardingTitleBar.Title" xml:space="preserve">
+    <value>Welcome to FluentTasks</value>
+  </data>
+  <data name="ShellStatusReady" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="CreateListButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>新しいリストを作成</value>
+  </data>
+  <data name="OnboardingFeatureOrganizeDescriptionBlock.Text" xml:space="preserve">
+    <value>Create lists and subtasks to organize your work</value>
+  </data>
+  <data name="DateToStringOverdueOneDay" xml:space="preserve">
+    <value>1日遅れ</value>
+  </data>
+  <data name="SettingsClearCacheTextBlock.Text" xml:space="preserve">
+    <value>キャッシュを削除</value>
+  </data>
+  <data name="TaskListAddSubtaskDialogPlaceholder" xml:space="preserve">
+    <value>サブタスク名...</value>
+  </data>
+  <data name="NewTaskInput.PlaceholderText" xml:space="preserve">
+    <value>新しいタスクを追加...</value>
+  </data>
+  <data name="DefaultFilterTodayComboBoxItem.Content" xml:space="preserve">
+    <value>今日</value>
+  </data>
+  <data name="SettingsThemeSystemTextBlock.Text" xml:space="preserve">
+    <value>システム設定を使用</value>
+  </data>
+  <data name="OnboardingSignInButtonTextBlock.Text" xml:space="preserve">
+    <value>Googleでサインイン</value>
+  </data>
+  <data name="ShellStatusNetworkErrorFormat" xml:space="preserve">
+    <value>ネットワーク エラー: {0}</value>
+  </data>
+  <data name="OnboardingFeatureSyncTitleBlock.Text" xml:space="preserve">
+    <value>Googleと同期</value>
+  </data>
+  <data name="TaskDetailsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>タスク詳細</value>
+  </data>
+  <data name="ShellStatusConnected" xml:space="preserve">
+    <value>接続済み</value>
+  </data>
+  <data name="ClearDueDateButton.Content" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="ShellStatusSyncedListsFormat" xml:space="preserve">
+    <value>{0}件のリストを同期</value>
+  </data>
+  <data name="TaskListFilterOptionIncomplete" xml:space="preserve">
+    <value>未完了</value>
+  </data>
+  <data name="SettingsTechDotNet10TextBlock.Text" xml:space="preserve">
+    <value>.NET 10</value>
+  </data>
+  <data name="TaskDetailsStatusLabelTextBlock.Text" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="TaskListSortOptionAlphabeticalReverse" xml:space="preserve">
+    <value>Z→A</value>
+  </data>
+  <data name="ShellDeleteListDialogMessageFormat" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?\n\nAll tasks in this list will be permanently deleted.</value>
+  </data>
+  <data name="TaskListEmptyStateNoResultsSubtitle" xml:space="preserve">
+    <value>別の検索語を試してください</value>
+  </data>
+  <data name="ShellStatusFailedDeleteList" xml:space="preserve">
+    <value>リストの削除に失敗しました</value>
+  </data>
+  <data name="ListNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>リスト名を入力...</value>
+  </data>
+  <data name="SettingsLicensedUnderTextBlock.Text" xml:space="preserve">
+    <value>MITライセンス</value>
+  </data>
+  <data name="FilterWeekMenuFlyoutItem.Text" xml:space="preserve">
+    <value>今週が期限</value>
+  </data>
+  <data name="SortAlphaMenuFlyoutItem.Text" xml:space="preserve">
+    <value>A→Z</value>
+  </data>
+  <data name="SortDefaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>既定</value>
+  </data>
+  <data name="SortCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>完了を最後に表示</value>
+  </data>
+  <data name="FilterCompletedMenuFlyoutItem.Text" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="FilterAllMenuFlyoutItem.Text" xml:space="preserve">
+    <value>すべてのタスク</value>
+  </data>
+  <data name="OnboardingGetStartedActionButton.Content" xml:space="preserve">
+    <value>開始</value>
+  </data>
+  <data name="FilterTodayMenuFlyoutItem.Text" xml:space="preserve">
+    <value>今日が期限</value>
+  </data>
+  <data name="OnboardingBackActionButton.Content" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="FilterIncompleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>未完了</value>
+  </data>
+  <data name="SortDueDateDescMenuFlyoutItem.Text" xml:space="preserve">
+    <value>期限 (遠い順)</value>
+  </data>
+  <data name="SortAlphaRevMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Z→A</value>
+  </data>
+  <data name="SortDueDateAscMenuFlyoutItem.Text" xml:space="preserve">
+    <value>期限 (近い順)</value>
+  </data>
+  <data name="FilterOverdueMenuFlyoutItem.Text" xml:space="preserve">
+    <value>期限超過</value>
+  </data>
+  <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
+    <value>📋</value>
+  </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>セッション期限切れ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Googleのサインインが期限切れです。もう一度サインインしますか？</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>サインイン</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>セッション期限切れ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>サインイン中...</value>
+  </data>
+<data name="ShortcutsOverlayTitle.Text" xml:space="preserve">
+    <value>キーボードショートカット</value>
+  </data>
+  <data name="ShortcutsOverlayCloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>閉じる (Esc)</value>
+  </data>
+  <data name="ShortcutsOverlayFooter" xml:space="preserve">
+    <value>Ctrl を押し続けて表示  ·  ? または Ctrl+Shift+? で切り替え  ·  Esc で閉じる</value>
+  </data>
+  <data name="ShortcutsCategoryNavigation" xml:space="preserve">
+    <value>ナビゲーション</value>
+  </data>
+  <data name="ShortcutsCategoryTasks" xml:space="preserve">
+    <value>タスク</value>
+  </data>
+  <data name="ShortcutsCategoryView" xml:space="preserve">
+    <value>表示とアプリ</value>
+  </data>
+  <data name="ShortcutDescNavigateTasks" xml:space="preserve">
+    <value>タスク間を移動</value>
+  </data>
+  <data name="ShortcutDescFocusSearchBox" xml:space="preserve">
+    <value>検索ボックスにフォーカス</value>
+  </data>
+  <data name="ShortcutDescClearSelection" xml:space="preserve">
+    <value>選択を解除 / 閉じる</value>
+  </data>
+  <data name="ShortcutDescCreateNewTask" xml:space="preserve">
+    <value>新しいタスクを作成</value>
+  </data>
+  <data name="ShortcutDescCreateNewList" xml:space="preserve">
+    <value>新しいリストを作成</value>
+  </data>
+  <data name="ShortcutDescEditSelectedTask" xml:space="preserve">
+    <value>選択したタスクを編集</value>
+  </data>
+  <data name="ShortcutDescToggleCompletion" xml:space="preserve">
+    <value>タスクの完了を切り替え</value>
+  </data>
+  <data name="ShortcutDescToggleCompletionAlt" xml:space="preserve">
+    <value>完了を切り替え (代替)</value>
+  </data>
+  <data name="ShortcutDescDeleteSelectedTask" xml:space="preserve">
+    <value>選択したタスクを削除</value>
+  </data>
+  <data name="ShortcutDescOpenTaskDetails" xml:space="preserve">
+    <value>タスクの詳細を開く</value>
+  </data>
+  <data name="ShortcutDescAddSubtask" xml:space="preserve">
+    <value>サブタスクを追加</value>
+  </data>
+  <data name="ShortcutDescSyncRefresh" xml:space="preserve">
+    <value>同期 / 更新</value>
+  </data>
+  <data name="ShortcutDescOpenSettings" xml:space="preserve">
+    <value>設定を開く</value>
+  </data>
+  <data name="ShortcutDescShowShortcuts" xml:space="preserve">
+    <value>ショートカットを表示</value>
+  </data>
+  <data name="ShortcutDescCloseApp" xml:space="preserve">
+    <value>アプリケーションを閉じる</value>
+  </data>
+  </root>

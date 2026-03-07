@@ -1,0 +1,591 @@
+<UserControl x:Class="FluentTasks.UI.Controls.TaskListControl"
+             x:Name="ThisControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:FluentTasks.UI.Controls"
+             xmlns:vm="using:FluentTasks.UI.ViewModels"
+             xmlns:core="using:FluentTasks.Core.Models"
+             SizeChanged="ThisControl_SizeChanged">
+
+    <Grid Padding="{Binding Padding, ElementName=ThisControl}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WidthStates">
+                <VisualState x:Name="WideContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="200" />
+                        <Setter Target="SearchBox.MaxWidth" Value="400" />
+                        <Setter Target="SortButtonText.Visibility" Value="Visible" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Visible" />
+                        <Setter Target="HeaderToolbar.Padding" Value="16,12" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="16,12,16,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="16" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MediumContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="120" />
+                        <Setter Target="SearchBox.MaxWidth" Value="250" />
+                        <Setter Target="SortButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="HeaderToolbar.Padding" Value="12,10" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="12,10,12,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="12" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowContent">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.MinWidth" Value="80" />
+                        <Setter Target="SearchBox.MaxWidth" Value="150" />
+                        <Setter Target="SortButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="FilterButtonText.Visibility" Value="Collapsed" />
+                        <Setter Target="HeaderToolbar.Padding" Value="8,8" />
+                        <Setter Target="AddTaskInputGrid.Padding" Value="8,8,8,0" />
+                        <Setter Target="TasksScrollViewer.Padding" Value="8" />
+                        <Setter Target="AddTaskButtonText.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Page Header with optional hamburger button - Always visible -->
+        <Grid Grid.Row="0"
+              Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Uid="HamburgerButton"
+                    x:Name="HamburgerButton"
+                    Grid.Column="0"
+                    Click="HamburgerButton_Click"
+                    VerticalAlignment="Center"
+                    Padding="10"
+                    Margin="0,0,8,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Visibility="Collapsed"
+                    ToolTipService.ToolTip="Toggle navigation">
+                <FontIcon Glyph="&#xE700;"
+                          FontSize="18" />
+            </Button>
+
+            <TextBlock Grid.Column="1"
+                       x:Uid="TaskListTitleBlock"
+                       x:Name="TaskListTitle"
+                       Text="My Tasks"
+                       Style="{StaticResource TitleLargeTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed" />
+        </Grid>
+
+        <!-- Empty State - Show when no list selected -->
+        <StackPanel x:Name="NoListSelectedState"
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="16"
+                    Visibility="Visible">
+            <TextBlock x:Uid="TaskListNoListSelectedIconTextBlock"
+                       Text="📋"
+                       FontSize="64"
+                       HorizontalAlignment="Center"
+                       Opacity="0.3" />
+            <TextBlock x:Uid="TaskListNoListSelectedTitleBlock"
+                       Text="Select a list to get Started"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBlock x:Uid="TaskListNoListSelectedSubtitleBlock"
+                       Text="Choose a task list from the sidebar or create a new one"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Task Content - Show when list selected -->
+        <Grid x:Name="TaskContentArea"
+              Grid.Row="1"
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Tasks Container -->
+            <Border Grid.Row="0"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header: Sort, Filter, Search -->
+                    <Grid x:Name="HeaderToolbar"
+                          Grid.Row="0"
+                          Background="{ThemeResource LayerFillColorDefaultBrush}"
+                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                          BorderThickness="0,0,0,1"
+                          Padding="16,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Sort Button -->
+                        <Button x:Uid="SortButton"
+                                x:Name="SortButton"
+                                Grid.Column="0"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4"
+                                Margin="0,0,8,0">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                    <RadioMenuFlyoutItem x:Uid="SortDefaultMenuFlyoutItem"
+                                                         x:Name="SortDefault"
+                                                         Text="Default"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="None"
+                                                         GroupName="SortOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="SortDueDateAscMenuFlyoutItem"
+                                                         x:Name="SortDueDateAsc"
+                                                         Text="Due date (earliest)"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="DueDateAscending"
+                                                         GroupName="SortOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="SortDueDateDescMenuFlyoutItem"
+                                                         x:Name="SortDueDateDesc"
+                                                         Text="Due date (latest)"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="DueDateDescending"
+                                                         GroupName="SortOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="SortAlphaMenuFlyoutItem"
+                                                         x:Name="SortAlpha"
+                                                         Text="A to Z"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="Alphabetical"
+                                                         GroupName="SortOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="SortAlphaRevMenuFlyoutItem"
+                                                         x:Name="SortAlphaRev"
+                                                         Text="Z to A"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="AlphabeticalReverse"
+                                                         GroupName="SortOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="SortCompletedMenuFlyoutItem"
+                                                         x:Name="SortCompleted"
+                                                         Text="Completed last"
+                                                         Click="SortMenuItem_Click"
+                                                         Tag="CompletedLast"
+                                                         GroupName="SortOptions" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6">
+                                <FontIcon x:Name="SortButtonIcon"
+                                          Glyph="&#xE8CB;"
+                                          FontSize="14" />
+                                <TextBlock x:Name="SortButtonText"
+                                           Text="Sort"
+                                           Style="{StaticResource CaptionTextBlockStyle}" />
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Filter Button -->
+                        <Button x:Uid="FilterButton"
+                                x:Name="FilterButton"
+                                Grid.Column="1"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="8,4">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                    <RadioMenuFlyoutItem x:Uid="FilterAllMenuFlyoutItem"
+                                                         x:Name="FilterAll"
+                                                         Text="All tasks"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="All"
+                                                         GroupName="FilterOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="FilterIncompleteMenuFlyoutItem"
+                                                         x:Name="FilterIncomplete"
+                                                         Text="Incomplete"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="Incomplete"
+                                                         GroupName="FilterOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="FilterCompletedMenuFlyoutItem"
+                                                         x:Name="FilterCompleted"
+                                                         Text="Completed"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="Completed"
+                                                         GroupName="FilterOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="FilterOverdueMenuFlyoutItem"
+                                                         x:Name="FilterOverdue"
+                                                         Text="Overdue"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="Overdue"
+                                                         GroupName="FilterOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="FilterTodayMenuFlyoutItem"
+                                                         x:Name="FilterToday"
+                                                         Text="Due today"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="Today"
+                                                         GroupName="FilterOptions" />
+                                    <RadioMenuFlyoutItem x:Uid="FilterWeekMenuFlyoutItem"
+                                                         x:Name="FilterWeek"
+                                                         Text="Due this week"
+                                                         Click="FilterMenuItem_Click"
+                                                         Tag="ThisWeek"
+                                                         GroupName="FilterOptions" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6">
+                                <FontIcon x:Name="FilterButtonIcon"
+                                          Glyph="&#xE71C;"
+                                          FontSize="14" />
+                                <TextBlock x:Name="FilterButtonText"
+                                           Text="Filter"
+                                           Style="{StaticResource CaptionTextBlockStyle}" />
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Search Box -->
+                        <AutoSuggestBox x:Uid="SearchBox"
+                                        Grid.Column="2"
+                                        x:Name="SearchBox"
+                                        PlaceholderText="Search tasks..."
+                                        QueryIcon="Find"
+                                        TextChanged="Search_TextChanged"
+                                        HorizontalAlignment="Right"
+                                        MaxWidth="400"
+                                        MinWidth="200"
+                                        VerticalAlignment="Center"
+                                        Margin="12,0,0,0">
+                            <AutoSuggestBox.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="F"
+                                                     Modifiers="Control" />
+                            </AutoSuggestBox.KeyboardAccelerators>
+                        </AutoSuggestBox>
+                    </Grid>
+
+                    <!-- Add Task Input -->
+                    <Grid x:Name="AddTaskInputGrid"
+                          Grid.Row="1"
+                          Padding="16,12,16,0"
+                          ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Uid="NewTaskInput"
+                                 Grid.Column="0"
+                                 x:Name="NewTaskInput"
+                                 PlaceholderText="Add a new task..."
+                                 VerticalAlignment="Center"
+                                 Text="{x:Bind ViewModel.NewTaskTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="Enter"
+                                                     Invoked="AddTask_Enter" />
+                            </TextBox.KeyboardAccelerators>
+                        </TextBox>
+
+                        <Button Grid.Column="1"
+                                Command="{x:Bind ViewModel.AddTaskCommand, Mode=OneWay}"
+                                Style="{StaticResource AccentButtonStyle}"
+                                VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6">
+                                <FontIcon Glyph="&#xE710;"
+                                          FontSize="14" />
+                                <TextBlock x:Uid="AddTaskButtonTextBlock"
+                                           x:Name="AddTaskButtonText"
+                                           Text="Add Task" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <!-- Tasks List -->
+                    <ScrollViewer x:Name="TasksScrollViewer"
+                                  Grid.Row="2"
+                                  Padding="16">
+                        <StackPanel Spacing="0">
+                            <ItemsRepeater x:Name="TasksView"
+                                           ItemsSource="{x:Bind ViewModel.Tasks, Mode=OneWay}">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="core:TaskItem">
+                                        <Grid Margin="{x:Bind UseSubtaskMargin, Converter={StaticResource SubtaskMarginConverter}}">
+                                            <Border Style="{StaticResource TaskCardStyle}"
+                                                    CanDrag="{x:Bind CanDrag}"
+                                                    AllowDrop="{x:Bind CanDrop}"
+                                                    DragStarting="Task_DragStarting"
+                                                    DragOver="Task_DragOver"
+                                                    Drop="Task_Drop"
+                                                    PointerEntered="TaskCard_PointerEntered"
+                                                    PointerExited="TaskCard_PointerExited"
+                                                    Tag="{x:Bind}">
+
+                                                <Grid ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{x:Bind IsCompleted, Mode=TwoWay}"
+                                                              Click="TaskCheckbox_Click"
+                                                              Tag="{x:Bind}"
+                                                              VerticalAlignment="Center" />
+
+                                                    <!-- Display Mode -->
+                                                    <StackPanel Grid.Column="1"
+                                                                Visibility="{x:Bind IsEditing, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                                Spacing="6"
+                                                                VerticalAlignment="Center">
+
+                                                        <TextBlock Text="{x:Bind Title, Mode=OneWay}"
+                                                                   Style="{StaticResource BodyTextBlockStyle}"
+                                                                   TextWrapping="Wrap"
+                                                                   IsTapEnabled="True"
+                                                                   PointerPressed="TaskTitle_PointerPressed"
+                                                                   PointerEntered="TaskTitle_PointerEntered"
+                                                                   PointerExited="TaskTitle_PointerExited"
+                                                                   Tag="{x:Bind}" />
+
+                                                        <!-- Chips Row -->
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    Spacing="6">
+                                                            <Border x:Name="DueDateChipBorder"
+                                                                    Background="{x:Bind IsOverdue, Converter={StaticResource OverdueToBackgroundConverter}}"
+                                                                    BorderBrush="{x:Bind IsOverdue, Converter={StaticResource OverdueToBorderConverter}}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="4"
+                                                                    Padding="6,2"
+                                                                    Visibility="{x:Bind HasDueDate, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                    Tapped="DateChip_Tapped"
+                                                                    Tag="{x:Bind}">
+                                                                <TextBlock x:Name="DueDateChipText"
+                                                                           Text="{x:Bind DueDate, Converter={StaticResource DateToStringConverter}}"
+                                                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                                                           Foreground="{x:Bind IsOverdue, Converter={StaticResource OverdueToColorConverter}}"
+                                                                           FontWeight="SemiBold" />
+                                                            </Border>
+
+                                                            <Border Background="{ThemeResource SystemFillColorNeutralBackgroundBrush}"
+                                                                    BorderBrush="{ThemeResource SystemFillColorNeutralBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="4"
+                                                                    Padding="6,2"
+                                                                    Visibility="{x:Bind ShowParentChip, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                <StackPanel Orientation="Horizontal"
+                                                                            Spacing="4">
+                                                                    <TextBlock x:Uid="SubtaskIndicatorTextBlock"
+                                                                               Text="↳"
+                                                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                                    <TextBlock Text="{x:Bind ParentTitle}"
+                                                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                                                               Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                                               FontWeight="SemiBold" />
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </StackPanel>
+
+                                                        <TextBlock Text="{x:Bind Notes}"
+                                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                                   TextWrapping="Wrap"
+                                                                   MaxLines="2"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   Visibility="{x:Bind HasNotes, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                   Opacity="0.8" />
+                                                    </StackPanel>
+
+                                                    <!-- Edit Mode -->
+                                                    <Grid Grid.Column="1"
+                                                          Visibility="{x:Bind IsEditing, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                          ColumnSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <TextBox Grid.Column="0"
+                                                                 Text="{x:Bind EditTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                 VerticalAlignment="Center"
+                                                                 MinWidth="200"
+                                                                 MaxWidth="400"
+                                                                 Tag="{x:Bind}">
+                                                            <TextBox.KeyboardAccelerators>
+                                                                <KeyboardAccelerator Key="Enter"
+                                                                                     Invoked="SaveEdit_Enter" />
+                                                                <KeyboardAccelerator Key="Escape"
+                                                                                     Invoked="CancelEdit_Escape" />
+                                                            </TextBox.KeyboardAccelerators>
+                                                        </TextBox>
+
+                                                        <Button x:Uid="SaveEditButton"
+                                                                Grid.Column="1"
+                                                                Content="&#xE8FB;"
+                                                                FontFamily="Segoe MDL2 Assets"
+                                                                Click="SaveEdit_Click"
+                                                                Tag="{x:Bind}"
+                                                                Style="{StaticResource AccentButtonStyle}"
+                                                                Padding="8,4"
+                                                                ToolTipService.ToolTip="Save (Enter)" />
+
+                                                        <Button x:Uid="CancelEditButton"
+                                                                Grid.Column="2"
+                                                                Content="&#xE711;"
+                                                                FontFamily="Segoe MDL2 Assets"
+                                                                Click="CancelEdit_Click"
+                                                                Tag="{x:Bind}"
+                                                                Padding="8,4"
+                                                                ToolTipService.ToolTip="Cancel (Esc)" />
+                                                    </Grid>
+
+                                                    <!-- Add Subtask Button -->
+                                                    <Button x:Uid="AddSubtaskButton"
+                                                            Grid.Column="2"
+                                                            Click="AddSubtask_Click"
+                                                            Tag="{x:Bind}"
+                                                            Style="{StaticResource TaskActionButtonStyle}"
+                                                            VerticalAlignment="Center"
+                                                            Visibility="{x:Bind ShowAddSubtaskButton, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Add subtask">
+                                                        <FontIcon Glyph="&#xE710;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
+
+                                                    <!-- Details Button -->
+                                                    <Button x:Uid="TaskDetailsButton"
+                                                            Grid.Column="3"
+                                                            Click="TaskDetails_Click"
+                                                            Tag="{x:Bind}"
+                                                            Style="{StaticResource TaskActionButtonStyle}"
+                                                            VerticalAlignment="Center"
+                                                            Visibility="{x:Bind IsEditing, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Task details">
+                                                        <FontIcon Glyph="&#xE70F;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
+
+                                                    <!-- Delete Button -->
+                                                    <Button x:Uid="DeleteTaskButton"
+                                                            Grid.Column="4"
+                                                            Click="DeleteTask_Click"
+                                                            Tag="{x:Bind}"
+                                                            Style="{StaticResource TaskActionButtonStyle}"
+                                                            VerticalAlignment="Center"
+                                                            Visibility="{x:Bind IsEditing, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                                                            ToolTipService.ToolTip="Delete task">
+                                                        <FontIcon Glyph="&#xE74D;"
+                                                                  FontSize="16"
+                                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    </Button>
+                                                </Grid>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+
+                            <!-- Empty State -->
+                            <StackPanel x:Name="EmptyState"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Spacing="12"
+                                        Margin="0,60,0,0"
+                                        Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+                                <TextBlock x:Uid="EmptyStateIconTextBlock"
+                                           x:Name="EmptyStateIcon"
+                                           Text="{x:Bind ViewModel.EmptyStateIcon, Mode=OneWay}"
+                                           FontSize="48"
+                                           HorizontalAlignment="Center"
+                                           Opacity="0.3" />
+                                <TextBlock x:Uid="EmptyStateTitleTextBlock"
+                                           x:Name="EmptyStateTitle"
+                                           Text="{x:Bind ViewModel.EmptyStateTitle, Mode=OneWay}"
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           HorizontalAlignment="Center" />
+                                <TextBlock x:Uid="EmptyStateSubtitleTextBlock"
+                                           x:Name="EmptyStateSubtitle"
+                                           Text="{x:Bind ViewModel.EmptyStateSubtitle, Mode=OneWay}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                           HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Skeleton Loading State -->
+                    <StackPanel x:Name="SkeletonLoadingState"
+                                Grid.Row="2"
+                                Padding="16"
+                                Spacing="0"
+                                Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonTaskTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonTaskTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonTaskTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonTaskTemplate}" />
+                        <ContentPresenter ContentTemplate="{StaticResource SkeletonTaskTemplate}" />
+                    </StackPanel>
+
+                    <!-- Status Bar -->
+                    <Border Grid.Row="3"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="0,1,0,0"
+                            Padding="16,8">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="8">
+                            <controls:StatusOrb x:Name="StatusOrb"
+                                                VerticalAlignment="Center" />
+                            <TextBlock x:Uid="StatusTextBlock"
+                                       x:Name="StatusText"
+                                       Text="Ready"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="ActionText"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       VerticalAlignment="Center"
+                                       Opacity="0" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

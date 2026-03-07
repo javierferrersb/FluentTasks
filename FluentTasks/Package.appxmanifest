@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -7,16 +7,15 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity
-    Name="645b8942-f8bf-44dc-a10b-baf54d2edbe6"
-    Publisher="CN=fsb14"
-    Version="1.0.0.0" />
+<Identity Name="50355JavierFerrerSB.FluentTasks"
+		Publisher="CN=D2C898CD-B235-4828-BCBB-A94E6CC5306F"
+		Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="645b8942-f8bf-44dc-a10b-baf54d2edbe6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>FluentTasks</DisplayName>
-    <PublisherDisplayName>fsb14</PublisherDisplayName>
+    <PublisherDisplayName>Javier Ferrer SB</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -26,7 +25,7 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
 
   <Applications>
@@ -35,14 +34,14 @@
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="FluentTasks"
-        Description="FluentTasks"
+        Description="A modern Google Tasks client for Windows"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
-      </uap:VisualElements>
-    </Application>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Fluent Tasks"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="white"/>
+	  </uap:VisualElements>
+	</Application>
   </Applications>
 
   <Capabilities>
