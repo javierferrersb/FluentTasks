@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -7,10 +7,9 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity
-    Name="JavierFerrerSB.FluentTasks"
-    Publisher="CN=JavierFerrerSB"
-    Version="1.0.1.0" />
+<Identity Name="50355JavierFerrerSB.FluentTasks"
+		Publisher="CN=D2C898CD-B235-4828-BCBB-A94E6CC5306F"
+		Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="645b8942-f8bf-44dc-a10b-baf54d2edbe6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -26,49 +25,7 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="en-US" />
-    <Resource Language="es-ES" />
-    <Resource Language="de-DE" />
-    <Resource Language="fr-FR" />
-    <Resource Language="it-IT" />
-    <Resource Language="pt-PT" />
-    <Resource Language="ru-RU" />
-    <Resource Language="zh-CN" />
-    <Resource Language="zh-TW" />
-    <Resource Language="ja-JP" />
-    <Resource Language="ko-KR" />
-    <Resource Language="nl-NL" />
-    <Resource Language="pl-PL" />
-    <Resource Language="tr-TR" />
-    <Resource Language="sv-SE" />
-    <Resource Language="da-DK" />
-    <Resource Language="fi-FI" />
-    <Resource Language="nb-NO" />
-    <Resource Language="cs-CZ" />
-    <Resource Language="el-GR" />
-    <Resource Language="he-IL" />
-    <Resource Language="ar-SA" />
-    <Resource Language="hi-IN" />
-    <Resource Language="th-TH" />
-    <Resource Language="vi-VN" />
-    <Resource Language="id-ID" />
-    <Resource Language="ms-MY" />
-    <Resource Language="uk-UA" />
-    <Resource Language="bg-BG" />
-    <Resource Language="hr-HR" />
-    <Resource Language="sk-SK" />
-    <Resource Language="sl-SI" />
-    <Resource Language="sr-Latn-RS" />
-    <Resource Language="ro-RO" />
-    <Resource Language="hu-HU" />
-    <Resource Language="ca-ES" />
-    <Resource Language="et-EE" />
-    <Resource Language="lv-LV" />
-    <Resource Language="lt-LT" />
-    <Resource Language="ga-IE" />
-    <Resource Language="mt-MT" />
-    <Resource Language="bn-BD" />
-    <Resource Language="pa-PK" />
+    <Resource Language="x-generate" />
   </Resources>
 
   <Applications>
