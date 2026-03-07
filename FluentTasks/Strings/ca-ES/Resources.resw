@@ -1189,4 +1189,22 @@ Totes les tasques d'aquesta llista s'eliminaran permanentment.</value>
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Sessió expirada</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>La sessió de Google ha expirat. Voleu iniciar sessió de nou?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Inicia sessió</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Cancel·la</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Sessió expirada</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Iniciant sessió...</value>
+  </data>
 </root>

@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Is-sessjoni skadiet</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>L-aċċess tiegħek ta' Google skada. Tixtieq tidħol mill-ġdid?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Idħol</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Ikkanċella</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Is-sessjoni skadiet</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Qed tidħol...</value>
+  </data>
 </root>

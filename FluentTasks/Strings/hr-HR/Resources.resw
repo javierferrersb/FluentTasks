@@ -1189,4 +1189,22 @@ Svi zadaci u ovom popisu bit će trajno izbrisani.</value>
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Sesija istekla</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Vaša Google prijava je istekla. Želite li se ponovno prijaviti?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Prijava</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Odustani</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Sesija istekla</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Prijava...</value>
+  </data>
 </root>

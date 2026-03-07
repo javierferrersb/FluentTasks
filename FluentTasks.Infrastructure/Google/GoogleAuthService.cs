@@ -80,6 +80,26 @@ namespace FluentTasks.Infrastructure.Google
             await DeleteStoredTokensAsync();
         }
 
+        public async Task<UserCredential> ReAuthenticateAsync()
+        {
+            // Clear any existing credential state
+            _credential = null;
+
+            // Delete stored token files so the broker performs a fresh login
+            await DeleteStoredTokensAsync();
+
+            // Perform a fresh interactive authentication
+            _credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                _clientSecrets.Value,
+                ["https://www.googleapis.com/auth/tasks"],
+                "user",
+                CancellationToken.None,
+                new FileDataStore(_appDataPath, true)
+            );
+
+            return _credential;
+        }
+
         private Task DeleteStoredTokensAsync()
         {
             try

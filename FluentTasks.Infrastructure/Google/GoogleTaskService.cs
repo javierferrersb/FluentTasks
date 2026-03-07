@@ -1,5 +1,8 @@
-﻿using FluentTasks.Core.Models;
+﻿using FluentTasks.Core.Exceptions;
+using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
+using Google;
+using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Services;
 using Google.Apis.Tasks.v1;
 using GoogleTask = Google.Apis.Tasks.v1.Data.Task;
@@ -20,6 +23,31 @@ namespace FluentTasks.Infrastructure.Google
         public GoogleTaskService(IGoogleAuthService authService)
         {
             _authService = authService;
+        }
+
+        /// <summary>
+        /// Resets the cached service so the next call creates a fresh one with new credentials.
+        /// </summary>
+        internal void InvalidateService()
+        {
+            _tasksService = null;
+        }
+
+        private static bool IsAuthenticationError(Exception ex)
+        {
+            return ex is TokenResponseException
+                || (ex is GoogleApiException gae && gae.HttpStatusCode == System.Net.HttpStatusCode.Unauthorized);
+        }
+
+        /// <summary>
+        /// Wraps an auth-related exception as <see cref="AuthenticationExpiredException"/>.
+        /// Also resets the cached service so the next call can use refreshed credentials.
+        /// </summary>
+        private AuthenticationExpiredException WrapAuthError(Exception ex)
+        {
+            _tasksService = null;
+            return new AuthenticationExpiredException(
+                "Your session has expired. Please sign in again.", ex);
         }
 
         /// <summary>
@@ -53,15 +81,22 @@ namespace FluentTasks.Infrastructure.Google
         /// <returns>Collection of task lists with ID and Title</returns>
         public async Task<IEnumerable<TaskList>> GetTaskListsAsync()
         {
-            var service = await GetServiceAsync();
-            var request = service.Tasklists.List();
-            var response = await request.ExecuteAsync();
-
-            return response.Items?.Select(tl => new TaskList
+            try
             {
-                Id = tl.Id,
-                Title = tl.Title
-            }) ?? [];
+                var service = await GetServiceAsync();
+                var request = service.Tasklists.List();
+                var response = await request.ExecuteAsync();
+
+                return response.Items?.Select(tl => new TaskList
+                {
+                    Id = tl.Id,
+                    Title = tl.Title
+                }) ?? [];
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
         }
 
         /// <summary>
@@ -73,22 +108,29 @@ namespace FluentTasks.Infrastructure.Google
         /// <returns>Collection of tasks with ID, Title, Completion status, and Due date</returns>
         public async Task<IEnumerable<TaskItem>> GetTasksAsync(string taskListId)
         {
-            var service = await GetServiceAsync();
-            var request = service.Tasks.List(taskListId);
-            var response = await request.ExecuteAsync();
-
-            return response.Items?.Select(googleTask => new TaskItem
+            try
             {
-                Id = googleTask.Id,
-                Title = googleTask.Title ?? "",
-                IsCompleted = googleTask.Status == "completed",
-                DueDate = string.IsNullOrEmpty(googleTask.Due)
-                    ? null
-                    : DateTimeOffset.Parse(googleTask.Due),
-                Notes = googleTask.Notes,
-                ParentId = googleTask.Parent,
-                Position = googleTask.Position ?? "0"
-            }) ?? [];
+                var service = await GetServiceAsync();
+                var request = service.Tasks.List(taskListId);
+                var response = await request.ExecuteAsync();
+
+                return response.Items?.Select(googleTask => new TaskItem
+                {
+                    Id = googleTask.Id,
+                    Title = googleTask.Title ?? "",
+                    IsCompleted = googleTask.Status == "completed",
+                    DueDate = string.IsNullOrEmpty(googleTask.Due)
+                        ? null
+                        : DateTimeOffset.Parse(googleTask.Due),
+                    Notes = googleTask.Notes,
+                    ParentId = googleTask.Parent,
+                    Position = googleTask.Position ?? "0"
+                }) ?? [];
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
         }
 
         /// <summary>
@@ -103,6 +145,8 @@ namespace FluentTasks.Infrastructure.Google
         /// <returns>Newly created task with Google-generated ID</returns>
         public async Task<TaskItem> CreateTaskAsync(string taskListId, string title, string? parentId = null, DateTimeOffset? dueDate = null)
         {
+            try
+            {
             var service = await GetServiceAsync();
 
             var googleTask = new GoogleTask
@@ -139,6 +183,11 @@ namespace FluentTasks.Infrastructure.Google
                 ParentId = created.Parent,
                 Position = created.Position ?? "0"
             };
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
         }
 
         /// <summary>
@@ -187,6 +236,10 @@ namespace FluentTasks.Infrastructure.Google
                 await updateRequest.ExecuteAsync();
                 return true;
             }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
             catch
             {
                 return false;
@@ -229,6 +282,10 @@ namespace FluentTasks.Infrastructure.Google
 
                 return true;
             }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
             catch
             {
                 return false;
@@ -250,6 +307,10 @@ namespace FluentTasks.Infrastructure.Google
                 var request = service.Tasks.Delete(taskListId, taskId);
                 await request.ExecuteAsync();
                 return true;
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
             }
             catch
             {
@@ -281,6 +342,10 @@ namespace FluentTasks.Infrastructure.Google
                     Id = created.Id,
                     Title = created.Title
                 };
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
             }
             catch (Exception ex)
             {
@@ -314,6 +379,10 @@ namespace FluentTasks.Infrastructure.Google
 
                 return true;
             }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
+            }
             catch
             {
                 return false;
@@ -334,6 +403,10 @@ namespace FluentTasks.Infrastructure.Google
                 var request = service.Tasklists.Delete(taskListId);
                 await request.ExecuteAsync();
                 return true;
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
             }
             catch
             {
@@ -365,6 +438,10 @@ namespace FluentTasks.Infrastructure.Google
 
                 await request.ExecuteAsync();
                 return true;
+            }
+            catch (Exception ex) when (IsAuthenticationError(ex))
+            {
+                throw WrapAuthError(ex);
             }
             catch
             {

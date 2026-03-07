@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>세션 만료</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Google 로그인이 만료되었습니다. 다시 로그인하시겠습니까?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>로그인</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>세션 만료</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>로그인 중...</value>
+  </data>
 </root>

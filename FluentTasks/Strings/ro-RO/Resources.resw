@@ -1189,4 +1189,22 @@ Toate sarcinile din această listă vor fi șterse permanent.</value>
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Sesiune expirată</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Autentificarea dvs. Google a expirat. Doriți să vă autentificați din nou?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Autentificare</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Anulare</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Sesiune expirată</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Autentificare...</value>
+  </data>
 </root>

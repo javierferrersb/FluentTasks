@@ -1189,4 +1189,22 @@ Tất cả công việc trong danh sách này sẽ bị xóa vĩnh viễn.</valu
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>Phiên đã hết hạn</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Đăng nhập Google của bạn đã hết hạn. Bạn có muốn đăng nhập lại không?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>Phiên đã hết hạn</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>Đang đăng nhập...</value>
+  </data>
 </root>

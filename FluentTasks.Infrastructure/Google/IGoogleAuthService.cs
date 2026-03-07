@@ -13,5 +13,11 @@ namespace FluentTasks.Infrastructure.Google
         /// Logs out the current user by revoking tokens and clearing stored credentials.
         /// </summary>
         Task LogOutAsync();
+
+        /// <summary>
+        /// Clears stored credentials and performs a fresh interactive authentication.
+        /// Used when the existing token has expired and cannot be refreshed.
+        /// </summary>
+        Task<UserCredential> ReAuthenticateAsync();
     }
 }

@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>セッション期限切れ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>Googleのサインインが期限切れです。もう一度サインインしますか？</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>サインイン</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>セッション期限切れ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>サインイン中...</value>
+  </data>
 </root>

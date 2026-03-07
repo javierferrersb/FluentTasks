@@ -1189,4 +1189,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>เซสชันหมดอายุ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>การลงชื่อเข้าใช้ Google ของคุณหมดอายุแล้ว ต้องการลงชื่อเข้าใช้อีกครั้งหรือไม่?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>ลงชื่อเข้าใช้</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>เซสชันหมดอายุ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>กำลังลงชื่อเข้าใช้...</value>
+  </data>
 </root>

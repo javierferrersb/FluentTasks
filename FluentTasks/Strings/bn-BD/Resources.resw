@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>সেশনের মেয়াদ শেষ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>আপনার Google সাইন-ইনের মেয়াদ শেষ হয়েছে। আবার সাইন ইন করতে চান?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>সাইন ইন</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>বাতিল</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>সেশনের মেয়াদ শেষ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>সাইন ইন হচ্ছে...</value>
+  </data>
 </root>

@@ -1098,4 +1098,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>工作階段已過期</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>您的 Google 登入已過期。是否要重新登入？</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>工作階段已過期</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>正在登入...</value>
+  </data>
 </root>

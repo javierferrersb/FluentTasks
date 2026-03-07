@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>פג תוקף ההפעלה</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>הכניסה שלך ל-Google פגה. האם ברצונך להיכנס שוב?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>כניסה</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>ביטול</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>פג תוקף ההפעלה</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>מתחבר...</value>
+  </data>
 </root>

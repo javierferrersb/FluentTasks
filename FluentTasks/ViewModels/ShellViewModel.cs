@@ -1,7 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentTasks.Core.Exceptions;
 using FluentTasks.Core.Models;
 using FluentTasks.Core.Services;
+using FluentTasks.Infrastructure.Google;
 using FluentTasks.UI.Models;
 using FluentTasks.UI.Services;
 using Microsoft.UI.Xaml;
@@ -22,6 +24,7 @@ public sealed partial class ShellViewModel : ObservableObject
 {
     private readonly ITaskService _taskService;
     private readonly IDialogService _dialogService;
+    private readonly IGoogleAuthService _authService;
     private readonly IconStorageService _iconStorageService;
     private readonly SettingsService _settingsService;
     private readonly ResourceLoader _resourceLoader = new();
@@ -96,11 +99,13 @@ public sealed partial class ShellViewModel : ObservableObject
     public ShellViewModel(
         ITaskService taskService,
         IDialogService dialogService,
+        IGoogleAuthService authService,
         IconStorageService iconStorageService,
         SettingsService settingsService)
     {
         _taskService = taskService;
         _dialogService = dialogService;
+        _authService = authService;
         _iconStorageService = iconStorageService;
         _settingsService = settingsService;
         _statusText = GetResource("ShellStatusReady", "Ready");
@@ -160,6 +165,10 @@ public sealed partial class ShellViewModel : ObservableObject
             OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
             StatusText = GetResource("ShellStatusOffline", "Offline");
             ShowError(string.Format(GetResource("ShellStatusNetworkErrorFormat", "Network error: {0}"), ex.Message));
+        }
+        catch (AuthenticationExpiredException)
+        {
+            await HandleAuthenticationExpiredAsync();
         }
         catch (Exception ex)
         {
@@ -496,6 +505,10 @@ public sealed partial class ShellViewModel : ObservableObject
             OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
             StatusText = GetResource("ShellStatusOffline", "Offline");
         }
+        catch (AuthenticationExpiredException)
+        {
+            await HandleAuthenticationExpiredAsync();
+        }
         catch (Exception ex)
         {
             // Unexpected error - log but don't interrupt user
@@ -567,6 +580,43 @@ public sealed partial class ShellViewModel : ObservableObject
         }
 
         _debounceTimer.Start();
+    }
+
+    // --- Authentication Recovery ---
+
+    /// <summary>
+    /// Handles expired authentication by showing a dialog and re-authenticating if the user agrees.
+    /// </summary>
+    private async Task HandleAuthenticationExpiredAsync()
+    {
+        OrbStatusChanged?.Invoke(OrbStatusKind.Warning);
+        StatusText = GetResource("ShellStatusAuthExpired", "Session expired");
+
+        var confirmed = await _dialogService.ShowConfirmationAsync(
+            GetResource("AuthExpiredDialogTitle", "Session Expired"),
+            GetResource("AuthExpiredDialogMessage", "Your Google sign-in has expired. Would you like to sign in again?"),
+            GetResource("AuthExpiredDialogPrimary", "Sign in"),
+            GetResource("AuthExpiredDialogClose", "Cancel"));
+
+        if (!confirmed)
+            return;
+
+        try
+        {
+            StatusText = GetResource("ShellStatusReAuthenticating", "Signing in...");
+            OrbStatusChanged?.Invoke(OrbStatusKind.Syncing);
+
+            await _authService.ReAuthenticateAsync();
+
+            // Retry sync after re-authentication
+            await PerformAutoSyncAsync();
+        }
+        catch (Exception ex)
+        {
+            OrbStatusChanged?.Invoke(OrbStatusKind.Offline);
+            StatusText = GetResource("ShellStatusSyncFailed", "Sync failed");
+            ShowError(string.Format(GetResource("ShellStatusSyncErrorFormat", "Sync error: {0}"), ex.Message));
+        }
     }
 
     // --- Status helpers ---

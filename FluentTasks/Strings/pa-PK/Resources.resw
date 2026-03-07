@@ -1185,4 +1185,22 @@
   <data name="TaskListNoListSelectedIconTextBlock.Text" xml:space="preserve">
     <value>📋</value>
   </data>
+  <data name="AuthExpiredDialogTitle" xml:space="preserve">
+    <value>ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ</value>
+  </data>
+  <data name="AuthExpiredDialogMessage" xml:space="preserve">
+    <value>ਤੁਹਾਡੀ Google ਸਾਈਨ-ਇਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕੀ ਤੁਸੀਂ ਦੁਬਾਰਾ ਸਾਈਨ ਇਨ ਕਰਨਾ ਚਾਹੋਗੇ?</value>
+  </data>
+  <data name="AuthExpiredDialogPrimary" xml:space="preserve">
+    <value>ਸਾਈਨ ਇਨ</value>
+  </data>
+  <data name="AuthExpiredDialogClose" xml:space="preserve">
+    <value>ਰੱਦ ਕਰੋ</value>
+  </data>
+  <data name="ShellStatusAuthExpired" xml:space="preserve">
+    <value>ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ</value>
+  </data>
+  <data name="ShellStatusReAuthenticating" xml:space="preserve">
+    <value>ਸਾਈਨ ਇਨ ਹੋ ਰਿਹਾ ਹੈ...</value>
+  </data>
 </root>
