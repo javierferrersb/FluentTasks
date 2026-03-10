@@ -103,6 +103,7 @@ namespace FluentTasks.Infrastructure.Google
         /// Retrieves all tasks from a specific task list.
         /// Includes completed tasks and maps Google's task structure to our domain model.
         /// Parses due dates from RFC 3339 format.
+        /// Handles pagination to ensure all tasks are returned.
         /// </summary>
         /// <param name="taskListId">The ID of the task list to retrieve tasks from</param>
         /// <returns>Collection of tasks with ID, Title, Completion status, and Due date</returns>
@@ -111,21 +112,43 @@ namespace FluentTasks.Infrastructure.Google
             try
             {
                 var service = await GetServiceAsync();
-                var request = service.Tasks.List(taskListId);
-                var response = await request.ExecuteAsync();
+                var allTasks = new List<TaskItem>();
+                string? pageToken = null;
 
-                return response.Items?.Select(googleTask => new TaskItem
+                do
                 {
-                    Id = googleTask.Id,
-                    Title = googleTask.Title ?? "",
-                    IsCompleted = googleTask.Status == "completed",
-                    DueDate = string.IsNullOrEmpty(googleTask.Due)
-                        ? null
-                        : DateTimeOffset.Parse(googleTask.Due),
-                    Notes = googleTask.Notes,
-                    ParentId = googleTask.Parent,
-                    Position = googleTask.Position ?? "0"
-                }) ?? [];
+                    var request = service.Tasks.List(taskListId);
+                    request.MaxResults = 100;
+                    request.ShowCompleted = true;
+                    request.ShowHidden = true;
+
+                    if (pageToken is not null)
+                    {
+                        request.PageToken = pageToken;
+                    }
+
+                    var response = await request.ExecuteAsync();
+
+                    if (response.Items is not null)
+                    {
+                        allTasks.AddRange(response.Items.Select(googleTask => new TaskItem
+                        {
+                            Id = googleTask.Id,
+                            Title = googleTask.Title ?? "",
+                            IsCompleted = googleTask.Status == "completed",
+                            DueDate = string.IsNullOrEmpty(googleTask.Due)
+                                ? null
+                                : DateTimeOffset.Parse(googleTask.Due),
+                            Notes = googleTask.Notes,
+                            ParentId = googleTask.Parent,
+                            Position = googleTask.Position ?? "0"
+                        }));
+                    }
+
+                    pageToken = response.NextPageToken;
+                } while (pageToken is not null);
+
+                return allTasks;
             }
             catch (Exception ex) when (IsAuthenticationError(ex))
             {
