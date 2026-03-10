@@ -2,6 +2,10 @@
 
 A Windows desktop app for managing your [Google Tasks](https://tasks.google.com), built with WinUI 3 and .NET 10.
 
+<a href="https://get.microsoft.com/installer/download/9pjxbn8816ff?referrer=appbadge" target="_self" >
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
 ## Features
 
 - **Google Tasks sync** — OAuth2 sign-in with auto-sync
