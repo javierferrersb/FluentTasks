@@ -58,7 +58,8 @@ internal sealed class DialogService : IDialogService
             CloseButtonText = closeText,
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = GetXamlRoot(),
-            RequestedTheme = _currentTheme
+            RequestedTheme = _currentTheme,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
         };
 
         IsDialogOpen = true;
@@ -114,7 +115,8 @@ internal sealed class DialogService : IDialogService
             CloseButtonText = GetResource("DialogDefaultCancel", "Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = GetXamlRoot(),
-            RequestedTheme = _currentTheme
+            RequestedTheme = _currentTheme,
+            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"]
         };
 
         IsDialogOpen = true;
