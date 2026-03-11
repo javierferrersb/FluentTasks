@@ -9,7 +9,7 @@
 
 <Identity Name="50355JavierFerrerSB.FluentTasks"
 		Publisher="CN=D2C898CD-B235-4828-BCBB-A94E6CC5306F"
-		Version="1.0.1.0" />
+		Version="1.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="645b8942-f8bf-44dc-a10b-baf54d2edbe6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
